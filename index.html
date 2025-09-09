@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Website Homepage</title>
+    <title>Your Unique Website Homepage</title>
     <style>
-        /* --- General Styles --- */
+        /* --- General & Advanced Styles --- */
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             margin: 0;
@@ -13,6 +13,7 @@
             line-height: 1.6;
             color: #333;
             background-color: #f4f4f4;
+            scroll-behavior: smooth;
         }
         
         .container {
@@ -22,36 +23,53 @@
         }
 
         .section {
-            padding: 60px 0;
+            padding: 100px 0;
             text-align: center;
+            opacity: 0; /* Initially hide sections for scroll animation */
+            transform: translateY(50px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        
+        .section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         h1, h2, h3 {
-            color: #333;
+            color: #212529;
             margin-bottom: 20px;
         }
 
         .cta-button {
             display: inline-block;
-            padding: 12px 24px;
+            padding: 15px 30px;
             background-color: #007bff;
             color: #fff;
             text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
+            border-radius: 30px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.4);
         }
 
         .cta-button:hover {
             background-color: #0056b3;
+            transform: translateY(-3px);
         }
 
-        /* --- Header --- */
+        /* --- Header with Sticky Effect --- */
         .header {
             background-color: #fff;
             padding: 20px 0;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: background-color 0.3s ease;
         }
-
+        
         .header .container {
             display: flex;
             justify-content: space-between;
@@ -59,10 +77,11 @@
         }
 
         .logo {
-            font-size: 24px;
+            font-size: 28px;
             font-weight: bold;
             color: #333;
             text-decoration: none;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
         }
 
         .nav-menu {
@@ -73,45 +92,99 @@
         }
         
         .nav-menu li {
-            margin-left: 20px;
+            margin-left: 30px;
         }
 
         .nav-menu a {
             color: #555;
             text-decoration: none;
             font-weight: bold;
-            transition: color 0.3s ease;
+            padding: 5px 0;
+            position: relative;
+        }
+        
+        .nav-menu a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #007bff;
+            transition: width 0.3s ease;
         }
 
-        .nav-menu a:hover {
-            color: #007bff;
+        .nav-menu a:hover:after {
+            width: 100%;
         }
 
         .hamburger {
             display: none;
             cursor: pointer;
-            font-size: 24px;
+            font-size: 30px;
+            color: #333;
         }
 
-        /* --- Hero Section --- */
-        .hero {
-            background-color: #e9ecef;
-            padding: 100px 20px;
+        /* --- Hero Section with Parallax Effect --- */
+        .hero-parallax {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             text-align: center;
+            overflow: hidden;
+            color: #fff;
+            background-color: #e9ecef;
         }
 
-        .hero h1 {
-            font-size: 48px;
-            color: #212529;
+        .hero-bg-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            will-change: transform;
         }
 
-        .hero p {
-            font-size: 20px;
+        .hero-bg-layer-1 {
+            background-image: url('https://via.placeholder.com/1920x1080?text=Background+Image');
+        }
+
+        .hero-bg-layer-2 {
+            background-image: url('https://via.placeholder.com/1920x1080?text=Foreground+Image');
+            opacity: 0.8;
+            transform: scale(1.1);
+        }
+        
+        .hero-parallax .container {
+            position: relative;
+            z-index: 1;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero-parallax h1 {
+            font-size: clamp(2rem, 5vw, 4rem);
+            color: #fff;
+        }
+        
+        .hero-parallax p {
+            font-size: clamp(1rem, 2vw, 1.5rem);
             max-width: 600px;
-            margin: 0 auto 30px;
+            margin: 0 auto 40px;
+            animation: fadeInText 1s ease-in-out 1s forwards;
+            opacity: 0;
         }
 
-        /* --- Features Section --- */
+        .typed-text {
+            color: #00ffc8;
+            border-right: 2px solid rgba(255,255,255,.75);
+            font-weight: 600;
+        }
+
+        /* --- Features Section with Hover Effects --- */
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -121,46 +194,124 @@
 
         .feature-item {
             background-color: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
 
-        /* --- Testimonials Section --- */
+        .feature-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 123, 255, 0.1);
+            transform: scale(0);
+            transition: transform 0.4s cubic-bezier(0.86, 0, 0.07, 1);
+            border-radius: 12px;
+            z-index: 0;
+        }
+        
+        .feature-item:hover::before {
+            transform: scale(1);
+        }
+        
+        .feature-item h3, .feature-item p {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* --- Testimonials with Image Carousel --- */
         .testimonials {
-            background-color: #fff;
+            background-color: #e9ecef;
+            overflow: hidden; /* Hide overflow from image rotation */
         }
-
+        
         .testimonial-card {
-            max-width: 600px;
+            max-width: 700px;
             margin: 40px auto 0;
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: relative;
+            display: flex;
+            align-items: center;
+            text-align: left;
+        }
+        
+        .testimonial-card img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-right: 20px;
+            object-fit: cover;
+            border: 3px solid #007bff;
+        }
+        
+        .testimonial-card p {
             font-style: italic;
-            border-left: 4px solid #007bff;
-            padding-left: 20px;
+            margin: 0;
+            color: #555;
         }
         
         .testimonial-card h4 {
-            margin-top: 15px;
+            margin: 10px 0 0;
             font-style: normal;
         }
 
-        /* --- Footer --- */
+        /* --- Custom Cursor Trail --- */
+        .cursor-trail {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            background-color: rgba(0, 123, 255, 0.3);
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0;
+            transform: scale(0);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+            z-index: 9999;
+        }
+
+        /* --- Footer with Social Icons and Animations --- */
         .footer {
             background-color: #343a40;
             color: #f8f9fa;
-            padding: 40px 0;
+            padding: 60px 0;
             text-align: center;
+        }
+
+        .footer p {
+            margin-bottom: 20px;
         }
 
         .social-icons a {
             color: #f8f9fa;
-            margin: 0 10px;
+            margin: 0 15px;
             text-decoration: none;
-            transition: color 0.3s ease;
+            font-size: 24px;
+            transition: color 0.3s ease, transform 0.3s ease;
         }
 
         .social-icons a:hover {
             color: #007bff;
+            transform: translateY(-5px);
+        }
+
+        /* --- Keyframe Animations --- */
+        @keyframes fadeInText {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         /* --- Responsive Design --- */
@@ -172,7 +323,7 @@
                 text-align: center;
                 background-color: #fff;
                 position: absolute;
-                top: 70px;
+                top: 80px;
                 left: 0;
                 box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             }
@@ -194,6 +345,15 @@
             .hamburger {
                 display: block;
             }
+
+            .testimonial-card {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .testimonial-card img {
+                margin: 0 0 20px;
+            }
         }
     </style>
 </head>
@@ -214,52 +374,57 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
+    <!-- Hero Section with Parallax Effect -->
+    <section class="hero-parallax">
+        <div class="hero-bg-layer hero-bg-layer-1"></div>
+        <div class="hero-bg-layer hero-bg-layer-2"></div>
         <div class="container">
-            <h1>Your Compelling Headline Here</h1>
-            <p>A concise sub-headline to explain your value proposition clearly and effectively.</p>
-            <a href="#" class="cta-button">Get Started Now</a>
+            <h1>Create <span class="typed-text"></span></h1>
+            <p>We build innovative, elegant solutions that elevate your brand and engage your audience.</p>
+            <a href="#" class="cta-button">Explore Solutions</a>
         </div>
     </section>
 
-    <!-- Services/Features Section -->
+    <!-- Services/Features Section with Hover Effects -->
     <section id="services" class="section">
         <div class="container">
             <h2>Our Services</h2>
             <div class="features-grid">
                 <div class="feature-item">
-                    <h3>Service One</h3>
-                    <p>A short description of your first service. Focus on the benefits to the customer.</p>
+                    <h3>Interactive Design</h3>
+                    <p>Captivate your audience with dynamic and engaging user interfaces that respond to every interaction.</p>
                 </div>
                 <div class="feature-item">
-                    <h3>Service Two</h3>
-                    <p>A short description of your second service. Explain how it solves a problem.</p>
+                    <h3>Custom Development</h3>
+                    <p>From custom web applications to scalable systems, we build tailored solutions that meet your unique needs.</p>
                 </div>
                 <div class="feature-item">
-                    <h3>Service Three</h3>
-                    <p>A short description of your third service. Highlight a key advantage.</p>
+                    <h3>Performance Optimization</h3>
+                    <p>Ensure your site is fast, responsive, and always ready to perform under any conditions.</p>
                 </div>
             </div>
         </div>
     </section>
     
-    <!-- Testimonials Section -->
+    <!-- Testimonials Section with Interactive Card -->
     <section class="testimonials section">
         <div class="container">
             <h2>What Our Customers Say</h2>
             <div class="testimonial-card">
-                <p>"This is an amazing quote from a satisfied customer that builds trust and credibility."</p>
-                <h4>- Jane Doe</h4>
+                <img src="https://via.placeholder.com/80?text=JD" alt="Jane Doe">
+                <div>
+                    <p>"This team delivered a website that exceeded our expectations. The design is beautiful and the performance is incredible!"</p>
+                    <h4>- Jane Doe, CEO at Innovate Corp.</h4>
+                </div>
             </div>
         </div>
     </section>
     
-    <!-- About Section -->
+    <!-- About Section with Scroll Animation -->
     <section id="about" class="section">
         <div class="container">
             <h2>About Us</h2>
-            <p>Tell your company's story here. Share your mission, vision, and what makes your team unique. This is where you connect with your audience on a personal level.</p>
+            <p>We are a team of creative developers and designers dedicated to building unique online experiences. Our mission is to combine cutting-edge technology with timeless design principles to create websites that are not just functional, but truly memorable.</p>
         </div>
     </section>
 
@@ -268,26 +433,42 @@
         <div class="container">
             <p>&copy; 2025 Your Company. All rights reserved.</p>
             <div class="social-icons">
-                <a href="#">Facebook</a>
-                <a href="#">Twitter</a>
-                <a href="#">LinkedIn</a>
+                <a href="#"><!-- Use icons from a library like Font Awesome or SVG -->FB</a>
+                <a href="#">TW</a>
+                <a href="#">LI</a>
             </div>
         </div>
     </footer>
+
+    <!-- Custom Cursor Trail Element -->
+    <div class="cursor-trail"></div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const hamburger = document.querySelector('.hamburger');
             const navMenu = document.querySelector('.nav-menu');
+            const sections = document.querySelectorAll('.section');
+            const heroText = "websites that are truly unique.";
+            let typedTextElement = document.querySelector('.typed-text');
+            let i = 0;
 
-            // Toggle navigation menu for mobile
+            // --- Mobile Navigation Toggle ---
             if (hamburger) {
                 hamburger.addEventListener('click', () => {
                     navMenu.classList.toggle('active');
                 });
             }
-        });
-    </script>
 
+            // --- Intersection Observer for Scroll Animations ---
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, {
+                rootMargin: '0px',
+                threshold: 0.2 // Trigger
+</script>
 </body>
 </html>
