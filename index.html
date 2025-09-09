@@ -5,7 +5,196 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Website Homepage</title>
     <style>
-        /* CSS styles to be defined here */
+        /* --- General Styles --- */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f4f4;
+        }
+        
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section {
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        h1, h2, h3 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* --- Header --- */
+        .header {
+            background-color: #fff;
+            padding: 20px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+        
+        .nav-menu li {
+            margin-left: 20px;
+        }
+
+        .nav-menu a {
+            color: #555;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            color: #007bff;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 24px;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            background-color: #e9ecef;
+            padding: 100px 20px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            color: #212529;
+        }
+
+        .hero p {
+            font-size: 20px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+
+        /* --- Features Section --- */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .feature-item {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        /* --- Testimonials Section --- */
+        .testimonials {
+            background-color: #fff;
+        }
+
+        .testimonial-card {
+            max-width: 600px;
+            margin: 40px auto 0;
+            font-style: italic;
+            border-left: 4px solid #007bff;
+            padding-left: 20px;
+        }
+        
+        .testimonial-card h4 {
+            margin-top: 15px;
+            font-style: normal;
+        }
+
+        /* --- Footer --- */
+        .footer {
+            background-color: #343a40;
+            color: #f8f9fa;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .social-icons a {
+            color: #f8f9fa;
+            margin: 0 10px;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: #007bff;
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                text-align: center;
+                background-color: #fff;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+            
+            .nav-menu li {
+                margin: 0;
+                border-top: 1px solid #eee;
+            }
+
+            .nav-menu a {
+                display: block;
+                padding: 15px;
+            }
+
+            .hamburger {
+                display: block;
+            }
+        }
     </style>
 </head>
 <body>
@@ -17,8 +206,8 @@
             <nav>
                 <div class="hamburger">&#9776;</div>
                 <ul class="nav-menu">
-                    <li><a href="#about">About</a></li>
                     <li><a href="#services">Services</a></li>
+                    <li><a href="#about">About</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
@@ -56,7 +245,7 @@
     </section>
     
     <!-- Testimonials Section -->
-    <section class="testimonials">
+    <section class="testimonials section">
         <div class="container">
             <h2>What Our Customers Say</h2>
             <div class="testimonial-card">
@@ -102,4 +291,3 @@
 
 </body>
 </html>
-
