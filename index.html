@@ -3,177 +3,161 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>CiphAnon Studios — Home</title>
-<meta name="description" content="CiphAnon Studios — prototypes, tools and interactive experiences. 3 years practical experience." />
+<title>CiphAnon Studios — Home (Full)</title>
+<meta name="description" content="CiphAnon Studios — interactive prototypes, tooling, and polished experiences. 3 years experience across many languages and engines." />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
 <style>
-  /* =========================
-     Theme / Reset
-     ========================= */
-  :root{
-    --bg-1:#041018; --bg-2:#071523;
-    --muted:#9fb0c6; --panel:#0d1722;
-    --accent-a:#ff9f1c; --accent-b:#ff5e7a;
-    --glass: rgba(255,255,255,0.03);
-    --maxw:1220px; --radius:14px; --ease:cubic-bezier(.2,.9,.3,1);
-  }
-  *{box-sizing:border-box}
-  html,body{height:100%}
-  body{
-    margin:0;
-    font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
-    background: linear-gradient(180deg,var(--bg-1),var(--bg-2));
-    color:#e9f6ff;
-    -webkit-font-smoothing:antialiased;
-    line-height:1.45;
-    scroll-behavior:smooth;
-  }
-  img{display:block;max-width:100%}
-  a{color:inherit}
-  .container{max-width:var(--maxw);margin:0 auto;padding:20px}
+/* =========================
+   THEME & RESET
+   ========================= */
+:root{
+  --bg-1:#041018; --bg-2:#071523;
+  --panel:#0d1722; --muted:#9fb0c6; --text:#e9f6ff;
+  --accent1:#ff9f1c; --accent2:#ff5e7a;
+  --glass: rgba(255,255,255,0.03);
+  --radius:12px; --maxw:1320px; --ease:cubic-bezier(.2,.9,.3,1);
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+  background: linear-gradient(180deg,var(--bg-1),var(--bg-2));
+  color:var(--text);-webkit-font-smoothing:antialiased;line-height:1.45;scroll-behavior:smooth;
+}
+img{display:block;max-width:100%}
+a{color:inherit}
+.container{max-width:var(--maxw);margin:0 auto;padding:20px}
 
-  /* =========================
-     Header / Nav
-     ========================= */
-  header{position:sticky;top:12px;z-index:120;padding:10px 0}
-  .nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px;border-radius:12px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));box-shadow:0 8px 30px rgba(2,6,12,0.45)}
-  .brand{display:flex;align-items:center;gap:12px}
-  .logo{width:48px;height:48px;border-radius:10px;object-fit:contain}
-  .brand h1{font-size:16px;margin:0}
-  nav.links{display:flex;gap:12px;align-items:center}
-  nav.links a{color:var(--muted);padding:6px 8px;border-radius:8px;font-weight:700}
-  .actions{display:flex;gap:8px}
-  .btn{background:linear-gradient(90deg,var(--accent-a),var(--accent-b));color:#041018;padding:10px 14px;border-radius:10px;font-weight:800;border:0;cursor:pointer}
-  .btn.secondary{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted);font-weight:700}
-  .btn:focus{outline:3px solid rgba(255,159,28,0.12);outline-offset:3px}
+/* ============= NAV ============= */
+header{position:sticky;top:12px;z-index:150;padding:10px 0}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px;border-radius:12px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));box-shadow:0 8px 30px rgba(2,6,12,0.45)}
+.brand{display:flex;align-items:center;gap:12px}
+.logo{width:52px;height:52px;border-radius:12px;object-fit:contain}
+.brand h1{font-size:16px;margin:0}
+.links{display:flex;gap:12px;align-items:center}
+.links a{color:var(--muted);padding:6px;border-radius:8px;font-weight:700}
+.actions{display:flex;gap:10px;align-items:center}
 
-  /* =========================
-     HERO (big & bold)
-     ========================= */
-  .hero{display:grid;grid-template-columns:1fr 520px;gap:32px;align-items:center;padding:56px 0}
-  .hero-left h1{font-size:44px;margin:0;line-height:1.02}
-  .accent-text{background:linear-gradient(90deg,var(--accent-a),var(--accent-b));-webkit-background-clip:text;background-clip:text;color:transparent}
-  .lead{color:var(--muted);margin-top:12px;font-size:1.05rem;max-width:64ch}
-  .hero-ctas{display:flex;gap:12px;margin-top:18px;flex-wrap:wrap}
-  .badges{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
-  .badge{background:var(--glass);padding:8px 12px;border-radius:999px;color:var(--muted);font-weight:700;border:1px solid rgba(255,255,255,0.03)}
+/* ============= HERO ============= */
+.hero{display:grid;grid-template-columns:1fr 520px;gap:28px;align-items:center;padding:56px 0}
+.hero-left h1{font-size:44px;margin:0;line-height:1.02}
+.accent{background:linear-gradient(90deg,var(--accent1),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{color:var(--muted);margin-top:12px;font-size:1.05rem;max-width:64ch}
+.hero-ctas{display:flex;gap:12px;margin-top:18px;flex-wrap:wrap}
+.badges{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.badge{background:var(--glass);padding:8px 12px;border-radius:999px;color:var(--muted);font-weight:700;border:1px solid rgba(255,255,255,0.03)}
+.hero-frame{height:480px;border-radius:16px;padding:14px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));position:relative;box-shadow:0 30px 90px rgba(2,6,12,0.65);overflow:hidden;contain:layout paint}
+.grad-overlay{position:absolute;inset:-25% -20% auto auto;width:640px;height:640px;border-radius:40%;filter:blur(74px);opacity:0.18;background:linear-gradient(120deg,var(--accent1),var(--accent2));transform:translate3d(0,0,0)}
+.hero-cards{position:absolute;left:20px;bottom:22px;display:flex;gap:12px}
+.mini-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:10px;border-radius:12px;box-shadow:0 10px 30px rgba(2,6,12,0.45);font-weight:700;color:#fff;min-width:120px;transform-origin:center;transition:transform .2s var(--ease)}
+.char-wrap{position:absolute;right:18px;bottom:18px;width:340px;max-width:48%;transform-origin:center;will-change:transform;pointer-events:none}
+.char{width:100%;display:block;filter:drop-shadow(0 20px 30px rgba(2,6,12,0.6));transform-origin:center}
+.bob{animation:bob 5.6s ease-in-out infinite}
+@keyframes bob{0%{transform:translateY(0)}50%{transform:translateY(-8px)}100%{transform:translateY(0)}}
 
-  /* hero visual frame */
-  .hero-frame{
-    height:460px;border-radius:16px;padding:14px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
-    position:relative;box-shadow:0 30px 90px rgba(2,6,12,0.65);overflow:hidden;contain:layout paint;
-  }
-  /* animated gradient overlay (cheap) */
-  .grad-overlay{position:absolute;inset: -20% -10% auto auto;width:560px;height:560px;border-radius:30%;filter:blur(60px);opacity:0.18;background:linear-gradient(120deg,var(--accent-a),var(--accent-b));transform:translate3d(0,0,0)}
-  /* floating project preview cards inside hero */
-  .hero-cards{position:absolute;left:18px;bottom:22px;display:flex;gap:12px}
-  .mini-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:10px;border-radius:12px;box-shadow:0 10px 30px rgba(2,6,12,0.45);font-weight:700;color:#fff;min-width:120px;transform-origin:center;transition:transform .2s var(--ease)}
+/* ============= QUICK STATS / CTA ============= */
+.stats-row{display:flex;gap:12px;margin-top:20px;align-items:center;flex-wrap:wrap}
+.stat{background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:12px;border-radius:10px;min-width:130px;text-align:center}
+.stat strong{display:block;font-size:20px}
 
-  /* character container w/ parallax & bob */
-  .char-wrap{position:absolute;right:18px;bottom:18px;width:300px;max-width:44%;transform-origin:center;will-change:transform;pointer-events:none}
-  .char{width:100%;display:block;filter:drop-shadow(0 20px 30px rgba(2,6,12,0.6));transform-origin:center}
-  .bob{animation:bob 5.6s ease-in-out infinite}
-  @keyframes bob{0%{transform:translateY(0)}50%{transform:translateY(-8px)}100%{transform:translateY(0)}}
+/* ============= FEATURES ============= */
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:30px}
+.feature{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));padding:18px;border-radius:12px;box-shadow:0 10px 30px rgba(2,6,12,0.35);transition:transform .22s var(--ease);contain:paint}
+.feature:hover{transform:translateY(-8px)}
 
-  /* =========================
-     KEY INFO STRIP (trust / stats)
-     ========================= */
-  .info-strip{display:flex;gap:12px;margin-top:20px;align-items:center;flex-wrap:wrap}
-  .info-box{background:linear-gradient(90deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));padding:10px;border-radius:10px;display:flex;gap:12px;align-items:center}
-  .info-box .num{font-weight:900;font-size:18px}
-  .trust-logos{display:flex;gap:12px;align-items:center;opacity:0.9}
+/* ============= PROJECTS (filter + search + grid + carousel) ============= */
+.controls{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:18px}
+.filter{padding:8px;border-radius:8px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03);color:var(--muted)}
+.search{padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit;min-width:220px}
+.project-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:12px}
+.project-card{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));border-radius:12px;padding:12px;box-shadow:0 8px 30px rgba(2,6,12,0.35);cursor:pointer;transition:transform .18s;contain:paint}
+.project-card:hover{transform:translateY(-8px)}
+.project-thumb{width:100%;height:160px;border-radius:10px;object-fit:cover;background:#081018}
+.tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.tag{font-size:12px;padding:6px 9px;border-radius:999px;background:rgba(255,255,255,0.02);color:var(--muted);font-weight:700}
 
-  /* =========================
-     FEATURES / SERVICES
-     ========================= */
-  .features{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:26px}
-  .feature{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));padding:16px;border-radius:12px;box-shadow:0 10px 30px rgba(2,6,12,0.35);transition:transform .22s var(--ease);contain:paint}
-  .feature:hover{transform:translateY(-8px)}
-  .feature h3{margin:0 0 8px}
-  .feature p{color:var(--muted);margin:0}
+/* modal */
+.modal-backdrop{position:fixed;inset:0;background:rgba(2,6,12,0.7);display:none;align-items:center;justify-content:center;z-index:300}
+.modal{background:var(--panel);border-radius:12px;padding:18px;max-width:960px;width:calc(100% - 40px);box-shadow:0 20px 60px rgba(2,6,12,0.8);max-height:90vh;overflow:auto}
 
-  /* =========================
-     PROJECT CAROUSEL + modal
-     ========================= */
-  .carousel{display:flex;gap:14px;overflow:auto;padding:12px 6px;scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch;contain:layout paint}
-  .project{flex:0 0 320px;min-width:260px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));border-radius:12px;padding:14px;box-shadow:0 10px 30px rgba(2,6,12,0.36);scroll-snap-align:start;cursor:pointer;transition:transform .18s}
-  .project:hover{transform:translateY(-10px)}
-  .project h4{margin:0 0 8px}
-  .project p{color:var(--muted);margin:0 0 10px}
-  .tags{display:flex;gap:8px;flex-wrap:wrap}
-  .tag{font-size:12px;padding:6px 9px;border-radius:999px;background:rgba(255,255,255,0.02);color:var(--muted);font-weight:700}
+/* ============= CASE STUDIES & PRICING ============= */
+.case-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px}
+.case{background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);padding:14px;border-radius:12px}
+.pricing{display:flex;gap:12px;margin-top:18px}
+.plan{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));padding:16px;border-radius:12px;min-width:200px;box-shadow:0 10px 30px rgba(2,6,12,0.35)}
 
-  .modal-backdrop{position:fixed;inset:0;background:rgba(2,6,12,0.7);display:none;align-items:center;justify-content:center;z-index:260}
-  .modal{background:var(--panel);border-radius:12px;padding:18px;max-width:920px;width:calc(100% - 40px);box-shadow:0 20px 60px rgba(2,6,12,0.8);max-height:90vh;overflow:auto}
+/* ============= TIMELINE & ROADMAP ============= */
+.timeline{margin-top:22px;border-left:2px solid rgba(255,255,255,0.03);padding-left:18px}
+.tl-item{margin:18px 0;opacity:0;transform:translateY(14px);transition:opacity .55s var(--ease),transform .55s var(--ease)}
+.tl-item.show{opacity:1;transform:none}
+.roadmap{margin-top:16px;display:flex;gap:12px;flex-wrap:wrap}
 
-  /* =========================
-     TESTIMONIALS (auto-scroll)
-     ========================= */
-  .testimonials{display:flex;gap:12px;overflow:auto;padding:8px 0;scroll-snap-type:x mandatory}
-  .test{flex:0 0 300px;min-width:240px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));padding:14px;border-radius:12px;box-shadow:0 10px 22px rgba(2,6,12,0.34);scroll-snap-align:start}
-  .test p{color:var(--muted);margin:0 0 8px}
+/* ============= BLOG PREVIEWS ============= */
+.blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px}
+.post{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));padding:12px;border-radius:12px;box-shadow:0 8px 20px rgba(2,6,12,0.36)}
 
-  /* =========================
-     GALLERY (hover parallax)
-     ========================= */
-  .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px}
-  .g-card{background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);border-radius:12px;padding:12px;overflow:hidden;position:relative;cursor:pointer;contain:paint}
-  .g-thumb{width:100%;height:160px;background:#081018;border-radius:10px;display:block;object-fit:cover;transition:transform .35s var(--ease);will-change:transform}
-  .g-meta{margin-top:10px;color:var(--muted);font-size:13px}
+/* ============= GALLERY (hover parallax) ============= */
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px}
+.g-card{background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);border-radius:12px;padding:12px;overflow:hidden;position:relative;cursor:pointer;contain:paint}
+.g-thumb{width:100%;height:160px;background:#081018;border-radius:10px;display:block;object-fit:cover;transition:transform .35s var(--ease);will-change:transform}
 
-  /* =========================
-     MARQUEE (logos)
-     ========================= */
-  .marquee{display:flex;gap:20px;align-items:center;overflow:hidden;padding:14px 0}
-  .marquee-inner{display:flex;gap:28px;animation:marq 16s linear infinite}
-  @keyframes marq{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-  .logo-small{width:84px;height:40px;object-fit:contain;opacity:0.85;filter:grayscale(0.2) contrast(0.9)}
+/* ============= TESTIMONIALS ============= */
+.testimonials{display:flex;gap:12px;overflow:auto;padding:8px 0;scroll-snap-type:x mandatory}
+.test{flex:0 0 320px;min-width:260px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));padding:14px;border-radius:12px;box-shadow:0 10px 22px rgba(2,6,12,0.34);scroll-snap-align:start}
 
-  /* =========================
-     COUNTERS, FAQ, CTA, FOOTER
-     ========================= */
-  .counters{display:flex;gap:12px;margin-top:14px}
-  .counter{background:linear-gradient(90deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));padding:10px;border-radius:10px;min-width:110px;text-align:center}
-  .faq{margin-top:22px}
-  .faq-item{background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);border-radius:10px;margin-bottom:8px;overflow:hidden}
-  .faq-head{display:flex;justify-content:space-between;align-items:center;padding:12px;cursor:pointer}
-  .faq-body{padding:12px;color:var(--muted);display:none}
-  .cta{margin-top:28px;padding:14px;border-radius:12px;background:linear-gradient(90deg, rgba(255,159,28,0.06), rgba(255,94,122,0.03));display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+/* ============= MARQUEE ============= */
+.marquee{display:flex;gap:20px;align-items:center;overflow:hidden;padding:14px 0}
+.marquee-inner{display:flex;gap:28px;animation:marq 16s linear infinite}
+@keyframes marq{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.logo-small{width:84px;height:40px;object-fit:contain;opacity:0.85;filter:grayscale(0.2) contrast(0.9)}
 
-  footer{margin-top:36px;padding:28px 0;border-top:1px solid rgba(255,255,255,0.02);color:var(--muted)}
-  .footer-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+/* ============= NEWSLETTER / CONTACT ============= */
+.news{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:20px}
+.input{padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit;min-width:220px}
 
-  /* reveal helper */
-  .reveal{opacity:0;transform:translateY(16px);transition:opacity .55s var(--ease),transform .55s var(--ease)}
-  .reveal.show{opacity:1;transform:none}
-  @media (prefers-reduced-motion: reduce){
-    .bob,.grad-overlay,.marquee-inner{animation:none !important}
-  }
+/* ============= FAQ ============= */
+.faq{margin-top:22px}
+.faq-item{background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);border-radius:10px;margin-bottom:8px;overflow:hidden}
+.faq-head{display:flex;justify-content:space-between;align-items:center;padding:12px;cursor:pointer}
+.faq-body{padding:12px;color:var(--muted);display:none}
 
-  /* responsive */
-  @media (max-width:1080px){.hero{grid-template-columns:1fr 360px}.features{grid-template-columns:repeat(2,1fr)}.gallery{grid-template-columns:repeat(2,1fr)}.footer-grid{grid-template-columns:repeat(2,1fr)}}
-  @media (max-width:720px){.hero{grid-template-columns:1fr}.hero-frame{height:360px}.gallery{grid-template-columns:1fr}.char-wrap{display:none}}
-  @media (max-width:420px){.hero-left h1{font-size:28px}}
+/* ============= FOOTER ============= */
+footer{margin-top:36px;padding:28px 0;border-top:1px solid rgba(255,255,255,0.02);color:var(--muted)}
+.footer-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+
+/* reveal helper */
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .55s var(--ease),transform .55s var(--ease)}
+.reveal.show{opacity:1;transform:none}
+@media (prefers-reduced-motion: reduce){
+  .bob,.marquee-inner{animation:none !important}
+}
+
+/* responsive */
+@media (max-width:1200px){.hero{grid-template-columns:1fr 420px}.features{grid-template-columns:repeat(2,1fr)}.project-grid{grid-template-columns:repeat(2,1fr)}.project-grid .project-card{min-width:auto}}
+@media (max-width:820px){.hero{grid-template-columns:1fr}.project-grid{grid-template-columns:1fr}.gallery{grid-template-columns:1fr}.char-wrap{display:none}.footer-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:420px){.hero-left h1{font-size:28px}}
 </style>
 </head>
 <body>
 
 <header>
-  <div class="container nav" role="navigation" aria-label="Main navigation">
+  <div class="container nav" role="navigation" aria-label="Main nav">
     <div class="brand">
       <!-- EDIT: replace with your logo -->
-      <img src="assets/logo.png" alt="CiphAnon logo" class="logo" loading="lazy" />
+      <img src="assets/logo.png" alt="logo" class="logo" loading="lazy" />
       <div>
         <h1>CiphAnon Studios</h1>
         <div style="font-size:12px;color:var(--muted)">Prototypes • Tools • UX</div>
       </div>
     </div>
 
-    <nav class="links" aria-label="Primary links">
+    <nav class="links" aria-label="Primary">
       <a href="#projects">Work</a>
       <a href="#features">Services</a>
       <a href="#about">About</a>
       <a href="#contact">Contact</a>
+      <a href="#blog">Blog</a>
     </nav>
 
     <div class="actions">
@@ -184,50 +168,44 @@
 </header>
 
 <main class="container" id="top">
-
   <!-- HERO -->
   <section class="hero" aria-labelledby="hero-title">
     <div class="hero-left">
-      <h1 id="hero-title"><span class="accent-text">CiphAnon Studios</span> — prototypes & polished tooling.</h1>
-      <p class="lead">3 years of hands-on experience across HTML, CSS, JavaScript, Godot, Lua, Java, Unity, Block Code, and Python. I build fast playable prototypes, clean tooling, and delightful UX systems.</p>
+      <h1 id="hero-title"><span class="accent">CiphAnon Studios</span> — prototypes, tools & polished UX.</h1>
+      <p class="lead">3 years building across HTML, CSS, JavaScript, Godot, Lua, Java, Unity, Block Code and Python. I build playable prototypes, utility tooling and UI systems that ship.</p>
 
       <div class="hero-ctas">
-        <a class="btn" href="#projects">See Projects</a>
-        <a class="btn secondary" href="#about">About</a>
+        <a class="btn" href="#projects">See Work</a>
+        <a class="btn secondary" href="#about">About the Studio</a>
       </div>
 
       <div class="badges" aria-hidden="true">
-        <div class="badge">Prototyping</div>
+        <div class="badge">Rapid Prototyping</div>
         <div class="badge">Tooling</div>
         <div class="badge">UX Systems</div>
+        <div class="badge">Playable Demos</div>
       </div>
 
-      <div class="info-strip" aria-hidden="true">
-        <div class="info-box"><div class="num">3</div><div style="font-size:12px;color:var(--muted)">Years coding</div></div>
-        <div class="info-box"><div class="num">9+</div><div style="font-size:12px;color:var(--muted)">Languages & engines</div></div>
-        <div class="info-box"><div class="num">10+</div><div style="font-size:12px;color:var(--muted)">Playables & tools</div></div>
-        <div style="margin-left:auto" class="trust-logos" aria-hidden="true">
-          <!-- small placeholders; replace with real logos if you want -->
-          <img src="assets/logo.png" alt="logo" class="logo-small" loading="lazy" />
-          <img src="assets/logo.png" alt="logo" class="logo-small" loading="lazy" />
-        </div>
+      <div class="stats-row" aria-hidden="true">
+        <div class="stat"><strong id="statYears">0</strong><small style="color:var(--muted)">Years coding</small></div>
+        <div class="stat"><strong id="statLangs">0</strong><small style="color:var(--muted)">Languages / engines</small></div>
+        <div class="stat"><strong id="statProjects">0</strong><small style="color:var(--muted)">Projects</small></div>
       </div>
     </div>
 
     <div class="hero-frame reveal" aria-hidden="true">
       <div class="grad-overlay" aria-hidden="true"></div>
 
-      <!-- floating preview mini cards -->
       <div class="hero-cards" aria-hidden="true">
         <div class="mini-card">App Dashboard</div>
         <div class="mini-card">Design System</div>
         <div class="mini-card">Game UI</div>
       </div>
 
-      <!-- character: parallax + bob (no full spin) -->
+      <!-- animated character (parallax & bob) -->
       <div class="char-wrap bob" id="charWrap" aria-hidden="false">
         <!-- EDIT: replace with your character -->
-        <img src="assets/char.png" alt="CiphAnon character" class="char" loading="lazy" />
+        <img src="assets/char.png" alt="character" class="char" loading="lazy" />
       </div>
     </div>
   </section>
@@ -235,76 +213,179 @@
   <!-- FEATURES -->
   <section id="features" class="features reveal" aria-labelledby="features-title">
     <h2 id="features-title" style="grid-column:1/-1;margin:0 0 12px">Core Services</h2>
-
     <div class="feature">
-      <h3>Rapid Prototyping</h3>
-      <p>Playable prototypes that validate mechanics and feel — fast iteration, clear feedback.</p>
+      <h3>Playables & Prototypes</h3>
+      <p>Rapid, playable prototypes that demonstrate interaction, feel, and core loops — shipped quickly for testing and iteration.</p>
     </div>
 
     <div class="feature">
       <h3>Developer Tooling</h3>
-      <p>Small, robust tools and automation scripts to speed up build and deploy workflows.</p>
+      <p>Robust small tools and scripts that speed builds, reduce friction, and automate repetitive tasks in your pipeline.</p>
     </div>
 
     <div class="feature">
-      <h3>UX & Interaction</h3>
-      <p>Design systems and front-end architecture with performance and accessibility in mind.</p>
+      <h3>UX Systems</h3>
+      <p>Design systems and front-end architecture focused on accessibility, performance, and developer ergonomics.</p>
     </div>
   </section>
 
-  <!-- PROJECT CAROUSEL -->
+  <!-- PROJECTS FILTER + GRID -->
   <section id="projects" class="reveal" aria-labelledby="projects-title" style="margin-top:26px">
-    <h2 id="projects-title" style="margin:0 0 12px">Featured Projects</h2>
+    <h2 id="projects-title">Projects</h2>
 
-    <div class="carousel" role="list" aria-label="Featured projects" tabindex="0">
-      <!-- Project cards: add or duplicate as desired -->
-      <article class="project" role="listitem" tabindex="0"
-               data-proj='{"title":"Pet-clicker Prototype","desc":"Collect, upgrade, and polish feedback loops — Godot prototype with web demo.","tags":["Godot","Prototype"],"details":"Playable prototype focused on core loop, balancing, and polish."}'>
-        <h4>Pet-clicker Prototype</h4>
-        <p>Collectible pets, upgrades, and mutation mechanics.</p>
-        <div class="tags"><span class="tag">Godot</span><span class="tag">JavaScript</span></div>
+    <div class="controls" aria-hidden="false">
+      <select id="filterSelect" class="filter" aria-label="Filter projects">
+        <option value="all">All</option>
+        <option value="prototype">Prototype</option>
+        <option value="tooling">Tooling</option>
+        <option value="web">Web</option>
+        <option value="game">Game</option>
+      </select>
+
+      <input id="projectSearch" class="search" type="search" placeholder="Search projects..." aria-label="Search projects" />
+
+      <div style="margin-left:auto;display:flex;gap:8px">
+        <button id="prevProj" class="btn secondary" aria-label="Previous projects">← Prev</button>
+        <button id="nextProj" class="btn secondary" aria-label="Next projects">Next →</button>
+      </div>
+    </div>
+
+    <div id="projectGrid" class="project-grid" tabindex="0">
+      <!-- Example project card; duplicate/edit as needed -->
+      <article class="project-card" data-type="prototype" data-title="Pet-clicker Prototype" data-tags="Godot,Prototype,Game" data-desc="Collectible pet prototype with upgrades and polish.">
+        <img src="assets/proj1.png" alt="Pet Clicker thumbnail" class="project-thumb" loading="lazy" onerror="this.style.background='#081018'" />
+        <h4 style="margin:10px 0 6px">Pet-clicker Prototype</h4>
+        <p style="margin:0;color:var(--muted)">Collectible pets, upgrades, and mutation systems.</p>
+        <div class="tags"><span class="tag">Godot</span><span class="tag">Prototype</span></div>
       </article>
 
-      <article class="project" role="listitem" tabindex="0"
-               data-proj='{"title":"Landing + Toolkit","desc":"Responsive marketing landing and small JS tooling for deploy previews.","tags":["HTML","JS"],"details":"Landing + automation tooling to speed demos."}'>
-        <h4>Landing + Toolkit</h4>
-        <p>Responsive landing and deploy helper scripts.</p>
-        <div class="tags"><span class="tag">HTML</span><span class="tag">GitHub Pages</span></div>
+      <article class="project-card" data-type="web" data-title="Landing + Toolkit" data-tags="HTML,JS,Web" data-desc="Responsive landing and small JS tooling for deploy previews.">
+        <img src="assets/proj2.png" alt="Landing thumbnail" class="project-thumb" loading="lazy" onerror="this.style.background='#081018'" />
+        <h4 style="margin:10px 0 6px">Landing + Toolkit</h4>
+        <p style="margin:0;color:var(--muted)">Marketing landing + deploy helper scripts.</p>
+        <div class="tags"><span class="tag">HTML</span><span class="tag">JavaScript</span></div>
       </article>
 
-      <article class="project" role="listitem" tabindex="0"
-               data-proj='{"title":"Dev Helpers","desc":"Python & Java utilities to speed repetitive build steps.","tags":["Python","Java"],"details":"Small documented utilities to improve productivity."}'>
-        <h4>Dev Helpers</h4>
-        <p>Automation scripts and packaging helpers.</p>
+      <article class="project-card" data-type="tooling" data-title="Dev Helpers" data-tags="Python,Java,Tooling" data-desc="Utilities that speed build steps and packaging.">
+        <img src="assets/proj3.png" alt="Dev Helpers thumbnail" class="project-thumb" loading="lazy" onerror="this.style.background='#081018'" />
+        <h4 style="margin:10px 0 6px">Dev Helpers</h4>
+        <p style="margin:0;color:var(--muted)">Python & Java utilities for builds and packaging.</p>
         <div class="tags"><span class="tag">Python</span><span class="tag">Java</span></div>
       </article>
 
-      <!-- duplicate more projects as needed -->
-    </div>
-
-    <div style="margin-top:10px;display:flex;gap:8px;align-items:center">
-      <button id="prevProj" class="btn secondary" aria-label="Previous project">← Prev</button>
-      <button id="nextProj" class="btn secondary" aria-label="Next project">Next →</button>
-      <div style="margin-left:auto;color:var(--muted);font-size:13px">Tip: use arrow keys to navigate</div>
+      <!-- add more project-card elements here to scale -->
     </div>
   </section>
 
-  <!-- GALLERY (hover parallax) -->
-  <section class="reveal" style="margin-top:26px">
-    <h3 style="margin:0 0 10px">Playables & Demos</h3>
+  <!-- PROJECT MODAL PREVIEW -->
+  <div id="modalBackdrop" class="modal-backdrop" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal" role="document" aria-labelledby="modalTitle">
+      <button id="modalClose" class="btn secondary" style="float:right">Close</button>
+      <h3 id="modalTitle"></h3>
+      <p id="modalDesc" style="color:var(--muted)"></p>
+      <div id="modalGallery" style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap"></div>
+      <div id="modalDetails" style="margin-top:12px;color:var(--muted)"></div>
+    </div>
+  </div>
+
+  <!-- CASE STUDIES -->
+  <section class="reveal" aria-labelledby="case-title" style="margin-top:28px">
+    <h2 id="case-title">Case studies</h2>
+    <div class="case-grid">
+      <article class="case">
+        <h4>Prototype: Pet ecosystem</h4>
+        <p style="color:var(--muted)">Short summary: validated progression and retention loops in a week-long sprint; reduced scope and polished interaction.</p>
+        <a href="/case/pet-ecosystem" style="color:var(--accent1)">Read case study →</a>
+      </article>
+
+      <article class="case">
+        <h4>Tooling: Deploy helper</h4>
+        <p style="color:var(--muted)">Small CLI and GitHub Actions combination that saved 30% deploy time on previews.</p>
+        <a href="/case/deploy-toolkit" style="color:var(--accent1)">Read case study →</a>
+      </article>
+
+      <article class="case">
+        <h4>UX: Design system</h4>
+        <p style="color:var(--muted)">Design tokens, accessible components, and a lightweight build story.</p>
+        <a href="/case/design-system" style="color:var(--accent1)">Read case study →</a>
+      </article>
+    </div>
+  </section>
+
+  <!-- PRICING / PACKAGES -->
+  <section class="reveal" style="margin-top:28px">
+    <h2>Packages</h2>
+    <div class="pricing">
+      <div class="plan">
+        <strong>Prototype Sprint</strong>
+        <div style="color:var(--muted);margin:8px 0">2-week rapid prototype • interaction & basic balancing</div>
+        <div style="font-weight:900;font-size:18px;margin-top:8px">$2k</div>
+      </div>
+      <div class="plan">
+        <strong>Tooling Pack</strong>
+        <div style="color:var(--muted);margin:8px 0">Build helpers, small CLI tools, packaging scripts</div>
+        <div style="font-weight:900;font-size:18px;margin-top:8px">$1.5k</div>
+      </div>
+      <div class="plan">
+        <strong>Full Delivery</strong>
+        <div style="color:var(--muted);margin:8px 0">Prototype → polish → delivery-ready assets</div>
+        <div style="font-weight:900;font-size:18px;margin-top:8px">Custom</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIMELINE & ROADMAP -->
+  <section class="reveal" style="margin-top:28px">
+    <h2>Timeline & Roadmap</h2>
+    <div class="timeline" id="timeline">
+      <div class="tl-item"><div class="date" style="color:var(--muted)">2022 — Now</div><div style="font-weight:800">Independent prototyper</div><div style="color:var(--muted)">Rapid prototyping, tooling, and collaborations.</div></div>
+      <div class="tl-item"><div class="date" style="color:var(--muted)">2023 Q4</div><div style="font-weight:800">Roadmap: New demo launcher</div><div style="color:var(--muted)">Creating a unified demo launcher for playtesting.</div></div>
+      <div class="tl-item"><div class="date" style="color:var(--muted)">2024 Q2</div><div style="font-weight:800">Roadmap: SDK helpers</div><div style="color:var(--muted)">Lightweight SDK to integrate prototypes with telemetry.</div></div>
+    </div>
+
+    <div class="roadmap">
+      <div style="background:var(--glass);padding:12px;border-radius:10px;color:var(--muted)">Prototype tools</div>
+      <div style="background:var(--glass);padding:12px;border-radius:10px;color:var(--muted)">Playtest analytics</div>
+      <div style="background:var(--glass);padding:12px;border-radius:10px;color:var(--muted)">Docs & demos</div>
+    </div>
+  </section>
+
+  <!-- BLOG PREVIEWS -->
+  <section id="blog" class="reveal" style="margin-top:28px">
+    <h2>Latest posts</h2>
+    <div class="blog-grid">
+      <article class="post">
+        <h4>Polishing feedback loops</h4>
+        <p style="color:var(--muted)">Short: tiny improvements that dramatically improve perceived quality.</p>
+        <a href="/blog/polish-feedback" style="color:var(--accent1)">Read →</a>
+      </article>
+      <article class="post">
+        <h4>Speeding up builds</h4>
+        <p style="color:var(--muted)">Small scripts and habits that save hours each week.</p>
+        <a href="/blog/speed-builds" style="color:var(--accent1)">Read →</a>
+      </article>
+      <article class="post">
+        <h4>Crafting prototypes in Godot</h4>
+        <p style="color:var(--muted)">How I structure prototypes for fast iteration.</p>
+        <a href="/blog/godot-prototypes" style="color:var(--accent1)">Read →</a>
+      </article>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="reveal" style="margin-top:28px">
+    <h2>Gallery</h2>
     <div class="gallery" id="gallery">
-      <div class="g-card" tabindex="0" data-thumb="assets/proj1.png">
-        <img src="assets/proj1.png" alt="" class="g-thumb" loading="lazy" onerror="this.style.background='#081018'" />
+      <div class="g-card" tabindex="0">
+        <img src="assets/proj1.png" alt="" class="g-thumb" loading="lazy" onerror="this.style.background='#081018'"/>
         <div class="g-meta"><div style="font-weight:800">Pet Clicker</div><div style="color:var(--muted)">Prototype • Godot</div></div>
       </div>
-
-      <div class="g-card" tabindex="0" data-thumb="assets/proj2.png">
-        <img src="assets/proj2.png" alt="" class="g-thumb" loading="lazy" onerror="this.style.background='#081018'" />
+      <div class="g-card" tabindex="0">
+        <img src="assets/proj2.png" alt="" class="g-thumb" loading="lazy" onerror="this.style.background='#081018'"/>
         <div class="g-meta"><div style="font-weight:800">Landing Toolkit</div><div style="color:var(--muted)">Web • Tools</div></div>
       </div>
-
-      <div class="g-card" tabindex="0" data-thumb="assets/proj3.png">
-        <img src="assets/proj3.png" alt="" class="g-thumb" loading="lazy" onerror="this.style.background='#081018'" />
+      <div class="g-card" tabindex="0">
+        <img src="assets/proj3.png" alt="" class="g-thumb" loading="lazy" onerror="this.style.background='#081018'"/>
         <div class="g-meta"><div style="font-weight:800">Dev Helpers</div><div style="color:var(--muted)">Python • Java</div></div>
       </div>
     </div>
@@ -312,33 +393,32 @@
 
   <!-- TESTIMONIALS -->
   <section class="reveal" style="margin-top:28px">
-    <h3 style="margin:0 0 10px">Testimonials</h3>
+    <h2>What people say</h2>
     <div class="testimonials" role="list" aria-label="Testimonials">
       <div class="test" role="listitem">
-        <p>"Delivered a polished playable in record time — the feel was excellent."</p>
-        <strong>— Alex P.</strong>
+        <p>"Delivered a playable that felt polished and tested — fast turnaround."</p>
+        <strong>— Alex</strong>
       </div>
       <div class="test" role="listitem">
-        <p>"Pragmatic tooling that kept our team moving."</p>
-        <strong>— Sam M.</strong>
+        <p>"Tooling was pragmatic and easy to use — our CI improved."</p>
+        <strong>— Sam</strong>
       </div>
       <div class="test" role="listitem">
         <p>"Great communication and clean code."</p>
-        <strong>— Rina T.</strong>
+        <strong>— Rina</strong>
       </div>
     </div>
   </section>
 
-  <!-- MARQUEE LOGOS -->
-  <section class="reveal" style="margin-top:26px">
-    <h4 style="margin:0 0 8px">Built with / Featured on</h4>
+  <!-- MARQUEE -->
+  <section class="reveal" style="margin-top:28px">
+    <h4>Built with / Featured</h4>
     <div class="marquee" aria-hidden="true">
       <div class="marquee-inner" id="marqInner">
         <img src="assets/logo.png" alt="logo" class="logo-small" loading="lazy" />
         <img src="assets/logo.png" alt="logo" class="logo-small" loading="lazy" />
         <img src="assets/logo.png" alt="logo" class="logo-small" loading="lazy" />
         <img src="assets/logo.png" alt="logo" class="logo-small" loading="lazy" />
-        <!-- duplicated to make loop -->
         <img src="assets/logo.png" alt="logo" class="logo-small" loading="lazy" />
         <img src="assets/logo.png" alt="logo" class="logo-small" loading="lazy" />
         <img src="assets/logo.png" alt="logo" class="logo-small" loading="lazy" />
@@ -347,31 +427,48 @@
     </div>
   </section>
 
-  <!-- NEWSLETTER + FAQ -->
+  <!-- NEWSLETTER + CONTACT -->
   <section class="reveal" style="margin-top:28px;display:flex;gap:18px;flex-wrap:wrap;align-items:center">
     <div style="flex:1;min-width:220px">
       <h3 style="margin:0 0 8px">Newsletter</h3>
-      <p style="color:var(--muted);margin:0 0 10px">Monthly notes on prototypes, demos and dev tips — no spam.</p>
-      <form id="newsForm" onsubmit="event.preventDefault(); subscribe();" aria-label="Subscribe to newsletter" style="display:flex;gap:8px">
-        <input class="input" id="email" name="email" type="email" placeholder="you@email.com" required style="padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit" />
+      <p style="color:var(--muted);margin:0 0 10px">Monthly notes: prototypes, small dev tips and behind-the-scenes. No spam.</p>
+      <form id="newsForm" onsubmit="event.preventDefault(); subscribe();" style="display:flex;gap:8px">
+        <input id="email" class="input" type="email" placeholder="you@email.com" required />
         <button class="btn" type="submit">Subscribe</button>
       </form>
       <div id="newsMsg" style="margin-top:8px;color:var(--muted);font-size:13px"></div>
     </div>
 
-    <div style="min-width:340px" id="faqRoot">
-      <h3 style="margin:0 0 8px">FAQ</h3>
+    <div style="width:320px" id="contact">
+      <h3 style="margin:0 0 8px">Contact</h3>
+      <div style="background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01));padding:12px;border-radius:10px">
+        <p style="color:var(--muted);margin:0 0 8px">Email for quotes, demos, or code samples — include a short brief and target timeline.</p>
+        <!-- demo contact form (no server) -->
+        <form id="contactForm" onsubmit="event.preventDefault(); contactSubmit();" aria-label="Contact form">
+          <input id="contactName" class="input" type="text" placeholder="Your name" required style="margin-bottom:8px;width:100%" />
+          <input id="contactEmail" class="input" type="email" placeholder="Your email" required style="margin-bottom:8px;width:100%" />
+          <textarea id="contactMsg" class="input" placeholder="Short project brief" required style="height:88px;width:100%"></textarea>
+          <div style="margin-top:8px;display:flex;gap:8px">
+            <button class="btn" type="submit">Send (demo)</button>
+            <button class="btn secondary" type="button" onclick="prefillDemo()">Prefill</button>
+          </div>
+          <div id="contactMsg" style="margin-top:8px;color:var(--muted);font-size:13px"></div>
+        </form>
+      </div>
+    </div>
+  </section>
 
-      <div class="faq">
-        <div class="faq-item">
-          <div class="faq-head" tabindex="0"><div>Where can I find full code samples?</div><div aria-hidden="true">▾</div></div>
-          <div class="faq-body">Project pages link to docs and source when available. See Work → Project → Docs for details.</div>
-        </div>
-
-        <div class="faq-item">
-          <div class="faq-head" tabindex="0"><div>How do I request a prototype?</div><div aria-hidden="true">▾</div></div>
-          <div class="faq-body">Email with a short brief (scope, timeline, target platform) and I'll reply with availability and an estimate.</div>
-        </div>
+  <!-- FAQ -->
+  <section class="reveal" style="margin-top:28px">
+    <h3>FAQ</h3>
+    <div class="faq">
+      <div class="faq-item">
+        <div class="faq-head" tabindex="0"><div>Where are code samples?</div><div aria-hidden="true">▾</div></div>
+        <div class="faq-body">Project pages and case studies link to repo or downloads when available.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-head" tabindex="0"><div>How long is a prototype sprint?</div><div aria-hidden="true">▾</div></div>
+        <div class="faq-body">Typical sprint is 1–2 weeks depending on scope and fidelity.</div>
       </div>
     </div>
   </section>
@@ -379,34 +476,16 @@
   <!-- CTA -->
   <div class="cta reveal" style="margin-top:28px">
     <div>
-      <strong>Want a prototype built fast?</strong>
-      <div style="color:var(--muted)">I ship playable demos, tooling and design systems — production-minded.</div>
+      <strong>Ready to prototype? Let’s build.</strong>
+      <div style="color:var(--muted)">Fast turnarounds, clear scope, and production-minded delivery.</div>
     </div>
     <div style="display:flex;gap:10px">
       <a class="btn" href="#contact">Request Quote</a>
       <a class="btn secondary" href="mailto:example@email.com">Email</a>
     </div>
   </div>
-
-  <!-- ABOUT / CONTACT teaser -->
-  <section id="about" class="reveal" style="margin-top:30px;display:flex;gap:18px;flex-wrap:wrap">
-    <div style="flex:1;min-width:220px">
-      <h3 style="margin:0 0 8px">About</h3>
-      <p style="color:var(--muted);margin:0">3 years practical experience across web and game engines. Full CV & team info on About page.</p>
-    </div>
-
-    <div style="width:320px" id="contact">
-      <div style="background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01));padding:12px;border-radius:10px">
-        <h3 style="margin:0 0 6px">Contact</h3>
-        <p style="color:var(--muted);margin:0 0 10px">For demos, collabs, or code samples — reach out with a short brief.</p>
-        <a class="btn" href="mailto:example@email.com">Email Me</a>
-      </div>
-    </div>
-  </section>
-
 </main>
 
-<!-- Footer -->
 <footer>
   <div class="container">
     <div class="footer-grid">
@@ -441,41 +520,32 @@
   </div>
 </footer>
 
-<!-- Modal -->
-<div id="modalBackdrop" class="modal-backdrop" role="dialog" aria-modal="true" aria-hidden="true">
-  <div class="modal" role="document" aria-labelledby="modalTitle">
-    <button id="modalClose" class="btn secondary" style="float:right">Close</button>
-    <h3 id="modalTitle"></h3>
-    <p id="modalDesc" style="color:var(--muted)"></p>
-    <div id="modalDetails" style="margin-top:10px;color:var(--muted)"></div>
-  </div>
-</div>
-
+<!-- ========== Scripts (performance-minded) ========== -->
 <script>
 /* ============================
- Performance-minded JS
- - requestAnimationFrame throttling
- - IntersectionObserver reveals
- - lazy image handling
- - prefers-reduced-motion respected
- ============================ */
+  Utilities & small helpers
+  - rAF throttling
+  - IntersectionObserver reveals
+  - lazy image behavior via loading="lazy"
+  - respects prefers-reduced-motion
+============================ */
 
-/* set year */
+// set year
 document.getElementById('year').textContent = new Date().getFullYear();
 
-/* Reveal sections */
-const io = new IntersectionObserver((entries)=>{
-  for (const e of entries) {
-    if (e.isIntersecting) { e.target.classList.add('show'); io.unobserve(e.target); }
+// Reveal on scroll
+const ro = new IntersectionObserver((entries)=>{
+  for(const e of entries){
+    if(e.isIntersecting){ e.target.classList.add('show'); ro.unobserve(e.target); }
   }
 }, { threshold: 0.12 });
-document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+document.querySelectorAll('.reveal').forEach(el=> ro.observe(el));
 
-/* Parallax for hero character: rAF throttled */
+/* ===== Hero parallax (rAF throttled) ===== */
 (function(){
   const scene = document.querySelector('.hero-frame');
-  const char = document.getElementById('charWrap');
-  if(!scene || !char) return;
+  const charWrap = document.getElementById('charWrap');
+  if(!scene || !charWrap) return;
   let raf = null, last = {x:0,y:0};
   function onMove(e){
     const clientX = e.touches ? e.touches[0].clientX : e.clientX;
@@ -488,125 +558,126 @@ document.querySelectorAll('.reveal').forEach(el => io.observe(el));
       raf = requestAnimationFrame(()=> {
         const tx = last.x * 14;
         const ty = last.y * 10;
-        char.style.transform = `translate3d(${tx}px, ${ty}px, 0)`;
+        charWrap.style.transform = `translate3d(${tx}px, ${ty}px, 0)`;
         raf = null;
       });
     }
   }
   scene.addEventListener('mousemove', onMove, {passive:true});
   scene.addEventListener('touchmove', onMove, {passive:true});
-  scene.addEventListener('mouseleave', ()=> char.style.transform = '', {passive:true});
-  // disable on narrow screens
+  scene.addEventListener('mouseleave', ()=> charWrap.style.transform = '', {passive:true});
   function check(){ if(window.innerWidth < 720){ scene.removeEventListener('mousemove', onMove); scene.removeEventListener('touchmove', onMove); } }
   check();
   window.addEventListener('resize', check, {passive:true});
 })();
 
-/* Counters triggered when hero visible */
+/* ===== Counters (animate when visible) ===== */
 (function counters(){
-  const hero = document.querySelector('.hero');
-  if(!hero) return;
-  const ob = new IntersectionObserver((entries)=>{
+  const elHero = document.querySelector('.hero');
+  if(!elHero) return;
+  const io = new IntersectionObserver((entries)=>{
     for(const e of entries){
       if(e.isIntersecting){
-        animateNumber('countAnim', 1); // placeholder - not used
-        animateNum('countAnim2', 1);
-        // three simple counters:
-        runCount('countYears', 3);
-        runCount('countLangs', 9);
-        runCount('countProjects', 12);
-        ob.disconnect();
+        runCount('statYears',3,800);
+        runCount('statLangs',9,900);
+        runCount('statProjects',12,1000);
+        io.disconnect();
       }
     }
-  }, {threshold:0.3});
-  ob.observe(hero);
-
-  function runCount(id,to){
-    // find counter element by mapping ids to elements above
-    const map = { 'countYears':'cnt1', 'countLangs':'cnt2', 'countProjects':'cnt3' };
-    const el = document.getElementById(map[id]||id);
+  }, { threshold: 0.3 });
+  io.observe(elHero);
+  function runCount(id,to,dur){
+    const el = document.getElementById(id);
     if(!el) return;
     let start = null;
-    const duration = 900;
     function step(ts){
       if(!start) start = ts;
-      const p = Math.min(1, (ts - start) / duration);
-      el.textContent = Math.floor(p * to);
-      if(p < 1) requestAnimationFrame(step);
+      const p = Math.min(1,(ts-start)/dur);
+      el.textContent = Math.floor(p*to);
+      if(p<1) requestAnimationFrame(step);
       else el.textContent = to;
     }
     requestAnimationFrame(step);
   }
 })();
 
-/* Carousel controls + keyboard */
-(function carousel(){
-  const carousel = document.querySelector('.carousel');
-  const prev = document.getElementById('prevProj');
-  const next = document.getElementById('nextProj');
-  if(!carousel) return;
-  function scrollByOffset(offset){ carousel.scrollBy({ left: offset, behavior:'smooth' }); }
-  prev && prev.addEventListener('click', ()=> scrollByOffset(-340));
-  next && next.addEventListener('click', ()=> scrollByOffset(340));
-  carousel.addEventListener('keydown', (e)=>{
-    if(e.key === 'ArrowRight'){ scrollByOffset(340); e.preventDefault(); }
-    if(e.key === 'ArrowLeft'){ scrollByOffset(-340); e.preventDefault(); }
-  });
-})();
-
-/* Project modal previews */
-(function projectModal(){
-  const modalBackdrop = document.getElementById('modalBackdrop');
-  const modalTitle = document.getElementById('modalTitle');
-  const modalDesc = document.getElementById('modalDesc');
-  const modalDetails = document.getElementById('modalDetails');
-  const modalClose = document.getElementById('modalClose');
-
-  function open(data){
-    modalTitle.textContent = data.title || '';
-    modalDesc.textContent = data.desc || '';
-    modalDetails.textContent = data.details || '';
-    modalBackdrop.style.display = 'flex';
-    modalBackdrop.setAttribute('aria-hidden','false');
-    modalClose.focus();
-  }
-  function close(){ modalBackdrop.style.display = 'none'; modalBackdrop.setAttribute('aria-hidden','true'); }
-
-  modalClose && modalClose.addEventListener('click', close);
-  modalBackdrop && modalBackdrop.addEventListener('click', (e)=> { if(e.target === modalBackdrop) close(); });
-
-  document.querySelectorAll('.project').forEach(p=>{
-    p.addEventListener('click', ()=>{
-      const raw = p.getAttribute('data-proj');
-      try{ const data = JSON.parse(raw); open(data); }catch(e){}
+/* ===== Project filters & search ===== */
+(function projectFiltering(){
+  const select = document.getElementById('filterSelect');
+  const search = document.getElementById('projectSearch');
+  const grid = document.getElementById('projectGrid');
+  function filter(){
+    const q = (search.value || '').trim().toLowerCase();
+    const type = select.value;
+    const cards = grid.querySelectorAll('.project-card');
+    cards.forEach(c=>{
+      const title = (c.dataset.title||'').toLowerCase();
+      const tags = (c.dataset.tags||'').toLowerCase();
+      const t = c.dataset.type || 'all';
+      const matchesType = (type === 'all') || (t === type);
+      const matchesQuery = !q || title.includes(q) || tags.includes(q);
+      c.style.display = (matchesType && matchesQuery) ? '' : 'none';
     });
-    p.addEventListener('keydown', (e)=> { if(e.key === 'Enter' || e.key === ' ') { p.click(); e.preventDefault(); } });
+  }
+  select && select.addEventListener('change', filter, {passive:true});
+  search && search.addEventListener('input', debounce(filter, 150), {passive:true});
+  // keyboard prev/next scroll for grid area (small offset)
+  const prevBtn = document.getElementById('prevProj');
+  const nextBtn = document.getElementById('nextProj');
+  prevBtn && prevBtn.addEventListener('click', ()=> scrollGrid(-360));
+  nextBtn && nextBtn.addEventListener('click', ()=> scrollGrid(360));
+  function scrollGrid(offset){ grid.scrollBy({left:offset, behavior:'smooth'}); }
+  // debounce util
+  function debounce(fn, wait){ let t; return (...a)=>{ clearTimeout(t); t=setTimeout(()=>fn(...a), wait); } }
+})();
+
+/* ===== Project modal preview ===== */
+(function projectModal(){
+  const modal = document.getElementById('modalBackdrop');
+  const title = document.getElementById('modalTitle');
+  const desc = document.getElementById('modalDesc');
+  const details = document.getElementById('modalDetails');
+  const gallery = document.getElementById('modalGallery');
+  const close = document.getElementById('modalClose');
+  function open(data){
+    title.textContent = data.title || '';
+    desc.textContent = data.desc || '';
+    details.textContent = data.details || '';
+    // gallery: if data.images exist (array), show thumbnails; else show nothing
+    gallery.innerHTML = '';
+    if(Array.isArray(data.images)){
+      data.images.forEach(src=>{
+        const img = document.createElement('img');
+        img.src = src; img.loading = 'lazy';
+        img.style.width='120px'; img.style.borderRadius='8px'; img.style.objectFit='cover';
+        gallery.appendChild(img);
+      });
+    }
+    modal.style.display='flex'; modal.setAttribute('aria-hidden','false');
+    close.focus();
+  }
+  function closeModal(){ modal.style.display='none'; modal.setAttribute('aria-hidden','true'); }
+  close && close.addEventListener('click', closeModal);
+  modal && modal.addEventListener('click', (e)=> { if(e.target === modal) closeModal(); });
+  document.querySelectorAll('.project-card').forEach(card=>{
+    card.addEventListener('click', ()=> {
+      const data = {
+        title: card.dataset.title,
+        desc: card.dataset.desc,
+        details: card.dataset.desc + ' — more details could be loaded from JSON.',
+        images: [ card.querySelector('img')?.src ].filter(Boolean)
+      };
+      try{ open(data); }catch(e){}
+    });
+    card.addEventListener('keydown', (e)=> { if(e.key === 'Enter' || e.key === ' ') { card.click(); e.preventDefault(); }});
   });
 })();
 
-/* Testimonials auto-scroll but cheap: rAF + pause on hover */
-(function testimonialsTicker(){
-  const el = document.querySelector('.testimonials');
-  if(!el) return;
-  let pos = 0, last = performance.now(), running = true;
-  function tick(ts){
-    if(!running) { last = ts; requestAnimationFrame(tick); return; }
-    const dt = ts - last; last = ts;
-    pos += dt * 0.02; // speed
-    if(pos > el.scrollWidth - el.clientWidth) pos = 0;
-    el.scrollLeft = pos;
-    requestAnimationFrame(tick);
-  }
-  el.addEventListener('mouseenter', ()=> running = false, {passive:true});
-  el.addEventListener('mouseleave', ()=> running = true, {passive:true});
-  if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches) requestAnimationFrame(tick);
-})();
-
-/* Gallery hover parallax (rAF throttled) */
+/* ===== Gallery hover parallax (rAF) ===== */
 (function galleryParallax(){
   const cards = document.querySelectorAll('.g-card');
   cards.forEach(card=>{
-    let raf = null;
+    let raf=null;
     function onMove(e){
       const rect = card.getBoundingClientRect();
       const cx = rect.left + rect.width/2;
@@ -629,46 +700,75 @@ document.querySelectorAll('.reveal').forEach(el => io.observe(el));
   });
 })();
 
-/* Marquee: pause on hover */
-(function marquee(){
-  const marq = document.querySelector('.marquee');
-  if(!marq) return;
-  marq.addEventListener('mouseenter', ()=> { const inr = marq.querySelector('.marquee-inner'); if(inr) inr.style.animationPlayState='paused'; }, {passive:true});
-  marq.addEventListener('mouseleave', ()=> { const inr = marq.querySelector('.marquee-inner'); if(inr) inr.style.animationPlayState='running'; }, {passive:true});
+/* ===== Testimonials ticker (cheap) ===== */
+(function testimonialsTicker(){
+  const el = document.querySelector('.testimonials');
+  if(!el) return;
+  let pos = 0, last = performance.now(), running = true;
+  function tick(ts){
+    if(!running){ last = ts; requestAnimationFrame(tick); return; }
+    const dt = ts - last; last = ts;
+    pos += dt * 0.02;
+    if(pos > el.scrollWidth - el.clientWidth) pos = 0;
+    el.scrollLeft = pos;
+    requestAnimationFrame(tick);
+  }
+  el.addEventListener('mouseenter', ()=> running=false, {passive:true});
+  el.addEventListener('mouseleave', ()=> running=true, {passive:true});
+  if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches) requestAnimationFrame(tick);
 })();
 
-/* FAQ accordion */
+/* ===== Marquee pause on hover ===== */
+(function marqueePause(){
+  const m = document.querySelector('.marquee');
+  if(!m) return;
+  m.addEventListener('mouseenter', ()=> { const inr = m.querySelector('.marquee-inner'); if(inr) inr.style.animationPlayState='paused'; }, {passive:true});
+  m.addEventListener('mouseleave', ()=> { const inr = m.querySelector('.marquee-inner'); if(inr) inr.style.animationPlayState='running'; }, {passive:true});
+})();
+
+/* ===== FAQ accordion ===== */
 document.querySelectorAll('.faq-head').forEach(head=>{
   const body = head.nextElementSibling;
   head.addEventListener('click', ()=> {
     const open = body.style.display === 'block' || body.style.display === '';
-    // close all
-    document.querySelectorAll('.faq-body').forEach(b => b.style.display = 'none');
-    if(!open) body.style.display = 'block';
+    document.querySelectorAll('.faq-body').forEach(b=> b.style.display='none');
+    if(!open) body.style.display='block';
   });
-  head.addEventListener('keydown', (e)=> { if(e.key === 'Enter' || e.key === ' ') { head.click(); e.preventDefault(); }});
+  head.addEventListener('keydown', (e)=> { if(e.key==='Enter' || e.key===' ') { head.click(); e.preventDefault(); }});
 });
 
-/* Newsletter demo */
+/* ===== Newsletter demo ===== */
 function subscribe(){
-  const email = document.getElementById('email');
-  const msg = document.getElementById('newsMsg');
-  if(!email || !email.value){ msg.textContent = 'Enter an email'; return; }
-  msg.textContent = 'Thanks — demo subscription saved (replace with real API).';
-  setTimeout(()=> msg.textContent = '', 4000);
+  const email = document.getElementById('email'); const msg = document.getElementById('newsMsg');
+  if(!email || !email.value){ msg.textContent='Enter an email'; return; }
+  msg.textContent = 'Thanks — demo subscription saved. (Replace with your real endpoint)';
+  setTimeout(()=> msg.textContent='', 4000);
 }
 
-/* Accessibility: keyboard focus outlines show only when keyboard used */
+/* ===== Contact demo submit ===== */
+function contactSubmit(){
+  const name = document.getElementById('contactName'); const email = document.getElementById('contactEmail'); const m = document.getElementById('contactMsg'); const out = document.getElementById('contactMsg');
+  if(!name.value || !email.value || !document.getElementById('contactMsg').value){ out.textContent='Fill all fields.'; return; }
+  out.textContent = 'Message received (demo). I will reply when this is hooked to real email.';
+  setTimeout(()=> out.textContent = '', 5000);
+}
+/* prefill demo data */
+function prefillDemo(){ document.getElementById('contactName').value='Acme Inc'; document.getElementById('contactEmail').value='hello@acme.test'; document.getElementById('contactMsg').value='We need a 2-week prototype to test mechanic X.'; }
+
+/* ===== Accessibility: focus visible only when keyboard used ===== */
 (function focusOutline(){
-  function handleFirstTab(e){
-    if(e.key === 'Tab') document.body.classList.add('show-focus');
-  }
-  window.addEventListener('keydown', handleFirstTab, {once:true});
+  function handler(e){ if(e.key === 'Tab') document.body.classList.add('show-focus'); window.removeEventListener('keydown', handler); }
+  window.addEventListener('keydown', handler);
 })();
 
-/* Respect reduced-motion: stop heavy rAF loops already guarded above */
+/* ===== Optional: service worker registration (commented) ===== */
+/*
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.register('/sw.js').then(()=> console.log('sw registered')).catch(()=>{});
+}
+*/
 
-/* lazy image fallback: do nothing here because using loading="lazy" in markup */
+/* Respect reduced motion: heavy loops are gated by preference checks above */
 
 </script>
 </body>
