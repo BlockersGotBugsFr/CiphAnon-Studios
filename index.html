@@ -1,196 +1,483 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Welcome | My Website</title>
-  <meta name="description" content="A professional and exciting homepage built with GitHub Pages." />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#0b1220" />
+  <title>Your Name — Creative Developer</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    /* =========================
+       Theme variables & reset
+       ========================= */
+    :root{
+      --bg:#0b1220;
+      --card:#0f1720;
+      --muted:#9aa7bd;
+      --accent:#5cc8ff;
+      --accent-2:#7b61ff;
+      --glass: rgba(255,255,255,0.04);
+      --radius:14px;
+      --maxw:1150px;
+      --ease: cubic-bezier(.2,.9,.3,1);
     }
 
-    body {
-      font-family: "Segoe UI", Tahoma, sans-serif;
-      background: #f9fafc;
-      color: #222;
-      line-height: 1.6;
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+      background: linear-gradient(180deg,#07101a 0%, #051020 100%);
+      color:#e6eef8;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+      overflow-x:hidden;
     }
 
-    header {
-      background: #0d1117;
-      color: #fff;
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+
+    .container{
+      width:100%;
+      max-width:var(--maxw);
+      margin:0 auto;
+      padding:0 24px;
     }
 
-    header h1 {
-      font-size: 1.5rem;
+    /* =========================
+       HEADER / NAV
+       ========================= */
+    header{
+      position:sticky;
+      top:14px;
+      z-index:60;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      pointer-events:none; /* allow only inner elements to be interactive */
+    }
+    .nav-inner{
+      pointer-events:auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      width:100%;
+      max-width:var(--maxw);
+      padding:10px 24px;
+      background: linear-gradient(90deg, rgba(11,17,32,0.35), rgba(11,17,32,0.25));
+      border-radius:12px;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 6px 30px rgba(2,6,12,0.6);
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+    .logo{
+      width:44px;height:44px;border-radius:10px;
+      background:linear-gradient(135deg,var(--accent),var(--accent-2));
+      display:flex;align-items:center;justify-content:center;font-weight:800;color:#041226;
+      box-shadow: 0 6px 18px rgba(92,200,255,0.14), inset 0 -6px 16px rgba(0,0,0,0.15);
+      font-size:18px;
+    }
+    .brand h1{font-size:16px;margin:0}
+    nav a{margin-left:18px;color:var(--muted);font-weight:600}
+    .nav-actions{display:flex;align-items:center;gap:12px}
+    .btn{
+      padding:10px 16px;border-radius:10px;font-weight:700;border:0;cursor:pointer;
+      background:linear-gradient(90deg,var(--accent),var(--accent-2));
+      color:#041226;box-shadow: 0 8px 30px rgba(123,97,255,0.12);
+      transition:transform .22s var(--ease),box-shadow .22s var(--ease);
+    }
+    .btn.secondary{
+      background: transparent;
+      color:var(--muted);
+      border:1px solid rgba(255,255,255,0.06);
+      box-shadow:none;font-weight:600;
+    }
+    .btn:focus{outline:3px solid rgba(92,200,255,0.12);outline-offset:3px}
+    .btn:hover{transform:translateY(-4px)}
+
+    /* =========================
+       HERO
+       ========================= */
+    .hero{
+      position:relative;
+      padding:72px 0 40px;
+      display:grid;
+      align-items:center;
+      gap:28px;
+    }
+    .hero-inner{
+      display:grid;
+      grid-template-columns: 1fr 420px;
+      gap:36px;
+      align-items:center;
+      width:100%;
+      max-width:var(--maxw);
+      margin:0 auto;
+      padding:40px 24px;
     }
 
-    nav a {
-      color: #fff;
-      margin: 0 12px;
-      text-decoration: none;
-      font-weight: 500;
+    /* hero visual: image area */
+    .hero-visual{
+      height:420px;
+      border-radius:18px;
+      background-image:
+        linear-gradient(180deg, rgba(11,17,32,0.12), rgba(9,14,22,0.06)),
+        url('https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=1400&auto=format&fit=crop&sat=-20');
+      background-size:cover;
+      background-position:center;
+      box-shadow: 0 18px 60px rgba(2,6,12,0.65);
+      position:relative;
+      overflow:hidden;
+    }
+    /* animated gradient overlay */
+    .hero-visual::after{
+      content:'';
+      position:absolute;inset:0;
+      background: linear-gradient(120deg, rgba(124,97,255,0.18), rgba(92,200,255,0.12));
+      mix-blend-mode: screen;
+      filter: blur(18px);
+      transform: translateX(-10%);
+      animation: drift 8s linear infinite;
+      opacity:0.9;
+    }
+    @keyframes drift{
+      0%{transform:translateX(-12%) translateY(0) rotate(0)}
+      50%{transform:translateX(8%) translateY(-8px) rotate(1deg)}
+      100%{transform:translateX(-12%) translateY(0) rotate(0)}
     }
 
-    nav a:hover {
-      color: #58a6ff;
+    /* floating overlay cards inside visual */
+    .sample-cards{
+      position:absolute;left:20px;bottom:20px;display:flex;gap:14px;
+      transform: translateY(0);
+    }
+    .sample-card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+      border-radius:12px;padding:10px 14px;width:140px;backdrop-filter: blur(6px);
+      box-shadow: 0 10px 30px rgba(2,6,12,0.5);color:#eaf6ff;font-weight:700;
+      transform: translateY(0);transition:transform .45s var(--ease);
+    }
+    .sample-card:hover{transform:translateY(-10px) rotate(-1deg)}
+
+    /* hero content text */
+    .hero-copy h2{
+      font-size:44px;
+      line-height:1.02;
+      margin:0 0 12px 0;
+      letter-spacing:-0.6px;
+      color:linear-gradient(90deg,var(--accent),var(--accent-2));
+    }
+    .headline-gradient{
+      display:inline-block;
+      background:linear-gradient(90deg,var(--accent),var(--accent-2));
+      -webkit-background-clip:text;background-clip:text;color:transparent;
+    }
+    .hero-copy p.lead{
+      color:var(--muted);
+      font-size:18px;
+      margin-bottom:18px;
+      max-width:56ch;
+    }
+    .hero-ctas{display:flex;gap:12px;align-items:center}
+    .mini-features{display:flex;gap:14px;margin-top:18px;flex-wrap:wrap}
+    .mini-features .pill{
+      background:var(--glass);padding:8px 12px;border-radius:999px;font-weight:600;color:var(--muted);
+      border:1px solid rgba(255,255,255,0.03);
     }
 
-    /* Hero Section */
-    .hero {
-      text-align: center;
-      padding: 5rem 2rem;
-      background: linear-gradient(135deg, #58a6ff, #1f6feb);
-      color: #fff;
+    /* =========================
+       STATS / TRUST ROW
+       ========================= */
+    .stats{
+      margin-top:28px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      padding:10px;border-radius:12px;display:flex;gap:18px;align-items:center;
+      color:var(--muted);font-weight:700;
+    }
+    .stat{
+      display:flex;flex-direction:column;
+    }
+    .stat .num{font-size:20px;color:#fff}
+
+    /* =========================
+       PROJECTS GRID
+       ========================= */
+    section.projects{padding:48px 0}
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
+    }
+    .proj{
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:14px;padding:18px;box-shadow:0 10px 30px rgba(2,6,12,0.45);
+      transition:transform .28s var(--ease),box-shadow .28s var(--ease);
+      display:flex;flex-direction:column;gap:12px;
+    }
+    .proj:hover{transform:translateY(-12px);box-shadow:0 18px 46px rgba(2,6,12,0.6)}
+    .proj .tags{display:flex;gap:8px;flex-wrap:wrap}
+    .tag{font-size:12px;padding:6px 9px;border-radius:999px;background:rgba(255,255,255,0.03);color:var(--muted);font-weight:700}
+
+    /* =========================
+       TESTIMONIALS
+       ========================= */
+    .testimonials{margin-top:42px;display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    .test{background:var(--card);padding:18px;border-radius:12px;box-shadow:0 6px 22px rgba(2,6,12,0.5)}
+    .test p{color:var(--muted);margin-bottom:12px}
+    .test .meta{display:flex;gap:12px;align-items:center}
+    .avatar{width:52px;height:52px;border-radius:10px;background:#10202b;display:inline-block}
+
+    /* =========================
+       CONTACT / FOOTER
+       ========================= */
+    footer{
+      margin-top:60px;padding:48px 0 80px;color:var(--muted);
+      border-top:1px solid rgba(255,255,255,0.02);
+    }
+    .contact-row{display:flex;gap:24px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+    .contact-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:18px;border-radius:12px}
+    .small{font-size:13px;color:var(--muted)}
+
+    /* =========================
+       RESPONSIVE
+       ========================= */
+    @media (max-width:1060px){
+      .hero-inner{grid-template-columns:1fr 360px}
+      .grid{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width:820px){
+      .nav-inner{padding:10px}
+      .hero-inner{grid-template-columns:1fr; padding:20px}
+      .hero-visual{height:300px;border-radius:12px}
+      .grid{grid-template-columns:1fr}
+      .testimonials{grid-template-columns:1fr}
+      .brand h1{font-size:14px}
+    }
+    @media (max-width:420px){
+      .hero-copy h2{font-size:28px}
+      .logo{width:40px;height:40px}
     }
 
-    .hero h2 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-    }
-
-    .hero p {
-      font-size: 1.2rem;
-      margin-bottom: 2rem;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 0.8rem 1.5rem;
-      border-radius: 8px;
-      background: #fff;
-      color: #1f6feb;
-      font-weight: bold;
-      text-decoration: none;
-      transition: 0.3s;
-    }
-
-    .btn:hover {
-      background: #e6e6e6;
-    }
-
-    /* Sections */
-    main {
-      max-width: 1000px;
-      margin: 2rem auto;
-      padding: 0 1.5rem;
-    }
-
-    section {
-      margin-bottom: 3rem;
-    }
-
-    section h2 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-      color: #0d1117;
-    }
-
-    section p {
-      font-size: 1rem;
-      color: #444;
-    }
-
-    /* Features */
-    .features {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
-      margin-top: 1.5rem;
-    }
-
-    .card {
-      background: #fff;
-      border-radius: 10px;
-      padding: 1.5rem;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-      transition: 0.3s;
-    }
-
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-    }
-
-    .card h3 {
-      margin-bottom: 0.5rem;
-      font-size: 1.3rem;
-    }
-
-    footer {
-      background: #0d1117;
-      color: #aaa;
-      text-align: center;
-      padding: 1.2rem;
-      font-size: 0.9rem;
-    }
-
-    footer a {
-      color: #58a6ff;
-    }
+    /* =========================
+       Reveal animation helper
+       ========================= */
+    .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+    .reveal.show{opacity:1;transform:none}
   </style>
 </head>
 <body>
+  <!-- ============ HEADER ============ -->
   <header>
-    <h1>My Website</h1>
-    <nav>
-      <a href="#about">About</a>
-      <a href="#features">Features</a>
-      <a href="#contact">Contact</a>
-    </nav>
+    <div class="nav-inner container" role="navigation" aria-label="Main navigation">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">Y</div>
+        <div>
+          <h1 style="margin:0;font-size:15px">Your Name</h1>
+          <div style="font-size:12px;color:var(--muted)">Creative Developer & Designer</div>
+        </div>
+      </div>
+
+      <nav aria-label="Top links" style="display:flex;align-items:center">
+        <a href="#projects">Projects</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a class="btn" href="#contact">Hire Me</a>
+        <a class="btn secondary" href="https://github.com/your-username" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
   </header>
 
-  <section class="hero">
-    <h2>Welcome to My Website 🚀</h2>
-    <p>Exciting, professional, and built to impress — discover my projects and skills below.</p>
-    <a href="#features" class="btn">Explore More</a>
-  </section>
-
+  <!-- ============ HERO ============ -->
   <main>
-    <section id="about">
-      <h2>About Me</h2>
-      <p>
-        I’m passionate about building modern, user-friendly websites and projects. 
-        This site is my digital home, showcasing what I create and the ideas I’m working on.
-      </p>
-    </section>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <h2 id="hero-title"><span class="headline-gradient">Design. Build. Launch.</span> Beautiful products that ship fast.</h2>
+          <p class="lead">I create polished web experiences, tools, and interactive demos — everything from landing pages to full-stack apps. I love clean UI, fast performance, and delightful details.</p>
 
-    <section id="features">
-      <h2>What I Do</h2>
-      <div class="features">
-        <div class="card">
-          <h3>🌐 Web Development</h3>
-          <p>Clean, responsive websites using modern tools and frameworks.</p>
+          <div class="hero-ctas">
+            <a class="btn" href="#projects">See Projects</a>
+            <a class="btn secondary" href="#contact">Work With Me</a>
+          </div>
+
+          <div class="mini-features" style="margin-top:18px">
+            <span class="pill">R&D & Prototyping</span>
+            <span class="pill">Responsive Design</span>
+            <span class="pill">Performance-first</span>
+          </div>
+
+          <div class="stats" style="margin-top:20px">
+            <div class="stat"><div class="num">40+</div><div class="small">Projects shipped</div></div>
+            <div style="width:1px;height:28px;background:rgba(255,255,255,0.03);margin:0 12px"></div>
+            <div class="stat"><div class="num">10k+</div><div class="small">Monthly users</div></div>
+            <div style="width:1px;height:28px;background:rgba(255,255,255,0.03);margin:0 12px"></div>
+            <div class="stat"><div class="num">5</div><div class="small">Years experience</div></div>
+          </div>
         </div>
-        <div class="card">
-          <h3>🎨 Design</h3>
-          <p>User-friendly designs with focus on simplicity and impact.</p>
-        </div>
-        <div class="card">
-          <h3>⚡ Projects</h3>
-          <p>Creative apps and experiments hosted right here on GitHub.</p>
+
+        <div class="hero-visual" aria-hidden="true">
+          <!-- sample floating cards -->
+          <div class="sample-cards" style="left:16px;bottom:18px">
+            <div class="sample-card">App Dashboard</div>
+            <div class="sample-card">Design System</div>
+            <div class="sample-card">Game UI</div>
+          </div>
         </div>
       </div>
     </section>
 
-    <section id="contact">
-      <h2>Contact</h2>
-      <p>
-        Get in touch at <a href="mailto:example@email.com">example@email.com</a> 
-        or connect on <a href="https://linkedin.com" target="_blank">LinkedIn</a>.
-      </p>
+    <!-- ============ PROJECTS ============ -->
+    <section id="projects" class="projects container" aria-labelledby="projects-title">
+      <h2 id="projects-title" style="font-size:22px;margin-bottom:18px">Featured Projects</h2>
+
+      <div class="grid reveal">
+        <!-- Project 1 -->
+        <article class="proj" tabindex="0" aria-labelledby="p1">
+          <div style="display:flex;justify-content:space-between;align-items:start;gap:10px">
+            <div>
+              <h3 id="p1" style="margin:0 0 6px">Studio Landing — Marketing Site</h3>
+              <p class="small" style="margin:0 0 10px;color:var(--muted)">Fast, conversion-focused landing pages with A/B frameworks.</p>
+            </div>
+            <div style="font-weight:800;color:var(--accent)">SaaS</div>
+          </div>
+          <div class="tags">
+            <span class="tag">React</span>
+            <span class="tag">Tailwind</span>
+            <span class="tag">Vercel</span>
+          </div>
+          <p style="margin-top:auto;color:var(--muted)">Live demo & repo available on GitHub.</p>
+        </article>
+
+        <!-- Project 2 -->
+        <article class="proj" tabindex="0" aria-labelledby="p2">
+          <div style="display:flex;justify-content:space-between;align-items:start;gap:10px">
+            <div>
+              <h3 id="p2" style="margin:0 0 6px">Pet-clicker Simulator — Game Prototype</h3>
+              <p class="small" style="margin:0 0 10px;color:var(--muted)">A polished mini-game with smooth controls and collectible pets.</p>
+            </div>
+            <div style="font-weight:800;color:var(--accent)">Game</div>
+          </div>
+          <div class="tags">
+            <span class="tag">JavaScript</span>
+            <span class="tag">Canvas</span>
+            <span class="tag">Design</span>
+          </div>
+          <p style="margin-top:auto;color:var(--muted)">UX-focused, works great on desktop and mobile.</p>
+        </article>
+
+        <!-- Project 3 -->
+        <article class="proj" tabindex="0" aria-labelledby="p3">
+          <div style="display:flex;justify-content:space-between;align-items:start;gap:10px">
+            <div>
+              <h3 id="p3" style="margin:0 0 6px">Tooling Library — Dev Tools</h3>
+              <p class="small" style="margin:0 0 10px;color:var(--muted)">CLI tools and micro-libraries that save time in build pipelines.</p>
+            </div>
+            <div style="font-weight:800;color:var(--accent)">Open Source</div>
+          </div>
+          <div class="tags">
+            <span class="tag">Node</span>
+            <span class="tag">npm</span>
+            <span class="tag">OSS</span>
+          </div>
+          <p style="margin-top:auto;color:var(--muted)">Actively maintained with clear docs.</p>
+        </article>
+      </div>
+
+      <!-- testimonials -->
+      <div class="testimonials reveal" style="margin-top:28px">
+        <div class="test">
+          <p>"Great to work with — shipped features rapidly and polished the UI to perfection."</p>
+          <div class="meta"><div class="avatar" style="background-image:url('https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400&auto=format&fit=crop');background-size:cover"></div><div>
+            <strong>Alex P.</strong><div class="small">Founder, Acme</div>
+          </div></div>
+        </div>
+
+        <div class="test">
+          <p>"The product's performance improved noticeably — users loved the feel of the interactions."</p>
+          <div class="meta"><div class="avatar" style="background-image:url('https://images.unsplash.com/photo-1545996124-1b78f2d7de53?q=80&w=400&auto=format&fit=crop');background-size:cover"></div><div>
+            <strong>Sam M.</strong><div class="small">PM, Nimbus</div>
+          </div></div>
+        </div>
+      </div>
     </section>
+
+    <!-- ============ ABOUT / CONTACT ============ -->
+    <section id="about" class="container" style="padding-bottom:40px">
+      <h2 style="font-size:22px;margin-bottom:12px">About</h2>
+      <div style="display:flex;gap:18px;align-items:flex-start;flex-wrap:wrap">
+        <div style="flex:1;min-width:260px">
+          <p style="color:var(--muted)">I'm a creative developer who loves building beautiful, reliable products. I pair design sensitivity with engineering discipline — always shipping with performance and accessibility in mind.</p>
+
+          <ul style="margin-top:12px;color:var(--muted)">
+            <li>Design systems, UI engineering, and front-end architecture</li>
+            <li>Game prototypes, interactive demos, and tooling</li>
+            <li>Open-source contributions and developer experience</li>
+          </ul>
+        </div>
+
+        <div style="width:320px">
+          <div class="contact-card">
+            <h3 style="margin:0 0 8px">Get in touch</h3>
+            <p class="small" style="margin-bottom:12px">Interested in working together or want a quote? Send a message.</p>
+            <a class="btn" href="mailto:example@email.com">Email Me</a>
+            <div style="margin-top:10px" class="small">Or <a href="https://linkedin.com" target="_blank" rel="noopener">connect on LinkedIn</a>.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </main>
 
+  <!-- ============ FOOTER ============ -->
   <footer>
-    <p>&copy; 2025 My Website | Built on <a href="https://pages.github.com/">GitHub Pages</a></p>
+    <div class="container">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+        <div>
+          <strong>Your Name</strong>
+          <div class="small">Creative Developer • Built with ❤️</div>
+        </div>
+        <div style="display:flex;gap:12px;align-items:center">
+          <a class="small" href="https://github.com/your-username" target="_blank" rel="noopener">GitHub</a>
+          <a class="small" href="https://twitter.com/your-handle" target="_blank" rel="noopener">Twitter</a>
+          <a class="small" href="#contact">Contact</a>
+        </div>
+      </div>
+
+      <div style="margin-top:22px;color:var(--muted);font-size:13px">
+        © <span id="year"></span> Your Name • All rights reserved.
+      </div>
+    </div>
   </footer>
+
+  <!-- =========================
+       Lightweight JS: reveal + year
+       ========================= -->
+  <script>
+    // set year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // simple intersection observer for reveal animations
+    const io = new IntersectionObserver((entries) => {
+      for(const e of entries){
+        if(e.isIntersecting){
+          e.target.classList.add('show');
+          io.unobserve(e.target);
+        }
+      }
+    }, {threshold: 0.12});
+
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  </script>
 </body>
 </html>
