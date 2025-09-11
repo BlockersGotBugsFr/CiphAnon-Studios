@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Website</title>
-  <meta name="description" content="A simple website hosted on GitHub Pages">
+  <title>My Portfolio</title>
+  <meta name="description" content="Professional portfolio website built with GitHub Pages.">
   <style>
-    /* Basic reset */
+    /* --- Reset --- */
     * {
       margin: 0;
       padding: 0;
@@ -14,70 +14,160 @@
     }
 
     body {
-      font-family: Arial, sans-serif;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: #fafafa;
+      color: #222;
       line-height: 1.6;
-      background: #f5f5f5;
-      color: #333;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
     }
 
-    header {
-      background: #333;
-      color: #fff;
-      padding: 1rem;
-      text-align: center;
-    }
-
-    nav {
-      margin-top: 0.5rem;
-    }
-
-    nav a {
-      color: #fff;
-      margin: 0 10px;
+    a {
+      color: inherit;
       text-decoration: none;
     }
 
-    nav a:hover {
-      text-decoration: underline;
-    }
-
-    main {
-      flex: 1;
-      padding: 2rem;
-      max-width: 800px;
-      margin: auto;
-    }
-
-    footer {
-      background: #333;
+    /* --- Header --- */
+    header {
+      background: #0d1117;
       color: #fff;
+      padding: 1.5rem;
       text-align: center;
-      padding: 1rem;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      margin-bottom: 0.3rem;
+    }
+
+    header p {
+      font-size: 1rem;
+      color: #aaa;
+    }
+
+    nav {
+      margin-top: 1rem;
+    }
+
+    nav a {
+      margin: 0 15px;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    nav a:hover {
+      color: #58a6ff;
+    }
+
+    /* --- Main Layout --- */
+    main {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+    }
+
+    section {
+      margin-bottom: 3rem;
+    }
+
+    section h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      color: #0d1117;
+      border-bottom: 2px solid #ddd;
+      display: inline-block;
+      padding-bottom: 0.3rem;
+    }
+
+    section p {
+      font-size: 1rem;
+      color: #444;
+    }
+
+    /* --- Cards for Projects --- */
+    .card {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    }
+
+    .card h3 {
+      margin-bottom: 0.5rem;
+      font-size: 1.3rem;
+      color: #111;
+    }
+
+    .card p {
+      color: #555;
+      font-size: 0.95rem;
+    }
+
+    /* --- Footer --- */
+    footer {
+      background: #0d1117;
+      color: #aaa;
+      text-align: center;
+      padding: 1.2rem;
+      margin-top: 2rem;
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: #58a6ff;
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>Welcome to My Website</h1>
+    <h1>My Name</h1>
+    <p>Web Developer | Designer | Creator</p>
     <nav>
-      <a href="#">Home</a>
-      <a href="#">About</a>
-      <a href="#">Projects</a>
-      <a href="#">Contact</a>
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
     </nav>
   </header>
 
   <main>
-    <h2>Hello World 👋</h2>
-    <p>This is a simple GitHub Pages website. You can edit <code>index.html</code> to customize it.</p>
-    <p>Add your content here and push changes to your GitHub repo — the site will update automatically.</p>
+    <section id="about">
+      <h2>About Me</h2>
+      <p>
+        Welcome to my professional portfolio. I’m passionate about building clean, user-friendly websites and applications. 
+        This site showcases my work and skills — all hosted using GitHub Pages.
+      </p>
+    </section>
+
+    <section id="projects">
+      <h2>Projects</h2>
+
+      <div class="card">
+        <h3>Project One</h3>
+        <p>A short description of your project. You can link to the GitHub repository or live demo.</p>
+      </div>
+
+      <div class="card">
+        <h3>Project Two</h3>
+        <p>Another example project with details about the tools and technologies you used.</p>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>Contact</h2>
+      <p>
+        You can reach me at <a href="mailto:example@email.com">example@email.com</a> 
+        or connect with me on <a href="https://linkedin.com" target="_blank">LinkedIn</a>.
+      </p>
+    </section>
   </main>
 
   <footer>
-    <p>&copy; 2025 My Website | Built with ❤️ using GitHub Pages</p>
+    <p>&copy; 2025 My Name. Built with ❤️ on <a href="https://pages.github.com/">GitHub Pages</a>.</p>
   </footer>
 </body>
 </html>
