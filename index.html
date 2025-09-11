@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Portfolio</title>
-  <meta name="description" content="Professional portfolio website built with GitHub Pages.">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome | My Website</title>
+  <meta name="description" content="A professional and exciting homepage built with GitHub Pages." />
   <style>
-    /* --- Reset --- */
     * {
       margin: 0;
       padding: 0;
@@ -14,52 +13,72 @@
     }
 
     body {
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      background: #fafafa;
+      font-family: "Segoe UI", Tahoma, sans-serif;
+      background: #f9fafc;
       color: #222;
       line-height: 1.6;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    /* --- Header --- */
     header {
       background: #0d1117;
       color: #fff;
-      padding: 1.5rem;
-      text-align: center;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
     header h1 {
-      font-size: 2rem;
-      margin-bottom: 0.3rem;
-    }
-
-    header p {
-      font-size: 1rem;
-      color: #aaa;
-    }
-
-    nav {
-      margin-top: 1rem;
+      font-size: 1.5rem;
     }
 
     nav a {
-      margin: 0 15px;
+      color: #fff;
+      margin: 0 12px;
+      text-decoration: none;
       font-weight: 500;
-      transition: color 0.2s ease;
     }
 
     nav a:hover {
       color: #58a6ff;
     }
 
-    /* --- Main Layout --- */
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 5rem 2rem;
+      background: linear-gradient(135deg, #58a6ff, #1f6feb);
+      color: #fff;
+    }
+
+    .hero h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.8rem 1.5rem;
+      border-radius: 8px;
+      background: #fff;
+      color: #1f6feb;
+      font-weight: bold;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #e6e6e6;
+    }
+
+    /* Sections */
     main {
-      max-width: 900px;
+      max-width: 1000px;
       margin: 2rem auto;
       padding: 0 1.5rem;
     }
@@ -69,12 +88,9 @@
     }
 
     section h2 {
-      font-size: 1.8rem;
+      font-size: 2rem;
       margin-bottom: 1rem;
       color: #0d1117;
-      border-bottom: 2px solid #ddd;
-      display: inline-block;
-      padding-bottom: 0.3rem;
     }
 
     section p {
@@ -82,14 +98,20 @@
       color: #444;
     }
 
-    /* --- Cards for Projects --- */
+    /* Features */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
     .card {
       background: #fff;
       border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
       padding: 1.5rem;
-      margin-bottom: 1.5rem;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      transition: 0.3s;
     }
 
     .card:hover {
@@ -100,21 +122,13 @@
     .card h3 {
       margin-bottom: 0.5rem;
       font-size: 1.3rem;
-      color: #111;
     }
 
-    .card p {
-      color: #555;
-      font-size: 0.95rem;
-    }
-
-    /* --- Footer --- */
     footer {
       background: #0d1117;
       color: #aaa;
       text-align: center;
       padding: 1.2rem;
-      margin-top: 2rem;
       font-size: 0.9rem;
     }
 
@@ -125,49 +139,58 @@
 </head>
 <body>
   <header>
-    <h1>My Name</h1>
-    <p>Web Developer | Designer | Creator</p>
+    <h1>My Website</h1>
     <nav>
       <a href="#about">About</a>
-      <a href="#projects">Projects</a>
+      <a href="#features">Features</a>
       <a href="#contact">Contact</a>
     </nav>
   </header>
+
+  <section class="hero">
+    <h2>Welcome to My Website 🚀</h2>
+    <p>Exciting, professional, and built to impress — discover my projects and skills below.</p>
+    <a href="#features" class="btn">Explore More</a>
+  </section>
 
   <main>
     <section id="about">
       <h2>About Me</h2>
       <p>
-        Welcome to my professional portfolio. I’m passionate about building clean, user-friendly websites and applications. 
-        This site showcases my work and skills — all hosted using GitHub Pages.
+        I’m passionate about building modern, user-friendly websites and projects. 
+        This site is my digital home, showcasing what I create and the ideas I’m working on.
       </p>
     </section>
 
-    <section id="projects">
-      <h2>Projects</h2>
-
-      <div class="card">
-        <h3>Project One</h3>
-        <p>A short description of your project. You can link to the GitHub repository or live demo.</p>
-      </div>
-
-      <div class="card">
-        <h3>Project Two</h3>
-        <p>Another example project with details about the tools and technologies you used.</p>
+    <section id="features">
+      <h2>What I Do</h2>
+      <div class="features">
+        <div class="card">
+          <h3>🌐 Web Development</h3>
+          <p>Clean, responsive websites using modern tools and frameworks.</p>
+        </div>
+        <div class="card">
+          <h3>🎨 Design</h3>
+          <p>User-friendly designs with focus on simplicity and impact.</p>
+        </div>
+        <div class="card">
+          <h3>⚡ Projects</h3>
+          <p>Creative apps and experiments hosted right here on GitHub.</p>
+        </div>
       </div>
     </section>
 
     <section id="contact">
       <h2>Contact</h2>
       <p>
-        You can reach me at <a href="mailto:example@email.com">example@email.com</a> 
-        or connect with me on <a href="https://linkedin.com" target="_blank">LinkedIn</a>.
+        Get in touch at <a href="mailto:example@email.com">example@email.com</a> 
+        or connect on <a href="https://linkedin.com" target="_blank">LinkedIn</a>.
       </p>
     </section>
   </main>
 
   <footer>
-    <p>&copy; 2025 My Name. Built with ❤️ on <a href="https://pages.github.com/">GitHub Pages</a>.</p>
+    <p>&copy; 2025 My Website | Built on <a href="https://pages.github.com/">GitHub Pages</a></p>
   </footer>
 </body>
 </html>
