@@ -3,298 +3,255 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>CiphAnon Studios — Creative Developer & Game Dev</title>
-<meta name="description" content="CiphAnon Studios — 3 years coding experience. Web & game prototypes, tools, and creative projects." />
+<title>CiphAnon Studios — Interactive Prototypes & Tools</title>
+<meta name="description" content="CiphAnon Studios: interactive experiences, polished prototypes, and developer tooling. 3 years coding across many languages and engines." />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-
 <style>
   :root{
-    --bg:#06101a; --card:#0f1720; --muted:#9aa7bd; --accent:#ff9f1c; --accent-2:#ff5e7a;
-    --glass: rgba(255,255,255,0.03); --maxw:1200px; --radius:14px; --ease:cubic-bezier(.2,.9,.3,1);
+    --bg:#05101a; --muted:#9aa7bd; --accent:#ff9f1c; --accent-2:#ff5e7a;
+    --glass: rgba(255,255,255,0.03); --card:#0d1720; --radius:12px; --maxw:1250px;
   }
   *{box-sizing:border-box} html,body{height:100%}
   body{
     margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
-    background: radial-gradient(1200px 600px at 10% 10%, rgba(255,94,122,0.04), transparent 8%),
-                linear-gradient(180deg,#051020,#02101a); color:#e8f2ff; -webkit-font-smoothing:antialiased;
-    overflow-x:hidden; line-height:1.45;
+    background: linear-gradient(180deg,#04101a,#021018); color:#e8f2ff; -webkit-font-smoothing:antialiased;
+    line-height:1.45; overflow-x:hidden;
   }
+  .container{max-width:var(--maxw);margin:0 auto;padding:22px}
   a{color:inherit;text-decoration:none}
   img{max-width:100%;display:block}
 
-  .container{max-width:var(--maxw);margin:0 auto;padding:24px}
-
   /* NAV */
-  header{position:sticky;top:14px;z-index:80;display:flex;justify-content:center;padding:10px}
-  .nav{
-    width:100%;max-width:var(--maxw);display:flex;align-items:center;justify-content:space-between;
-    gap:18px;padding:10px 18px;border-radius:12px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-    box-shadow:0 10px 30px rgba(2,6,12,0.5);backdrop-filter: blur(6px);
-  }
+  header{position:sticky;top:12px;z-index:90;padding:12px 0}
+  .nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px;border-radius:12px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));box-shadow:0 8px 30px rgba(2,6,12,0.6)}
   .brand{display:flex;gap:12px;align-items:center}
-  .brand img.logo{width:44px;height:44px;object-fit:contain;border-radius:10px;background:transparent}
-  .brand h1{font-size:16px;margin:0}
-  nav.links{display:flex;gap:14px;align-items:center}
-  nav.links a{color:var(--muted);font-weight:600;padding:6px 10px;border-radius:8px}
-  nav.links a:hover{color:var(--accent);background:rgba(255,255,255,0.02)}
-  .nav-cta{display:flex;gap:10px}
-  .btn{
-    background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#081020;padding:10px 14px;border-radius:10px;font-weight:800;border:0;cursor:pointer;
-    box-shadow:0 10px 30px rgba(255,94,122,0.08);transition:transform .18s var(--ease)
-  }
+  .logo{width:44px;height:44px;border-radius:10px;object-fit:contain}
+  .brand h1{margin:0;font-size:16px}
+  nav.links{display:flex;gap:12px;align-items:center}
+  nav.links a{color:var(--muted);padding:8px;border-radius:8px;font-weight:600}
+  nav.links a:hover{color:var(--accent)}
+  .actions{display:flex;gap:8px}
+  .btn{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#08101a;padding:10px 14px;border-radius:10px;font-weight:800;border:0;cursor:pointer}
   .btn.secondary{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted);font-weight:700}
-  .btn:focus{outline:3px solid rgba(255,159,28,0.12);outline-offset:3px}
-  .btn:hover{transform:translateY(-4px)}
 
   /* HERO */
-  .hero{
-    padding:64px 0 36px; position:relative; overflow:visible;
-  }
-  .hero-inner{display:grid;grid-template-columns:1fr 460px;gap:36px;align-items:center;max-width:var(--maxw);margin:0 auto;padding:10px}
-  .hero-title{font-size:40px;line-height:1.02;margin:0 0 16px;color:#fff}
-  .headline-gradient{background:linear-gradient(90deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
-  .hero-sub{color:var(--muted);font-size:1.05rem;margin-bottom:18px;max-width:60ch}
-  .hero-actions{display:flex;gap:12px;align-items:center}
-  .pills{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+  .hero{display:grid;grid-template-columns:1fr 460px;gap:34px;align-items:center;padding:56px 0}
+  .hero h2{font-size:44px;margin:0;line-height:1.02}
+  .hero .gradient{background:linear-gradient(90deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .lead{color:var(--muted);font-size:1.05rem;margin-top:12px;max-width:58ch}
+  .hero .ctas{display:flex;gap:12px;margin-top:18px}
+  .pills{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
   .pill{background:var(--glass);padding:8px 12px;border-radius:999px;color:var(--muted);font-weight:700;border:1px solid rgba(255,255,255,0.03)}
 
-  /* hero frame */
-  .hero-frame{
-    height:420px;border-radius:18px;position:relative;overflow:visible;
-    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-    padding:22px;display:flex;align-items:center;justify-content:center;
-    box-shadow: 0 28px 80px rgba(2,6,12,0.6);
-  }
-  .scene{position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center}
-  /* character container for parallax + wave */
-  .character-wrap{position:absolute;right:22px;bottom:12px;width:260px;max-width:46%;
-    transform-origin:center; transition:transform .18s var(--ease); will-change:transform}
-  .char{
-    width:100%;display:block;filter:drop-shadow(0 18px 30px rgba(2,6,12,0.6));
-  }
-  /* waving arm (fake by rotating element) */
-  .wave {
-    position:absolute;
-    right:14%;
-    top:14%;
-    width:42%;
-    transform-origin:70% 70%;
-    animation: idleWave 3.2s ease-in-out infinite;
-    pointer-events:none;
-  }
-  @keyframes idleWave{
-    0%{transform:rotate(0deg)}
-    20%{transform:rotate(-8deg)}
-    40%{transform:rotate(6deg)}
-    60%{transform:rotate(-6deg)}
-    80%{transform:rotate(3deg)}
-    100%{transform:rotate(0deg)}
-  }
-  /* bobbing overall */
+  /* hero visual */
+  .hero-frame{height:420px;border-radius:16px;padding:18px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));box-shadow:0 24px 80px rgba(2,6,12,0.6);position:relative;overflow:visible}
+  .scene{position:relative;height:100%;display:flex;align-items:center;justify-content:center}
+  .char-wrap{position:absolute;right:28px;bottom:10px;width:280px;transform-origin:center;transition:transform .18s}
+  .char{width:100%;filter:drop-shadow(0 18px 30px rgba(2,6,12,0.6))}
   .bob{animation:bob 5s ease-in-out infinite}
-  @keyframes bob{0%{transform:translateY(0)}50%{transform:translateY(-10px)}100%{transform:translateY(0)}}
+  @keyframes bob{0%{transform:translateY(0)}50%{transform:translateY(-8px)}100%{transform:translateY(0)}}
 
-  /* project area */
-  .projects{padding:40px 0}
-  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-  .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:12px;padding:16px;box-shadow:0 10px 30px rgba(2,6,12,0.45);transition:transform .22s var(--ease)}
-  .card:hover{transform:translateY(-12px)}
-  .card h3{margin:0 0 8px}
-  .card p{color:var(--muted);margin:0 0 12px}
-  .tags{display:flex;gap:8px;flex-wrap:wrap}
-  .tag{font-size:12px;padding:6px 9px;border-radius:999px;background:rgba(255,255,255,0.02);color:var(--muted);font-weight:700}
+  /* VALUE STRIP */
+  .value-strip{display:flex;gap:18px;align-items:center;margin-top:18px}
+  .value{background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:12px;border-radius:10px;display:flex;flex-direction:column;gap:6px;min-width:120px}
+  .value strong{font-size:18px}
+  .value .muted{color:var(--muted);font-size:13px}
+
+  /* SERVICES / FEATURES */
+  .services{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:36px}
+  .service{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:18px;border-radius:12px;box-shadow:0 10px 30px rgba(2,6,12,0.45);transition:transform .22s}
+  .service:hover{transform:translateY(-10px)}
+  .service h3{margin:0 0 8px}
+  .service p{color:var(--muted);margin:0 0 12px}
+  .service .more{font-weight:800;color:var(--accent)}
+
+  /* PORTFOLIO / CAROUSEL (simple) */
+  .portfolio{margin-top:36px}
+  .carousel{display:flex;gap:14px;overflow:auto;padding-bottom:8px}
+  .proj-card{flex:0 0 320px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:12px;padding:14px;box-shadow:0 10px 30px rgba(2,6,12,0.45)}
+  .proj-card h4{margin:0 0 6px}
+  .proj-card p{color:var(--muted);margin:0 0 10px}
+  .proj-card .meta{display:flex;gap:8px;flex-wrap:wrap}
+
+  /* TECH STACK */
+  .stack{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+  .chip{background:rgba(255,255,255,0.02);padding:8px 10px;border-radius:8px;font-weight:700;color:var(--muted)}
+
+  /* FAQ teaser */
+  .faq{margin-top:34px;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);padding:20px;border-radius:12px}
+  .faq h4{margin:0 0 10px}
+  .faq p{color:var(--muted);margin:0}
 
   /* CTA strip */
-  .cta-strip{margin:28px auto;padding:18px;border-radius:12px;background:linear-gradient(90deg, rgba(255,159,28,0.08), rgba(255,94,122,0.04));display:flex;justify-content:space-between;align-items:center;gap:12px}
-  .cta-strip .left{display:flex;flex-direction:column}
-  .cta-strip .left strong{font-size:18px}
-  .cta-strip .right{display:flex;gap:10px}
+  .cta{margin-top:36px;padding:18px;border-radius:12px;background:linear-gradient(90deg, rgba(255,159,28,0.06), rgba(255,94,122,0.03));display:flex;align-items:center;justify-content:space-between;gap:12px}
 
-  /* footer */
-  footer{padding:48px 0;color:var(--muted);border-top:1px solid rgba(255,255,255,0.02);margin-top:40px}
+  /* FOOTER */
+  footer{margin-top:40px;padding:36px 0;border-top:1px solid rgba(255,255,255,0.02);color:var(--muted)}
+  .footer-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+  .footer-grid a{display:block;margin:6px 0;color:var(--muted)}
+  .copyright{margin-top:18px;font-size:13px;color:var(--muted)}
 
   /* reveal helper */
-  .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s,transform .6s}
   .reveal.show{opacity:1;transform:none}
 
-  /* responsive */
-  @media (max-width:1100px){.hero-inner{grid-template-columns:1fr 360px}.grid{grid-template-columns:repeat(2,1fr)}}
-  @media (max-width:760px){
-    .hero-inner{grid-template-columns:1fr;gap:20px;padding:6px}
-    .character-wrap{position:relative;right:auto;left:50%;transform:translateX(-50%);width:54%}
-    .hero-frame{height:360px}
-    .grid{grid-template-columns:1fr}
-  }
-  @media (max-width:420px){.hero-title{font-size:26px}}
+  /* RESPONSIVE */
+  @media (max-width:1020px){.hero{padding:36px 0}.hero{grid-template-columns:1fr 360px}.services{grid-template-columns:repeat(2,1fr)} .footer-grid{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:680px){.hero{grid-template-columns:1fr}.nav{flex-direction:column;align-items:stretch}.hero-frame{height:380px}.carousel{gap:10px}.services{grid-template-columns:1fr}}
+  @media (max-width:420px){.hero h2{font-size:26px}}
 </style>
 </head>
 <body>
 
 <header>
-  <div class="nav container nav" role="navigation" aria-label="Main">
-    <div class="brand" aria-hidden="false">
-      <!-- EDIT: replace with your logo file -->
-      <img src="assets/logo.png" alt="CiphAnon Studios logo" class="logo" />
+  <div class="container nav" role="navigation" aria-label="Main navigation">
+    <div class="brand">
+      <img src="assets/logo.png" alt="CiphAnon logo" class="logo" />
       <div>
-        <h1 style="margin:0">CiphAnon Studios</h1>
-        <div style="font-size:12px;color:var(--muted)">Creative Developer & Game Prototyper</div>
+        <h1>CiphAnon Studios</h1>
+        <div style="font-size:12px;color:var(--muted)">Interactive prototypes & developer tooling</div>
       </div>
     </div>
 
-    <nav class="links" aria-label="Main links">
-      <a href="#projects">Projects</a>
+    <nav class="links" aria-label="Primary">
+      <a href="#projects">Work</a>
+      <a href="#services">Services</a>
       <a href="#about">About</a>
       <a href="#contact">Contact</a>
     </nav>
 
-    <div class="nav-cta">
+    <div class="actions">
       <a class="btn secondary" href="https://github.com/your-username" target="_blank" rel="noopener">GitHub</a>
-      <a class="btn" href="#contact">Hire / Collab</a>
+      <a class="btn" href="#contact">Let's Talk</a>
     </div>
   </div>
 </header>
 
-<main>
+<main class="container">
+
   <!-- HERO -->
   <section class="hero" aria-labelledby="hero-heading">
-    <div class="hero-inner container">
-      <div>
-        <h2 id="hero-heading" class="hero-title"><span class="headline-gradient">CiphAnon Studios</span> — Build fast, play hard.</h2>
-        <p class="hero-sub">3 years of hands-on coding across HTML, CSS, JavaScript, Godot, Lua, Java, Block Code, Unity, Python (and Turtle). I design polished UI, rapid game prototypes, and developer tooling.</p>
+    <div>
+      <h2 id="hero-heading"><span class="gradient">CiphAnon Studios</span> — polished prototypes, tooling, and interactive experiences.</h2>
+      <p class="lead">3 years building across many languages and engines — HTML, CSS, JavaScript, Godot, Lua, Java, Block Code, Unity, Python (Turtle). I craft fast prototypes, UX-focused systems, and developer-first tools.</p>
 
-        <div class="hero-actions">
-          <a class="btn" href="#projects">See Featured Work</a>
-          <a class="btn secondary" href="#contact">Get a Quote</a>
-        </div>
-
-        <div class="pills" aria-hidden="false">
-          <!-- quick skill highlights -->
-          <span class="pill">HTML · CSS · JS</span>
-          <span class="pill">Godot · Unity · Lua</span>
-          <span class="pill">Java · Python · Block Code</span>
-        </div>
-
-        <div class="stats reveal" style="margin-top:18px;display:flex;gap:18px">
-          <div style="display:flex;flex-direction:column">
-            <div style="font-weight:900;font-size:20px">3</div>
-            <div class="small" style="color:var(--muted)">Years coding</div>
-          </div>
-          <div style="width:1px;background:rgba(255,255,255,0.03)"></div>
-          <div style="display:flex;flex-direction:column">
-            <div style="font-weight:900;font-size:20px">9</div>
-            <div class="small" style="color:var(--muted)">Languages/engines</div>
-          </div>
-          <div style="width:1px;background:rgba(255,255,255,0.03)"></div>
-          <div style="display:flex;flex-direction:column">
-            <div style="font-weight:900;font-size:20px">10+</div>
-            <div class="small" style="color:var(--muted)">Projects</div>
-          </div>
-        </div>
+      <div class="ctas">
+        <a class="btn" href="#projects">Explore Work</a>
+        <a class="btn secondary" href="#about">About the Studio</a>
       </div>
 
-      <!-- hero visual: show your character (EDIT image) -->
-      <div class="hero-frame" aria-hidden="true">
-        <div class="scene" id="scene">
-          <!-- background elements or project preview could go here -->
-          <div style="position:absolute;left:18px;top:18px;opacity:0.06;font-size:18px;color:#fff">CiphAnon</div>
+      <div class="pills" aria-hidden="false">
+        <span class="pill">Prototyping</span>
+        <span class="pill">UI & Interaction</span>
+        <span class="pill">Tools & Automation</span>
+      </div>
 
-          <!-- character area: uses provided char image; wave is a transformed overlay for fun -->
-          <div class="character-wrap bob" id="charWrap" role="img" aria-label="CiphAnon pumpkin character">
-            <!-- main pumpkin character -->
-            <img src="assets/char.png" alt="CiphAnon character" class="char" id="charImg" />
+      <div class="value-strip">
+        <div class="value"><strong>3 yrs</strong><div class="muted">Practical experience</div></div>
+        <div class="value"><strong>9+</strong><div class="muted">Languages & engines</div></div>
+        <div class="value"><strong>10+</strong><div class="muted">Projects & demos</div></div>
+      </div>
+    </div>
 
-            <!-- wave overlay: for images without separate arm, we fake a waving accent (pure decorative) -->
-            <svg class="wave" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-              <circle cx="50" cy="50" r="46" fill="rgba(255,159,28,0.06)"/>
-            </svg>
-          </div>
+    <div class="hero-frame reveal">
+      <div class="scene" id="scene">
+        <!-- decorative background -->
+        <svg style="position:absolute;left:18px;top:14px;opacity:0.05" width="160" height="160" viewBox="0 0 200 200" aria-hidden="true">
+          <defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#ff9f1c"/><stop offset="1" stop-color="#ff5e7a"/></linearGradient></defs>
+          <circle cx="100" cy="100" r="90" fill="url(#g)"/>
+        </svg>
+
+        <div class="char-wrap bob" id="charWrap" role="img" aria-label="CiphAnon character">
+          <img src="assets/char.png" alt="CiphAnon character" class="char" id="charImg" />
         </div>
       </div>
     </div>
   </section>
 
-  <!-- PROJECTS -->
-  <section id="projects" class="projects container" aria-labelledby="projects-title">
-    <h2 id="projects-title" style="font-size:20px;margin-bottom:12px">Featured Projects</h2>
-
-    <div class="grid reveal">
-      <article class="card" tabindex="0">
-        <h3>Pet-Clicker Simulator</h3>
-        <p>Collect, upgrade, and mutate pets. Built as a fast prototype in Godot; web demo uses JavaScript and Canvas.</p>
-        <div class="tags" aria-hidden="false">
-          <span class="tag">Godot</span>
-          <span class="tag">JavaScript</span>
-          <span class="tag">Game Design</span>
-        </div>
-      </article>
-
-      <article class="card" tabindex="0">
-        <h3>Studio Landing + Toolkit</h3>
-        <p>Responsive marketing site and small JS tooling for automating deploys and demos.</p>
-        <div class="tags">
-          <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">GitHub Pages</span>
-        </div>
-      </article>
-
-      <article class="card" tabindex="0">
-        <h3>Dev Tools & Scripts</h3>
-        <p>Python, Java and Lua helper libraries to speed builds and prototyping—documented and reusable.</p>
-        <div class="tags">
-          <span class="tag">Python</span><span class="tag">Java</span><span class="tag">Lua</span>
-        </div>
-      </article>
+  <!-- SERVICES -->
+  <section id="services" class="services reveal" aria-labelledby="services-title">
+    <div class="service">
+      <h3>Interactive Prototypes</h3>
+      <p>Rapid, playable prototypes and interaction experiments to validate ideas fast — focused on feel and polish.</p>
+      <div class="more">Learn more →</div>
     </div>
 
-    <!-- testimonials -->
-    <div class="grid" style="margin-top:20px">
-      <div class="card reveal">
-        <p style="color:var(--muted)">"Fast, clear, and shipped a great playable prototype — delighted with the polish."</p>
-        <strong>— Alex P., Founder</strong>
-      </div>
-      <div class="card reveal">
-        <p style="color:var(--muted)">"Great communication. Code was clean and easy to extend."</p>
-        <strong>— Sam M., PM</strong>
-      </div>
-      <div class="card reveal">
-        <p style="color:var(--muted)">"Delivered more than we expected — playable and fun."</p>
-        <strong>— Rina T., Producer</strong>
-      </div>
+    <div class="service">
+      <h3>Developer Tools</h3>
+      <p>Small libraries, build helpers, and automation scripts that speed iteration and keep projects organized.</p>
+      <div class="more">Learn more →</div>
+    </div>
+
+    <div class="service">
+      <h3>UI & UX Systems</h3>
+      <p>Design systems, UI patterns, and front-end architecture—prioritizing accessibility and performance.</p>
+      <div class="more">Learn more →</div>
     </div>
   </section>
 
-  <!-- CTA strip -->
-  <div class="container">
-    <div class="cta-strip reveal" role="region" aria-label="Call to action">
-      <div class="left">
-        <strong>Have an idea? Let's prototype it.</strong>
-        <div class="small">I build playable prototypes, landing pages, and small production tools.</div>
-      </div>
-      <div class="right">
-        <a class="btn" href="#contact">Request a Quote</a>
-        <a class="btn secondary" href="mailto:example@email.com">Email</a>
-      </div>
+  <!-- PORTFOLIO -->
+  <section id="projects" class="portfolio reveal" aria-labelledby="projects-title">
+    <h3 id="projects-title" style="margin:0 0 12px">Featured Work</h3>
+    <div class="carousel" role="list">
+      <article class="proj-card" role="listitem">
+        <h4>Pet-clicker Prototype</h4>
+        <p>Collectible system, upgrades, and polish—prototype built in Godot and demoed on the web.</p>
+        <div class="meta"><span class="chip">Godot</span><span class="chip">Prototype</span></div>
+      </article>
+
+      <article class="proj-card" role="listitem">
+        <h4>Landing & Toolkit</h4>
+        <p>Clear, responsive marketing landing + small JS tools for deploy workflows and demos.</p>
+        <div class="meta"><span class="chip">HTML</span><span class="chip">JS</span></div>
+      </article>
+
+      <article class="proj-card" role="listitem">
+        <h4>Developer Scripts</h4>
+        <p>Python and Java utilities to automate repetitive tasks and speed up builds.</p>
+        <div class="meta"><span class="chip">Python</span><span class="chip">Java</span></div>
+      </article>
+
+      <!-- more project cards can be added here -->
+    </div>
+
+    <!-- tech stack -->
+    <div class="stack" aria-hidden="false" style="margin-top:16px">
+      <div class="chip">HTML</div><div class="chip">CSS</div><div class="chip">JavaScript</div><div class="chip">Godot</div>
+      <div class="chip">Unity</div><div class="chip">Lua</div><div class="chip">Java</div><div class="chip">Python</div><div class="chip">Block Code</div>
+    </div>
+  </section>
+
+  <!-- FAQ / Teaser -->
+  <section class="faq reveal" aria-labelledby="faq-title">
+    <h4 id="faq-title">Need details?</h4>
+    <p>All in-depth details, code samples and downloads live on the project pages and documentation. The homepage is a hub — go to Work → Project → Docs to see full info and demos.</p>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta reveal" role="region" aria-label="Get started">
+    <div>
+      <strong>Have an idea or prototype in mind?</strong>
+      <div class="muted" style="color:var(--muted)">I help turn concepts into playable demos and reliable tooling.</div>
+    </div>
+    <div style="display:flex;gap:10px">
+      <a class="btn" href="#contact">Request a Quote</a>
+      <a class="btn secondary" href="mailto:example@email.com">Email</a>
     </div>
   </div>
 
-  <!-- ABOUT / CONTACT -->
-  <section id="about" class="container" style="padding:36px 24px 80px">
-    <h2 style="font-size:20px;margin-bottom:10px">About</h2>
-    <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:flex-start">
-      <div style="flex:1;min-width:240px">
-        <p style="color:var(--muted)">I bring <strong>3 years</strong> of practical coding experience: web, game engines, and scripting. I focus on fast iteration, clear UX, and performance.</p>
-        <ul style="color:var(--muted);margin-top:12px">
-          <li><strong>Languages & engines:</strong> HTML, CSS, JavaScript, Godot (GDScript), Lua, Java, Block Code, Unity, Python (Turtle)</li>
-          <li>Prototyping, UI/UX, game mechanics, and tooling</li>
-          <li>Open-source-friendly with a focus on readable code</li>
-        </ul>
+  <!-- ABOUT / CONTACT TEASER -->
+  <section id="about" style="margin-top:28px" class="reveal">
+    <div style="display:flex;gap:18px;flex-wrap:wrap;align-items:flex-start">
+      <div style="flex:1;min-width:220px">
+        <h4 style="margin:0 0 8px">About CiphAnon</h4>
+        <p style="color:var(--muted)">I bring 3 years of practical coding across many environments. I focus on fast iteration, clear UX, and production-ready tooling. Full bio and CV are on the About page.</p>
       </div>
 
       <div style="width:320px">
-        <div style="background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:16px;border-radius:12px">
-          <h3 style="margin:0 0 8px">Contact</h3>
-          <p class="small" style="color:var(--muted)">For collaborations, demos, or code samples — reach out.</p>
-          <a class="btn" id="emailBtn" href="mailto:example@email.com">Email Me</a>
-          <div style="margin-top:8px" class="small">Or find me on <a href="https://github.com/your-username" target="_blank" rel="noopener">GitHub</a>.</div>
+        <div style="background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:14px;border-radius:10px">
+          <h4 style="margin:0 0 6px">Contact</h4>
+          <p style="color:var(--muted);margin:0 0 10px">Looking to collaborate? Request demos or see code samples on the Project pages.</p>
+          <a class="btn" id="contact" href="mailto:example@email.com">Email Me</a>
         </div>
       </div>
     </div>
@@ -302,61 +259,67 @@
 
 </main>
 
+<!-- FOOTER -->
 <footer>
-  <div class="container" style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
-    <div>
-      <strong>CiphAnon Studios</strong>
-      <div class="small" style="color:var(--muted)">Creative Developer • Built with ❤️</div>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <strong>CiphAnon Studios</strong>
+        <div style="color:var(--muted);margin-top:8px">Interactive prototypes, UI systems, and developer tooling.</div>
+      </div>
+
+      <div>
+        <h4 style="margin:0 0 8px">Product</h4>
+        <a href="#projects">Work</a>
+        <a href="/docs">Docs</a>
+        <a href="/downloads">Downloads</a>
+      </div>
+
+      <div>
+        <h4 style="margin:0 0 8px">Company</h4>
+        <a href="/about">About</a>
+        <a href="/careers">Careers</a>
+        <a href="/contact">Contact</a>
+      </div>
+
+      <div>
+        <h4 style="margin:0 0 8px">Connect</h4>
+        <a href="https://github.com/your-username" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://twitter.com/your-handle" target="_blank" rel="noopener">Twitter</a>
+        <a href="mailto:example@email.com">Email</a>
+      </div>
     </div>
-    <div style="display:flex;gap:12px;align-items:center">
-      <a class="small" href="https://github.com/your-username" target="_blank" rel="noopener">GitHub</a>
-      <a class="small" href="https://twitter.com/your-handle" target="_blank" rel="noopener">Twitter</a>
-      <a class="small" href="#contact">Contact</a>
+
+    <div class="copyright">
+      © <span id="year"></span> CiphAnon Studios — All rights reserved.
     </div>
   </div>
-  <div class="container" style="margin-top:18px;color:var(--muted);font-size:13px">© <span id="year"></span> CiphAnon Studios</div>
 </footer>
 
 <script>
   // set year
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  // reveal on scroll
-  const io = new IntersectionObserver((entries) => {
-    for (const e of entries) {
-      if (e.isIntersecting) { e.target.classList.add('show'); io.unobserve(e.target); }
+  // simple reveal observer
+  const io = new IntersectionObserver((entries)=>{
+    for(const e of entries){
+      if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target); }
     }
-  }, {threshold: 0.12});
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  }, {threshold:0.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-  // gentle parallax: mouse move on hero frame -> translate character slightly
+  // parallax character micro-interaction
   const scene = document.getElementById('scene');
   const charWrap = document.getElementById('charWrap');
-  if (scene && charWrap) {
-    scene.addEventListener('mousemove', e => {
+  if(scene && charWrap){
+    scene.addEventListener('mousemove', e=>{
       const r = scene.getBoundingClientRect();
-      const dx = (e.clientX - (r.left + r.width/2)) / r.width;
-      const dy = (e.clientY - (r.top + r.height/2)) / r.height;
-      const tx = dx * 14; // horizontal
-      const ty = dy * 12; // vertical
-      charWrap.style.transform = `translateX(${tx}px) translateY(${ty}px)`;
+      const dx = (e.clientX - (r.left + r.width/2))/r.width;
+      const dy = (e.clientY - (r.top + r.height/2))/r.height;
+      charWrap.style.transform = `translateX(${dx*12}px) translateY(${dy*10}px)`;
     });
-    scene.addEventListener('mouseleave', e => { charWrap.style.transform = ''; });
+    scene.addEventListener('mouseleave', ()=>{ charWrap.style.transform = ''; });
   }
-
-  // small idle scale on scroll for hero (adds life)
-  let lastY = 0;
-  window.addEventListener('scroll', () => {
-    const hero = document.querySelector('.hero');
-    if (!hero) return;
-    const sc = window.scrollY;
-    const d = Math.min(1, sc/600);
-    const s = 1 - d*0.03;
-    const hw = document.querySelector('.hero-frame');
-    if (hw) hw.style.transform = `scale(${s})`;
-    lastY = sc;
-  }, {passive:true});
 </script>
-
 </body>
 </html>
