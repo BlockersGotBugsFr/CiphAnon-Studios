@@ -3,434 +3,398 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>CiphAnon Studios — Home</title>
-<meta name="description" content="CiphAnon Studios — prototypes, tools, and polished interactive experiences. 3 years experience across many languages and engines." />
+<title>CiphAnon — Animated About</title>
+<meta name="description" content="Animated about section and visual showcase for CiphAnon Studios." />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-
 <style>
-  /* ========================
-     Theme + Reset
-     ======================== */
+  /* ========= Theme & Reset ========= */
   :root{
-    --bg:#041018; --muted:#9aa7bd; --accent1:#ff9f1c; --accent2:#ff5e7a;
-    --card:#0d1720; --glass: rgba(255,255,255,0.03);
-    --maxw:1180px; --radius:12px; --ease: cubic-bezier(.2,.9,.3,1);
+    --bg:#051018; --muted:#98a9bf; --card:#0f1720;
+    --accent1:#ff9f1c; --accent2:#ff5e7a; --glass:rgba(255,255,255,0.03);
+    --maxw:1100px; --radius:12px; --ease:cubic-bezier(.2,.9,.3,1);
   }
   *{box-sizing:border-box}
   html,body{height:100%}
   body{
-    margin:0; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
-    background: linear-gradient(180deg,var(--bg),#021018 120%); color:#e8f2ff; -webkit-font-smoothing:antialiased;
-    line-height:1.45; -webkit-text-size-adjust:100%;
-    scroll-behavior:smooth;
+    margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+    background:linear-gradient(180deg,#041018,#021018);color:#eaf5ff;line-height:1.45;
+    -webkit-font-smoothing:antialiased;scroll-behavior:smooth;
   }
+  a{color:inherit}
   img{display:block;max-width:100%}
-  a{color:inherit;text-decoration:none}
   .container{max-width:var(--maxw);margin:0 auto;padding:20px}
 
-  /* ========================
-     Nav
-     ======================== */
-  header{position:sticky;top:12px;z-index:90;padding:10px 0}
-  .nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px;border-radius:12px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));box-shadow:0 6px 18px rgba(2,6,12,0.45)}
+  /* ========= Header ========= */
+  header{padding:12px 0;position:sticky;top:10px;z-index:120}
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:10px;border-radius:12px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));box-shadow:0 8px 26px rgba(2,6,12,0.5)}
   .brand{display:flex;gap:12px;align-items:center}
-  .logo{width:44px;height:44px;border-radius:10px;object-fit:contain}
-  .brand h1{margin:0;font-size:16px}
+  .logo{width:46px;height:46px;border-radius:10px;object-fit:contain}
   nav.links{display:flex;gap:12px;align-items:center}
-  nav.links a{color:var(--muted);padding:6px 8px;border-radius:8px;font-weight:600}
-  nav.links a:hover{color:var(--accent1)}
-  .actions{display:flex;gap:8px}
-  .btn{background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#081018;padding:10px 14px;border-radius:10px;font-weight:800;border:0;cursor:pointer}
-  .btn.secondary{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted);font-weight:700}
-  .btn:focus{outline:3px solid rgba(255,159,28,0.12);outline-offset:3px}
+  .btn{background:linear-gradient(90deg,var(--accent1),var(--accent2));padding:10px 14px;border-radius:10px;color:#041018;font-weight:800;border:0;cursor:pointer}
 
-  /* ========================
-     Hero (lightweight animation)
-     ======================== */
-  .hero{display:grid;grid-template-columns:1fr 460px;gap:28px;align-items:center;padding:52px 0}
-  .hero h2{font-size:40px;margin:0;line-height:1.02}
-  .gradient-text{background:linear-gradient(90deg,var(--accent1),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
-  .lead{color:var(--muted);margin-top:12px;max-width:56ch}
-  .ctas{display:flex;gap:12px;margin-top:16px;flex-wrap:wrap}
-  .pills{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
-  .pill{background:var(--glass);padding:8px 12px;border-radius:999px;color:var(--muted);font-weight:700;border:1px solid rgba(255,255,255,0.03)}
-
-  /* hero visual: optimized */
-  .hero-frame{
-    height:380px;border-radius:12px;padding:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-    box-shadow:0 20px 40px rgba(2,6,12,0.5);position:relative;overflow:hidden;contain:layout paint;
+  /* ========= Hero (animated gradient + type) ========= */
+  .hero{padding:48px 0;display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center}
+  .hero-left h1{font-size:36px;margin:0;line-height:1.02}
+  .accent{background:linear-gradient(90deg,var(--accent1),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .type { color:var(--muted); margin-top:8px; font-weight:600; min-height:22px; }
+  /* animated gradient background (lightweight) */
+  .hero-bg{
+    border-radius:14px;padding:18px;height:360px;position:relative;overflow:hidden;
+    background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
+    box-shadow:0 24px 80px rgba(2,6,12,0.55);
   }
-  .scene{position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center;pointer-events:none}
-  .char-wrap{position:absolute;right:18px;bottom:8px;width:260px;transform-origin:center;will-change:transform;pointer-events:auto}
-  .char{width:100%;height:auto;display:block;filter:drop-shadow(0 10px 18px rgba(2,6,12,0.45))}
-  /* subtle bob (hardware-accelerated transform) */
-  .bob{animation:bob 6s ease-in-out infinite;will-change:transform}
+  .grad-blob{position:absolute;inset:-20% -30% auto auto;width:420px;height:420px;border-radius:40%;filter:blur(66px);opacity:0.18;background:linear-gradient(90deg,var(--accent1),var(--accent2));animation:blob 10s linear infinite}
+  @keyframes blob{0%{transform:translate(0,0) scale(1)}50%{transform:translate(-8vh,-6vh) scale(1.08)}100%{transform:translate(0,0) scale(1)}}
+
+  /* ========= Animated Character (wave + bob) ========= */
+  .char-wrap{position:absolute;right:16px;bottom:10px;width:260px;transform-origin:center;pointer-events:none;will-change:transform}
+  .char{width:100%;display:block;transform-origin:center center;will-change:transform}
+  /* fake wave: gentle rotate on child */
+  .char-wave{position:absolute;right:14%;top:12%;width:40%;height:40%;pointer-events:none;transform-origin:70% 70%;animation:wave 3.2s ease-in-out infinite}
+  @keyframes wave{0%{transform:rotate(0)}20%{transform:rotate(-8deg)}40%{transform:rotate(6deg)}60%{transform:rotate(-6deg)}80%{transform:rotate(3deg)}100%{transform:rotate(0)}}
+  /* bobbing whole char (GPU) */
+  .bob{animation:bob 5.6s ease-in-out infinite}
   @keyframes bob{0%{transform:translateY(0)}50%{transform:translateY(-6px)}100%{transform:translateY(0)}}
 
-  /* ========================
-     Quick value strip + features
-     ======================== */
-  .value-strip{display:flex;gap:14px;margin-top:16px;flex-wrap:wrap}
-  .value{background:linear-gradient(90deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01));padding:10px;border-radius:10px;min-width:120px;text-align:center}
-  .value strong{display:block;font-size:18px}
-  .features{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:28px}
-  .feature{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));padding:14px;border-radius:10px;box-shadow:0 8px 22px rgba(2,6,12,0.35);transition:transform .2s var(--ease);contain:paint}
-  .feature:hover{transform:translateY(-8px)}
-  .feature h3{margin:0 0 8px}
-  .feature p{color:var(--muted);margin:0}
+  /* ========= Skill Cloud (SVG + CSS rotate) ========= */
+  .cloud-wrap{position:relative;height:260px;width:100%;display:flex;align-items:center;justify-content:center;contain:layout paint}
+  .cloud{position:relative;width:260px;height:260px;border-radius:50%;display:block;transform:translateZ(0);will-change:transform}
+  .skill{position:absolute;left:50%;top:50%;transform-origin:0 0; font-weight:700;color:#fff;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,0.03);backdrop-filter:none}
+  /* small sizes */
+  .skill.small{font-size:12px;padding:6px 8px}
+  /* rotate group - rAF will control rotation for perf */
+  .cloud-rotate{transform-origin:center center}
 
-  /* ========================
-     Portfolio carousel (light)
-     ======================== */
-  .carousel{display:flex;gap:12px;overflow:auto;padding:10px 0;scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch;contain:layout paint}
-  .proj{flex:0 0 300px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));border-radius:10px;padding:12px;box-shadow:0 8px 22px rgba(2,6,12,0.35);scroll-snap-align:start;min-width:260px}
-  .proj h4{margin:0 0 6px}
-  .proj p{color:var(--muted);margin:0 0 10px}
-  .meta{display:flex;gap:8px;flex-wrap:wrap}
+  /* ========= Timeline (animated entry) ========= */
+  .timeline{margin-top:18px;border-left:2px solid rgba(255,255,255,0.03);padding-left:18px}
+  .tl-item{margin:18px 0;opacity:0;transform:translateY(14px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+  .tl-item.show{opacity:1;transform:none}
+  .tl-item .date{color:var(--muted);font-size:13px}
 
-  /* ========================
-     Newsletter + blog teasers
-     ======================== */
-  .newsletter{display:flex;gap:12px;align-items:center;margin-top:20px;flex-wrap:wrap}
-  .news-left{flex:1;min-width:220px}
-  .news-form{display:flex;gap:8px}
-  .input{padding:10px 12px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit;min-width:220px}
+  /* ========= Gallery Cards (hover parallax) ========= */
+  .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}
+  .g-card{background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);border-radius:12px;padding:12px;overflow:hidden;position:relative;cursor:pointer;contain:paint}
+  .g-thumb{width:100%;height:160px;background:#081018;border-radius:10px;display:block;object-fit:cover;transition:transform .35s var(--ease);will-change:transform}
+  .g-card:hover .g-thumb{transform:scale(1.04) translateY(-6px)}
+  .g-meta{margin-top:8px;color:var(--muted);font-size:13px}
 
-  /* ========================
-     CTA strip
-     ======================== */
-  .cta{margin-top:26px;padding:14px;border-radius:10px;background:linear-gradient(90deg, rgba(255,159,28,0.06), rgba(255,94,122,0.03));display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+  /* ========= Marquee (logos) ========= */
+  .marquee{display:flex;gap:20px;align-items:center;overflow:hidden;padding:14px 0}
+  .marquee-inner{display:flex;gap:28px;animation:marq 18s linear infinite}
+  @keyframes marq{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+  .logo-small{width:84px;height:40px;object-fit:contain;opacity:0.85;filter:grayscale(0.2) contrast(0.9)}
 
-  /* ========================
-     Footer
-     ======================== */
-  footer{margin-top:36px;padding:28px 0;border-top:1px solid rgba(255,255,255,0.02);color:var(--muted)}
-  .footer-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-  .footer-grid a{display:block;margin:6px 0;color:var(--muted)}
-  .copyright{margin-top:12px;font-size:13px;color:var(--muted)}
+  /* ========= Counters & CTA ========= */
+  .counters{display:flex;gap:12px;margin-top:10px}
+  .counter{background:linear-gradient(90deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));padding:12px;border-radius:10px;min-width:110px;text-align:center}
+  .cta{margin-top:18px;padding:12px;border-radius:10px;background:linear-gradient(90deg, rgba(255,159,28,0.06), rgba(255,94,122,0.03));display:flex;justify-content:space-between;gap:12px;align-items:center}
 
-  /* reveal helper (IntersectionObserver) */
-  .reveal{opacity:0;transform:translateY(14px);transition:opacity .55s var(--ease),transform .55s var(--ease)}
-  .reveal.show{opacity:1;transform:none}
-
-  /* accessibility: respect reduced motion */
-  @media (prefers-reduced-motion: reduce){
-    .bob, .reveal{animation:none !important;transition:none !important}
-  }
+  /* ========= Footer ========= */
+  footer{margin-top:34px;padding:24px 0;border-top:1px solid rgba(255,255,255,0.02);color:var(--muted)}
 
   /* responsive */
-  @media (max-width:1020px){.hero{grid-template-columns:1fr 360px}.features{grid-template-columns:repeat(2,1fr)}.footer-grid{grid-template-columns:repeat(2,1fr)}}
-  @media (max-width:720px){.hero{grid-template-columns:1fr}.hero-frame{height:320px}.carousel{gap:10px}.features{grid-template-columns:1fr}}
-  @media (max-width:420px){.hero h2{font-size:28px}}
+  @media (max-width:1000px){
+    .hero{grid-template-columns:1fr}
+    .gallery{grid-template-columns:repeat(2,1fr)}
+    .cloud-wrap{height:210px}
+  }
+  @media (max-width:640px){
+    .gallery{grid-template-columns:1fr}
+    .hero-left h1{font-size:28px}
+    .char-wrap{display:none}
+  }
+
+  /* reduced motion */
+  @media (prefers-reduced-motion: reduce){
+    .grad-blob,.char-wave,.bob,.cloud-rotate,.marquee-inner{animation:none !important}
+  }
 </style>
 </head>
 <body>
-
 <header>
-  <div class="container nav" role="navigation" aria-label="Main">
+  <div class="container nav" role="navigation" aria-label="Main nav">
     <div class="brand">
-      <!-- EDIT: replace with your logo -->
-      <img src="assets/logo.png" alt="CiphAnon Studios logo" class="logo" loading="lazy" />
+      <img src="assets/logo.png" alt="logo" class="logo" loading="lazy" />
       <div>
-        <h1>CiphAnon Studios</h1>
-        <div style="font-size:12px;color:var(--muted)">Prototypes, UX systems & developer tools</div>
+        <div style="font-weight:800">CiphAnon Studios</div>
+        <div style="font-size:12px;color:var(--muted)">3 years • Prototypes & Tools</div>
       </div>
     </div>
 
-    <nav class="links" aria-label="Primary">
-      <a href="#projects">Work</a>
-      <a href="#features">What I Do</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
-    </nav>
-
-    <div class="actions" role="group" aria-label="Actions">
-      <a class="btn secondary" href="https://github.com/your-username" target="_blank" rel="noopener">GitHub</a>
-      <a class="btn" href="#contact">Hire</a>
+    <div>
+      <a class="btn" href="#contact">Contact</a>
     </div>
   </div>
 </header>
 
-<main class="container" id="top">
-
+<main class="container">
   <!-- HERO -->
-  <section class="hero" aria-labelledby="hero-heading">
-    <div>
-      <h2 id="hero-heading"><span class="gradient-text">CiphAnon Studios</span> — Build fast, ship polished.</h2>
-      <p class="lead">3 years of hands-on experience across multiple languages and engines — HTML, CSS, JavaScript, Godot, Lua, Java, Block Code, Unity, and Python. I create interactive prototypes, developer tooling, and polished UX systems.</p>
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-left">
+      <h1 id="hero-title"><span class="accent">CiphAnon</span> — visual, fast, playful.</h1>
+      <div class="type" id="typeLine">Designer • Dev • Prototype maker</div>
 
-      <div class="ctas">
-        <a class="btn" href="#projects">See Featured Work</a>
-        <a class="btn secondary" href="#about">About the Studio</a>
+      <div class="counters" aria-hidden="true">
+        <div class="counter"><div id="cnt1" style="font-weight:800">0</div><div style="font-size:12px;color:var(--muted)">Years</div></div>
+        <div class="counter"><div id="cnt2" style="font-weight:800">0</div><div style="font-size:12px;color:var(--muted)">Languages</div></div>
+        <div class="counter"><div id="cnt3" style="font-weight:800">0</div><div style="font-size:12px;color:var(--muted)">Projects</div></div>
       </div>
 
-      <div class="pills" aria-hidden="false">
-        <span class="pill">Prototyping</span>
-        <span class="pill">UI & Interaction</span>
-        <span class="pill">Tools & Automation</span>
-      </div>
-
-      <div class="value-strip" aria-hidden="true">
-        <div class="value"><strong>3</strong><div class="muted">Years coding</div></div>
-        <div class="value"><strong>9+</strong><div class="muted">Languages & engines</div></div>
-        <div class="value"><strong>10+</strong><div class="muted">Playables & tools</div></div>
+      <div style="margin-top:12px">
+        <a class="btn" href="#about">About Me</a>
       </div>
     </div>
 
-    <!-- HERO VISUAL (optimized: lazy image, GPU transforms) -->
-    <div class="hero-frame reveal" aria-hidden="true">
-      <div class="scene" id="scene">
-        <!-- decorative subtle background (SVG) low-cost -->
-        <svg style="position:absolute;left:14px;top:10px;opacity:0.06" width="120" height="120" viewBox="0 0 200 200" aria-hidden="true">
-          <defs><linearGradient id="g2" x1="0" x2="1"><stop offset="0" stop-color="#ff9f1c"/><stop offset="1" stop-color="#ff5e7a"/></linearGradient></defs>
-          <circle cx="100" cy="100" r="80" fill="url(#g2)"/>
+    <div class="hero-bg" aria-hidden="true">
+      <div class="grad-blob" aria-hidden="true"></div>
+
+      <!-- animated character -->
+      <div class="char-wrap bob" id="charWrap" aria-hidden="false">
+        <img src="assets/char.png" alt="CiphAnon character" class="char" loading="lazy" />
+        <!-- decorative wave overlay (purely visual) -->
+        <svg class="char-wave" viewBox="0 0 100 100" aria-hidden="true">
+          <circle cx="50" cy="50" r="48" fill="rgba(255,159,28,0.06)"/>
         </svg>
-
-        <!-- char: lazy-loaded, bobbing (GPU) -->
-        <div class="char-wrap bob" id="charWrap" role="img" aria-label="CiphAnon character">
-          <!-- EDIT: replace with your character file -->
-          <img src="assets/char.png" alt="CiphAnon character" class="char" id="charImg" loading="lazy" />
-        </div>
       </div>
     </div>
   </section>
 
-  <!-- FEATURES -->
-  <section id="features" class="features reveal" aria-labelledby="features-title">
-    <h3 id="features-title" style="grid-column:1/-1">What I focus on</h3>
-    <div class="feature">
-      <h3>Rapid Prototyping</h3>
-      <p>Turn ideas into playable prototypes quickly so you can iterate on feel and mechanics.</p>
-    </div>
-    <div class="feature">
-      <h3>Developer Tooling</h3>
-      <p>Small, pragmatic scripts and libraries to speed up builds and reduce repetitive work.</p>
-    </div>
-    <div class="feature">
-      <h3>UI & UX Systems</h3>
-      <p>Design systems that scale and front-end code focused on accessibility and performance.</p>
-    </div>
-  </section>
+  <!-- SKILL CLOUD -->
+  <section id="about" style="margin-top:18px">
+    <h2 style="margin:0 0 8px">About — animated highlights</h2>
+    <p style="color:var(--muted);margin:0 0 12px">Short, visual snapshot — full details on the About and Projects pages.</p>
 
-  <!-- PORTFOLIO CAROUSEL -->
-  <section id="projects" class="reveal" aria-labelledby="projects-title" style="margin-top:26px">
-    <h3 id="projects-title">Featured work</h3>
-    <div class="carousel" role="list" aria-label="Featured projects">
-      <article class="proj" role="listitem" tabindex="0">
-        <h4>Pet-clicker Prototype</h4>
-        <p>Collectible pets, upgrades, and mutation mechanics — built in Godot and demoed on web.</p>
-        <div class="meta"><span class="chip">Godot</span><span class="chip">Prototype</span></div>
-      </article>
-
-      <article class="proj" role="listitem" tabindex="0">
-        <h4>Landing & Deploy Toolkit</h4>
-        <p>Responsive marketing landing and JS tools to automate deploy previews and demos.</p>
-        <div class="meta"><span class="chip">HTML</span><span class="chip">GitHub Pages</span></div>
-      </article>
-
-      <article class="proj" role="listitem" tabindex="0">
-        <h4>Build Helpers</h4>
-        <p>Python & Java utilities that speed up local build steps and packaging workflows.</p>
-        <div class="meta"><span class="chip">Python</span><span class="chip">Java</span></div>
-      </article>
-
-      <!-- add more project cards as needed -->
+    <div class="cloud-wrap" aria-hidden="true">
+      <div class="cloud" id="skillCloud" role="img" aria-label="Skills cloud">
+        <!-- skills placed around a circle using JS -->
+        <div class="skill" data-angle="0">HTML</div>
+        <div class="skill small" data-angle="40">CSS</div>
+        <div class="skill" data-angle="80">JavaScript</div>
+        <div class="skill small" data-angle="120">Godot</div>
+        <div class="skill" data-angle="160">Lua</div>
+        <div class="skill" data-angle="200">Java</div>
+        <div class="skill small" data-angle="240">Unity</div>
+        <div class="skill" data-angle="280">Python</div>
+        <div class="skill small" data-angle="320">Block Code</div>
+      </div>
     </div>
 
-    <!-- tech chips -->
-    <div style="margin-top:12px" class="stack">
-      <span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JavaScript</span>
-      <span class="chip">Godot</span><span class="chip">Unity</span><span class="chip">Lua</span>
-      <span class="chip">Java</span><span class="chip">Python</span><span class="chip">Block Code</span>
+    <!-- timeline -->
+    <div class="timeline" id="timeline">
+      <div class="tl-item"><div class="date">2022 — Now</div><div style="font-weight:800">Independent prototyper</div><div style="color:var(--muted)">Rapid prototypes, game systems, and utility tooling.</div></div>
+      <div class="tl-item"><div class="date">2021 — 2022</div><div style="font-weight:800">Collaborations & Freelance</div><div style="color:var(--muted)">Worked on UI and small game experiences for teams and clients.</div></div>
+      <div class="tl-item"><div class="date">2019 — 2021</div><div style="font-weight:800">Learning & experiments</div><div style="color:var(--muted)">Focused on engines, design, and scripting fundamentals.</div></div>
     </div>
   </section>
 
-  <!-- NEWSLETTER -->
-  <section class="newsletter reveal" aria-labelledby="news-title" style="margin-top:22px">
-    <div class="news-left">
-      <h4 id="news-title" style="margin:0 0 8px">Stay in the loop</h4>
-      <p style="color:var(--muted);margin:0 0 10px">Monthly notes on prototypes, demos, and short dev tips — no spam.</p>
-      <form id="newsForm" class="news-form" onsubmit="event.preventDefault(); subscribe();" aria-label="Subscribe to newsletter">
-        <input class="input" id="email" name="email" type="email" placeholder="you@email.com" required />
-        <button class="btn" type="submit">Subscribe</button>
-      </form>
-      <div id="newsMsg" style="margin-top:8px;font-size:13px;color:var(--muted)"></div>
-    </div>
-
-    <div style="min-width:220px">
-      <h4 style="margin:0 0 8px">Latest from the blog</h4>
-      <div style="color:var(--muted)">No blog posts here — full posts live on the Blog page. The homepage teases & routes you to full details.</div>
+  <!-- GALLERY (parallax on hover) -->
+  <section style="margin-top:18px">
+    <h3 style="margin:0 0 8px">Playables & Demos</h3>
+    <div class="gallery" id="gallery">
+      <div class="g-card" tabindex="0" data-thumb="assets/proj1.png">
+        <img src="assets/proj1.png" alt="" class="g-thumb" loading="lazy" onerror="this.style.background='#081018'" />
+        <div class="g-meta"><div style="font-weight:800">Pet Clicker</div><div style="color:var(--muted)">Prototype • Godot</div></div>
+      </div>
+      <div class="g-card" tabindex="0" data-thumb="assets/proj2.png">
+        <img src="assets/proj2.png" alt="" class="g-thumb" loading="lazy" onerror="this.style.background='#081018'" />
+        <div class="g-meta"><div style="font-weight:800">Landing Toolkit</div><div style="color:var(--muted)">Web • Tools</div></div>
+      </div>
+      <div class="g-card" tabindex="0" data-thumb="assets/proj3.png">
+        <img src="assets/proj3.png" alt="" class="g-thumb" loading="lazy" onerror="this.style.background='#081018'" />
+        <div class="g-meta"><div style="font-weight:800">Dev Helpers</div><div style="color:var(--muted)">Python • Java</div></div>
+      </div>
     </div>
   </section>
 
-  <!-- FAQ teaser -->
-  <section class="reveal" style="margin-top:24px">
-    <div class="faq" aria-labelledby="faq-heading">
-      <h4 id="faq-heading" style="margin:0 0 8px">Need full details?</h4>
-      <p style="color:var(--muted);margin:0">Project pages contain full documentation, code samples, and downloads. Use Work → Project → Docs for deep dives.</p>
+  <!-- MARQUEE LOGOS -->
+  <section style="margin-top:20px">
+    <h4 style="margin:0 0 8px">Featured on / Built with</h4>
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-inner" id="marqInner">
+        <!-- EDIT: replace with real logos or images -->
+        <img src="assets/logo.png" alt="logo" class="logo-small" loading="lazy" />
+        <img src="assets/logo.png" alt="logo" class="logo-small" loading="lazy" />
+        <img src="assets/logo.png" alt="logo" class="logo-small" loading="lazy" />
+        <img src="assets/logo.png" alt="logo" class="logo-small" loading="lazy" />
+        <!-- duplicate to create infinite scroll illusion -->
+        <img src="assets/logo.png" alt="logo" class="logo-small" loading="lazy" />
+        <img src="assets/logo.png" alt="logo" class="logo-small" loading="lazy" />
+        <img src="assets/logo.png" alt="logo" class="logo-small" loading="lazy" />
+        <img src="assets/logo.png" alt="logo" class="logo-small" loading="lazy" />
+      </div>
     </div>
   </section>
 
   <!-- CTA -->
-  <div class="cta reveal" style="margin-top:20px" role="region" aria-label="Call to action">
+  <div class="cta" style="margin-top:18px">
     <div>
-      <strong>Have an idea? Let’s prototype it.</strong>
-      <div style="color:var(--muted)">Fast turnarounds, clear communication, and production-ready deliverables.</div>
+      <strong>Want this in your project?</strong>
+      <div style="color:var(--muted)">I build prototypes, UIs, and small tooling — fast and production-minded.</div>
     </div>
-    <div style="display:flex;gap:8px">
-      <a class="btn" href="#contact">Request Quote</a>
-      <a class="btn secondary" href="mailto:example@email.com">Email</a>
+    <div>
+      <a class="btn" href="mailto:example@email.com">Email</a>
     </div>
   </div>
-
-  <!-- about/contact teaser -->
-  <section id="about" class="reveal" style="margin-top:24px;display:flex;gap:14px;flex-wrap:wrap">
-    <div style="flex:1;min-width:220px">
-      <h4 style="margin:0 0 6px">About</h4>
-      <p style="color:var(--muted);margin:0">3 years building prototypes, tools and interfaces. Full bio and CV on About page.</p>
-    </div>
-    <div style="width:320px">
-      <div style="background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01));padding:12px;border-radius:10px">
-        <h4 style="margin:0 0 6px">Contact</h4>
-        <p style="color:var(--muted);margin:0 0 8px">For demos or code samples, reach out — project pages include downloads or source links.</p>
-        <a id="contact" class="btn" href="mailto:example@email.com">Email Me</a>
-      </div>
-    </div>
-  </section>
-
 </main>
 
 <footer>
   <div class="container">
-    <div class="footer-grid">
-      <div>
-        <strong>CiphAnon Studios</strong>
-        <div style="color:var(--muted);margin-top:8px">Interactive prototypes & developer tooling</div>
-      </div>
-
-      <div>
-        <h4 style="margin:0 0 8px">Work</h4>
-        <a href="#projects">Featured</a>
-        <a href="/projects">All projects</a>
-        <a href="/docs">Docs</a>
-      </div>
-
-      <div>
-        <h4 style="margin:0 0 8px">Company</h4>
-        <a href="/about">About</a>
-        <a href="/contact">Contact</a>
-        <a href="/careers">Careers</a>
-      </div>
-
-      <div>
-        <h4 style="margin:0 0 8px">Connect</h4>
-        <a href="https://github.com/your-username" target="_blank" rel="noopener">GitHub</a>
-        <a href="https://twitter.com/your-handle" target="_blank" rel="noopener">Twitter</a>
-        <a href="mailto:example@email.com">Email</a>
-      </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+      <div><strong>CiphAnon Studios</strong><div style="color:var(--muted)">Interactive prototypes & tooling</div></div>
+      <div style="color:var(--muted)">© <span id="year"></span></div>
     </div>
-
-    <div class="copyright">© <span id="year"></span> CiphAnon Studios — All rights reserved.</div>
   </div>
 </footer>
 
 <script>
-  // =========== Utilities for performance ===========
-  // set year
-  document.getElementById('year').textContent = new Date().getFullYear();
+/* =============================
+   Performance-minded animations
+   ============================= */
 
-  // lightweight reveal using IntersectionObserver
-  const io = new IntersectionObserver((entries) => {
-    for (const e of entries) {
-      if (e.isIntersecting) { e.target.classList.add('show'); io.unobserve(e.target); }
+/* year */
+document.getElementById('year').textContent = new Date().getFullYear();
+
+/* Typewriter line (light) */
+(function typeLine(){
+  const el = document.getElementById('typeLine');
+  const lines = ['Designer • Dev • Prototype maker', 'HTML · CSS · JS · Godot · Lua · Java · Unity · Python'];
+  let i=0, char=0, forward=true;
+  function tick(){
+    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) { el.textContent = lines[0]; return; }
+    const text = lines[i];
+    if(forward){
+      el.textContent = text.slice(0, ++char);
+      if(char===text.length){ forward=false; setTimeout(tick, 900); return; }
+    } else {
+      el.textContent = text.slice(0, --char);
+      if(char===0){ forward=true; i=(i+1)%lines.length; }
     }
-  }, { threshold: 0.12 });
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    setTimeout(tick, forward ? 36 : 22);
+  }
+  tick();
+})();
 
-  // Throttled mouse parallax using requestAnimationFrame for low CPU
-  (function () {
-    const scene = document.getElementById('scene');
-    const charWrap = document.getElementById('charWrap');
-    if (!scene || !charWrap) return;
+/* Simple counters */
+function animateCount(id,to,dur){
+  const el=document.getElementById(id); if(!el) return;
+  let start=null;
+  function step(ts){
+    if(!start) start=ts;
+    const p=Math.min(1,(ts-start)/dur);
+    el.textContent=Math.floor(p*to);
+    if(p<1) requestAnimationFrame(step); else el.textContent=to;
+  }
+  requestAnimationFrame(step);
+}
+(function triggerCounts(){
+  const hero=document.querySelector('.hero');
+  if(!hero) return;
+  const io=new IntersectionObserver((entries)=>{
+    for(const e of entries){
+      if(e.isIntersecting){
+        animateCount('cnt1',3,800);
+        animateCount('cnt2',9,900);
+        animateCount('cnt3',12,1000);
+        io.disconnect();
+      }
+    }
+  },{threshold:0.3});
+  io.observe(hero);
+})();
 
-    let raf = null;
-    let last = { x: 0, y: 0 };
+/* Skill cloud placement + rotation (rAF) */
+(function skillCloud(){
+  const cloud=document.getElementById('skillCloud');
+  if(!cloud) return;
+  const skills=[...cloud.querySelectorAll('.skill')];
+  const r=100; // radius
+  // position by data-angle
+  skills.forEach(el=>{
+    const a = parseFloat(el.getAttribute('data-angle')||0) * Math.PI/180;
+    const x = Math.cos(a)*r;
+    const y = Math.sin(a)*r;
+    el.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
+  });
 
-    function onMove(e) {
-      // get pointer (supports touch/mouse)
+  // continuous slow rotation using rAF (very cheap)
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  let rot = 0;
+  function rotate(ts){
+    rot = (rot + 0.02) % 360;
+    cloud.style.transform = `rotate(${rot}deg)`;
+    skills.forEach(el=>{
+      // counter-rotate labels so they stay readable
+      el.style.transform += ` rotate(${-rot}deg)`;
+    });
+    requestAnimationFrame(rotate);
+  }
+  requestAnimationFrame(rotate);
+})();
+
+/* Timeline reveal (IntersectionObserver) */
+(function timelineReveal(){
+  const items = document.querySelectorAll('.tl-item');
+  const io = new IntersectionObserver((entries)=>{
+    for(const e of entries){
+      if(e.isIntersecting) e.target.classList.add('show');
+    }
+  }, {threshold:0.15});
+  items.forEach(i=> io.observe(i));
+})();
+
+/* Gallery card hover parallax - use rAF, passive listeners */
+(function galleryParallax(){
+  const cards = document.querySelectorAll('.g-card');
+  cards.forEach(card=>{
+    let raf=null;
+    function onMove(e){
+      const rect = card.getBoundingClientRect();
+      const cx = rect.left + rect.width/2;
+      const cy = rect.top + rect.height/2;
       const clientX = e.touches ? e.touches[0].clientX : e.clientX;
       const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-
-      const r = scene.getBoundingClientRect();
-      const dx = (clientX - (r.left + r.width / 2)) / (r.width || 1);
-      const dy = (clientY - (r.top + r.height / 2)) / (r.height || 1);
-      last.x = dx;
-      last.y = dy;
-
-      if (raf === null) {
-        raf = requestAnimationFrame(() => {
-          // smaller motion = less repaint work
-          const tx = last.x * 10; // horizontal
-          const ty = last.y * 8; // vertical
-          charWrap.style.transform = `translate3d(${tx}px, ${ty}px, 0)`;
-          raf = null;
-        });
-      }
+      const dx = (clientX - cx) / (rect.width/2);
+      const dy = (clientY - cy) / (rect.height/2);
+      if(raf) cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(()=> {
+        const img = card.querySelector('.g-thumb');
+        img.style.transform = `translate3d(${dx*6}px, ${dy*-6}px, 0) scale(1.02)`;
+      });
     }
-
-    // use passive listeners and reduce events on mobile
-    scene.addEventListener('mousemove', onMove, { passive: true });
-    scene.addEventListener('touchmove', onMove, { passive: true });
-
-    scene.addEventListener('mouseleave', () => { charWrap.style.transform = ''; }, { passive: true });
-
-    // disable parallax on small screens for perf
-    function checkDisable() {
-      if (window.innerWidth < 720) {
-        scene.removeEventListener('mousemove', onMove);
-        scene.removeEventListener('touchmove', onMove);
-      }
+    function onLeave(){
+      const img = card.querySelector('.g-thumb');
+      if(img) img.style.transform = '';
     }
-    checkDisable();
-    window.addEventListener('resize', checkDisable, { passive: true });
-  })();
+    card.addEventListener('mousemove', onMove, {passive:true});
+    card.addEventListener('touchmove', onMove, {passive:true});
+    card.addEventListener('mouseleave', onLeave, {passive:true});
+    card.addEventListener('touchend', onLeave, {passive:true});
+  });
+})();
 
-  // smooth scroll performance: passive scroll listener only to adjust minimal UI (no heavy ops)
-  (function () {
-    let ticking = false;
-    window.addEventListener('scroll', () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          // small visual adjustments can go here (keep cheap)
-          const heroFrame = document.querySelector('.hero-frame');
-          if (heroFrame) {
-            const sc = window.scrollY;
-            const d = Math.min(1, sc / 900);
-            heroFrame.style.transform = `scale(${1 - d * 0.02})`;
-          }
-          ticking = false;
-        });
-        ticking = true;
-      }
-    }, { passive: true });
-  })();
+/* Marquee duplication fix: ensure width enough by duplicating children (done in HTML) */
+/* Pause marquee when hovered (cheap) */
+(function marqueePause(){
+  const marq = document.querySelector('.marquee');
+  if(!marq) return;
+  marq.addEventListener('mouseenter', ()=> {
+    const inner = marq.querySelector('.marquee-inner'); if(inner) inner.style.animationPlayState='paused';
+  }, {passive:true});
+  marq.addEventListener('mouseleave', ()=> {
+    const inner = marq.querySelector('.marquee-inner'); if(inner) inner.style.animationPlayState='running';
+  }, {passive:true});
+})();
 
-  // Newsletter stub (replace with real API)
-  function subscribe() {
-    const email = document.getElementById('email').value;
-    const msg = document.getElementById('newsMsg');
-    if (!email) { msg.textContent = 'Please enter an email.'; return; }
-    // simple faux success (replace with real POST)
-    msg.textContent = 'Thanks — check your inbox for confirmation (demo).';
-    setTimeout(() => { msg.textContent = ''; }, 5000);
+/* Respect reduced motion: stop rAF heavy loops already gated above */
+
+/* Accessibility: keyboard focus outlines (show only when keyboard used) */
+(function focusOutline(){
+  function handleFirstTab(e){
+    if(e.key === 'Tab') document.body.classList.add('show-focus');
   }
+  window.addEventListener('keydown', handleFirstTab, {once:true});
+})();
 
-  // Accessibility improvement: focus-visible polyfill fallback
-  (function () {
-    try {
-      document.body.classList.add('js-ready');
-    } catch (e) {}
-  })();
 </script>
 </body>
 </html>
