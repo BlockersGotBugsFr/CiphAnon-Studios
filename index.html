@@ -1,474 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Unique Website Homepage</title>
-    <style>
-        /* --- General & Advanced Styles --- */
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            line-height: 1.6;
-            color: #333;
-            background-color: #f4f4f4;
-            scroll-behavior: smooth;
-        }
-        
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Website</title>
+  <meta name="description" content="A simple website hosted on GitHub Pages">
+  <style>
+    /* Basic reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        .section {
-            padding: 100px 0;
-            text-align: center;
-            opacity: 0; /* Initially hide sections for scroll animation */
-            transform: translateY(50px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-        
-        .section.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      background: #f5f5f5;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
 
-        h1, h2, h3 {
-            color: #212529;
-            margin-bottom: 20px;
-        }
+    header {
+      background: #333;
+      color: #fff;
+      padding: 1rem;
+      text-align: center;
+    }
 
-        .cta-button {
-            display: inline-block;
-            padding: 15px 30px;
-            background-color: #007bff;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 30px;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: transform 0.3s ease, background-color 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.4);
-        }
+    nav {
+      margin-top: 0.5rem;
+    }
 
-        .cta-button:hover {
-            background-color: #0056b3;
-            transform: translateY(-3px);
-        }
+    nav a {
+      color: #fff;
+      margin: 0 10px;
+      text-decoration: none;
+    }
 
-        /* --- Header with Sticky Effect --- */
-        .header {
-            background-color: #fff;
-            padding: 20px 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            transition: background-color 0.3s ease;
-        }
-        
-        .header .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+    nav a:hover {
+      text-decoration: underline;
+    }
 
-        .logo {
-            font-size: 28px;
-            font-weight: bold;
-            color: #333;
-            text-decoration: none;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-        }
+    main {
+      flex: 1;
+      padding: 2rem;
+      max-width: 800px;
+      margin: auto;
+    }
 
-        .nav-menu {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
-        }
-        
-        .nav-menu li {
-            margin-left: 30px;
-        }
-
-        .nav-menu a {
-            color: #555;
-            text-decoration: none;
-            font-weight: bold;
-            padding: 5px 0;
-            position: relative;
-        }
-        
-        .nav-menu a:after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: 0;
-            left: 0;
-            background-color: #007bff;
-            transition: width 0.3s ease;
-        }
-
-        .nav-menu a:hover:after {
-            width: 100%;
-        }
-
-        .hamburger {
-            display: none;
-            cursor: pointer;
-            font-size: 30px;
-            color: #333;
-        }
-
-        /* --- Hero Section with Parallax Effect --- */
-        .hero-parallax {
-            position: relative;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            overflow: hidden;
-            color: #fff;
-            background-color: #e9ecef;
-        }
-
-        .hero-bg-layer {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-            will-change: transform;
-        }
-
-        .hero-bg-layer-1 {
-            background-image: url('https://via.placeholder.com/1920x1080?text=Background+Image');
-        }
-
-        .hero-bg-layer-2 {
-            background-image: url('https://via.placeholder.com/1920x1080?text=Foreground+Image');
-            opacity: 0.8;
-            transform: scale(1.1);
-        }
-        
-        .hero-parallax .container {
-            position: relative;
-            z-index: 1;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        }
-
-        .hero-parallax h1 {
-            font-size: clamp(2rem, 5vw, 4rem);
-            color: #fff;
-        }
-        
-        .hero-parallax p {
-            font-size: clamp(1rem, 2vw, 1.5rem);
-            max-width: 600px;
-            margin: 0 auto 40px;
-            animation: fadeInText 1s ease-in-out 1s forwards;
-            opacity: 0;
-        }
-
-        .typed-text {
-            color: #00ffc8;
-            border-right: 2px solid rgba(255,255,255,.75);
-            font-weight: 600;
-        }
-
-        /* --- Features Section with Hover Effects --- */
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .feature-item {
-            background-color: #fff;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .feature-item:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-
-        .feature-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 123, 255, 0.1);
-            transform: scale(0);
-            transition: transform 0.4s cubic-bezier(0.86, 0, 0.07, 1);
-            border-radius: 12px;
-            z-index: 0;
-        }
-        
-        .feature-item:hover::before {
-            transform: scale(1);
-        }
-        
-        .feature-item h3, .feature-item p {
-            position: relative;
-            z-index: 1;
-        }
-
-        /* --- Testimonials with Image Carousel --- */
-        .testimonials {
-            background-color: #e9ecef;
-            overflow: hidden; /* Hide overflow from image rotation */
-        }
-        
-        .testimonial-card {
-            max-width: 700px;
-            margin: 40px auto 0;
-            background-color: #fff;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            position: relative;
-            display: flex;
-            align-items: center;
-            text-align: left;
-        }
-        
-        .testimonial-card img {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            margin-right: 20px;
-            object-fit: cover;
-            border: 3px solid #007bff;
-        }
-        
-        .testimonial-card p {
-            font-style: italic;
-            margin: 0;
-            color: #555;
-        }
-        
-        .testimonial-card h4 {
-            margin: 10px 0 0;
-            font-style: normal;
-        }
-
-        /* --- Custom Cursor Trail --- */
-        .cursor-trail {
-            position: fixed;
-            width: 20px;
-            height: 20px;
-            background-color: rgba(0, 123, 255, 0.3);
-            border-radius: 50%;
-            pointer-events: none;
-            opacity: 0;
-            transform: scale(0);
-            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-            z-index: 9999;
-        }
-
-        /* --- Footer with Social Icons and Animations --- */
-        .footer {
-            background-color: #343a40;
-            color: #f8f9fa;
-            padding: 60px 0;
-            text-align: center;
-        }
-
-        .footer p {
-            margin-bottom: 20px;
-        }
-
-        .social-icons a {
-            color: #f8f9fa;
-            margin: 0 15px;
-            text-decoration: none;
-            font-size: 24px;
-            transition: color 0.3s ease, transform 0.3s ease;
-        }
-
-        .social-icons a:hover {
-            color: #007bff;
-            transform: translateY(-5px);
-        }
-
-        /* --- Keyframe Animations --- */
-        @keyframes fadeInText {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* --- Responsive Design --- */
-        @media (max-width: 768px) {
-            .nav-menu {
-                display: none;
-                flex-direction: column;
-                width: 100%;
-                text-align: center;
-                background-color: #fff;
-                position: absolute;
-                top: 80px;
-                left: 0;
-                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            }
-
-            .nav-menu.active {
-                display: flex;
-            }
-            
-            .nav-menu li {
-                margin: 0;
-                border-top: 1px solid #eee;
-            }
-
-            .nav-menu a {
-                display: block;
-                padding: 15px;
-            }
-
-            .hamburger {
-                display: block;
-            }
-
-            .testimonial-card {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .testimonial-card img {
-                margin: 0 0 20px;
-            }
-        }
-    </style>
+    footer {
+      background: #333;
+      color: #fff;
+      text-align: center;
+      padding: 1rem;
+    }
+  </style>
 </head>
 <body>
+  <header>
+    <h1>Welcome to My Website</h1>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">About</a>
+      <a href="#">Projects</a>
+      <a href="#">Contact</a>
+    </nav>
+  </header>
 
-    <!-- Header -->
-    <header class="header">
-        <div class="container">
-            <a href="#" class="logo">Your Logo</a>
-            <nav>
-                <div class="hamburger">&#9776;</div>
-                <ul class="nav-menu">
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+  <main>
+    <h2>Hello World 👋</h2>
+    <p>This is a simple GitHub Pages website. You can edit <code>index.html</code> to customize it.</p>
+    <p>Add your content here and push changes to your GitHub repo — the site will update automatically.</p>
+  </main>
 
-    <!-- Hero Section with Parallax Effect -->
-    <section class="hero-parallax">
-        <div class="hero-bg-layer hero-bg-layer-1"></div>
-        <div class="hero-bg-layer hero-bg-layer-2"></div>
-        <div class="container">
-            <h1>Create <span class="typed-text"></span></h1>
-            <p>We build innovative, elegant solutions that elevate your brand and engage your audience.</p>
-            <a href="#" class="cta-button">Explore Solutions</a>
-        </div>
-    </section>
-
-    <!-- Services/Features Section with Hover Effects -->
-    <section id="services" class="section">
-        <div class="container">
-            <h2>Our Services</h2>
-            <div class="features-grid">
-                <div class="feature-item">
-                    <h3>Interactive Design</h3>
-                    <p>Captivate your audience with dynamic and engaging user interfaces that respond to every interaction.</p>
-                </div>
-                <div class="feature-item">
-                    <h3>Custom Development</h3>
-                    <p>From custom web applications to scalable systems, we build tailored solutions that meet your unique needs.</p>
-                </div>
-                <div class="feature-item">
-                    <h3>Performance Optimization</h3>
-                    <p>Ensure your site is fast, responsive, and always ready to perform under any conditions.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Testimonials Section with Interactive Card -->
-    <section class="testimonials section">
-        <div class="container">
-            <h2>What Our Customers Say</h2>
-            <div class="testimonial-card">
-                <img src="https://via.placeholder.com/80?text=JD" alt="Jane Doe">
-                <div>
-                    <p>"This team delivered a website that exceeded our expectations. The design is beautiful and the performance is incredible!"</p>
-                    <h4>- Jane Doe, CEO at Innovate Corp.</h4>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- About Section with Scroll Animation -->
-    <section id="about" class="section">
-        <div class="container">
-            <h2>About Us</h2>
-            <p>We are a team of creative developers and designers dedicated to building unique online experiences. Our mission is to combine cutting-edge technology with timeless design principles to create websites that are not just functional, but truly memorable.</p>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2025 Your Company. All rights reserved.</p>
-            <div class="social-icons">
-                <a href="#"><!-- Use icons from a library like Font Awesome or SVG -->FB</a>
-                <a href="#">TW</a>
-                <a href="#">LI</a>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Custom Cursor Trail Element -->
-    <div class="cursor-trail"></div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const hamburger = document.querySelector('.hamburger');
-            const navMenu = document.querySelector('.nav-menu');
-            const sections = document.querySelectorAll('.section');
-            const heroText = "websites that are truly unique.";
-            let typedTextElement = document.querySelector('.typed-text');
-            let i = 0;
-
-            // --- Mobile Navigation Toggle ---
-            if (hamburger) {
-                hamburger.addEventListener('click', () => {
-                    navMenu.classList.toggle('active');
-                });
-            }
-
-            // --- Intersection Observer for Scroll Animations ---
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
-                    }
-                });
-            }, {
-                rootMargin: '0px',
-                threshold: 0.2 // Trigger
-</script>
+  <footer>
+    <p>&copy; 2025 My Website | Built with ❤️ using GitHub Pages</p>
+  </footer>
 </body>
 </html>
