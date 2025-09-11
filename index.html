@@ -3,140 +3,164 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>CiphAnon Studios — Interactive Prototypes & Tools</title>
-<meta name="description" content="CiphAnon Studios: interactive experiences, polished prototypes, and developer tooling. 3 years coding across many languages and engines." />
+<title>CiphAnon Studios — Home</title>
+<meta name="description" content="CiphAnon Studios — prototypes, tools, and polished interactive experiences. 3 years experience across many languages and engines." />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --bg:#05101a; --muted:#9aa7bd; --accent:#ff9f1c; --accent-2:#ff5e7a;
-    --glass: rgba(255,255,255,0.03); --card:#0d1720; --radius:12px; --maxw:1250px;
-  }
-  *{box-sizing:border-box} html,body{height:100%}
-  body{
-    margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
-    background: linear-gradient(180deg,#04101a,#021018); color:#e8f2ff; -webkit-font-smoothing:antialiased;
-    line-height:1.45; overflow-x:hidden;
-  }
-  .container{max-width:var(--maxw);margin:0 auto;padding:22px}
-  a{color:inherit;text-decoration:none}
-  img{max-width:100%;display:block}
 
-  /* NAV */
-  header{position:sticky;top:12px;z-index:90;padding:12px 0}
-  .nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px;border-radius:12px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));box-shadow:0 8px 30px rgba(2,6,12,0.6)}
+<style>
+  /* ========================
+     Theme + Reset
+     ======================== */
+  :root{
+    --bg:#041018; --muted:#9aa7bd; --accent1:#ff9f1c; --accent2:#ff5e7a;
+    --card:#0d1720; --glass: rgba(255,255,255,0.03);
+    --maxw:1180px; --radius:12px; --ease: cubic-bezier(.2,.9,.3,1);
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+    background: linear-gradient(180deg,var(--bg),#021018 120%); color:#e8f2ff; -webkit-font-smoothing:antialiased;
+    line-height:1.45; -webkit-text-size-adjust:100%;
+    scroll-behavior:smooth;
+  }
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  .container{max-width:var(--maxw);margin:0 auto;padding:20px}
+
+  /* ========================
+     Nav
+     ======================== */
+  header{position:sticky;top:12px;z-index:90;padding:10px 0}
+  .nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px;border-radius:12px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));box-shadow:0 6px 18px rgba(2,6,12,0.45)}
   .brand{display:flex;gap:12px;align-items:center}
   .logo{width:44px;height:44px;border-radius:10px;object-fit:contain}
   .brand h1{margin:0;font-size:16px}
   nav.links{display:flex;gap:12px;align-items:center}
-  nav.links a{color:var(--muted);padding:8px;border-radius:8px;font-weight:600}
-  nav.links a:hover{color:var(--accent)}
+  nav.links a{color:var(--muted);padding:6px 8px;border-radius:8px;font-weight:600}
+  nav.links a:hover{color:var(--accent1)}
   .actions{display:flex;gap:8px}
-  .btn{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#08101a;padding:10px 14px;border-radius:10px;font-weight:800;border:0;cursor:pointer}
+  .btn{background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#081018;padding:10px 14px;border-radius:10px;font-weight:800;border:0;cursor:pointer}
   .btn.secondary{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted);font-weight:700}
+  .btn:focus{outline:3px solid rgba(255,159,28,0.12);outline-offset:3px}
 
-  /* HERO */
-  .hero{display:grid;grid-template-columns:1fr 460px;gap:34px;align-items:center;padding:56px 0}
-  .hero h2{font-size:44px;margin:0;line-height:1.02}
-  .hero .gradient{background:linear-gradient(90deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
-  .lead{color:var(--muted);font-size:1.05rem;margin-top:12px;max-width:58ch}
-  .hero .ctas{display:flex;gap:12px;margin-top:18px}
-  .pills{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+  /* ========================
+     Hero (lightweight animation)
+     ======================== */
+  .hero{display:grid;grid-template-columns:1fr 460px;gap:28px;align-items:center;padding:52px 0}
+  .hero h2{font-size:40px;margin:0;line-height:1.02}
+  .gradient-text{background:linear-gradient(90deg,var(--accent1),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .lead{color:var(--muted);margin-top:12px;max-width:56ch}
+  .ctas{display:flex;gap:12px;margin-top:16px;flex-wrap:wrap}
+  .pills{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
   .pill{background:var(--glass);padding:8px 12px;border-radius:999px;color:var(--muted);font-weight:700;border:1px solid rgba(255,255,255,0.03)}
 
-  /* hero visual */
-  .hero-frame{height:420px;border-radius:16px;padding:18px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));box-shadow:0 24px 80px rgba(2,6,12,0.6);position:relative;overflow:visible}
-  .scene{position:relative;height:100%;display:flex;align-items:center;justify-content:center}
-  .char-wrap{position:absolute;right:28px;bottom:10px;width:280px;transform-origin:center;transition:transform .18s}
-  .char{width:100%;filter:drop-shadow(0 18px 30px rgba(2,6,12,0.6))}
-  .bob{animation:bob 5s ease-in-out infinite}
-  @keyframes bob{0%{transform:translateY(0)}50%{transform:translateY(-8px)}100%{transform:translateY(0)}}
+  /* hero visual: optimized */
+  .hero-frame{
+    height:380px;border-radius:12px;padding:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    box-shadow:0 20px 40px rgba(2,6,12,0.5);position:relative;overflow:hidden;contain:layout paint;
+  }
+  .scene{position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center;pointer-events:none}
+  .char-wrap{position:absolute;right:18px;bottom:8px;width:260px;transform-origin:center;will-change:transform;pointer-events:auto}
+  .char{width:100%;height:auto;display:block;filter:drop-shadow(0 10px 18px rgba(2,6,12,0.45))}
+  /* subtle bob (hardware-accelerated transform) */
+  .bob{animation:bob 6s ease-in-out infinite;will-change:transform}
+  @keyframes bob{0%{transform:translateY(0)}50%{transform:translateY(-6px)}100%{transform:translateY(0)}}
 
-  /* VALUE STRIP */
-  .value-strip{display:flex;gap:18px;align-items:center;margin-top:18px}
-  .value{background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:12px;border-radius:10px;display:flex;flex-direction:column;gap:6px;min-width:120px}
-  .value strong{font-size:18px}
-  .value .muted{color:var(--muted);font-size:13px}
+  /* ========================
+     Quick value strip + features
+     ======================== */
+  .value-strip{display:flex;gap:14px;margin-top:16px;flex-wrap:wrap}
+  .value{background:linear-gradient(90deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01));padding:10px;border-radius:10px;min-width:120px;text-align:center}
+  .value strong{display:block;font-size:18px}
+  .features{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:28px}
+  .feature{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));padding:14px;border-radius:10px;box-shadow:0 8px 22px rgba(2,6,12,0.35);transition:transform .2s var(--ease);contain:paint}
+  .feature:hover{transform:translateY(-8px)}
+  .feature h3{margin:0 0 8px}
+  .feature p{color:var(--muted);margin:0}
 
-  /* SERVICES / FEATURES */
-  .services{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:36px}
-  .service{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:18px;border-radius:12px;box-shadow:0 10px 30px rgba(2,6,12,0.45);transition:transform .22s}
-  .service:hover{transform:translateY(-10px)}
-  .service h3{margin:0 0 8px}
-  .service p{color:var(--muted);margin:0 0 12px}
-  .service .more{font-weight:800;color:var(--accent)}
+  /* ========================
+     Portfolio carousel (light)
+     ======================== */
+  .carousel{display:flex;gap:12px;overflow:auto;padding:10px 0;scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch;contain:layout paint}
+  .proj{flex:0 0 300px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));border-radius:10px;padding:12px;box-shadow:0 8px 22px rgba(2,6,12,0.35);scroll-snap-align:start;min-width:260px}
+  .proj h4{margin:0 0 6px}
+  .proj p{color:var(--muted);margin:0 0 10px}
+  .meta{display:flex;gap:8px;flex-wrap:wrap}
 
-  /* PORTFOLIO / CAROUSEL (simple) */
-  .portfolio{margin-top:36px}
-  .carousel{display:flex;gap:14px;overflow:auto;padding-bottom:8px}
-  .proj-card{flex:0 0 320px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:12px;padding:14px;box-shadow:0 10px 30px rgba(2,6,12,0.45)}
-  .proj-card h4{margin:0 0 6px}
-  .proj-card p{color:var(--muted);margin:0 0 10px}
-  .proj-card .meta{display:flex;gap:8px;flex-wrap:wrap}
+  /* ========================
+     Newsletter + blog teasers
+     ======================== */
+  .newsletter{display:flex;gap:12px;align-items:center;margin-top:20px;flex-wrap:wrap}
+  .news-left{flex:1;min-width:220px}
+  .news-form{display:flex;gap:8px}
+  .input{padding:10px 12px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit;min-width:220px}
 
-  /* TECH STACK */
-  .stack{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
-  .chip{background:rgba(255,255,255,0.02);padding:8px 10px;border-radius:8px;font-weight:700;color:var(--muted)}
+  /* ========================
+     CTA strip
+     ======================== */
+  .cta{margin-top:26px;padding:14px;border-radius:10px;background:linear-gradient(90deg, rgba(255,159,28,0.06), rgba(255,94,122,0.03));display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
 
-  /* FAQ teaser */
-  .faq{margin-top:34px;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);padding:20px;border-radius:12px}
-  .faq h4{margin:0 0 10px}
-  .faq p{color:var(--muted);margin:0}
-
-  /* CTA strip */
-  .cta{margin-top:36px;padding:18px;border-radius:12px;background:linear-gradient(90deg, rgba(255,159,28,0.06), rgba(255,94,122,0.03));display:flex;align-items:center;justify-content:space-between;gap:12px}
-
-  /* FOOTER */
-  footer{margin-top:40px;padding:36px 0;border-top:1px solid rgba(255,255,255,0.02);color:var(--muted)}
-  .footer-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+  /* ========================
+     Footer
+     ======================== */
+  footer{margin-top:36px;padding:28px 0;border-top:1px solid rgba(255,255,255,0.02);color:var(--muted)}
+  .footer-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
   .footer-grid a{display:block;margin:6px 0;color:var(--muted)}
-  .copyright{margin-top:18px;font-size:13px;color:var(--muted)}
+  .copyright{margin-top:12px;font-size:13px;color:var(--muted)}
 
-  /* reveal helper */
-  .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s,transform .6s}
+  /* reveal helper (IntersectionObserver) */
+  .reveal{opacity:0;transform:translateY(14px);transition:opacity .55s var(--ease),transform .55s var(--ease)}
   .reveal.show{opacity:1;transform:none}
 
-  /* RESPONSIVE */
-  @media (max-width:1020px){.hero{padding:36px 0}.hero{grid-template-columns:1fr 360px}.services{grid-template-columns:repeat(2,1fr)} .footer-grid{grid-template-columns:repeat(2,1fr)}}
-  @media (max-width:680px){.hero{grid-template-columns:1fr}.nav{flex-direction:column;align-items:stretch}.hero-frame{height:380px}.carousel{gap:10px}.services{grid-template-columns:1fr}}
-  @media (max-width:420px){.hero h2{font-size:26px}}
+  /* accessibility: respect reduced motion */
+  @media (prefers-reduced-motion: reduce){
+    .bob, .reveal{animation:none !important;transition:none !important}
+  }
+
+  /* responsive */
+  @media (max-width:1020px){.hero{grid-template-columns:1fr 360px}.features{grid-template-columns:repeat(2,1fr)}.footer-grid{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:720px){.hero{grid-template-columns:1fr}.hero-frame{height:320px}.carousel{gap:10px}.features{grid-template-columns:1fr}}
+  @media (max-width:420px){.hero h2{font-size:28px}}
 </style>
 </head>
 <body>
 
 <header>
-  <div class="container nav" role="navigation" aria-label="Main navigation">
+  <div class="container nav" role="navigation" aria-label="Main">
     <div class="brand">
-      <img src="assets/logo.png" alt="CiphAnon logo" class="logo" />
+      <!-- EDIT: replace with your logo -->
+      <img src="assets/logo.png" alt="CiphAnon Studios logo" class="logo" loading="lazy" />
       <div>
         <h1>CiphAnon Studios</h1>
-        <div style="font-size:12px;color:var(--muted)">Interactive prototypes & developer tooling</div>
+        <div style="font-size:12px;color:var(--muted)">Prototypes, UX systems & developer tools</div>
       </div>
     </div>
 
     <nav class="links" aria-label="Primary">
       <a href="#projects">Work</a>
-      <a href="#services">Services</a>
+      <a href="#features">What I Do</a>
       <a href="#about">About</a>
       <a href="#contact">Contact</a>
     </nav>
 
-    <div class="actions">
+    <div class="actions" role="group" aria-label="Actions">
       <a class="btn secondary" href="https://github.com/your-username" target="_blank" rel="noopener">GitHub</a>
-      <a class="btn" href="#contact">Let's Talk</a>
+      <a class="btn" href="#contact">Hire</a>
     </div>
   </div>
 </header>
 
-<main class="container">
+<main class="container" id="top">
 
   <!-- HERO -->
   <section class="hero" aria-labelledby="hero-heading">
     <div>
-      <h2 id="hero-heading"><span class="gradient">CiphAnon Studios</span> — polished prototypes, tooling, and interactive experiences.</h2>
-      <p class="lead">3 years building across many languages and engines — HTML, CSS, JavaScript, Godot, Lua, Java, Block Code, Unity, Python (Turtle). I craft fast prototypes, UX-focused systems, and developer-first tools.</p>
+      <h2 id="hero-heading"><span class="gradient-text">CiphAnon Studios</span> — Build fast, ship polished.</h2>
+      <p class="lead">3 years of hands-on experience across multiple languages and engines — HTML, CSS, JavaScript, Godot, Lua, Java, Block Code, Unity, and Python. I create interactive prototypes, developer tooling, and polished UX systems.</p>
 
       <div class="ctas">
-        <a class="btn" href="#projects">Explore Work</a>
+        <a class="btn" href="#projects">See Featured Work</a>
         <a class="btn secondary" href="#about">About the Studio</a>
       </div>
 
@@ -146,140 +170,156 @@
         <span class="pill">Tools & Automation</span>
       </div>
 
-      <div class="value-strip">
-        <div class="value"><strong>3 yrs</strong><div class="muted">Practical experience</div></div>
+      <div class="value-strip" aria-hidden="true">
+        <div class="value"><strong>3</strong><div class="muted">Years coding</div></div>
         <div class="value"><strong>9+</strong><div class="muted">Languages & engines</div></div>
-        <div class="value"><strong>10+</strong><div class="muted">Projects & demos</div></div>
+        <div class="value"><strong>10+</strong><div class="muted">Playables & tools</div></div>
       </div>
     </div>
 
-    <div class="hero-frame reveal">
+    <!-- HERO VISUAL (optimized: lazy image, GPU transforms) -->
+    <div class="hero-frame reveal" aria-hidden="true">
       <div class="scene" id="scene">
-        <!-- decorative background -->
-        <svg style="position:absolute;left:18px;top:14px;opacity:0.05" width="160" height="160" viewBox="0 0 200 200" aria-hidden="true">
-          <defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#ff9f1c"/><stop offset="1" stop-color="#ff5e7a"/></linearGradient></defs>
-          <circle cx="100" cy="100" r="90" fill="url(#g)"/>
+        <!-- decorative subtle background (SVG) low-cost -->
+        <svg style="position:absolute;left:14px;top:10px;opacity:0.06" width="120" height="120" viewBox="0 0 200 200" aria-hidden="true">
+          <defs><linearGradient id="g2" x1="0" x2="1"><stop offset="0" stop-color="#ff9f1c"/><stop offset="1" stop-color="#ff5e7a"/></linearGradient></defs>
+          <circle cx="100" cy="100" r="80" fill="url(#g2)"/>
         </svg>
 
+        <!-- char: lazy-loaded, bobbing (GPU) -->
         <div class="char-wrap bob" id="charWrap" role="img" aria-label="CiphAnon character">
-          <img src="assets/char.png" alt="CiphAnon character" class="char" id="charImg" />
+          <!-- EDIT: replace with your character file -->
+          <img src="assets/char.png" alt="CiphAnon character" class="char" id="charImg" loading="lazy" />
         </div>
       </div>
     </div>
   </section>
 
-  <!-- SERVICES -->
-  <section id="services" class="services reveal" aria-labelledby="services-title">
-    <div class="service">
-      <h3>Interactive Prototypes</h3>
-      <p>Rapid, playable prototypes and interaction experiments to validate ideas fast — focused on feel and polish.</p>
-      <div class="more">Learn more →</div>
+  <!-- FEATURES -->
+  <section id="features" class="features reveal" aria-labelledby="features-title">
+    <h3 id="features-title" style="grid-column:1/-1">What I focus on</h3>
+    <div class="feature">
+      <h3>Rapid Prototyping</h3>
+      <p>Turn ideas into playable prototypes quickly so you can iterate on feel and mechanics.</p>
     </div>
-
-    <div class="service">
-      <h3>Developer Tools</h3>
-      <p>Small libraries, build helpers, and automation scripts that speed iteration and keep projects organized.</p>
-      <div class="more">Learn more →</div>
+    <div class="feature">
+      <h3>Developer Tooling</h3>
+      <p>Small, pragmatic scripts and libraries to speed up builds and reduce repetitive work.</p>
     </div>
-
-    <div class="service">
+    <div class="feature">
       <h3>UI & UX Systems</h3>
-      <p>Design systems, UI patterns, and front-end architecture—prioritizing accessibility and performance.</p>
-      <div class="more">Learn more →</div>
+      <p>Design systems that scale and front-end code focused on accessibility and performance.</p>
     </div>
   </section>
 
-  <!-- PORTFOLIO -->
-  <section id="projects" class="portfolio reveal" aria-labelledby="projects-title">
-    <h3 id="projects-title" style="margin:0 0 12px">Featured Work</h3>
-    <div class="carousel" role="list">
-      <article class="proj-card" role="listitem">
+  <!-- PORTFOLIO CAROUSEL -->
+  <section id="projects" class="reveal" aria-labelledby="projects-title" style="margin-top:26px">
+    <h3 id="projects-title">Featured work</h3>
+    <div class="carousel" role="list" aria-label="Featured projects">
+      <article class="proj" role="listitem" tabindex="0">
         <h4>Pet-clicker Prototype</h4>
-        <p>Collectible system, upgrades, and polish—prototype built in Godot and demoed on the web.</p>
+        <p>Collectible pets, upgrades, and mutation mechanics — built in Godot and demoed on web.</p>
         <div class="meta"><span class="chip">Godot</span><span class="chip">Prototype</span></div>
       </article>
 
-      <article class="proj-card" role="listitem">
-        <h4>Landing & Toolkit</h4>
-        <p>Clear, responsive marketing landing + small JS tools for deploy workflows and demos.</p>
-        <div class="meta"><span class="chip">HTML</span><span class="chip">JS</span></div>
+      <article class="proj" role="listitem" tabindex="0">
+        <h4>Landing & Deploy Toolkit</h4>
+        <p>Responsive marketing landing and JS tools to automate deploy previews and demos.</p>
+        <div class="meta"><span class="chip">HTML</span><span class="chip">GitHub Pages</span></div>
       </article>
 
-      <article class="proj-card" role="listitem">
-        <h4>Developer Scripts</h4>
-        <p>Python and Java utilities to automate repetitive tasks and speed up builds.</p>
+      <article class="proj" role="listitem" tabindex="0">
+        <h4>Build Helpers</h4>
+        <p>Python & Java utilities that speed up local build steps and packaging workflows.</p>
         <div class="meta"><span class="chip">Python</span><span class="chip">Java</span></div>
       </article>
 
-      <!-- more project cards can be added here -->
+      <!-- add more project cards as needed -->
     </div>
 
-    <!-- tech stack -->
-    <div class="stack" aria-hidden="false" style="margin-top:16px">
-      <div class="chip">HTML</div><div class="chip">CSS</div><div class="chip">JavaScript</div><div class="chip">Godot</div>
-      <div class="chip">Unity</div><div class="chip">Lua</div><div class="chip">Java</div><div class="chip">Python</div><div class="chip">Block Code</div>
+    <!-- tech chips -->
+    <div style="margin-top:12px" class="stack">
+      <span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JavaScript</span>
+      <span class="chip">Godot</span><span class="chip">Unity</span><span class="chip">Lua</span>
+      <span class="chip">Java</span><span class="chip">Python</span><span class="chip">Block Code</span>
     </div>
   </section>
 
-  <!-- FAQ / Teaser -->
-  <section class="faq reveal" aria-labelledby="faq-title">
-    <h4 id="faq-title">Need details?</h4>
-    <p>All in-depth details, code samples and downloads live on the project pages and documentation. The homepage is a hub — go to Work → Project → Docs to see full info and demos.</p>
+  <!-- NEWSLETTER -->
+  <section class="newsletter reveal" aria-labelledby="news-title" style="margin-top:22px">
+    <div class="news-left">
+      <h4 id="news-title" style="margin:0 0 8px">Stay in the loop</h4>
+      <p style="color:var(--muted);margin:0 0 10px">Monthly notes on prototypes, demos, and short dev tips — no spam.</p>
+      <form id="newsForm" class="news-form" onsubmit="event.preventDefault(); subscribe();" aria-label="Subscribe to newsletter">
+        <input class="input" id="email" name="email" type="email" placeholder="you@email.com" required />
+        <button class="btn" type="submit">Subscribe</button>
+      </form>
+      <div id="newsMsg" style="margin-top:8px;font-size:13px;color:var(--muted)"></div>
+    </div>
+
+    <div style="min-width:220px">
+      <h4 style="margin:0 0 8px">Latest from the blog</h4>
+      <div style="color:var(--muted)">No blog posts here — full posts live on the Blog page. The homepage teases & routes you to full details.</div>
+    </div>
+  </section>
+
+  <!-- FAQ teaser -->
+  <section class="reveal" style="margin-top:24px">
+    <div class="faq" aria-labelledby="faq-heading">
+      <h4 id="faq-heading" style="margin:0 0 8px">Need full details?</h4>
+      <p style="color:var(--muted);margin:0">Project pages contain full documentation, code samples, and downloads. Use Work → Project → Docs for deep dives.</p>
+    </div>
   </section>
 
   <!-- CTA -->
-  <div class="cta reveal" role="region" aria-label="Get started">
+  <div class="cta reveal" style="margin-top:20px" role="region" aria-label="Call to action">
     <div>
-      <strong>Have an idea or prototype in mind?</strong>
-      <div class="muted" style="color:var(--muted)">I help turn concepts into playable demos and reliable tooling.</div>
+      <strong>Have an idea? Let’s prototype it.</strong>
+      <div style="color:var(--muted)">Fast turnarounds, clear communication, and production-ready deliverables.</div>
     </div>
-    <div style="display:flex;gap:10px">
-      <a class="btn" href="#contact">Request a Quote</a>
+    <div style="display:flex;gap:8px">
+      <a class="btn" href="#contact">Request Quote</a>
       <a class="btn secondary" href="mailto:example@email.com">Email</a>
     </div>
   </div>
 
-  <!-- ABOUT / CONTACT TEASER -->
-  <section id="about" style="margin-top:28px" class="reveal">
-    <div style="display:flex;gap:18px;flex-wrap:wrap;align-items:flex-start">
-      <div style="flex:1;min-width:220px">
-        <h4 style="margin:0 0 8px">About CiphAnon</h4>
-        <p style="color:var(--muted)">I bring 3 years of practical coding across many environments. I focus on fast iteration, clear UX, and production-ready tooling. Full bio and CV are on the About page.</p>
-      </div>
-
-      <div style="width:320px">
-        <div style="background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:14px;border-radius:10px">
-          <h4 style="margin:0 0 6px">Contact</h4>
-          <p style="color:var(--muted);margin:0 0 10px">Looking to collaborate? Request demos or see code samples on the Project pages.</p>
-          <a class="btn" id="contact" href="mailto:example@email.com">Email Me</a>
-        </div>
+  <!-- about/contact teaser -->
+  <section id="about" class="reveal" style="margin-top:24px;display:flex;gap:14px;flex-wrap:wrap">
+    <div style="flex:1;min-width:220px">
+      <h4 style="margin:0 0 6px">About</h4>
+      <p style="color:var(--muted);margin:0">3 years building prototypes, tools and interfaces. Full bio and CV on About page.</p>
+    </div>
+    <div style="width:320px">
+      <div style="background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01));padding:12px;border-radius:10px">
+        <h4 style="margin:0 0 6px">Contact</h4>
+        <p style="color:var(--muted);margin:0 0 8px">For demos or code samples, reach out — project pages include downloads or source links.</p>
+        <a id="contact" class="btn" href="mailto:example@email.com">Email Me</a>
       </div>
     </div>
   </section>
 
 </main>
 
-<!-- FOOTER -->
 <footer>
   <div class="container">
     <div class="footer-grid">
       <div>
         <strong>CiphAnon Studios</strong>
-        <div style="color:var(--muted);margin-top:8px">Interactive prototypes, UI systems, and developer tooling.</div>
+        <div style="color:var(--muted);margin-top:8px">Interactive prototypes & developer tooling</div>
       </div>
 
       <div>
-        <h4 style="margin:0 0 8px">Product</h4>
-        <a href="#projects">Work</a>
+        <h4 style="margin:0 0 8px">Work</h4>
+        <a href="#projects">Featured</a>
+        <a href="/projects">All projects</a>
         <a href="/docs">Docs</a>
-        <a href="/downloads">Downloads</a>
       </div>
 
       <div>
         <h4 style="margin:0 0 8px">Company</h4>
         <a href="/about">About</a>
-        <a href="/careers">Careers</a>
         <a href="/contact">Contact</a>
+        <a href="/careers">Careers</a>
       </div>
 
       <div>
@@ -290,36 +330,107 @@
       </div>
     </div>
 
-    <div class="copyright">
-      © <span id="year"></span> CiphAnon Studios — All rights reserved.
-    </div>
+    <div class="copyright">© <span id="year"></span> CiphAnon Studios — All rights reserved.</div>
   </div>
 </footer>
 
 <script>
+  // =========== Utilities for performance ===========
   // set year
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  // simple reveal observer
-  const io = new IntersectionObserver((entries)=>{
-    for(const e of entries){
-      if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target); }
+  // lightweight reveal using IntersectionObserver
+  const io = new IntersectionObserver((entries) => {
+    for (const e of entries) {
+      if (e.isIntersecting) { e.target.classList.add('show'); io.unobserve(e.target); }
     }
-  }, {threshold:0.12});
-  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-  // parallax character micro-interaction
-  const scene = document.getElementById('scene');
-  const charWrap = document.getElementById('charWrap');
-  if(scene && charWrap){
-    scene.addEventListener('mousemove', e=>{
+  // Throttled mouse parallax using requestAnimationFrame for low CPU
+  (function () {
+    const scene = document.getElementById('scene');
+    const charWrap = document.getElementById('charWrap');
+    if (!scene || !charWrap) return;
+
+    let raf = null;
+    let last = { x: 0, y: 0 };
+
+    function onMove(e) {
+      // get pointer (supports touch/mouse)
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
       const r = scene.getBoundingClientRect();
-      const dx = (e.clientX - (r.left + r.width/2))/r.width;
-      const dy = (e.clientY - (r.top + r.height/2))/r.height;
-      charWrap.style.transform = `translateX(${dx*12}px) translateY(${dy*10}px)`;
-    });
-    scene.addEventListener('mouseleave', ()=>{ charWrap.style.transform = ''; });
+      const dx = (clientX - (r.left + r.width / 2)) / (r.width || 1);
+      const dy = (clientY - (r.top + r.height / 2)) / (r.height || 1);
+      last.x = dx;
+      last.y = dy;
+
+      if (raf === null) {
+        raf = requestAnimationFrame(() => {
+          // smaller motion = less repaint work
+          const tx = last.x * 10; // horizontal
+          const ty = last.y * 8; // vertical
+          charWrap.style.transform = `translate3d(${tx}px, ${ty}px, 0)`;
+          raf = null;
+        });
+      }
+    }
+
+    // use passive listeners and reduce events on mobile
+    scene.addEventListener('mousemove', onMove, { passive: true });
+    scene.addEventListener('touchmove', onMove, { passive: true });
+
+    scene.addEventListener('mouseleave', () => { charWrap.style.transform = ''; }, { passive: true });
+
+    // disable parallax on small screens for perf
+    function checkDisable() {
+      if (window.innerWidth < 720) {
+        scene.removeEventListener('mousemove', onMove);
+        scene.removeEventListener('touchmove', onMove);
+      }
+    }
+    checkDisable();
+    window.addEventListener('resize', checkDisable, { passive: true });
+  })();
+
+  // smooth scroll performance: passive scroll listener only to adjust minimal UI (no heavy ops)
+  (function () {
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          // small visual adjustments can go here (keep cheap)
+          const heroFrame = document.querySelector('.hero-frame');
+          if (heroFrame) {
+            const sc = window.scrollY;
+            const d = Math.min(1, sc / 900);
+            heroFrame.style.transform = `scale(${1 - d * 0.02})`;
+          }
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+  })();
+
+  // Newsletter stub (replace with real API)
+  function subscribe() {
+    const email = document.getElementById('email').value;
+    const msg = document.getElementById('newsMsg');
+    if (!email) { msg.textContent = 'Please enter an email.'; return; }
+    // simple faux success (replace with real POST)
+    msg.textContent = 'Thanks — check your inbox for confirmation (demo).';
+    setTimeout(() => { msg.textContent = ''; }, 5000);
   }
+
+  // Accessibility improvement: focus-visible polyfill fallback
+  (function () {
+    try {
+      document.body.classList.add('js-ready');
+    } catch (e) {}
+  })();
 </script>
 </body>
 </html>
