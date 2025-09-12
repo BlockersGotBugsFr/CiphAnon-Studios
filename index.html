@@ -170,6 +170,35 @@
   .reveal.show{opacity:1;transform:none}
   @media (prefers-reduced-motion: reduce){.reveal{transition:none!important} .fab-icons svg{transition:none!important}}
 
+  /* Hire dropdown styles */
+  .hire-dropdown{position:relative;display:inline-block}
+  .hire-dropdown .btn{display:flex;align-items:center;gap:8px}
+  .hire-menu{
+    position:absolute;right:0;top:calc(100% + 10px);
+    min-width:220px;background:var(--card);border-radius:12px;padding:8px;
+    box-shadow:0 10px 30px rgba(2,6,12,0.45);backdrop-filter:blur(6px);
+    border:1px solid rgba(255,255,255,0.03);z-index:220;
+    transform-origin:top right;transition:opacity .22s var(--ease),transform .22s var(--ease);
+    opacity:0;transform:translateY(-6px) scale(.98);pointer-events:none;
+  }
+  .hire-menu a{
+    display:block;padding:10px 12px;border-radius:8px;text-decoration:none;color:var(--muted);
+    font-weight:700;border:1px solid transparent;margin:4px 0;
+  }
+  .hire-menu a:hover,
+  .hire-menu a:focus{
+    background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
+    color:#071018;border-color:rgba(255,255,255,0.02);outline:none;
+  }
+  .hire-dropdown.open .hire-menu{opacity:1;transform:none;pointer-events:auto}
+
+  /* small caret rotation for visual feedback */
+  #hireToggle svg{transition:transform .22s var(--ease)}
+  .hire-dropdown.open #hireToggle svg{transform:rotate(180deg)}
+
+  /* keyboard focus styles */
+  .hire-menu a:focus{box-shadow:0 6px 18px rgba(0,0,0,0.12)}
+
   /* responsive */
   @media (max-width:1000px){.hero{grid-template-columns:1fr}.hero-visual{height:320px}.cap-grid{grid-template-columns:repeat(2,1fr)}.contact-grid{grid-template-columns:1fr}.portrait-wrap{display:none}}
   @media (max-width:560px){.cap-grid{grid-template-columns:1fr}}
@@ -194,7 +223,23 @@
     <div class="actions">
       <button class="icon-btn" id="themeToggle" aria-label="Toggle theme"></button>
       <a class="btn ghost" href="mailto:example@email.com">Email</a>
-      <a class="btn" href="#contact">Hire</a>
+
+      <!-- Hire dropdown -->
+      <div class="hire-dropdown" id="hireDropdown">
+        <button class="btn" id="hireToggle" aria-haspopup="true" aria-expanded="false" aria-controls="hireMenu">
+          Hire <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" focusable="false" style="margin-left:6px;opacity:.9"><path d="M7 10l5 5 5-5z" fill="currentColor"/></svg>
+        </button>
+        <div class="hire-menu" id="hireMenu" role="menu" aria-labelledby="hireToggle" hidden>
+          <a role="menuitem" href="#contact" data-action="quote">Request Quote</a>
+          <a role="menuitem" href="mailto:example@email.com?subject=Consultation" 
+             data-action="consult">Consultation</a>
+          <a role="menuitem" href="mailto:example@email.com?subject=Code%20Audit" 
+             data-action="audit">Code Audit</a>
+          <a role="menuitem" href="#pricing" data-action="pricing">Package Pricing</a>
+          <a role="menuitem" href="#schedule" data-action="schedule">Schedule Meeting</a>
+        </div>
+      </div>
+
     </div>
   </div>
 </header>
@@ -302,11 +347,27 @@ document.getElementById('year').textContent = new Date().getFullYear();
   step();
 })();
 
+/* THEME toggling (single global function used by both header and floating toggle) */
+function toggleTheme(){
+  const cur = document.documentElement.getAttribute('data-theme') || 'light';
+  const next = cur === 'light' ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', next);
+  try { localStorage.setItem('theme', next); } catch(e){}
+}
+document.getElementById('themeFab').addEventListener('click', toggleTheme);
+document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+
+/* restore theme on load */
+(function restoreTheme(){
+  try {
+    const saved = localStorage.getItem('theme');
+    if(saved) document.documentElement.setAttribute('data-theme', saved);
+  } catch(e){}
+})();
+
 /* Back-to-top behavior + SVG cycling + smooth color transition */
 (function fabNav(){
   const topFab = document.getElementById('topFab');
-  const themeFab = document.getElementById('themeFab');
-  const themeToggle = document.getElementById('themeToggle');
   const svgWrap = topFab.querySelector('.fab-icons');
   const svgs = Array.from(svgWrap.querySelectorAll('svg'));
   let cur = 0;
@@ -319,7 +380,6 @@ document.getElementById('year').textContent = new Date().getFullYear();
   function cycleStep(){
     const prev = cur;
     cur = (cur + 1) % svgs.length;
-    // crossfade: remove active from prev then add to next (transitions handle smoothness)
     svgs[prev].classList.remove('active');
     svgs[cur].classList.add('active');
   }
@@ -332,73 +392,122 @@ document.getElementById('year').textContent = new Date().getFullYear();
 
   // click behavior: scroll to top with smoothness and pop animation
   topFab.addEventListener('click', function(e){
-    // small pop to show click
     topFab.classList.remove('fab--pop');
-    // force reflow so animation can restart
-    void topFab.offsetWidth;
+    void topFab.offsetWidth; // reflow to restart animation
     topFab.classList.add('fab--pop');
-
     window.scrollTo({top:0,behavior:'smooth'});
   });
 
   // optionally make the icon cycle faster while scrolling up (visual feedback)
   let scrollTimer = null;
   window.addEventListener('scroll', () => {
-    // if user is scrolling up, briefly show the "up" icon (we'll pick svg #2)
     if(scrollTimer) clearTimeout(scrollTimer);
     const isScrollingUp = (window.scrollYPrev || 0) > window.scrollY;
     window.scrollYPrev = window.scrollY;
 
     if(isScrollingUp && !reduced){
-      // show index 1 quickly
       svgs.forEach((s) => s.classList.remove('active'));
       svgs[1 % svgs.length].classList.add('active');
 
-      // resume regular cycle shortly after
       scrollTimer = setTimeout(() => {
-        // ensure a consistent index
         svgs.forEach((s,i) => s.classList.toggle('active', i === cur));
       }, 600);
     } else {
-      // no special handling; resume
       scrollTimer = setTimeout(() => {
         svgs.forEach((s,i) => s.classList.toggle('active', i === cur));
       }, 800);
     }
   }, {passive:true});
 
-  // theme toggle button hooking
-  function toggleTheme(){
-    const curTheme = document.documentElement.getAttribute('data-theme');
-    const next = curTheme === 'light' ? 'dark' : 'light';
-    document.documentElement.setAttribute('data-theme', next);
-    localStorage.setItem('theme', next);
-    // Minor accessibility hint: focus the topFab so user sees focus color in keyboard flows
-  }
+  // keyboard activation for accessibility
+  topFab.addEventListener('keydown', (e) => {
+    if(e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      topFab.click();
+    }
+  });
 
-  themeFab.addEventListener('click', toggleTheme);
-  themeToggle.addEventListener('click', toggleTheme);
-
-  // on load: apply saved theme
-  (function restoreTheme(){
-    const saved = localStorage.getItem('theme');
-    if(saved) document.documentElement.setAttribute('data-theme', saved);
-  })();
-
-  // cleanup before unload (not strictly necessary but polite)
+  // cleanup before unload
   window.addEventListener('unload', () => {
     if(cycleInterval) clearInterval(cycleInterval);
   });
 
 })();
 
-/* Back-to-top quick action (old handler kept for compatibility) */
-document.getElementById('topFab').addEventListener('keydown', (e) => {
-  if(e.key === 'Enter' || e.key === ' ') {
-    e.preventDefault();
-    document.getElementById('topFab').click();
+/* Hire dropdown: accessible toggle, keyboard navigation, outside click close */
+(function hireDropdown(){
+  const dropdown = document.getElementById('hireDropdown');
+  if(!dropdown) return;
+  const toggle = document.getElementById('hireToggle');
+  const menu = document.getElementById('hireMenu');
+  const items = Array.from(menu.querySelectorAll('[role="menuitem"]'));
+  let open = false;
+
+  function openMenu(focusFirst=true){
+    open = true;
+    dropdown.classList.add('open');
+    menu.hidden = false;
+    toggle.setAttribute('aria-expanded','true');
+    requestAnimationFrame(()=>{ dropdown.classList.add('open'); });
+    if(focusFirst) items[0]?.focus();
   }
-});
+  function closeMenu(returnFocus=true){
+    open = false;
+    dropdown.classList.remove('open');
+    toggle.setAttribute('aria-expanded','false');
+    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+      menu.hidden = true;
+    } else {
+      setTimeout(()=>{ menu.hidden = true; }, 200);
+    }
+    if(returnFocus) toggle.focus();
+  }
+
+  toggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    open ? closeMenu() : openMenu();
+  });
+
+  toggle.addEventListener('keydown', (e) => {
+    if(e.key === 'ArrowDown' || e.key === 'Enter' || e.key === ' '){
+      e.preventDefault();
+      openMenu(true);
+    } else if(e.key === 'Escape'){
+      closeMenu();
+    }
+  });
+
+  menu.addEventListener('keydown', (e) => {
+    const idx = items.indexOf(document.activeElement);
+    if(e.key === 'ArrowDown'){ e.preventDefault(); items[(idx+1) % items.length].focus(); }
+    if(e.key === 'ArrowUp'){ e.preventDefault(); items[(idx-1 + items.length) % items.length].focus(); }
+    if(e.key === 'Home'){ e.preventDefault(); items[0].focus(); }
+    if(e.key === 'End'){ e.preventDefault(); items[items.length-1].focus(); }
+    if(e.key === 'Escape'){ e.preventDefault(); closeMenu(); }
+    if(e.key === 'Tab'){ closeMenu(false); } // let tab proceed but close menu
+  });
+
+  // close when clicking outside
+  window.addEventListener('click', (ev) => {
+    if(!dropdown.contains(ev.target) && open){
+      closeMenu(false);
+    }
+  }, {capture:true, passive:true});
+
+  // activate by click — preserve default behavior but close menu afterwards
+  items.forEach((it) => {
+    it.addEventListener('click', () => {
+      dropdown.classList.add('clicked');
+      setTimeout(()=>dropdown.classList.remove('clicked'), 220);
+      closeMenu(false);
+    });
+  });
+
+  // close on escape from anywhere
+  window.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape' && open){ closeMenu(); }
+  });
+})();
 </script>
 </body>
 </html>
