@@ -3,56 +3,48 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>CiphAnon — Developer • Prototyper</title>
+<title>CiphAnon — Developer & Prototyper</title>
 <meta name="description" content="CiphAnon — prototypes, developer tooling, and polished front-end experiences." />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 <style>
   /* =========================
-     THEME, RESET & VARIABLES
+     THEME & BASE
      ========================= */
   :root{
-    --bg-1: #06121a;
-    --bg-2: #071824;
-    --card: #0f1720;
-    --muted: #98a9bd;
-    --text: #eaf3fb;
-    --accent-1: #ff9f1c;
-    --accent-2: #ff5e7a;
+    --bg-1:#07121a;
+    --bg-2:#071824;
+    --card:#0f1720;
+    --muted:#98a9bd;
+    --text:#eaf3fb;
+    --accent-1:#ff9f1c;
+    --accent-2:#ff5e7a;
     --glass: rgba(255,255,255,0.03);
-    --radius: 14px;
-    --maxw: 1200px;
-    --ease: cubic-bezier(.2,.9,.3,1);
-    --shadow-1: 0 8px 30px rgba(2,6,12,0.55);
+    --radius:14px;
+    --maxw:1200px;
+    --ease:cubic-bezier(.2,.9,.3,1);
+    --shadow: 0 14px 40px rgba(2,6,12,0.55);
   }
   [data-theme="light"]{
-    --bg-1: #f6f8fa;
-    --bg-2: #eef2f6;
-    --card: #ffffff;
-    --muted: #4b5563;
-    --text: #0b1116;
-    --glass: rgba(11,17,22,0.04);
-    --shadow-1: 0 8px 30px rgba(11,17,22,0.06);
+    --bg-1:#f6f8fa; --bg-2:#eef2f6; --card:#fff; --muted:#4b5563; --text:#071018; --glass: rgba(11,17,22,0.04); --shadow: 0 10px 30px rgba(11,17,22,0.06);
   }
   *{box-sizing:border-box}
   html,body{height:100%}
   body{
     margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;
-    background: linear-gradient(180deg,var(--bg-1),var(--bg-2));
-    color:var(--text);-webkit-font-smoothing:antialiased;line-height:1.45;
-    scroll-behavior:smooth;
+    background:linear-gradient(180deg,var(--bg-1),var(--bg-2));
+    color:var(--text);-webkit-font-smoothing:antialiased;line-height:1.45;scroll-behavior:smooth;
   }
-  img{max-width:100%;display:block}
+  img{display:block;max-width:100%}
   a{color:inherit}
   .container{max-width:var(--maxw);margin:0 auto;padding:28px}
 
-  /* =========================
-     NAV
-     ========================= */
+  /* NAV */
   header{position:sticky;top:12px;z-index:160;padding:10px 0}
-  .nav{display:flex;align-items:center;justify-content:space-between;padding:12px;border-radius:16px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));box-shadow:var(--shadow-1)}
-  .brand{display:flex;gap:12px;align-items:center}
-  .logo{width:52px;height:52px;border-radius:12px;object-fit:cover}
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:12px;border-radius:14px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));box-shadow:var(--shadow)}
+  .brand{display:flex;align-items:center;gap:12px}
+  .logo-mark{width:56px;height:56px;border-radius:12px;overflow:hidden;flex:0 0 56px}
+  .logo-mark img{width:100%;height:100%;object-fit:cover;display:block}
   .brand h1{font-size:16px;margin:0}
   nav.primary{display:flex;gap:14px;align-items:center}
   nav.primary a{color:var(--muted);text-decoration:none;padding:6px;border-radius:8px;font-weight:600}
@@ -61,78 +53,69 @@
   .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted);font-weight:700}
   .icon-btn{background:transparent;border:0;padding:8px;border-radius:8px;cursor:pointer;color:var(--muted)}
 
-  /* =========================
-     HERO
-     ========================= */
-  .hero{display:grid;grid-template-columns:1fr 460px;gap:36px;align-items:center;padding:48px 0}
+  /* HERO */
+  .hero{display:grid;grid-template-columns:1fr 480px;gap:36px;align-items:center;padding:48px 0}
   .kicker{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
-  .title{font-size:42px;line-height:1.03;margin:8px 0 0}
+  .title{font-size:44px;line-height:1.03;margin:8px 0 0}
   .title .accent{background:linear-gradient(90deg,var(--accent-1),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
   .subtitle{color:var(--muted);margin-top:14px;max-width:60ch}
   .hero-ctas{display:flex;gap:12px;margin-top:22px;flex-wrap:wrap}
   .stats{display:flex;gap:12px;margin-top:20px;flex-wrap:wrap}
-  .stat{background:var(--card);padding:10px 12px;border-radius:10px;min-width:120px;text-align:center;box-shadow:var(--shadow-1)}
+  .stat{background:var(--card);padding:10px 12px;border-radius:10px;min-width:120px;text-align:center;box-shadow:var(--shadow)}
   .stat strong{display:block;font-size:18px}
 
-  /* hero visual */
-  .hero-visual{height:420px;border-radius:16px;padding:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));position:relative;box-shadow:var(--shadow-1);overflow:hidden}
-  .bg-svg{position:absolute;inset:-20% -10% auto auto;width:640px;height:640px;filter:blur(72px);opacity:0.12;pointer-events:none}
-  .portrait-wrap{position:absolute;right:14px;bottom:12px;width:320px;max-width:52%;pointer-events:none;will-change:transform}
-  .portrait{width:100%;border-radius:12px;display:block;filter:drop-shadow(0 26px 36px rgba(0,0,0,0.55));}
+  /* HERO VISUAL: uses StudiosImageT.png as subtle texture + 1000007475.png as portrait */
+  .hero-visual{height:460px;border-radius:16px;padding:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));position:relative;box-shadow:var(--shadow);overflow:hidden;display:flex;align-items:center;justify-content:center}
+  .hero-visual .bg-art{position:absolute;inset:0;background-image:url('assets/StudiosImageT.png');background-position:center;background-size:cover;opacity:0.12;filter:blur(18px) saturate(.9);transform:scale(1.02);pointer-events:none}
+  .hero-card{position:relative;z-index:2;width:92%;display:flex;align-items:center;justify-content:space-between;gap:18px}
+  .hero-copy{flex:1;min-width:220px}
+  .hero-portrait{flex:0 0 260px;border-radius:12px;overflow:hidden;box-shadow:0 26px 48px rgba(2,6,12,0.5);transform:translateZ(0)}
+  .hero-portrait img{width:100%;height:100%;object-fit:cover;display:block;}
 
-  /* subtle typed subtitle */
-  .typed{font-weight:700;color:var(--accent-2);margin-top:10px}
+/* badge row */
+.badge-row{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+.badge{background:var(--glass);padding:8px 12px;border-radius:999px;color:var(--muted);font-weight:700;border:1px solid rgba(255,255,255,0.03)}
 
-  /* =========================
-     MAIN: CAPABILITIES + SKILLS
-     ========================= */
+  /* MAIN SECTIONS */
   section{padding:36px 0;border-bottom:1px solid rgba(255,255,255,0.02)}
   .cap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:18px}
-  .cap{background:var(--card);padding:18px;border-radius:12px;box-shadow:var(--shadow-1);transition:transform .18s var(--ease)}
+  .cap{background:var(--card);padding:18px;border-radius:12px;box-shadow:var(--shadow);transition:transform .18s var(--ease)}
   .cap:hover{transform:translateY(-8px)}
   .cap h3{margin:0 0 8px}
   .cap p{color:var(--muted);margin:0}
   .skill-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
   .skill{background:var(--glass);padding:8px 10px;border-radius:999px;font-weight:700;color:var(--muted);border:1px solid rgba(255,255,255,0.03)}
 
-  /* =========================
-     SOCIALS & YOUTUBE (lazy)
-     ========================= */
+  /* SOCIALS & YOUTUBE (lazy) */
   .social-row{display:flex;gap:12px;align-items:center;margin-top:14px;flex-wrap:wrap}
   .social-link{display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.03);color:var(--muted);text-decoration:none;font-weight:700}
-
   .yt-placeholder{position:relative;background:#000;border-radius:10px;overflow:hidden;min-height:160px;display:flex;align-items:center;justify-content:center;cursor:pointer}
   .yt-placeholder img{width:100%;height:100%;object-fit:cover;opacity:0.95;filter:brightness(.6)}
   .yt-play{position:absolute;display:inline-flex;align-items:center;justify-content:center;width:64px;height:64px;border-radius:999px;background:linear-gradient(90deg,var(--accent-1),var(--accent-2));box-shadow:0 8px 30px rgba(0,0,0,0.4);color:#071018;font-weight:800;font-size:18px}
 
-  /* =========================
-     TESTIMONIALS (tiny)
-     ========================= */
+  /* TESTIMONIALS */
   .testimonials{display:flex;gap:12px;overflow:auto;padding:8px 0;scroll-snap-type:x mandatory}
-  .test{flex:0 0 300px;min-width:240px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));padding:14px;border-radius:12px;box-shadow:var(--shadow-1);scroll-snap-align:start}
+  .test{flex:0 0 300px;min-width:240px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));padding:14px;border-radius:12px;box-shadow:var(--shadow);scroll-snap-align:start}
 
-  /* =========================
-     CONTACT / FOOTER
-     ========================= */
+  /* CONTACT */
   .contact-grid{display:grid;grid-template-columns:1fr 320px;gap:18px;margin-top:12px}
   .field{display:block;width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit}
   .form-actions{display:flex;gap:10px;margin-top:10px}
+
   footer{padding:28px 0;color:var(--muted)}
   .footer-grid{display:flex;gap:20px;flex-wrap:wrap}
 
-  /* floating back-to-top & theme toggle */
+  /* floating controls */
   .floating{position:fixed;right:18px;bottom:18px;z-index:240;display:flex;flex-direction:column;gap:8px}
-  .fab{width:48px;height:48px;border-radius:12px;background:var(--card);display:inline-grid;place-items:center;box-shadow:var(--shadow-1);cursor:pointer;border:0;color:var(--muted)}
+  .fab{width:48px;height:48px;border-radius:12px;background:var(--card);display:inline-grid;place-items:center;box-shadow:var(--shadow);cursor:pointer;border:0;color:var(--muted)}
 
   /* reveal helper & reduced motion */
   .reveal{opacity:0;transform:translateY(12px);transition:opacity .55s var(--ease),transform .55s var(--ease)}
   .reveal.show{opacity:1;transform:none}
-  @media (prefers-reduced-motion: reduce){
-    .reveal{transition:none!important}
-  }
+  @media (prefers-reduced-motion: reduce){ .reveal{transition:none!important} }
 
   /* responsive */
-  @media (max-width:1000px){.hero{grid-template-columns:1fr}.hero-visual{height:320px}.cap-grid{grid-template-columns:repeat(2,1fr)}.contact-grid{grid-template-columns:1fr}.portrait-wrap{display:none}}
+  @media (max-width:1040px){.hero{grid-template-columns:1fr}.hero-visual{height:360px}.cap-grid{grid-template-columns:repeat(2,1fr)}.contact-grid{grid-template-columns:1fr}.portrait-wrap{display:none}}
   @media (max-width:560px){.cap-grid{grid-template-columns:1fr}}
 </style>
 </head>
@@ -141,7 +124,10 @@
 <header>
   <div class="container nav" role="navigation" aria-label="Main">
     <div class="brand">
-      <img src="assets/logo.png" alt="CiphAnon logo" class="logo" loading="lazy" /> <!-- EDIT: your logo -->
+      <div class="logo-mark" aria-hidden="true">
+        <!-- Using StudiosImageT.png as header mark -->
+        <img src="assets/StudiosImageT.png" alt="CiphAnon mark" loading="lazy" />
+      </div>
       <div>
         <h1>CiphAnon</h1>
         <div style="font-size:12px;color:var(--muted)">Developer • Prototyper</div>
@@ -156,7 +142,7 @@
 
     <div class="actions">
       <button class="icon-btn" id="themeToggle" aria-label="Toggle theme">🌓</button>
-      <a class="btn ghost" href="mailto:example@email.com">Email</a> <!-- EDIT -->
+      <a class="btn ghost" href="mailto:example@email.com">Email</a>
       <a class="btn" href="#contact">Hire</a>
     </div>
   </div>
@@ -167,17 +153,14 @@
   <section class="hero" aria-labelledby="hero-title">
     <div>
       <div class="kicker">Hello — I'm a developer</div>
-      <h1 id="hero-title" class="title">I build <span class="accent">fast prototypes</span> and developer tooling that ships.</h1>
-      <div class="subtitle lead">
-        3 years of hands-on experience across HTML, CSS, JavaScript, Godot, Lua, Java, Unity, Block Code and Python.
-        I deliver focused prototypes, practical tooling, and polished front-end experiences.
-      </div>
+      <h1 id="hero-title" class="title">I build <span class="accent">fast prototypes</span> and practical developer tooling.</h1>
+      <p class="subtitle">3 years of hands-on experience across HTML, CSS, JavaScript, Godot, Lua, Java, Unity, Block Code and Python. I deliver focused prototypes and reliable tooling with clean UX.</p>
 
-      <div class="typed" aria-hidden="true" id="typedLine">Interactive prototypes · Dev tooling · UX polish</div>
+      <div class="typed" id="typedLine" aria-hidden="true">Interactive prototypes · Dev tooling · UX polish</div>
 
-      <div class="hero-ctas">
+      <div class="hero-ctas" style="margin-top:18px">
         <a class="btn" href="#contact">Request Quote</a>
-        <a class="btn ghost" href="https://github.com/your-username" target="_blank" rel="noopener">GitHub</a> <!-- EDIT -->
+        <a class="btn ghost" href="https://github.com/your-username" target="_blank" rel="noopener">GitHub</a>
       </div>
 
       <div class="stats" aria-hidden="true">
@@ -185,20 +168,27 @@
         <div class="stat"><strong id="statLangs">0</strong><span style="color:var(--muted)">Languages</span></div>
         <div class="stat"><strong id="statWorks">0</strong><span style="color:var(--muted)">Demos/tools</span></div>
       </div>
+
+      <div class="badge-row" aria-hidden="true">
+        <div class="badge">Prototyping</div>
+        <div class="badge">Tooling</div>
+        <div class="badge">UX</div>
+      </div>
     </div>
 
     <div class="hero-visual reveal" aria-hidden="true">
-      <!-- decorative blurred svg -->
-      <svg class="bg-svg" viewBox="0 0 600 600" aria-hidden="true">
-        <defs>
-          <linearGradient id="g1" x1="0" x2="1"><stop offset="0" stop-color="#ff9f1c"/><stop offset="1" stop-color="#ff5e7a"/></linearGradient>
-        </defs>
-        <circle cx="300" cy="300" r="260" fill="url(#g1)"/>
-      </svg>
+      <div class="bg-art" aria-hidden="true"></div>
 
-      <!-- portrait (parallax + bob) -->
-      <div class="portrait-wrap" id="portraitWrap" aria-hidden="false">
-        <img src="assets/char.png" alt="Character" class="portrait" loading="lazy" /> <!-- EDIT -->
+      <div class="hero-card" role="region" aria-label="Visual showcase">
+        <div class="hero-copy">
+          <h3 style="margin:0 0 8px">Focused deliverables</h3>
+          <p style="margin:0;color:var(--muted)">I ship playable prototypes that communicate intent and tooling that reduces daily friction. Small, deliberate scope — fast iteration.</p>
+        </div>
+
+        <div class="hero-portrait" aria-hidden="true">
+          <!-- Using 1000007475.png as the portrait image -->
+          <img src="assets/1000007475.png" alt="CiphAnon portrait" loading="lazy" />
+        </div>
       </div>
     </div>
   </section>
@@ -206,7 +196,7 @@
   <!-- ABOUT -->
   <section id="about" class="reveal" aria-labelledby="aboutTitle">
     <h2 id="aboutTitle">About</h2>
-    <p class="lead">I help teams move from idea to playable prototype quickly and build small, reliable tooling that saves time. My deliverables are practical, tested, and production-minded.</p>
+    <p class="lead">I help teams move from idea → playable prototype quickly and build small, reliable tooling that saves time. Deliverables emphasize clarity, testability, and performance.</p>
   </section>
 
   <!-- CAPABILITIES -->
@@ -215,15 +205,15 @@
     <div class="cap-grid" role="list">
       <div class="cap" role="listitem">
         <h3>Rapid Prototyping</h3>
-        <p>Playable demos that validate mechanics and interaction quickly.</p>
+        <p>Playables that validate feel and mechanics quickly so you can make decisions with confidence.</p>
       </div>
       <div class="cap" role="listitem">
         <h3>Developer Tooling</h3>
-        <p>Small utilities and scripts (Python/JS) to automate and speed development.</p>
+        <p>Small scripts and utilities (Python/JS) that eliminate repetitive work and speed dev loops.</p>
       </div>
       <div class="cap" role="listitem">
-        <h3>UI & polish</h3>
-        <p>Front-end work with attention to accessibility, micro-interactions, and performance.</p>
+        <h3>UI & Interaction</h3>
+        <p>Polished front-end experiences with attention to accessibility and micro-interaction quality.</p>
       </div>
     </div>
 
@@ -240,12 +230,12 @@
     </div>
   </section>
 
-  <!-- SOCIALS + YOUTUBE (lazy embed) -->
+  <!-- SOCIALS & YOUTUBE -->
   <section class="reveal" aria-labelledby="socialsTitle">
     <h2 id="socialsTitle">Socials & Media</h2>
     <div style="display:flex;gap:18px;flex-wrap:wrap;align-items:flex-start">
       <div style="flex:1;min-width:280px">
-        <p class="lead">Follow for demos, short walkthroughs, and development notes.</p>
+        <p class="lead">Follow for demos, walkthroughs, and short dev notes.</p>
         <div class="social-row" role="list">
           <a class="social-link" href="https://github.com/your-username" target="_blank" rel="noopener">GitHub</a> <!-- EDIT -->
           <a class="social-link" href="https://www.youtube.com/channel/your-channel" target="_blank" rel="noopener">YouTube</a> <!-- EDIT -->
@@ -255,7 +245,7 @@
       </div>
 
       <div style="width:420px;min-width:280px">
-        <!-- Lazy YouTube: replace data-video with your video id or channel embed -->
+        <!-- Lazy YouTube: replace data-video with your video id -->
         <div class="yt-placeholder" id="ytLazy" data-video="dQw4w9WgXcQ" aria-label="YouTube video placeholder" role="button" tabindex="0">
           <img src="https://i.ytimg.com/vi/dQw4w9WgXcQ/maxresdefault.jpg" alt="YouTube thumbnail" loading="lazy" />
           <div class="yt-play" aria-hidden="true">▶</div>
@@ -268,8 +258,8 @@
   <section class="reveal" aria-labelledby="testTitle">
     <h2 id="testTitle">Testimonials</h2>
     <div class="testimonials" role="list">
-      <div class="test" role="listitem"><p>"Clear communication and fast results — the prototype helped us decide quickly."</p><strong>— Alex</strong></div>
-      <div class="test" role="listitem"><p>"Small tooling improvements saved hours of work weekly."</p><strong>— Sam</strong></div>
+      <div class="test" role="listitem"><p>"Fast, clear, and useful prototypes — helped us decide quickly."</p><strong>— Alex</strong></div>
+      <div class="test" role="listitem"><p>"Tooling saved our team hours each week."</p><strong>— Sam</strong></div>
     </div>
   </section>
 
@@ -289,9 +279,9 @@
       </form>
 
       <aside>
-        <div style="background:var(--card);padding:14px;border-radius:10px;box-shadow:var(--shadow-1)">
+        <div style="background:var(--card);padding:14px;border-radius:10px;box-shadow:var(--shadow)">
           <strong>Availability</strong>
-          <div style="color:var(--muted);margin-top:8px">Typically available for 1–4 week prototype sprints and small tooling tasks. Tell me roughly what you need and your timeline.</div>
+          <div style="color:var(--muted);margin-top:8px">Typically available for short prototype sprints and small tooling projects. Describe scope and timeline when you reach out.</div>
         </div>
       </aside>
     </div>
@@ -327,13 +317,8 @@
 </div>
 
 <script>
-/* =========================
-   PERFORMANCE-MINDED INTERACTIONS
-   ========================= */
-/* Helpers */
+/* ====== Lightweight interactions & polish ====== */
 const prefersReduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-/* Set year */
 document.getElementById('year').textContent = new Date().getFullYear();
 
 /* Reveal on scroll */
@@ -342,36 +327,37 @@ const io = new IntersectionObserver((entries)=>{
     if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target); }
   }
 },{threshold:0.12});
-document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+document.querySelectorAll('.reveal').forEach(el=> io.observe(el));
 
-/* Typed subtitle (simple) */
+/* typed line */
 (function typed(){
   if(prefersReduce) return;
   const el = document.getElementById('typedLine');
   if(!el) return;
-  const lines = ['Interactive prototypes','Dev tooling','UX polish'];
-  let i=0, pos=0, forward=true;
+  const arr = ['Interactive prototypes','Dev tooling','UX polish'];
+  let i=0,pos=0,dir=1;
   function step(){
-    const text = lines[i];
-    if(forward){ pos++; el.textContent = text.slice(0,pos); if(pos===text.length){ forward=false; setTimeout(step,900); return; } }
-    else { pos--; el.textContent = text.slice(0,pos); if(pos===0){ forward=true; i=(i+1)%lines.length; } }
-    setTimeout(step, forward ? 28 : 18);
+    const txt = arr[i];
+    pos += dir;
+    el.textContent = txt.slice(0,pos);
+    if(pos === txt.length || pos === 0){ if(pos===txt.length){ dir = -1; setTimeout(step,800); return; } else { dir = 1; i=(i+1)%arr.length; } }
+    setTimeout(step, dir>0?28:18);
   }
   step();
 })();
 
-/* Portrait parallax (rAF throttled) */
+/* portrait parallax (rAF throttled) */
 (function portraitParallax(){
   const frame = document.querySelector('.hero-visual');
-  const wrap = document.getElementById('portraitWrap');
+  const wrap = document.querySelector('.hero-portrait');
   if(!frame || !wrap) return;
-  let raf=null, last={x:0,y:0};
+  let raf=null,last={x:0,y:0};
   function onMove(e){
-    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+    const clientX = e.touches?e.touches[0].clientX:e.clientX;
+    const clientY = e.touches?e.touches[0].clientY:e.clientY;
     const r = frame.getBoundingClientRect();
-    const dx = (clientX - (r.left + r.width/2)) / (r.width || 1);
-    const dy = (clientY - (r.top + r.height/2)) / (r.height || 1);
+    const dx = (clientX - (r.left + r.width/2))/(r.width||1);
+    const dy = (clientY - (r.top + r.height/2))/(r.height||1);
     last.x = dx; last.y = dy;
     if(raf === null){
       raf = requestAnimationFrame(()=> {
@@ -387,16 +373,14 @@ document.querySelectorAll('.reveal').forEach(el => io.observe(el));
   check(); window.addEventListener('resize', check, {passive:true});
 })();
 
-/* Counters */
+/* counters (run once) */
 (function counters(){
   const hero = document.querySelector('.hero');
   if(!hero) return;
   const obs = new IntersectionObserver((entries)=>{
     for(const e of entries){
       if(e.isIntersecting){
-        animate('statYears',3,800);
-        animate('statLangs',9,900);
-        animate('statWorks',12,1000);
+        animate('statYears',3,700); animate('statLangs',9,800); animate('statWorks',12,900);
         obs.disconnect();
       }
     }
@@ -408,16 +392,16 @@ document.querySelectorAll('.reveal').forEach(el => io.observe(el));
     let start=null;
     function step(ts){
       if(!start) start = ts;
-      const p = Math.min(1, (ts-start)/dur);
+      const p = Math.min(1,(ts-start)/dur);
       el.textContent = Math.floor(p*to);
-      if(p < 1) requestAnimationFrame(step);
+      if(p<1) requestAnimationFrame(step);
       else el.textContent = to;
     }
     requestAnimationFrame(step);
   }
 })();
 
-/* Lazy YouTube embed (click-to-load) */
+/* Lazy YouTube click-to-load (edit video id) */
 (function ytLazy(){
   const p = document.getElementById('ytLazy');
   if(!p) return;
@@ -428,19 +412,16 @@ document.querySelectorAll('.reveal').forEach(el => io.observe(el));
     iframe.src = `https://www.youtube.com/embed/${encodeURIComponent(vid)}?rel=0&showinfo=0&autoplay=1`;
     iframe.width = '100%'; iframe.height = '100%';
     iframe.allow = 'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture';
-    iframe.allowFullscreen = true;
-    iframe.style.border = '0';
-    p.innerHTML = '';
-    p.appendChild(iframe);
+    iframe.allowFullscreen = true; iframe.style.border='0';
+    p.innerHTML=''; p.appendChild(iframe);
   }
   p.addEventListener('click', load, {passive:true});
-  p.addEventListener('keydown', (e)=> { if(e.key === 'Enter' || e.key === ' ') { load(); e.preventDefault(); } });
+  p.addEventListener('keydown', (e)=>{ if(e.key==='Enter'||e.key===' '){ load(); e.preventDefault(); }});
 })();
 
-/* Testimonials auto-scroll (cheap) */
+/* testimonials auto-scroll (cheap) */
 (function testimonials(){
-  const el = document.querySelector('.testimonials');
-  if(!el) return;
+  const el = document.querySelector('.testimonials'); if(!el) return;
   let pos=0,last=performance.now(),running=true;
   function tick(ts){
     if(!running){ last=ts; requestAnimationFrame(tick); return; }
@@ -455,21 +436,17 @@ document.querySelectorAll('.reveal').forEach(el => io.observe(el));
   if(!prefersReduce) requestAnimationFrame(tick);
 })();
 
-/* Contact demo submit */
+/* Contact (demo) */
 function handleContact(){
-  const name = document.getElementById('name').value.trim();
-  const email = document.getElementById('email').value.trim();
-  const message = document.getElementById('message').value.trim();
-  const out = document.getElementById('contactStatus');
-  if(!name || !email || !message){ out.textContent = 'Please fill all fields.'; return; }
-  out.textContent = 'Message sent (demo). Replace with a real endpoint for production.';
-  setTimeout(()=> out.textContent = '', 4000);
+  const n=document.getElementById('name').value.trim();
+  const e=document.getElementById('email').value.trim();
+  const m=document.getElementById('message').value.trim();
+  const out=document.getElementById('contactStatus');
+  if(!n||!e||!m){ out.textContent='Please fill all fields.'; return; }
+  out.textContent='Message sent (demo). Replace with a real backend to receive messages.';
+  setTimeout(()=> out.textContent='',4000);
 }
-function prefill(){
-  document.getElementById('name').value = 'Acme Studio';
-  document.getElementById('email').value = 'hello@acme.test';
-  document.getElementById('message').value = 'We need a 2-week prototype to test mechanic X.';
-}
+function prefill(){ document.getElementById('name').value='Acme Studio'; document.getElementById('email').value='hello@acme.test'; document.getElementById('message').value='We need a 2-week prototype to test mechanic X.'; }
 
 /* Floating controls */
 document.getElementById('topFab').addEventListener('click', ()=> window.scrollTo({top:0,behavior:'smooth'}));
@@ -477,8 +454,8 @@ document.getElementById('themeFab').addEventListener('click', toggleTheme);
 document.getElementById('themeToggle').addEventListener('click', toggleTheme);
 
 function toggleTheme(){
-  const cur = document.documentElement.getAttribute('data-theme');
-  const next = cur === 'light' ? 'dark' : 'light';
+  const cur=document.documentElement.getAttribute('data-theme');
+  const next = cur==='light'?'dark':'light';
   document.documentElement.setAttribute('data-theme', next);
   localStorage.setItem('theme', next);
 }
@@ -490,14 +467,8 @@ function toggleTheme(){
   else document.documentElement.setAttribute('data-theme','dark');
 })();
 
-/* Accessibility: focus outlines only after keyboard nav */
-(function focusOutline(){
-  function onFirstTab(e){ if(e.key === 'Tab') document.body.classList.add('show-focus'); window.removeEventListener('keydown', onFirstTab); }
-  window.addEventListener('keydown', onFirstTab);
-})();
-
-/* Respect reduced motion already considered above */
-
+/* keyboard focus outlines only after Tab used */
+(function focusOutline(){ function onFirstTab(e){ if(e.key==='Tab') document.body.classList.add('show-focus'); window.removeEventListener('keydown', onFirstTab); } window.addEventListener('keydown', onFirstTab); })();
 </script>
 </body>
 </html>
