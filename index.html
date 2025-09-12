@@ -1,48 +1,69 @@
-<html lang="en" data-theme="dark"><head>
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>CiphAnon Studios</title>
 <meta name="description" content="CiphAnon — prototypes, developer tooling, and polished front-end experiences.">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&amp;display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 <style>
   /* =========================
-     THEME & BASE
+     THEME, RESET & VARIABLES
      ========================= */
   :root{
-    --bg-1:#07121a;
-    --bg-2:#071824;
-    --card:#0f1720;
-    --muted:#98a9bd;
-    --text:#eaf3fb;
-    --accent-1:#ff9f1c;
-    --accent-2:#ff5e7a;
+    --bg-1: #06121a;
+    --bg-2: #071824;
+    --card: #0f1720;
+    --muted: #98a9bd;
+    --text: #eaf3fb;
+    --accent-1: #ff9f1c;
+    --accent-2: #ff5e7a;
     --glass: rgba(255,255,255,0.03);
-    --radius:14px;
-    --maxw:1200px;
-    --ease:cubic-bezier(.2,.9,.3,1);
-    --shadow: 0 14px 40px rgba(2,6,12,0.55);
+    --radius: 14px;
+    --maxw: 1200px;
+    --ease: cubic-bezier(.2,.9,.3,1);
+    --shadow-1: 0 8px 30px rgba(2,6,12,0.55);
+
+    /* icon / fab variables */
+    --fab-bg: var(--card);
+    --fab-fill: #e3e3e3; /* icon color (default) */
+    --fab-hover-fill: #071018; /* if needed for hover contrast */
+    --fab-transition: 320ms var(--ease);
   }
   [data-theme="light"]{
-    --bg-1:#f6f8fa; --bg-2:#eef2f6; --card:#fff; --muted:#4b5563; --text:#071018; --glass: rgba(11,17,22,0.04); --shadow: 0 10px 30px rgba(11,17,22,0.06);
+    --bg-1: #f6f8fa;
+    --bg-2: #eef2f6;
+    --card: #ffffff;
+    --muted: #4b5563;
+    --text: #0b1116;
+    --glass: rgba(11,17,22,0.04);
+    --shadow-1: 0 8px 30px rgba(11,17,22,0.06);
+
+    /* light theme icon color (darker icon so it remains visible) */
+    --fab-bg: var(--card);
+    --fab-fill: #071018;
+    --fab-hover-fill: #ffffff;
   }
   *{box-sizing:border-box}
   html,body{height:100%}
   body{
     margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;
-    background:linear-gradient(180deg,var(--bg-1),var(--bg-2));
-    color:var(--text);-webkit-font-smoothing:antialiased;line-height:1.45;scroll-behavior:smooth;
+    background: linear-gradient(180deg,var(--bg-1),var(--bg-2));
+    color:var(--text);-webkit-font-smoothing:antialiased;line-height:1.45;
+    scroll-behavior:smooth;
   }
-  img{display:block;max-width:100%}
+  img{max-width:100%;display:block}
   a{color:inherit}
   .container{max-width:var(--maxw);margin:0 auto;padding:28px}
 
-  /* NAV */
+  /* =========================
+     NAV
+     ========================= */
   header{position:sticky;top:12px;z-index:160;padding:10px 0}
-  .nav{display:flex;align-items:center;justify-content:space-between;padding:12px;border-radius:14px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));box-shadow:var(--shadow)}
-  .brand{display:flex;align-items:center;gap:12px}
-  .logo-mark{width:56px;height:56px;border-radius:12px;overflow:hidden;flex:0 0 56px}
-  .logo-mark img{width:100%;height:100%;object-fit:cover;display:block}
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:12px;border-radius:16px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));box-shadow:var(--shadow-1)}
+  .brand{display:flex;gap:12px;align-items:center}
+  .logo{width:52px;height:52px;border-radius:12px;object-fit:cover}
   .brand h1{font-size:16px;margin:0}
   nav.primary{display:flex;gap:14px;align-items:center}
   nav.primary a{color:var(--muted);text-decoration:none;padding:6px;border-radius:8px;font-weight:600}
@@ -51,69 +72,106 @@
   .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted);font-weight:700}
   .icon-btn{background:transparent;border:0;padding:8px;border-radius:8px;cursor:pointer;color:var(--muted)}
 
-  /* HERO */
-  .hero{display:grid;grid-template-columns:1fr 480px;gap:36px;align-items:center;padding:48px 0}
+  /* =========================
+     HERO
+     ========================= */
+  .hero{display:grid;grid-template-columns:1fr 460px;gap:36px;align-items:center;padding:48px 0}
   .kicker{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
-  .title{font-size:44px;line-height:1.03;margin:8px 0 0}
+  .title{font-size:42px;line-height:1.03;margin:8px 0 0}
   .title .accent{background:linear-gradient(90deg,var(--accent-1),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
   .subtitle{color:var(--muted);margin-top:14px;max-width:60ch}
   .hero-ctas{display:flex;gap:12px;margin-top:22px;flex-wrap:wrap}
   .stats{display:flex;gap:12px;margin-top:20px;flex-wrap:wrap}
-  .stat{background:var(--card);padding:10px 12px;border-radius:10px;min-width:120px;text-align:center;box-shadow:var(--shadow)}
+  .stat{background:var(--card);padding:10px 12px;border-radius:10px;min-width:120px;text-align:center;box-shadow:var(--shadow-1)}
   .stat strong{display:block;font-size:18px}
 
-  /* HERO VISUAL: uses StudiosImageT.png as subtle texture + 1000007475.png as portrait */
-  .hero-visual{height:460px;border-radius:16px;padding:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));position:relative;box-shadow:var(--shadow);overflow:hidden;display:flex;align-items:center;justify-content:center}
-  .hero-visual .bg-art{position:absolute;inset:0;background-image:url('assets/StudiosImageT.png');background-position:center;background-size:cover;opacity:0.12;filter:blur(18px) saturate(.9);transform:scale(1.02);pointer-events:none}
-  .hero-card{position:relative;z-index:2;width:92%;display:flex;align-items:center;justify-content:space-between;gap:18px}
-  .hero-copy{flex:1;min-width:220px}
-  .hero-portrait{flex:0 0 260px;border-radius:12px;overflow:hidden;box-shadow:0 26px 48px rgba(2,6,12,0.5);transform:translateZ(0)}
-  .hero-portrait img{width:100%;height:100%;object-fit:cover;display:block;}
+  /* hero visual */
+  .hero-visual{height:420px;border-radius:16px;padding:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));position:relative;box-shadow:var(--shadow-1);overflow:hidden}
+  .bg-svg{position:absolute;inset:-20% -10% auto auto;width:640px;height:640px;filter:blur(72px);opacity:0.12;pointer-events:none}
+  .portrait-wrap{position:absolute;right:14px;bottom:12px;width:320px;max-width:52%;pointer-events:none;will-change:transform}
+  .portrait{width:100%;border-radius:12px;display:block;filter:drop-shadow(0 26px 36px rgba(0,0,0,0.55));}
 
-/* badge row */
-.badge-row{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
-.badge{background:var(--glass);padding:8px 12px;border-radius:999px;color:var(--muted);font-weight:700;border:1px solid rgba(255,255,255,0.03)}
+  /* subtle typed subtitle */
+  .typed{font-weight:700;color:var(--accent-2);margin-top:10px}
+  .typed::after{content:"|";margin-left:4px;color:var(--accent-2);animation:blink 0.8s infinite}
+  @keyframes blink{0%,50%{opacity:1}51%,100%{opacity:0}}
 
-  /* MAIN SECTIONS */
+  /* =========================
+     MAIN: CAPABILITIES + SKILLS
+     ========================= */
   section{padding:36px 0;border-bottom:1px solid rgba(255,255,255,0.02)}
   .cap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:18px}
-  .cap{background:var(--card);padding:18px;border-radius:12px;box-shadow:var(--shadow);transition:transform .18s var(--ease)}
+  .cap{background:var(--card);padding:18px;border-radius:12px;box-shadow:var(--shadow-1);transition:transform .18s var(--ease)}
   .cap:hover{transform:translateY(-8px)}
   .cap h3{margin:0 0 8px}
   .cap p{color:var(--muted);margin:0}
   .skill-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
   .skill{background:var(--glass);padding:8px 10px;border-radius:999px;font-weight:700;color:var(--muted);border:1px solid rgba(255,255,255,0.03)}
 
-  /* SOCIALS & YOUTUBE (lazy) */
+  /* =========================
+     SOCIALS & YOUTUBE (lazy)
+     ========================= */
   .social-row{display:flex;gap:12px;align-items:center;margin-top:14px;flex-wrap:wrap}
   .social-link{display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.03);color:var(--muted);text-decoration:none;font-weight:700}
+
   .yt-placeholder{position:relative;background:#000;border-radius:10px;overflow:hidden;min-height:160px;display:flex;align-items:center;justify-content:center;cursor:pointer}
   .yt-placeholder img{width:100%;height:100%;object-fit:cover;opacity:0.95;filter:brightness(.6)}
   .yt-play{position:absolute;display:inline-flex;align-items:center;justify-content:center;width:64px;height:64px;border-radius:999px;background:linear-gradient(90deg,var(--accent-1),var(--accent-2));box-shadow:0 8px 30px rgba(0,0,0,0.4);color:#071018;font-weight:800;font-size:18px}
 
-  /* TESTIMONIALS */
+  /* =========================
+     TESTIMONIALS (tiny)
+     ========================= */
   .testimonials{display:flex;gap:12px;overflow:auto;padding:8px 0;scroll-snap-type:x mandatory}
-  .test{flex:0 0 300px;min-width:240px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));padding:14px;border-radius:12px;box-shadow:var(--shadow);scroll-snap-align:start}
+  .test{flex:0 0 300px;min-width:240px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));padding:14px;border-radius:12px;box-shadow:var(--shadow-1);scroll-snap-align:start}
 
-  /* CONTACT */
+  /* =========================
+     CONTACT / FOOTER
+     ========================= */
   .contact-grid{display:grid;grid-template-columns:1fr 320px;gap:18px;margin-top:12px}
   .field{display:block;width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit}
   .form-actions{display:flex;gap:10px;margin-top:10px}
-
   footer{padding:28px 0;color:var(--muted)}
   .footer-grid{display:flex;gap:20px;flex-wrap:wrap}
 
-  /* floating controls */
+  /* floating back-to-top & theme toggle */
   .floating{position:fixed;right:18px;bottom:18px;z-index:240;display:flex;flex-direction:column;gap:8px}
-  .fab{width:48px;height:48px;border-radius:12px;background:var(--card);display:inline-grid;place-items:center;box-shadow:var(--shadow);cursor:pointer;border:0;color:var(--muted)}
+  .fab{
+    width:48px;height:48px;border-radius:12px;background:var(--fab-bg);display:inline-grid;place-items:center;box-shadow:var(--shadow-1);
+    cursor:pointer;border:0;color:var(--muted);position:relative;overflow:visible;
+    transition:background var(--fab-transition), box-shadow var(--fab-transition);
+  }
+  .fab:focus{outline:2px solid rgba(255,255,255,0.06);outline-offset:2px}
+  .fab:hover{box-shadow:0 12px 36px rgba(0,0,0,0.28)}
+
+  /* --- icon area and SVG cycling --- */
+  .fab-icons{width:24px;height:24px;display:inline-block;position:relative}
+  .fab-icons svg{
+    position:absolute;left:0;top:0;width:24px;height:24px;display:block;
+    opacity:0; transform:translateY(6px) scale(0.98);
+    transition:opacity .35s var(--ease), transform .35s var(--ease), fill .4s var(--ease);
+    fill: var(--fab-fill);
+    will-change:opacity,transform,fill;
+    pointer-events:none;
+  }
+  .fab-icons svg.active{
+    opacity:1; transform:none;
+  }
+
+  /* subtle bounce when you click it (so it feels lively) */
+  .fab--pop{animation:fab-pop .36s var(--ease) both}
+  @keyframes fab-pop{
+    0%{transform:translateY(0) scale(1)}
+    30%{transform:translateY(-6px) scale(1.06)}
+    100%{transform:translateY(0) scale(1)}
+  }
 
   /* reveal helper & reduced motion */
   .reveal{opacity:0;transform:translateY(12px);transition:opacity .55s var(--ease),transform .55s var(--ease)}
   .reveal.show{opacity:1;transform:none}
-  @media (prefers-reduced-motion: reduce){ .reveal{transition:none!important} }
+  @media (prefers-reduced-motion: reduce){.reveal{transition:none!important} .fab-icons svg{transition:none!important}}
 
   /* responsive */
-  @media (max-width:1040px){.hero{grid-template-columns:1fr}.hero-visual{height:360px}.cap-grid{grid-template-columns:repeat(2,1fr)}.contact-grid{grid-template-columns:1fr}.portrait-wrap{display:none}}
+  @media (max-width:1000px){.hero{grid-template-columns:1fr}.hero-visual{height:320px}.cap-grid{grid-template-columns:repeat(2,1fr)}.contact-grid{grid-template-columns:1fr}.portrait-wrap{display:none}}
   @media (max-width:560px){.cap-grid{grid-template-columns:1fr}}
 </style>
 </head>
@@ -122,24 +180,19 @@
 <header>
   <div class="container nav" role="navigation" aria-label="Main">
     <div class="brand">
-      <div class="logo-mark" aria-hidden="true">
-        <!-- Using StudiosImageT.png as header mark -->
-        <img src="assets/StudiosImageT.png" alt="CiphAnon mark" loading="lazy">
-      </div>
+      <img src="assets/logo.png" alt="CiphAnon logo" class="logo" loading="lazy">
       <div>
         <h1>CiphAnon Studios</h1>
-        <div style="font-size:12px;color:var(--muted)">Text • Text</div>
+        <div style="font-size:12px;color:var(--muted)">Coder • Idk What Else ngl</div>
       </div>
     </div>
-
     <nav class="primary" aria-label="Primary navigation">
       <a href="#about">About</a>
       <a href="#capabilities">Capabilities</a>
       <a href="#contact">Contact</a>
     </nav>
-
     <div class="actions">
-      <button class="icon-btn" id="themeToggle" aria-label="Toggle theme"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M480-360q50 0 85-35t35-85q0-50-35-85t-85-35q-50 0-85 35t-35 85q0 50 35 85t85 35Zm0 80q-83 0-141.5-58.5T280-480q0-83 58.5-141.5T480-680q83 0 141.5 58.5T680-480q0 83-58.5 141.5T480-280ZM200-440H40v-80h160v80Zm720 0H760v-80h160v80ZM440-760v-160h80v160h-80Zm0 720v-160h80v160h-80ZM256-650l-101-97 57-59 96 100-52 56Zm492 496-97-101 53-55 101 97-57 59Zm-98-550 97-101 59 57-100 96-56-52ZM154-212l101-97 55 53-97 101-59-57Zm326-268Z"/></svg></button>
+      <button class="icon-btn" id="themeToggle" aria-label="Toggle theme"></button>
       <a class="btn ghost" href="mailto:example@email.com">Email</a>
       <a class="btn" href="#contact">Hire</a>
     </div>
@@ -150,13 +203,15 @@
   <!-- HERO -->
   <section class="hero" aria-labelledby="hero-title">
     <div>
-      <div class="kicker">Hello — Im ToonyTime</div>
-      <h1 id="hero-title" class="title">I build <span class="accent">fast prototypes</span> and practical developer tooling.</h1>
-      <p class="subtitle">3 years of hands-on experience across HTML, CSS, JavaScript, Godot, Lua, Java, Unity, Block Code and Python. I deliver focused prototypes and reliable tooling with clean UX.</p>
+      <div class="kicker">Hello — I'm a developer</div>
+      <h1 id="hero-title" class="title">I build <span class="accent">fast prototypes</span> and developer tooling that ships.</h1>
+      <div class="subtitle lead">
+        3 years of hands-on experience across HTML, CSS, JavaScript, Godot, Lua, Java, Unity, Block Code and Python.
+      </div>
 
-      <div class="typed" id="typedLine" aria-hidden="true">In</div>
+      <div class="typed" aria-hidden="true" id="typedLine"></div>
 
-      <div class="hero-ctas" style="margin-top:18px">
+      <div class="hero-ctas">
         <a class="btn" href="#contact">Request Quote</a>
         <a class="btn ghost" href="https://github.com/your-username" target="_blank" rel="noopener">GitHub</a>
       </div>
@@ -166,308 +221,184 @@
         <div class="stat"><strong id="statLangs">9</strong><span style="color:var(--muted)">Languages</span></div>
         <div class="stat"><strong id="statWorks">12</strong><span style="color:var(--muted)">Demos/tools</span></div>
       </div>
-
-      <div class="badge-row" aria-hidden="true">
-        <div class="badge">Prototyping</div>
-        <div class="badge">Tooling</div>
-        <div class="badge">UX</div>
-      </div>
     </div>
 
     <div class="hero-visual reveal show" aria-hidden="true">
-      <div class="bg-art" aria-hidden="true"></div>
-
-      <div class="hero-card" role="region" aria-label="Visual showcase">
-        <div class="hero-copy">
-          <h3 style="margin:0 0 8px">Focused deliverables</h3>
-          <p style="margin:0;color:var(--muted)">I ship playable prototypes that communicate intent and tooling that reduces daily friction. Small, deliberate scope — fast iteration.</p>
-        </div>
-
-        <div class="hero-portrait" aria-hidden="true" style="">
-          <!-- Using 1000007475.png as the portrait image -->
-          <img src="assets/1000007475.png" alt="CiphAnon portrait" loading="lazy">
-        </div>
-      </div>
+      <svg class="bg-svg" viewBox="0 0 600 600" aria-hidden="true">
+        <defs><linearGradient id="g1" x1="0" x2="1"><stop offset="0" stop-color="#ff9f1c"/><stop offset="1" stop-color="#ff5e7a"/></linearGradient></defs>
+        <circle cx="300" cy="300" r="260" fill="url(#g1)"/>
+      </svg>
+      <div class="portrait-wrap" id="portraitWrap"><img src="assets/char.png" alt="Character" class="portrait" loading="lazy"></div>
     </div>
   </section>
 
   <!-- ABOUT -->
-  <section id="about" class="reveal show" aria-labelledby="aboutTitle">
-    <h2 id="aboutTitle">About</h2>
-    <p class="lead">I help teams move from idea → playable prototype quickly and build small, reliable tooling that saves time. Deliverables emphasize clarity, testability, and performance.</p>
-  </section>
+  <section id="about" class="reveal show"><h2>About</h2><p class="lead">I help teams move from idea to playable prototype quickly and build small, reliable tooling that saves time.</p></section>
 
   <!-- CAPABILITIES -->
-  <section id="capabilities" class="reveal show" aria-labelledby="capTitle">
-    <h2 id="capTitle">Capabilities</h2>
-    <div class="cap-grid" role="list">
-      <div class="cap" role="listitem">
-        <h3>Rapid Prototyping</h3>
-        <p>Playables that validate feel and mechanics quickly so you can make decisions with confidence.</p>
-      </div>
-      <div class="cap" role="listitem">
-        <h3>Developer Tooling</h3>
-        <p>Small scripts and utilities (Python/JS) that eliminate repetitive work and speed dev loops.</p>
-      </div>
-      <div class="cap" role="listitem">
-        <h3>UI &amp; Interaction</h3>
-        <p>Polished front-end experiences with attention to accessibility and micro-interaction quality.</p>
-      </div>
+  <section id="capabilities" class="reveal show"><h2>Capabilities</h2>
+    <div class="cap-grid">
+      <div class="cap"><h3>Rapid Prototyping</h3><p>Playable demos that validate mechanics quickly.</p></div>
+      <div class="cap"><h3>Developer Tooling</h3><p>Utilities and scripts to automate workflows.</p></div>
+      <div class="cap"><h3>UI &amp; polish</h3><p>Front-end with accessibility, interactions, and performance.</p></div>
     </div>
-
-    <div class="skill-list" aria-hidden="true">
-      <span class="skill">HTML</span>
-      <span class="skill">CSS</span>
-      <span class="skill">JavaScript</span>
-      <span class="skill">Godot</span>
-      <span class="skill">Lua</span>
-      <span class="skill">Java</span>
-      <span class="skill">Unity</span>
-      <span class="skill">Python</span>
-      <span class="skill">Block Code</span>
-    </div>
-  </section>
-
-  <!-- SOCIALS & YOUTUBE -->
-  <section class="reveal show" aria-labelledby="socialsTitle">
-    <h2 id="socialsTitle">Socials &amp; Media</h2>
-    <div style="display:flex;gap:18px;flex-wrap:wrap;align-items:flex-start">
-      <div style="flex:1;min-width:280px">
-        <p class="lead">Follow for demos, walkthroughs, and short dev notes.</p>
-        <div class="social-row" role="list">
-          <a class="social-link" href="https://github.com/your-username" target="_blank" rel="noopener">GitHub</a> <!-- EDIT -->
-          <a class="social-link" href="https://www.youtube.com/channel/your-channel" target="_blank" rel="noopener">YouTube</a> <!-- EDIT -->
-          <a class="social-link" href="https://twitter.com/your-handle" target="_blank" rel="noopener">Twitter</a> <!-- EDIT -->
-          <a class="social-link" href="mailto:example@email.com">Email</a> <!-- EDIT -->
-        </div>
-      </div>
-
-      <div style="width:420px;min-width:280px">
-        <!-- Lazy YouTube: replace data-video with your video id -->
-        <div class="yt-placeholder" id="ytLazy" data-video="dQw4w9WgXcQ" aria-label="YouTube video placeholder" role="button" tabindex="0">
-          <img src="https://i.ytimg.com/vi/dQw4w9WgXcQ/maxresdefault.jpg" alt="YouTube thumbnail" loading="lazy">
-          <div class="yt-play" aria-hidden="true">▶</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- TESTIMONIALS -->
-  <section class="reveal show" aria-labelledby="testTitle">
-    <h2 id="testTitle">Testimonials</h2>
-    <div class="testimonials" role="list">
-      <div class="test" role="listitem"><p>"Fast, clear, and useful prototypes — helped us decide quickly."</p><strong>— Alex</strong></div>
-      <div class="test" role="listitem"><p>"Tooling saved our team hours each week."</p><strong>— Sam</strong></div>
-    </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section id="contact" class="reveal show" aria-labelledby="contactTitle">
-    <h2 id="contactTitle">Contact</h2>
-    <div class="contact-grid" role="form" aria-label="Contact form">
-      <form onsubmit="event.preventDefault(); handleContact()" style="display:flex;flex-direction:column;gap:8px">
-        <input id="name" class="field" type="text" placeholder="Your name" required="">
-        <input id="email" class="field" type="email" placeholder="Your email" required="">
-        <textarea id="message" class="field" rows="6" placeholder="Short description (scope, timeline)" required=""></textarea>
-        <div class="form-actions">
-          <button class="btn" type="submit">Send message</button>
-          <button class="btn ghost" type="button" onclick="prefill()">Prefill demo</button>
-        </div>
-        <div id="contactStatus" style="color:var(--muted);font-size:13px"></div>
-      </form>
-
-      <aside>
-        <div style="background:var(--card);padding:14px;border-radius:10px;box-shadow:var(--shadow)">
-          <strong>Availability</strong>
-          <div style="color:var(--muted);margin-top:8px">Typically available for short prototype sprints and small tooling projects. Describe scope and timeline when you reach out.</div>
-        </div>
-      </aside>
+    <div class="skill-list">
+      <span class="skill">HTML</span><span class="skill">CSS</span><span class="skill">JavaScript</span><span class="skill">Godot</span><span class="skill">Lua</span><span class="skill">Java</span><span class="skill">Unity</span><span class="skill">Python</span><span class="skill">Block Code</span>
     </div>
   </section>
 </main>
 
 <footer>
   <div class="container footer-grid">
-    <div>
-      <strong>CiphAnon</strong>
-      <div style="color:var(--muted);margin-top:8px">Developer &amp; Prototyper</div>
-    </div>
-
-    <div>
-      <h4 style="margin:0 0 8px">Navigate</h4>
-      <a href="#about">About</a><br>
-      <a href="#capabilities">Capabilities</a><br>
-      <a href="#contact">Contact</a>
-    </div>
-
-    <div>
-      <h4 style="margin:0 0 8px">Contact</h4>
-      <a href="mailto:example@email.com">example@email.com</a>
-      <div style="color:var(--muted);margin-top:10px;font-size:13px">© <span id="year">2025</span> CiphAnon</div>
-    </div>
+    <div><strong>CiphAnon</strong><div style="color:var(--muted);margin-top:8px">Developer &amp; Prototyper</div></div>
+    <div><h4>Navigate</h4><a href="#about">About</a><br><a href="#capabilities">Capabilities</a><br><a href="#contact">Contact</a></div>
+    <div><h4>Contact</h4><a href="mailto:example@email.com">example@email.com</a><div style="color:var(--muted);margin-top:10px;font-size:13px">© <span id="year">2025</span> CiphAnon</div></div>
   </div>
 </footer>
 
-<!-- floating controls -->
-<div class="floating" aria-hidden="false">
-  <button class="fab" id="themeFab" aria-label="Toggle theme"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M600-640 480-760l120-120 120 120-120 120Zm200 120-80-80 80-80 80 80-80 80ZM483-80q-84 0-157.5-32t-128-86.5Q143-253 111-326.5T79-484q0-146 93-257.5T409-880q-18 99 11 193.5T520-521q71 71 165.5 100T879-410q-26 144-138 237T483-80Zm0-80q88 0 163-44t118-121q-86-8-163-43.5T463-465q-61-61-97-138t-43-163q-77 43-120.5 118.5T159-484q0 135 94.5 229.5T483-160Zm-20-305Z"/></svg></button>
-  <button class="fab" id="topFab" aria-label="Back to top"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M440-727 256-544l-56-56 280-280 280 280-56 57-184-184v287h-80v-287Zm0 487v-120h80v120h-80Zm0 160v-80h80v80h-80Z"/></svg></button>
+<div class="floating">
+  <button class="fab" id="themeFab" aria-label="Toggle theme">🌓</button>
+
+  <!-- topFab: contains 3 stacked svgs that crossfade/slide into view -->
+  <button class="fab" id="topFab" aria-label="Back to top" title="Back to top">
+    <span class="fab-icons" aria-hidden="true">
+      <!-- svg #1 -->
+      <svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+        <path d="M480-528 296-344l-56-56 240-240 240 240-56 56-184-184Z"/>
+      </svg>
+      <!-- svg #2 -->
+      <svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+        <path d="M440-240v-368L296-464l-56-56 240-240 240 240-56 56-144-144v368h-80Z"/>
+      </svg>
+      <!-- svg #3 -->
+      <svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+        <path d="M440-727 256-544l-56-56 280-280 280 280-56 57-184-184v287h-80v-287Zm0 487v-120h80v120h-80Zm0 160v-80h80v80h-80Z"/>
+      </svg>
+    </span>
+  </button>
 </div>
 
 <script>
-/* ====== Lightweight interactions & polish ====== */
-const prefersReduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+/* =========================
+   INTERACTIONS
+   ========================= */
 document.getElementById('year').textContent = new Date().getFullYear();
 
-/* Reveal on scroll */
-const io = new IntersectionObserver((entries)=>{
-  for(const e of entries){
-    if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target); }
-  }
-},{threshold:0.12});
-document.querySelectorAll('.reveal').forEach(el=> io.observe(el));
-
-/* typed line */
+/* Typed subtitle with blinking cursor */
 (function typed(){
-  if(prefersReduce) return;
   const el = document.getElementById('typedLine');
   if(!el) return;
-  const arr = ['Interactive prototypes','Dev tooling','UX polish'];
-  let i=0,pos=0,dir=1;
+  const lines = ['Interactive prototypes','Dev tooling','UX polish','Fast iterations','Clean UI','Playable demos'];
+  let i=0,pos=0,forward=true;
   function step(){
-    const txt = arr[i];
-    pos += dir;
-    el.textContent = txt.slice(0,pos);
-    if(pos === txt.length || pos === 0){ if(pos===txt.length){ dir = -1; setTimeout(step,800); return; } else { dir = 1; i=(i+1)%arr.length; } }
-    setTimeout(step, dir>0?28:18);
+    const text=lines[i];
+    if(forward){pos++;el.textContent=text.slice(0,pos);
+      if(pos===text.length){forward=false;setTimeout(step,1000);return;}
+    }else{pos--;el.textContent=text.slice(0,pos);
+      if(pos===0){forward=true;i=(i+1)%lines.length;}
+    }
+    setTimeout(step,forward?60:40);
   }
   step();
 })();
 
-/* portrait parallax (rAF throttled) */
-(function portraitParallax(){
-  const frame = document.querySelector('.hero-visual');
-  const wrap = document.querySelector('.hero-portrait');
-  if(!frame || !wrap) return;
-  let raf=null,last={x:0,y:0};
-  function onMove(e){
-    const clientX = e.touches?e.touches[0].clientX:e.clientX;
-    const clientY = e.touches?e.touches[0].clientY:e.clientY;
-    const r = frame.getBoundingClientRect();
-    const dx = (clientX - (r.left + r.width/2))/(r.width||1);
-    const dy = (clientY - (r.top + r.height/2))/(r.height||1);
-    last.x = dx; last.y = dy;
-    if(raf === null){
-      raf = requestAnimationFrame(()=> {
-        wrap.style.transform = `translate3d(${last.x*8}px, ${last.y*6}px, 0)`;
-        raf = null;
-      });
+/* Back-to-top behavior + SVG cycling + smooth color transition */
+(function fabNav(){
+  const topFab = document.getElementById('topFab');
+  const themeFab = document.getElementById('themeFab');
+  const themeToggle = document.getElementById('themeToggle');
+  const svgWrap = topFab.querySelector('.fab-icons');
+  const svgs = Array.from(svgWrap.querySelectorAll('svg'));
+  let cur = 0;
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // initialize: show the first svg
+  svgs.forEach((s, i) => s.classList.toggle('active', i === 0));
+
+  // cycle function
+  function cycleStep(){
+    const prev = cur;
+    cur = (cur + 1) % svgs.length;
+    // crossfade: remove active from prev then add to next (transitions handle smoothness)
+    svgs[prev].classList.remove('active');
+    svgs[cur].classList.add('active');
+  }
+
+  // run the cycle periodically (if user doesn't prefer reduced motion)
+  let cycleInterval = null;
+  if(!reduced){
+    cycleInterval = setInterval(cycleStep, 900); // ~0.9s per step
+  }
+
+  // click behavior: scroll to top with smoothness and pop animation
+  topFab.addEventListener('click', function(e){
+    // small pop to show click
+    topFab.classList.remove('fab--pop');
+    // force reflow so animation can restart
+    void topFab.offsetWidth;
+    topFab.classList.add('fab--pop');
+
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+
+  // optionally make the icon cycle faster while scrolling up (visual feedback)
+  let scrollTimer = null;
+  window.addEventListener('scroll', () => {
+    // if user is scrolling up, briefly show the "up" icon (we'll pick svg #2)
+    if(scrollTimer) clearTimeout(scrollTimer);
+    const isScrollingUp = (window.scrollYPrev || 0) > window.scrollY;
+    window.scrollYPrev = window.scrollY;
+
+    if(isScrollingUp && !reduced){
+      // show index 1 quickly
+      svgs.forEach((s) => s.classList.remove('active'));
+      svgs[1 % svgs.length].classList.add('active');
+
+      // resume regular cycle shortly after
+      scrollTimer = setTimeout(() => {
+        // ensure a consistent index
+        svgs.forEach((s,i) => s.classList.toggle('active', i === cur));
+      }, 600);
+    } else {
+      // no special handling; resume
+      scrollTimer = setTimeout(() => {
+        svgs.forEach((s,i) => s.classList.toggle('active', i === cur));
+      }, 800);
     }
+  }, {passive:true});
+
+  // theme toggle button hooking
+  function toggleTheme(){
+    const curTheme = document.documentElement.getAttribute('data-theme');
+    const next = curTheme === 'light' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+    // Minor accessibility hint: focus the topFab so user sees focus color in keyboard flows
   }
-  frame.addEventListener('mousemove', onMove, {passive:true});
-  frame.addEventListener('touchmove', onMove, {passive:true});
-  frame.addEventListener('mouseleave', ()=> wrap.style.transform = '', {passive:true});
-  function check(){ if(window.innerWidth < 720){ frame.removeEventListener('mousemove', onMove); frame.removeEventListener('touchmove', onMove); } }
-  check(); window.addEventListener('resize', check, {passive:true});
+
+  themeFab.addEventListener('click', toggleTheme);
+  themeToggle.addEventListener('click', toggleTheme);
+
+  // on load: apply saved theme
+  (function restoreTheme(){
+    const saved = localStorage.getItem('theme');
+    if(saved) document.documentElement.setAttribute('data-theme', saved);
+  })();
+
+  // cleanup before unload (not strictly necessary but polite)
+  window.addEventListener('unload', () => {
+    if(cycleInterval) clearInterval(cycleInterval);
+  });
+
 })();
 
-/* counters (run once) */
-(function counters(){
-  const hero = document.querySelector('.hero');
-  if(!hero) return;
-  const obs = new IntersectionObserver((entries)=>{
-    for(const e of entries){
-      if(e.isIntersecting){
-        animate('statYears',3,700); animate('statLangs',9,800); animate('statWorks',12,900);
-        obs.disconnect();
-      }
-    }
-  },{threshold:0.3});
-  obs.observe(hero);
-  function animate(id,to,dur){
-    const el = document.getElementById(id);
-    if(!el) return;
-    let start=null;
-    function step(ts){
-      if(!start) start = ts;
-      const p = Math.min(1,(ts-start)/dur);
-      el.textContent = Math.floor(p*to);
-      if(p<1) requestAnimationFrame(step);
-      else el.textContent = to;
-    }
-    requestAnimationFrame(step);
+/* Back-to-top quick action (old handler kept for compatibility) */
+document.getElementById('topFab').addEventListener('keydown', (e) => {
+  if(e.key === 'Enter' || e.key === ' ') {
+    e.preventDefault();
+    document.getElementById('topFab').click();
   }
-})();
-
-/* Lazy YouTube click-to-load (edit video id) */
-(function ytLazy(){
-  const p = document.getElementById('ytLazy');
-  if(!p) return;
-  function load(){
-    const vid = p.dataset.video;
-    if(!vid) return;
-    const iframe = document.createElement('iframe');
-    iframe.src = `https://www.youtube.com/embed/${encodeURIComponent(vid)}?rel=0&showinfo=0&autoplay=1`;
-    iframe.width = '100%'; iframe.height = '100%';
-    iframe.allow = 'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture';
-    iframe.allowFullscreen = true; iframe.style.border='0';
-    p.innerHTML=''; p.appendChild(iframe);
-  }
-  p.addEventListener('click', load, {passive:true});
-  p.addEventListener('keydown', (e)=>{ if(e.key==='Enter'||e.key===' '){ load(); e.preventDefault(); }});
-})();
-
-/* testimonials auto-scroll (cheap) */
-(function testimonials(){
-  const el = document.querySelector('.testimonials'); if(!el) return;
-  let pos=0,last=performance.now(),running=true;
-  function tick(ts){
-    if(!running){ last=ts; requestAnimationFrame(tick); return; }
-    const dt = ts-last; last = ts;
-    pos += dt*0.02;
-    if(pos > el.scrollWidth - el.clientWidth) pos = 0;
-    el.scrollLeft = pos;
-    requestAnimationFrame(tick);
-  }
-  el.addEventListener('mouseenter', ()=> running=false, {passive:true});
-  el.addEventListener('mouseleave', ()=> running=true, {passive:true});
-  if(!prefersReduce) requestAnimationFrame(tick);
-})();
-
-/* Contact (demo) */
-function handleContact(){
-  const n=document.getElementById('name').value.trim();
-  const e=document.getElementById('email').value.trim();
-  const m=document.getElementById('message').value.trim();
-  const out=document.getElementById('contactStatus');
-  if(!n||!e||!m){ out.textContent='Please fill all fields.'; return; }
-  out.textContent='Message sent (demo). Replace with a real backend to receive messages.';
-  setTimeout(()=> out.textContent='',4000);
-}
-function prefill(){ document.getElementById('name').value='Acme Studio'; document.getElementById('email').value='hello@acme.test'; document.getElementById('message').value='We need a 2-week prototype to test mechanic X.'; }
-
-/* Floating controls */
-document.getElementById('topFab').addEventListener('click', ()=> window.scrollTo({top:0,behavior:'smooth'}));
-document.getElementById('themeFab').addEventListener('click', toggleTheme);
-document.getElementById('themeToggle').addEventListener('click', toggleTheme);
-
-function toggleTheme(){
-  const cur=document.documentElement.getAttribute('data-theme');
-  const next = cur==='light'?'dark':'light';
-  document.documentElement.setAttribute('data-theme', next);
-  localStorage.setItem('theme', next);
-}
-(function initTheme(){
-  const saved = localStorage.getItem('theme');
-  const prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
-  if(saved) document.documentElement.setAttribute('data-theme', saved);
-  else if(prefersLight) document.documentElement.setAttribute('data-theme','light');
-  else document.documentElement.setAttribute('data-theme','dark');
-})();
-
-/* keyboard focus outlines only after Tab used */
-(function focusOutline(){ function onFirstTab(e){ if(e.key==='Tab') document.body.classList.add('show-focus'); window.removeEventListener('keydown', onFirstTab); } window.addEventListener('keydown', onFirstTab); })();
+});
 </script>
-
-
-</body></html>
+</body>
+</html>
