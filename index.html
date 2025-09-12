@@ -3,159 +3,333 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>CiphAnon — Developer & Prototyper</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<title>CiphAnon — Personal Hub</title>
+<meta name="description" content="CiphAnon — personal hub: prototypes, tooling, demos & socials." />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg-1:#050d16; --bg-2:#0c1824;
-  --card:#101b29; --muted:#9ba7bb;
-  --text:#f0f6ff; --accent-1:#ff9f1c; --accent-2:#ff3f6c;
-  --shadow:0 16px 40px rgba(0,0,0,.6);
-}
-*{box-sizing:border-box;margin:0;padding:0}
-body {
-  font-family:Inter,system-ui,sans-serif;
-  background:radial-gradient(circle at 20% 30%,#0f2136,#050d16 80%);
-  color:var(--text); line-height:1.5; overflow-x:hidden;
-}
-a{text-decoration:none;color:inherit}
-img{max-width:100%;display:block}
+  :root{
+    --bg-1:#061017;
+    --bg-2:#071828;
+    --glass: rgba(255,255,255,0.04);
+    --muted:#93a6bb;
+    --accent-a:#ff9f1c;
+    --accent-b:#ff4d7a;
+    --card:#0f1722;
+    --radius:14px;
+    --maxw:1100px;
+    --shadow: 0 18px 50px rgba(2,8,20,0.6);
+    --fps-target:60;
+  }
 
-header {
-  position:sticky;top:0;z-index:1000;
-  backdrop-filter:blur(12px);
-  background:rgba(15,25,35,0.7);
-  padding:14px 28px;
-  display:flex;align-items:center;justify-content:space-between;
-}
-.brand {display:flex;align-items:center;gap:12px}
-.brand img{width:48px;height:48px;border-radius:10px}
-nav a{margin:0 12px;color:var(--muted);font-weight:600;transition:.2s}
-nav a:hover{color:var(--accent-1)}
+  html,body{height:100%}
+  *{box-sizing:border-box}
+  body{
+    margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;
+    color:#edf6ff;background:linear-gradient(180deg,var(--bg-1),var(--bg-2)) fixed;
+    -webkit-font-smoothing:antialiased;line-height:1.45;overflow-y:auto;
+  }
 
-.btn {
-  padding:10px 18px;border-radius:12px;font-weight:700;
-  background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
-  border:none;cursor:pointer;color:#111;
-  box-shadow:0 6px 18px rgba(0,0,0,.5);transition:.3s;
-}
-.btn:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(0,0,0,.7)}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:28px;position:relative;z-index:5}
+  header{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:10px 0}
+  .brand{display:flex;align-items:center;gap:12px}
+  .brand .mark{width:54px;height:54px;border-radius:12px;overflow:hidden;flex:0 0 54px;box-shadow:0 8px 24px rgba(0,0,0,0.35)}
+  .brand .mark img{width:100%;height:100%;object-fit:cover;display:block}
+  .brand h1{font-size:16px;margin:0;font-weight:800}
+  .nav a{margin-left:14px;color:var(--muted);font-weight:700;text-decoration:none}
+  .nav a:hover{color:var(--accent-a)}
+  .cta-btn{background:linear-gradient(90deg,var(--accent-a),var(--accent-b));color:#071018;padding:10px 14px;border-radius:10px;border:0;font-weight:800;cursor:pointer;box-shadow:var(--shadow)}
 
-.hero {
-  display:grid;grid-template-columns:1fr 400px;gap:36px;align-items:center;
-  padding:80px 28px;max-width:1200px;margin:auto;
-}
-.hero h1{font-size:48px;font-weight:800;line-height:1.1}
-.hero h1 .accent{background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
-  -webkit-background-clip:text;background-clip:text;color:transparent}
-.hero p{color:var(--muted);margin-top:16px;font-size:17px}
+  /* ------------------------------------------------------------
+     Background canvas (full bleed) + subtle watermark using image
+     ------------------------------------------------------------ */
+  .bg-canvas { position:fixed; inset:0; z-index:0; pointer-events:none; }
+  .bg-watermark { position:fixed; right:6%; top:8%; width:320px; height:200px; opacity:0.06; z-index:0; image-rendering:auto; pointer-events:none; filter:blur(2px) contrast(.9); }
 
-.hero-portrait {
-  border-radius:16px;overflow:hidden;box-shadow:var(--shadow);
-  position:relative;isolation:isolate;
-}
-.hero-portrait img{width:100%;height:100%;object-fit:cover}
-.hero-portrait::before {
-  content:"";position:absolute;inset:0;
-  background:url("assets/StudiosImageT.png") center/cover no-repeat;
-  opacity:.15;z-index:-1;filter:blur(22px) saturate(1.1);
-}
+  /* HERO */
+  .hero{display:grid;grid-template-columns:1fr 420px;gap:30px;align-items:center;padding:52px 0 28px;position:relative;z-index:5}
+  .tag{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
+  .title{font-size:44px;line-height:1.02;margin:6px 0;font-weight:800}
+  .title .accent{background:linear-gradient(90deg,var(--accent-a),var(--accent-b));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .strap{color:var(--muted);margin-top:12px;max-width:60ch;font-size:16px}
+  .buttons{display:flex;gap:12px;margin-top:20px;flex-wrap:wrap}
+  .small-badges{margin-top:18px;display:flex;gap:8px;flex-wrap:wrap}
+  .badge{background:var(--glass);border-radius:999px;padding:8px 12px;color:var(--muted);font-weight:700;border:1px solid rgba(255,255,255,0.03)}
 
-.badges{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap}
-.badges span{padding:8px 14px;border-radius:999px;
-  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.08);
-  font-size:13px;color:var(--muted);font-weight:600}
+  /* HERO CARD (portrait) */
+  .card{
+    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border-radius:16px;padding:16px;box-shadow:var(--shadow);display:flex;gap:12px;align-items:center;
+  }
+  .portrait{width:240px;height:240px;border-radius:12px;overflow:hidden;flex:0 0 240px;box-shadow:0 20px 40px rgba(0,0,0,0.5)}
+  .portrait img{width:100%;height:100%;object-fit:cover;display:block}
+  .card-info{flex:1}
+  .card-info h3{margin:0 0 6px;font-size:18px}
+  .card-info p{margin:0;color:var(--muted)}
 
-.section{padding:70px 28px;max-width:1200px;margin:auto}
-.section h2{font-size:28px;margin-bottom:22px}
+  /* QUICK LINKS / SOCIAL HUB */
+  .social-hub{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+  .social-btn{display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:12px;background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted);font-weight:800;text-decoration:none}
+  .social-btn:hover{background:linear-gradient(90deg,var(--accent-a),var(--accent-b));color:#071018}
 
-.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px}
-.skill-card {
-  background:var(--card);padding:18px;border-radius:14px;
-  text-align:center;box-shadow:var(--shadow);transition:.25s;
-}
-.skill-card:hover{transform:translateY(-6px)}
-.skill-card strong{display:block;margin-top:8px;font-size:16px}
+  /* SKILL CARDS */
+  .skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-top:28px}
+  .skill{background:rgba(255,255,255,0.02);border-radius:12px;padding:14px;text-align:center;box-shadow:0 10px 24px rgba(0,0,0,0.45);transition:transform .18s}
+  .skill:hover{transform:translateY(-6px)}
+  .skill strong{display:block;font-size:15px;margin-top:8px}
 
-.socials{display:flex;gap:14px;flex-wrap:wrap;margin-top:20px}
-.socials a {
-  display:flex;align-items:center;gap:10px;
-  padding:10px 16px;border-radius:12px;
-  background:rgba(255,255,255,.05);
-  color:var(--muted);font-weight:600;transition:.25s;
-}
-.socials a:hover{background:linear-gradient(90deg,var(--accent-1),var(--accent-2));color:#111}
+  /* FOOTER */
+  footer{margin-top:48px;padding:28px 0;text-align:center;color:var(--muted);font-size:13px}
 
-footer {
-  padding:40px 28px;text-align:center;font-size:14px;color:var(--muted);
-  background:#0a121c;margin-top:60px;
-}
+  /* floating quick actions */
+  .floating{position:fixed;right:18px;bottom:18px;display:flex;flex-direction:column;gap:8px;z-index:30}
+  .fab{width:48px;height:48px;border-radius:12px;background:var(--card);border:0;box-shadow:0 10px 30px rgba(0,0,0,0.5);color:var(--muted);cursor:pointer}
+
+  /* accessibility & responsiveness */
+  @media (max-width:980px){
+    .hero{grid-template-columns:1fr;gap:20px}
+    .portrait{width:200px;height:200px}
+    .card{flex-direction:row-reverse;align-items:center}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .skill, .card, .portrait, .social-btn, .btn { transition: none !important; animation: none !important; }
+  }
 </style>
 </head>
 <body>
 
-<header>
-  <div class="brand">
-    <img src="assets/StudiosImageT.png" alt="logo">
-    <strong>CiphAnon</strong>
-  </div>
-  <nav>
-    <a href="#about">About</a>
-    <a href="#skills">Skills</a>
-    <a href="#contact">Contact</a>
-  </nav>
-  <button class="btn">Hire Me</button>
-</header>
+<!-- Canvas-based subtle orbs background (keeps CPU low) -->
+<canvas id="bgCanvas" class="bg-canvas" aria-hidden="true"></canvas>
+<!-- watermark image (low opacity) -->
+<img src="assets/StudiosImageT.png" alt="" class="bg-watermark" aria-hidden="true">
 
-<section class="hero">
-  <div>
-    <h1>Hi, I’m <span class="accent">CiphAnon</span><br/>Developer & Prototyper</h1>
-    <p>3+ years of coding experience across HTML, CSS, JS, Python, Lua, Java, Unity, Godot and more.  
-    I turn ideas into polished, working prototypes.</p>
-    <div class="badges">
-      <span>Fast Prototyping</span><span>Creative Builds</span><span>Cheat Codes</span>
+<div class="wrap" role="main">
+  <header>
+    <div class="brand" aria-hidden="false">
+      <div class="mark">
+        <img src="assets/StudiosImageT.png" alt="logo mark" width="56" height="56" />
+      </div>
+      <div>
+        <h1>CiphAnon</h1>
+        <div style="font-size:12px;color:var(--muted)">personal hub</div>
+      </div>
     </div>
-    <div style="margin-top:24px">
-      <button class="btn">Let’s Talk</button>
+
+    <nav class="nav" aria-label="Main">
+      <a href="#about">about</a>
+      <a href="#skills">skills</a>
+      <a href="#contact">contact</a>
+    </nav>
+
+    <div>
+      <button class="cta-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">contact</button>
     </div>
-  </div>
-  <div class="hero-portrait">
-    <img src="assets/1000007475.png" alt="CiphAnon portrait">
-  </div>
-</section>
+  </header>
 
-<section id="skills" class="section">
-  <h2>Skills & Tools</h2>
-  <div class="skills-grid">
-    <div class="skill-card"><strong>HTML / CSS</strong></div>
-    <div class="skill-card"><strong>JavaScript</strong></div>
-    <div class="skill-card"><strong>Python</strong></div>
-    <div class="skill-card"><strong>Lua</strong></div>
-    <div class="skill-card"><strong>Java</strong></div>
-    <div class="skill-card"><strong>Unity</strong></div>
-    <div class="skill-card"><strong>Godot</strong></div>
-    <div class="skill-card"><strong>Block Code</strong></div>
-  </div>
-</section>
+  <section class="hero" aria-labelledby="heroTitle">
+    <div>
+      <div class="tag">hey — i'm CiphAnon</div>
+      <h1 id="heroTitle" class="title">Breaking code • building things • shipping fast <span class="accent">— that’s my lane</span></h1>
+      <p class="strap">3 years making prototypes, developer tools, and polished front-end interactions across web & game stacks.</p>
 
-<section id="contact" class="section">
-  <h2>Find Me Online</h2>
-  <p style="color:var(--muted)">Follow my work, videos, and updates:</p>
-  <div class="socials">
-    <a href="https://github.com/yourname" target="_blank">GitHub</a>
-    <a href="https://www.youtube.com/yourchannel" target="_blank">YouTube</a>
-    <a href="https://twitter.com/yourhandle" target="_blank">Twitter</a>
-    <a href="mailto:example@email.com">Email</a>
-  </div>
-</section>
+      <div class="buttons">
+        <button class="cta-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get in touch</button>
+        <a class="social-btn" href="https://github.com/your-username" target="_blank" rel="noopener">GitHub</a> <!-- EDIT -->
+        <a class="social-btn" href="https://www.youtube.com/channel/your-channel" target="_blank" rel="noopener">YouTube</a> <!-- EDIT -->
+      </div>
 
-<footer>
-  © <span id="year"></span> CiphAnon. All rights reserved.
-</footer>
+      <div class="small-badges" aria-hidden="true">
+        <div class="badge">plays well with: HTML • CSS • JS</div>
+        <div class="badge">engines: Godot • Unity</div>
+        <div class="badge">other: Python • Java • Lua</div>
+      </div>
+
+      <div class="skills" id="skillPreview" aria-hidden="false" style="margin-top:22px">
+        <div class="skill"><svg width="36" height="36" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="6" fill="#1F2937"/></svg><strong>HTML</strong></div>
+        <div class="skill"><svg width="36" height="36" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="6" fill="#0ea5a4"/></svg><strong>CSS</strong></div>
+        <div class="skill"><svg width="36" height="36" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="6" fill="#f59e0b"/></svg><strong>JavaScript</strong></div>
+        <div class="skill"><svg width="36" height="36" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="6" fill="#6ee7b7"/></svg><strong>Python</strong></div>
+        <div class="skill"><svg width="36" height="36" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="6" fill="#8b5cf6"/></svg><strong>Godot</strong></div>
+        <div class="skill"><svg width="36" height="36" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="6" fill="#ef4444"/></svg><strong>Unity</strong></div>
+      </div>
+    </div>
+
+    <!-- portrait card -->
+    <aside class="card" aria-hidden="false">
+      <div class="card-info">
+        <h3>Personal hub</h3>
+        <p style="color:var(--muted)">This page links my socials, demos, and quick contact. Use it as the central place to send people.</p>
+        <div class="social-hub" style="margin-top:14px">
+          <a class="social-btn" href="https://github.com/your-username" target="_blank" rel="noopener">GitHub</a> <!-- EDIT -->
+          <a class="social-btn" href="https://www.youtube.com/channel/your-channel" target="_blank" rel="noopener">YouTube</a> <!-- EDIT -->
+          <a class="social-btn" href="mailto:example@email.com">Email</a> <!-- EDIT -->
+        </div>
+      </div>
+
+      <div class="portrait" aria-hidden="true">
+        <img src="assets/1000007475.png" alt="CiphAnon portrait" loading="lazy" />
+      </div>
+    </aside>
+  </section>
+
+  <section id="about" class="section" style="padding-top:10px">
+    <h2 style="font-size:22px;margin-bottom:8px">About</h2>
+    <p style="color:var(--muted);max-width:60ch">I build prototypes and small tooling that answer questions quickly. I like to ship small, measurable experiments — then iterate. If you want a demo or a short prototype, that’s what I do best.</p>
+  </section>
+
+  <section id="skills" class="section">
+    <h2 style="font-size:22px;margin-bottom:8px">What I use</h2>
+    <div class="skills" aria-hidden="true">
+      <div class="skill"><strong>HTML</strong></div>
+      <div class="skill"><strong>CSS</strong></div>
+      <div class="skill"><strong>JavaScript</strong></div>
+      <div class="skill"><strong>Godot (GDScript)</strong></div>
+      <div class="skill"><strong>Unity / C#</strong></div>
+      <div class="skill"><strong>Lua</strong></div>
+      <div class="skill"><strong>Python</strong></div>
+      <div class="skill"><strong>Java</strong></div>
+      <div class="skill"><strong>Block Code</strong></div>
+    </div>
+  </section>
+
+  <section id="contact" class="section" style="padding-bottom:80px">
+    <h2 style="font-size:22px;margin-bottom:8px">Contact</h2>
+    <p style="color:var(--muted);margin-bottom:12px">Short & direct: paste a quick brief and a timeline — I’ll reply with next steps.</p>
+    <form onsubmit="event.preventDefault(); demoSend()" style="max-width:720px;display:flex;flex-direction:column;gap:10px">
+      <input id="name" placeholder="Your name" required style="padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,.06);background:transparent;color:inherit" />
+      <input id="email" type="email" placeholder="Your email" required style="padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,.06);background:transparent;color:inherit" />
+      <textarea id="body" rows="5" placeholder="Short brief & timeline" required style="padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,.06);background:transparent;color:inherit"></textarea>
+      <div style="display:flex;gap:10px">
+        <button class="cta-btn" type="submit">Send (demo)</button>
+        <button class="social-btn" type="button" onclick="prefill()">Prefill demo</button>
+      </div>
+      <div id="status" style="color:var(--muted);font-size:13px"></div>
+    </form>
+  </section>
+
+  <footer>
+    © <span id="year"></span> CiphAnon — personal hub
+  </footer>
+</div>
+
+<!-- floating controls -->
+<div class="floating" aria-hidden="true">
+  <button class="fab" id="topFab" title="Back to top">⬆</button>
+</div>
 
 <script>
-document.getElementById("year").textContent=new Date().getFullYear();
-</script>
+/* -------------------------
+   small helpers & UI logic
+   ------------------------- */
 
+document.getElementById('year').textContent = new Date().getFullYear();
+document.getElementById('topFab').addEventListener('click', ()=> window.scrollTo({top:0,behavior:'smooth'}));
+
+function demoSend(){
+  const n=document.getElementById('name').value.trim();
+  const e=document.getElementById('email').value.trim();
+  const b=document.getElementById('body').value.trim();
+  const out=document.getElementById('status');
+  if(!n||!e||!b){ out.textContent = 'Fill all fields.'; return; }
+  out.textContent = 'Message sent (demo) — this page is not wired to a backend.';
+  setTimeout(()=> out.textContent='',4200);
+}
+function prefill(){
+  document.getElementById('name').value='Acme Studio';
+  document.getElementById('email').value='hello@acme.test';
+  document.getElementById('body').value='We need a short prototype to test mechanic X. Timeline: 2 weeks.';
+}
+
+/* -------------------------
+   Canvas background: soft floating orbs
+   Lightweight, respects reduced-motion
+   ------------------------- */
+(function(){
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduce) return; // skip animation if user prefers reduced motion
+
+  const canvas = document.getElementById('bgCanvas');
+  const ctx = canvas.getContext('2d');
+  let W = canvas.width = innerWidth;
+  let H = canvas.height = innerHeight;
+  const DPR = Math.min(2, window.devicePixelRatio || 1);
+  canvas.width = W * DPR; canvas.height = H * DPR; canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+  ctx.scale(DPR, DPR);
+
+  // particle/light orb definition
+  const ORBS = [];
+  const ORB_COUNT = Math.max(6, Math.floor(W / 200));
+  for(let i=0;i<ORB_COUNT;i++){
+    ORBS.push({
+      x: Math.random() * W,
+      y: Math.random() * H,
+      r: 40 + Math.random()*90,
+      vx: (Math.random()*0.6 - 0.3),
+      vy: (Math.random()*0.3 - 0.15),
+      hue: 20 + Math.random()*340,
+      alpha: 0.06 + Math.random()*0.08,
+      drift: Math.random()*0.6
+    });
+  }
+
+  let last = performance.now();
+  function step(now){
+    const dt = Math.min(40, now - last) / 16.666; last = now;
+    ctx.clearRect(0,0,W,H);
+    // soft gradient overlay (adds depth)
+    const grad = ctx.createLinearGradient(0,0,W,H);
+    grad.addColorStop(0,'rgba(8,14,20,0.08)');
+    grad.addColorStop(1,'rgba(6,12,18,0.12)');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0,0,W,H);
+
+    // draw orbs
+    for(const o of ORBS){
+      o.x += o.vx * dt * (0.6 + o.drift);
+      o.y += o.vy * dt * (0.6 + o.drift/2);
+      // wrap
+      if(o.x < -o.r) o.x = W + o.r;
+      if(o.x > W + o.r) o.x = -o.r;
+      if(o.y < -o.r) o.y = H + o.r;
+      if(o.y > H + o.r) o.y = -o.r;
+
+      // radial gradient
+      const g = ctx.createRadialGradient(o.x, o.y, 0, o.x, o.y, o.r);
+      const color = `hsla(${o.hue},85%,62%,${o.alpha})`;
+      g.addColorStop(0, color);
+      g.addColorStop(0.25, color);
+      g.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.globalCompositeOperation = 'lighter';
+      ctx.fillStyle = g;
+      ctx.beginPath();
+      ctx.arc(o.x, o.y, o.r, 0, Math.PI*2);
+      ctx.fill();
+    }
+    ctx.globalCompositeOperation = 'source-over';
+    // schedule
+    requestAnimationFrame(step);
+  }
+
+  // resize handling
+  window.addEventListener('resize', ()=>{
+    W = canvas.width = innerWidth;
+    H = canvas.height = innerHeight;
+    canvas.width = W * DPR; canvas.height = H * DPR; canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+    ctx.scale(DPR, DPR);
+  }, {passive:true});
+
+  requestAnimationFrame(step);
+})();
+
+/* -------------------------
+   Lightweight accessibility niceties
+   ------------------------- */
+(function(){
+  function showFocus(e){
+    if(e.key === 'Tab') document.body.classList.add('show-focus');
+    window.removeEventListener('keydown', showFocus);
+  }
+  window.addEventListener('keydown', showFocus);
+})();
+</script>
 </body>
 </html>
