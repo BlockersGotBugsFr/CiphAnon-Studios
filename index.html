@@ -3,161 +3,113 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>CiphAnon Studios — Home (Full)</title>
-<meta name="description" content="CiphAnon Studios — interactive prototypes, tooling, and polished experiences. 3 years experience across many languages and engines." />
+<title>CiphAnon — Home</title>
+<meta name="description" content="CiphAnon — developer & prototyper. 3 years experience across many languages and engines." />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-
 <style>
-/* =========================
-   THEME & RESET
-   ========================= */
-:root{
-  --bg-1:#041018; --bg-2:#071523;
-  --panel:#0d1722; --muted:#9fb0c6; --text:#e9f6ff;
-  --accent1:#ff9f1c; --accent2:#ff5e7a;
-  --glass: rgba(255,255,255,0.03);
-  --radius:12px; --maxw:1320px; --ease:cubic-bezier(.2,.9,.3,1);
-}
-*{box-sizing:border-box}
-html,body{height:100%}
-body{
-  margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
-  background: linear-gradient(180deg,var(--bg-1),var(--bg-2));
-  color:var(--text);-webkit-font-smoothing:antialiased;line-height:1.45;scroll-behavior:smooth;
-}
-img{display:block;max-width:100%}
-a{color:inherit}
-.container{max-width:var(--maxw);margin:0 auto;padding:20px}
+  :root{
+    --bg:#041018; --panel:#0d1722; --muted:#99aebb;
+    --accent1:#ff9f1c; --accent2:#ff5e7a; --glass:rgba(255,255,255,0.03);
+    --maxw:1100px; --radius:12px; --ease:cubic-bezier(.2,.9,.3,1);
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+    background: linear-gradient(180deg,var(--bg), #021018 140%);
+    color:#eaf5ff;-webkit-font-smoothing:antialiased;line-height:1.45;
+    scroll-behavior:smooth;
+  }
+  img{display:block;max-width:100%}
+  a{color:inherit}
+  .container{max-width:var(--maxw);margin:0 auto;padding:20px}
 
-/* ============= NAV ============= */
-header{position:sticky;top:12px;z-index:150;padding:10px 0}
-.nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px;border-radius:12px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));box-shadow:0 8px 30px rgba(2,6,12,0.45)}
-.brand{display:flex;align-items:center;gap:12px}
-.logo{width:52px;height:52px;border-radius:12px;object-fit:contain}
-.brand h1{font-size:16px;margin:0}
-.links{display:flex;gap:12px;align-items:center}
-.links a{color:var(--muted);padding:6px;border-radius:8px;font-weight:700}
-.actions{display:flex;gap:10px;align-items:center}
+  /* NAV */
+  header{position:sticky;top:12px;z-index:120;padding:10px 0}
+  .nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px;border-radius:12px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));box-shadow:0 8px 30px rgba(2,6,12,0.45)}
+  .brand{display:flex;gap:12px;align-items:center}
+  .logo{width:44px;height:44px;border-radius:10px;object-fit:contain}
+  nav.links{display:flex;gap:12px;align-items:center}
+  nav.links a{color:var(--muted);padding:6px 8px;border-radius:8px;font-weight:700}
+  .actions{display:flex;gap:8px}
+  .btn{background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#041018;padding:10px 14px;border-radius:10px;font-weight:800;border:0;cursor:pointer}
+  .btn.secondary{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted);font-weight:700}
+  .btn:focus{outline:3px solid rgba(255,159,28,0.12);outline-offset:3px}
 
-/* ============= HERO ============= */
-.hero{display:grid;grid-template-columns:1fr 520px;gap:28px;align-items:center;padding:56px 0}
-.hero-left h1{font-size:44px;margin:0;line-height:1.02}
-.accent{background:linear-gradient(90deg,var(--accent1),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
-.lead{color:var(--muted);margin-top:12px;font-size:1.05rem;max-width:64ch}
-.hero-ctas{display:flex;gap:12px;margin-top:18px;flex-wrap:wrap}
-.badges{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
-.badge{background:var(--glass);padding:8px 12px;border-radius:999px;color:var(--muted);font-weight:700;border:1px solid rgba(255,255,255,0.03)}
-.hero-frame{height:480px;border-radius:16px;padding:14px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));position:relative;box-shadow:0 30px 90px rgba(2,6,12,0.65);overflow:hidden;contain:layout paint}
-.grad-overlay{position:absolute;inset:-25% -20% auto auto;width:640px;height:640px;border-radius:40%;filter:blur(74px);opacity:0.18;background:linear-gradient(120deg,var(--accent1),var(--accent2));transform:translate3d(0,0,0)}
-.hero-cards{position:absolute;left:20px;bottom:22px;display:flex;gap:12px}
-.mini-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:10px;border-radius:12px;box-shadow:0 10px 30px rgba(2,6,12,0.45);font-weight:700;color:#fff;min-width:120px;transform-origin:center;transition:transform .2s var(--ease)}
-.char-wrap{position:absolute;right:18px;bottom:18px;width:340px;max-width:48%;transform-origin:center;will-change:transform;pointer-events:none}
-.char{width:100%;display:block;filter:drop-shadow(0 20px 30px rgba(2,6,12,0.6));transform-origin:center}
-.bob{animation:bob 5.6s ease-in-out infinite}
-@keyframes bob{0%{transform:translateY(0)}50%{transform:translateY(-8px)}100%{transform:translateY(0)}}
+  /* HERO */
+  .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;padding:56px 0}
+  .hero h1{font-size:40px;margin:0;line-height:1.02}
+  .accent-text{background:linear-gradient(90deg,var(--accent1),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .lead{color:var(--muted);margin-top:12px;font-size:1.02rem;max-width:56ch}
+  .hero-ctas{display:flex;gap:12px;margin-top:18px;flex-wrap:wrap}
+  .pills{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+  .pill{background:var(--glass);padding:8px 12px;border-radius:999px;color:var(--muted);font-weight:700;border:1px solid rgba(255,255,255,0.03)}
 
-/* ============= QUICK STATS / CTA ============= */
-.stats-row{display:flex;gap:12px;margin-top:20px;align-items:center;flex-wrap:wrap}
-.stat{background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:12px;border-radius:10px;min-width:130px;text-align:center}
-.stat strong{display:block;font-size:20px}
+  .hero-frame{height:380px;border-radius:12px;padding:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));position:relative;box-shadow:0 20px 50px rgba(2,6,12,0.6);overflow:hidden;contain:layout paint}
+  .grad-blob{position:absolute;left:14px;top:10px;width:160px;height:160px;border-radius:40%;filter:blur(46px);opacity:0.14;background:linear-gradient(90deg,var(--accent1),var(--accent2))}
+  .char-wrap{position:absolute;right:14px;bottom:10px;width:260px;transform-origin:center;will-change:transform;pointer-events:none}
+  .char{width:100%;display:block;filter:drop-shadow(0 16px 28px rgba(2,6,12,0.5));transform-origin:center}
+  .bob{animation:bob 5.6s ease-in-out infinite}
+  @keyframes bob{0%{transform:translateY(0)}50%{transform:translateY(-6px)}100%{transform:translateY(0)}}
 
-/* ============= FEATURES ============= */
-.features{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:30px}
-.feature{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));padding:18px;border-radius:12px;box-shadow:0 10px 30px rgba(2,6,12,0.35);transition:transform .22s var(--ease);contain:paint}
-.feature:hover{transform:translateY(-8px)}
+  /* SKILLS CLOUD (gentle) */
+  .section{margin-top:28px}
+  .skills-wrap{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+  .skill-cloud{position:relative;width:300px;height:300px;border-radius:999px;display:flex;align-items:center;justify-content:center;contain:layout paint}
+  .skill{position:absolute;left:50%;top:50%;transform-origin:0 0;background:rgba(255,255,255,0.03);padding:8px 12px;border-radius:999px;color:#fff;font-weight:700}
+  .skill.small{font-size:12px;padding:6px 8px}
 
-/* ============= PROJECTS (filter + search + grid + carousel) ============= */
-.controls{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:18px}
-.filter{padding:8px;border-radius:8px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03);color:var(--muted)}
-.search{padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit;min-width:220px}
-.project-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:12px}
-.project-card{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));border-radius:12px;padding:12px;box-shadow:0 8px 30px rgba(2,6,12,0.35);cursor:pointer;transition:transform .18s;contain:paint}
-.project-card:hover{transform:translateY(-8px)}
-.project-thumb{width:100%;height:160px;border-radius:10px;object-fit:cover;background:#081018}
-.tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
-.tag{font-size:12px;padding:6px 9px;border-radius:999px;background:rgba(255,255,255,0.02);color:var(--muted);font-weight:700}
+  /* ABOUT / EXPERIENCE */
+  .about{max-width:60ch;color:var(--muted)}
+  .whatido{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}
+  .what{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));padding:12px;border-radius:10px;box-shadow:0 10px 28px rgba(2,6,12,0.35)}
 
-/* modal */
-.modal-backdrop{position:fixed;inset:0;background:rgba(2,6,12,0.7);display:none;align-items:center;justify-content:center;z-index:300}
-.modal{background:var(--panel);border-radius:12px;padding:18px;max-width:960px;width:calc(100% - 40px);box-shadow:0 20px 60px rgba(2,6,12,0.8);max-height:90vh;overflow:auto}
+  /* SOCIALS */
+  .socials{display:flex;gap:10px;align-items:center;margin-top:14px}
+  .social-btn{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:var(--glass);border:1px solid rgba(255,255,255,0.03);font-weight:700;color:var(--muted);text-decoration:none}
+  .social-btn .dot{width:10px;height:10px;border-radius:50%;background:var(--accent1);box-shadow:0 6px 18px rgba(255,159,28,0.08);}
 
-/* ============= CASE STUDIES & PRICING ============= */
-.case-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px}
-.case{background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);padding:14px;border-radius:12px}
-.pricing{display:flex;gap:12px;margin-top:18px}
-.plan{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));padding:16px;border-radius:12px;min-width:200px;box-shadow:0 10px 30px rgba(2,6,12,0.35)}
+  /* TESTIMONIALS */
+  .testimonials{display:flex;gap:12px;overflow:auto;padding:8px 0;scroll-snap-type:x mandatory}
+  .test{flex:0 0 280px;min-width:240px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));padding:12px;border-radius:12px;box-shadow:0 10px 22px rgba(2,6,12,0.34);scroll-snap-align:start}
 
-/* ============= TIMELINE & ROADMAP ============= */
-.timeline{margin-top:22px;border-left:2px solid rgba(255,255,255,0.03);padding-left:18px}
-.tl-item{margin:18px 0;opacity:0;transform:translateY(14px);transition:opacity .55s var(--ease),transform .55s var(--ease)}
-.tl-item.show{opacity:1;transform:none}
-.roadmap{margin-top:16px;display:flex;gap:12px;flex-wrap:wrap}
+  /* CONTACT / NEWSLETTER */
+  .contact-wrap{display:flex;gap:18px;flex-wrap:wrap;align-items:flex-start;margin-top:18px}
+  .contact-box{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));padding:14px;border-radius:12px}
+  .input{padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit;min-width:220px}
 
-/* ============= BLOG PREVIEWS ============= */
-.blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px}
-.post{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));padding:12px;border-radius:12px;box-shadow:0 8px 20px rgba(2,6,12,0.36)}
+  /* FOOTER */
+  footer{margin-top:28px;padding:28px 0;border-top:1px solid rgba(255,255,255,0.02);color:var(--muted)}
+  .footer-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 
-/* ============= GALLERY (hover parallax) ============= */
-.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px}
-.g-card{background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);border-radius:12px;padding:12px;overflow:hidden;position:relative;cursor:pointer;contain:paint}
-.g-thumb{width:100%;height:160px;background:#081018;border-radius:10px;display:block;object-fit:cover;transition:transform .35s var(--ease);will-change:transform}
+  /* reveal helper */
+  .reveal{opacity:0;transform:translateY(14px);transition:opacity .55s var(--ease),transform .55s var(--ease)}
+  .reveal.show{opacity:1;transform:none}
+  @media (prefers-reduced-motion: reduce){
+    .bob,.reveal{animation:none !important;transition:none !important}
+  }
 
-/* ============= TESTIMONIALS ============= */
-.testimonials{display:flex;gap:12px;overflow:auto;padding:8px 0;scroll-snap-type:x mandatory}
-.test{flex:0 0 320px;min-width:260px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));padding:14px;border-radius:12px;box-shadow:0 10px 22px rgba(2,6,12,0.34);scroll-snap-align:start}
-
-/* ============= MARQUEE ============= */
-.marquee{display:flex;gap:20px;align-items:center;overflow:hidden;padding:14px 0}
-.marquee-inner{display:flex;gap:28px;animation:marq 16s linear infinite}
-@keyframes marq{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-.logo-small{width:84px;height:40px;object-fit:contain;opacity:0.85;filter:grayscale(0.2) contrast(0.9)}
-
-/* ============= NEWSLETTER / CONTACT ============= */
-.news{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:20px}
-.input{padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit;min-width:220px}
-
-/* ============= FAQ ============= */
-.faq{margin-top:22px}
-.faq-item{background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);border-radius:10px;margin-bottom:8px;overflow:hidden}
-.faq-head{display:flex;justify-content:space-between;align-items:center;padding:12px;cursor:pointer}
-.faq-body{padding:12px;color:var(--muted);display:none}
-
-/* ============= FOOTER ============= */
-footer{margin-top:36px;padding:28px 0;border-top:1px solid rgba(255,255,255,0.02);color:var(--muted)}
-.footer-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-
-/* reveal helper */
-.reveal{opacity:0;transform:translateY(16px);transition:opacity .55s var(--ease),transform .55s var(--ease)}
-.reveal.show{opacity:1;transform:none}
-@media (prefers-reduced-motion: reduce){
-  .bob,.marquee-inner{animation:none !important}
-}
-
-/* responsive */
-@media (max-width:1200px){.hero{grid-template-columns:1fr 420px}.features{grid-template-columns:repeat(2,1fr)}.project-grid{grid-template-columns:repeat(2,1fr)}.project-grid .project-card{min-width:auto}}
-@media (max-width:820px){.hero{grid-template-columns:1fr}.project-grid{grid-template-columns:1fr}.gallery{grid-template-columns:1fr}.char-wrap{display:none}.footer-grid{grid-template-columns:repeat(2,1fr)}}
-@media (max-width:420px){.hero-left h1{font-size:28px}}
+  /* responsive */
+  @media (max-width:980px){.hero{grid-template-columns:1fr}.skill-cloud{width:220px;height:220px}.char-wrap{display:none}}
+  @media (max-width:600px){.whatido{grid-template-columns:1fr}.testimonials{overflow:auto}}
 </style>
 </head>
 <body>
 
 <header>
-  <div class="container nav" role="navigation" aria-label="Main nav">
+  <div class="container nav" role="navigation" aria-label="Main navigation">
     <div class="brand">
-      <!-- EDIT: replace with your logo -->
       <img src="assets/logo.png" alt="logo" class="logo" loading="lazy" />
       <div>
-        <h1>CiphAnon Studios</h1>
-        <div style="font-size:12px;color:var(--muted)">Prototypes • Tools • UX</div>
+        <div style="font-weight:800">CiphAnon</div>
+        <div style="font-size:12px;color:var(--muted)">Developer & Prototyper</div>
       </div>
     </div>
 
-    <nav class="links" aria-label="Primary">
-      <a href="#projects">Work</a>
-      <a href="#features">Services</a>
+    <nav class="links" aria-label="Primary links">
       <a href="#about">About</a>
+      <a href="#skills">Skills</a>
       <a href="#contact">Contact</a>
-      <a href="#blog">Blog</a>
     </nav>
 
     <div class="actions">
@@ -167,609 +119,311 @@ footer{margin-top:36px;padding:28px 0;border-top:1px solid rgba(255,255,255,0.02
   </div>
 </header>
 
-<main class="container" id="top">
+<main class="container">
   <!-- HERO -->
   <section class="hero" aria-labelledby="hero-title">
-    <div class="hero-left">
-      <h1 id="hero-title"><span class="accent">CiphAnon Studios</span> — prototypes, tools & polished UX.</h1>
-      <p class="lead">3 years building across HTML, CSS, JavaScript, Godot, Lua, Java, Unity, Block Code and Python. I build playable prototypes, utility tooling and UI systems that ship.</p>
+    <div>
+      <h1 id="hero-title"><span class="accent-text">CiphAnon</span> — clean code, playful prototypes, fast iteration.</h1>
+      <p class="lead">3 years experience across HTML, CSS, JavaScript, Godot (GDScript), Lua, Java, Unity, Block Code, and Python. I focus on rapid prototyping, developer-first tooling, and UX-focused interactions.</p>
 
       <div class="hero-ctas">
-        <a class="btn" href="#projects">See Work</a>
-        <a class="btn secondary" href="#about">About the Studio</a>
+        <a class="btn" href="#contact">Get in touch</a>
+        <a class="btn secondary" href="#skills">See skills</a>
       </div>
 
-      <div class="badges" aria-hidden="true">
-        <div class="badge">Rapid Prototyping</div>
-        <div class="badge">Tooling</div>
-        <div class="badge">UX Systems</div>
-        <div class="badge">Playable Demos</div>
+      <div class="pills" aria-hidden="true">
+        <span class="pill">Prototyping</span>
+        <span class="pill">Tooling</span>
+        <span class="pill">UX</span>
       </div>
 
-      <div class="stats-row" aria-hidden="true">
-        <div class="stat"><strong id="statYears">0</strong><small style="color:var(--muted)">Years coding</small></div>
-        <div class="stat"><strong id="statLangs">0</strong><small style="color:var(--muted)">Languages / engines</small></div>
-        <div class="stat"><strong id="statProjects">0</strong><small style="color:var(--muted)">Projects</small></div>
+      <div class="stats-row" aria-hidden="true" style="margin-top:14px">
+        <div class="stat"><strong id="yearsCount">0</strong><small style="color:var(--muted)">Years coding</small></div>
+        <div class="stat"><strong id="langsCount">0</strong><small style="color:var(--muted)">Languages & engines</small></div>
+        <div class="stat"><strong id="thingsCount">0</strong><small style="color:var(--muted)">Projects / Demos</small></div>
       </div>
     </div>
 
     <div class="hero-frame reveal" aria-hidden="true">
-      <div class="grad-overlay" aria-hidden="true"></div>
+      <div class="grad-blob" aria-hidden="true"></div>
 
-      <div class="hero-cards" aria-hidden="true">
-        <div class="mini-card">App Dashboard</div>
-        <div class="mini-card">Design System</div>
-        <div class="mini-card">Game UI</div>
-      </div>
-
-      <!-- animated character (parallax & bob) -->
       <div class="char-wrap bob" id="charWrap" aria-hidden="false">
-        <!-- EDIT: replace with your character -->
         <img src="assets/char.png" alt="character" class="char" loading="lazy" />
       </div>
     </div>
   </section>
 
-  <!-- FEATURES -->
-  <section id="features" class="features reveal" aria-labelledby="features-title">
-    <h2 id="features-title" style="grid-column:1/-1;margin:0 0 12px">Core Services</h2>
-    <div class="feature">
-      <h3>Playables & Prototypes</h3>
-      <p>Rapid, playable prototypes that demonstrate interaction, feel, and core loops — shipped quickly for testing and iteration.</p>
-    </div>
+  <!-- ABOUT -->
+  <section id="about" class="section reveal" aria-labelledby="about-title">
+    <h2 id="about-title">About</h2>
+    <p class="about">I’m a developer with ~3 years of hands-on experience across web and game environments. I build prototypes to test ideas quickly, create small tooling that improves developer flow, and ship clean front-end experiences with usability and performance in mind. (Full details & code samples are available on request.)</p>
 
-    <div class="feature">
-      <h3>Developer Tooling</h3>
-      <p>Robust small tools and scripts that speed builds, reduce friction, and automate repetitive tasks in your pipeline.</p>
-    </div>
-
-    <div class="feature">
-      <h3>UX Systems</h3>
-      <p>Design systems and front-end architecture focused on accessibility, performance, and developer ergonomics.</p>
+    <div class="whatido" style="margin-top:12px">
+      <div class="what"><strong>Prototype & iterate</strong><div style="color:var(--muted);margin-top:6px">Fast experiments to validate mechanics and UX.</div></div>
+      <div class="what"><strong>Developer tooling</strong><div style="color:var(--muted);margin-top:6px">Scripts, small libs, and build helpers that save time.</div></div>
+      <div class="what"><strong>UI & polish</strong><div style="color:var(--muted);margin-top:6px">Clear interfaces and interaction feedback that feels good.</div></div>
     </div>
   </section>
 
-  <!-- PROJECTS FILTER + GRID -->
-  <section id="projects" class="reveal" aria-labelledby="projects-title" style="margin-top:26px">
-    <h2 id="projects-title">Projects</h2>
+  <!-- SKILLS CLOUD -->
+  <section id="skills" class="section reveal" aria-labelledby="skills-title">
+    <h2 id="skills-title">Skills (visual)</h2>
 
-    <div class="controls" aria-hidden="false">
-      <select id="filterSelect" class="filter" aria-label="Filter projects">
-        <option value="all">All</option>
-        <option value="prototype">Prototype</option>
-        <option value="tooling">Tooling</option>
-        <option value="web">Web</option>
-        <option value="game">Game</option>
-      </select>
-
-      <input id="projectSearch" class="search" type="search" placeholder="Search projects..." aria-label="Search projects" />
-
-      <div style="margin-left:auto;display:flex;gap:8px">
-        <button id="prevProj" class="btn secondary" aria-label="Previous projects">← Prev</button>
-        <button id="nextProj" class="btn secondary" aria-label="Next projects">Next →</button>
+    <div class="skills-wrap">
+      <div class="skill-cloud" id="skillCloud" aria-hidden="true">
+        <div class="skill small" data-angle="0">HTML</div>
+        <div class="skill" data-angle="40">CSS</div>
+        <div class="skill" data-angle="80">JavaScript</div>
+        <div class="skill small" data-angle="120">Godot</div>
+        <div class="skill" data-angle="160">Lua</div>
+        <div class="skill" data-angle="200">Java</div>
+        <div class="skill small" data-angle="240">Unity</div>
+        <div class="skill" data-angle="280">Python</div>
+        <div class="skill small" data-angle="320">Block Code</div>
       </div>
-    </div>
 
-    <div id="projectGrid" class="project-grid" tabindex="0">
-      <!-- Example project card; duplicate/edit as needed -->
-      <article class="project-card" data-type="prototype" data-title="Pet-clicker Prototype" data-tags="Godot,Prototype,Game" data-desc="Collectible pet prototype with upgrades and polish.">
-        <img src="assets/proj1.png" alt="Pet Clicker thumbnail" class="project-thumb" loading="lazy" onerror="this.style.background='#081018'" />
-        <h4 style="margin:10px 0 6px">Pet-clicker Prototype</h4>
-        <p style="margin:0;color:var(--muted)">Collectible pets, upgrades, and mutation systems.</p>
-        <div class="tags"><span class="tag">Godot</span><span class="tag">Prototype</span></div>
-      </article>
+      <div style="flex:1;min-width:240px">
+        <p style="color:var(--muted);margin-top:0">A visual snapshot of the languages and engines I use. Hover over the cloud (desktop) for a subtle tilt — everything is performance-friendly and respects reduced-motion preferences.</p>
 
-      <article class="project-card" data-type="web" data-title="Landing + Toolkit" data-tags="HTML,JS,Web" data-desc="Responsive landing and small JS tooling for deploy previews.">
-        <img src="assets/proj2.png" alt="Landing thumbnail" class="project-thumb" loading="lazy" onerror="this.style.background='#081018'" />
-        <h4 style="margin:10px 0 6px">Landing + Toolkit</h4>
-        <p style="margin:0;color:var(--muted)">Marketing landing + deploy helper scripts.</p>
-        <div class="tags"><span class="tag">HTML</span><span class="tag">JavaScript</span></div>
-      </article>
-
-      <article class="project-card" data-type="tooling" data-title="Dev Helpers" data-tags="Python,Java,Tooling" data-desc="Utilities that speed build steps and packaging.">
-        <img src="assets/proj3.png" alt="Dev Helpers thumbnail" class="project-thumb" loading="lazy" onerror="this.style.background='#081018'" />
-        <h4 style="margin:10px 0 6px">Dev Helpers</h4>
-        <p style="margin:0;color:var(--muted)">Python & Java utilities for builds and packaging.</p>
-        <div class="tags"><span class="tag">Python</span><span class="tag">Java</span></div>
-      </article>
-
-      <!-- add more project-card elements here to scale -->
-    </div>
-  </section>
-
-  <!-- PROJECT MODAL PREVIEW -->
-  <div id="modalBackdrop" class="modal-backdrop" role="dialog" aria-modal="true" aria-hidden="true">
-    <div class="modal" role="document" aria-labelledby="modalTitle">
-      <button id="modalClose" class="btn secondary" style="float:right">Close</button>
-      <h3 id="modalTitle"></h3>
-      <p id="modalDesc" style="color:var(--muted)"></p>
-      <div id="modalGallery" style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap"></div>
-      <div id="modalDetails" style="margin-top:12px;color:var(--muted)"></div>
-    </div>
-  </div>
-
-  <!-- CASE STUDIES -->
-  <section class="reveal" aria-labelledby="case-title" style="margin-top:28px">
-    <h2 id="case-title">Case studies</h2>
-    <div class="case-grid">
-      <article class="case">
-        <h4>Prototype: Pet ecosystem</h4>
-        <p style="color:var(--muted)">Short summary: validated progression and retention loops in a week-long sprint; reduced scope and polished interaction.</p>
-        <a href="/case/pet-ecosystem" style="color:var(--accent1)">Read case study →</a>
-      </article>
-
-      <article class="case">
-        <h4>Tooling: Deploy helper</h4>
-        <p style="color:var(--muted)">Small CLI and GitHub Actions combination that saved 30% deploy time on previews.</p>
-        <a href="/case/deploy-toolkit" style="color:var(--accent1)">Read case study →</a>
-      </article>
-
-      <article class="case">
-        <h4>UX: Design system</h4>
-        <p style="color:var(--muted)">Design tokens, accessible components, and a lightweight build story.</p>
-        <a href="/case/design-system" style="color:var(--accent1)">Read case study →</a>
-      </article>
-    </div>
-  </section>
-
-  <!-- PRICING / PACKAGES -->
-  <section class="reveal" style="margin-top:28px">
-    <h2>Packages</h2>
-    <div class="pricing">
-      <div class="plan">
-        <strong>Prototype Sprint</strong>
-        <div style="color:var(--muted);margin:8px 0">2-week rapid prototype • interaction & basic balancing</div>
-        <div style="font-weight:900;font-size:18px;margin-top:8px">$2k</div>
-      </div>
-      <div class="plan">
-        <strong>Tooling Pack</strong>
-        <div style="color:var(--muted);margin:8px 0">Build helpers, small CLI tools, packaging scripts</div>
-        <div style="font-weight:900;font-size:18px;margin-top:8px">$1.5k</div>
-      </div>
-      <div class="plan">
-        <strong>Full Delivery</strong>
-        <div style="color:var(--muted);margin:8px 0">Prototype → polish → delivery-ready assets</div>
-        <div style="font-weight:900;font-size:18px;margin-top:8px">Custom</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- TIMELINE & ROADMAP -->
-  <section class="reveal" style="margin-top:28px">
-    <h2>Timeline & Roadmap</h2>
-    <div class="timeline" id="timeline">
-      <div class="tl-item"><div class="date" style="color:var(--muted)">2022 — Now</div><div style="font-weight:800">Independent prototyper</div><div style="color:var(--muted)">Rapid prototyping, tooling, and collaborations.</div></div>
-      <div class="tl-item"><div class="date" style="color:var(--muted)">2023 Q4</div><div style="font-weight:800">Roadmap: New demo launcher</div><div style="color:var(--muted)">Creating a unified demo launcher for playtesting.</div></div>
-      <div class="tl-item"><div class="date" style="color:var(--muted)">2024 Q2</div><div style="font-weight:800">Roadmap: SDK helpers</div><div style="color:var(--muted)">Lightweight SDK to integrate prototypes with telemetry.</div></div>
-    </div>
-
-    <div class="roadmap">
-      <div style="background:var(--glass);padding:12px;border-radius:10px;color:var(--muted)">Prototype tools</div>
-      <div style="background:var(--glass);padding:12px;border-radius:10px;color:var(--muted)">Playtest analytics</div>
-      <div style="background:var(--glass);padding:12px;border-radius:10px;color:var(--muted)">Docs & demos</div>
-    </div>
-  </section>
-
-  <!-- BLOG PREVIEWS -->
-  <section id="blog" class="reveal" style="margin-top:28px">
-    <h2>Latest posts</h2>
-    <div class="blog-grid">
-      <article class="post">
-        <h4>Polishing feedback loops</h4>
-        <p style="color:var(--muted)">Short: tiny improvements that dramatically improve perceived quality.</p>
-        <a href="/blog/polish-feedback" style="color:var(--accent1)">Read →</a>
-      </article>
-      <article class="post">
-        <h4>Speeding up builds</h4>
-        <p style="color:var(--muted)">Small scripts and habits that save hours each week.</p>
-        <a href="/blog/speed-builds" style="color:var(--accent1)">Read →</a>
-      </article>
-      <article class="post">
-        <h4>Crafting prototypes in Godot</h4>
-        <p style="color:var(--muted)">How I structure prototypes for fast iteration.</p>
-        <a href="/blog/godot-prototypes" style="color:var(--accent1)">Read →</a>
-      </article>
-    </div>
-  </section>
-
-  <!-- GALLERY -->
-  <section class="reveal" style="margin-top:28px">
-    <h2>Gallery</h2>
-    <div class="gallery" id="gallery">
-      <div class="g-card" tabindex="0">
-        <img src="assets/proj1.png" alt="" class="g-thumb" loading="lazy" onerror="this.style.background='#081018'"/>
-        <div class="g-meta"><div style="font-weight:800">Pet Clicker</div><div style="color:var(--muted)">Prototype • Godot</div></div>
-      </div>
-      <div class="g-card" tabindex="0">
-        <img src="assets/proj2.png" alt="" class="g-thumb" loading="lazy" onerror="this.style.background='#081018'"/>
-        <div class="g-meta"><div style="font-weight:800">Landing Toolkit</div><div style="color:var(--muted)">Web • Tools</div></div>
-      </div>
-      <div class="g-card" tabindex="0">
-        <img src="assets/proj3.png" alt="" class="g-thumb" loading="lazy" onerror="this.style.background='#081018'"/>
-        <div class="g-meta"><div style="font-weight:800">Dev Helpers</div><div style="color:var(--muted)">Python • Java</div></div>
+        <div class="socials" aria-label="Social links">
+          <a class="social-btn" href="https://github.com/your-username" target="_blank" rel="noopener"> <!-- EDIT -->
+            <span class="dot" style="background:#6cc644"></span> GitHub
+          </a>
+          <a class="social-btn" href="https://youtube.com/your-channel" target="_blank" rel="noopener"> <!-- EDIT -->
+            <span class="dot" style="background:#FF0000"></span> YouTube
+          </a>
+          <a class="social-btn" href="https://twitter.com/your-handle" target="_blank" rel="noopener"> <!-- EDIT -->
+            <span class="dot" style="background:#1DA1F2"></span> Twitter
+          </a>
+          <a class="social-btn" href="mailto:example@email.com">
+            <span class="dot" style="background:#ff9f1c"></span> Email
+          </a>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- TESTIMONIALS -->
-  <section class="reveal" style="margin-top:28px">
-    <h2>What people say</h2>
+  <section class="section reveal" aria-labelledby="test-title">
+    <h2 id="test-title">Testimonials</h2>
     <div class="testimonials" role="list" aria-label="Testimonials">
-      <div class="test" role="listitem">
-        <p>"Delivered a playable that felt polished and tested — fast turnaround."</p>
-        <strong>— Alex</strong>
-      </div>
-      <div class="test" role="listitem">
-        <p>"Tooling was pragmatic and easy to use — our CI improved."</p>
-        <strong>— Sam</strong>
-      </div>
-      <div class="test" role="listitem">
-        <p>"Great communication and clean code."</p>
-        <strong>— Rina</strong>
-      </div>
+      <div class="test" role="listitem"><p>"Quick, clear, and the prototype felt real." </p><strong>— Alex</strong></div>
+      <div class="test" role="listitem"><p>"Helpful tooling that made local builds easy." </p><strong>— Sam</strong></div>
+      <div class="test" role="listitem"><p>"Great communicator and clean code." </p><strong>— Rina</strong></div>
     </div>
   </section>
 
-  <!-- MARQUEE -->
-  <section class="reveal" style="margin-top:28px">
-    <h4>Built with / Featured</h4>
-    <div class="marquee" aria-hidden="true">
-      <div class="marquee-inner" id="marqInner">
-        <img src="assets/logo.png" alt="logo" class="logo-small" loading="lazy" />
-        <img src="assets/logo.png" alt="logo" class="logo-small" loading="lazy" />
-        <img src="assets/logo.png" alt="logo" class="logo-small" loading="lazy" />
-        <img src="assets/logo.png" alt="logo" class="logo-small" loading="lazy" />
-        <img src="assets/logo.png" alt="logo" class="logo-small" loading="lazy" />
-        <img src="assets/logo.png" alt="logo" class="logo-small" loading="lazy" />
-        <img src="assets/logo.png" alt="logo" class="logo-small" loading="lazy" />
-        <img src="assets/logo.png" alt="logo" class="logo-small" loading="lazy" />
-      </div>
-    </div>
-  </section>
+  <!-- CONTACT / NEWSLETTER -->
+  <section id="contact" class="section reveal" aria-labelledby="contact-title">
+    <h2 id="contact-title">Contact</h2>
 
-  <!-- NEWSLETTER + CONTACT -->
-  <section class="reveal" style="margin-top:28px;display:flex;gap:18px;flex-wrap:wrap;align-items:center">
-    <div style="flex:1;min-width:220px">
-      <h3 style="margin:0 0 8px">Newsletter</h3>
-      <p style="color:var(--muted);margin:0 0 10px">Monthly notes: prototypes, small dev tips and behind-the-scenes. No spam.</p>
-      <form id="newsForm" onsubmit="event.preventDefault(); subscribe();" style="display:flex;gap:8px">
-        <input id="email" class="input" type="email" placeholder="you@email.com" required />
-        <button class="btn" type="submit">Subscribe</button>
-      </form>
-      <div id="newsMsg" style="margin-top:8px;color:var(--muted);font-size:13px"></div>
-    </div>
-
-    <div style="width:320px" id="contact">
-      <h3 style="margin:0 0 8px">Contact</h3>
-      <div style="background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01));padding:12px;border-radius:10px">
-        <p style="color:var(--muted);margin:0 0 8px">Email for quotes, demos, or code samples — include a short brief and target timeline.</p>
-        <!-- demo contact form (no server) -->
+    <div class="contact-wrap">
+      <div class="contact-box" style="flex:1;min-width:260px">
         <form id="contactForm" onsubmit="event.preventDefault(); contactSubmit();" aria-label="Contact form">
-          <input id="contactName" class="input" type="text" placeholder="Your name" required style="margin-bottom:8px;width:100%" />
-          <input id="contactEmail" class="input" type="email" placeholder="Your email" required style="margin-bottom:8px;width:100%" />
-          <textarea id="contactMsg" class="input" placeholder="Short project brief" required style="height:88px;width:100%"></textarea>
-          <div style="margin-top:8px;display:flex;gap:8px">
+          <input id="name" class="input" type="text" placeholder="Your name" required style="margin-bottom:8px" />
+          <input id="email" class="input" type="email" placeholder="Your email" required style="margin-bottom:8px" />
+          <textarea id="message" class="input" placeholder="Short brief (what do you need?)" required style="height:96px;margin-bottom:8px"></textarea>
+          <div style="display:flex;gap:8px">
             <button class="btn" type="submit">Send (demo)</button>
-            <button class="btn secondary" type="button" onclick="prefillDemo()">Prefill</button>
+            <button class="btn secondary" type="button" onclick="prefill()">Prefill</button>
           </div>
-          <div id="contactMsg" style="margin-top:8px;color:var(--muted);font-size:13px"></div>
+          <div id="contactResult" style="margin-top:8px;color:var(--muted)"></div>
         </form>
       </div>
-    </div>
-  </section>
 
-  <!-- FAQ -->
-  <section class="reveal" style="margin-top:28px">
-    <h3>FAQ</h3>
-    <div class="faq">
-      <div class="faq-item">
-        <div class="faq-head" tabindex="0"><div>Where are code samples?</div><div aria-hidden="true">▾</div></div>
-        <div class="faq-body">Project pages and case studies link to repo or downloads when available.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-head" tabindex="0"><div>How long is a prototype sprint?</div><div aria-hidden="true">▾</div></div>
-        <div class="faq-body">Typical sprint is 1–2 weeks depending on scope and fidelity.</div>
+      <div style="width:320px">
+        <div class="contact-box">
+          <h4 style="margin:0 0 8px">Newsletter</h4>
+          <p style="color:var(--muted);margin:0 0 10px">Short monthly notes on prototypes and small dev tips. No spam.</p>
+          <form id="newsForm" onsubmit="event.preventDefault(); subscribe()" aria-label="Newsletter form" style="display:flex;gap:8px">
+            <input id="newsEmail" class="input" type="email" placeholder="you@email.com" required />
+            <button class="btn" type="submit">Subscribe</button>
+          </form>
+          <div id="newsResult" style="margin-top:8px;color:var(--muted)"></div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- CTA -->
-  <div class="cta reveal" style="margin-top:28px">
-    <div>
-      <strong>Ready to prototype? Let’s build.</strong>
-      <div style="color:var(--muted)">Fast turnarounds, clear scope, and production-minded delivery.</div>
-    </div>
-    <div style="display:flex;gap:10px">
-      <a class="btn" href="#contact">Request Quote</a>
-      <a class="btn secondary" href="mailto:example@email.com">Email</a>
-    </div>
-  </div>
 </main>
 
 <footer>
-  <div class="container">
-    <div class="footer-grid">
-      <div>
-        <strong>CiphAnon Studios</strong>
-        <div style="color:var(--muted);margin-top:8px">Interactive prototypes • developer tooling • UX systems</div>
-      </div>
-
-      <div>
-        <h4 style="margin:0 0 8px">Work</h4>
-        <a href="#projects">Featured</a>
-        <a href="/projects">All Projects</a>
-        <a href="/docs">Docs</a>
-      </div>
-
-      <div>
-        <h4 style="margin:0 0 8px">Company</h4>
-        <a href="/about">About</a>
-        <a href="/contact">Contact</a>
-        <a href="/careers">Careers</a>
-      </div>
-
-      <div>
-        <h4 style="margin:0 0 8px">Connect</h4>
-        <a href="https://github.com/your-username" target="_blank" rel="noopener">GitHub</a>
-        <a href="https://twitter.com/your-handle" target="_blank" rel="noopener">Twitter</a>
-        <a href="mailto:example@email.com">Email</a>
-      </div>
+  <div class="container footer-grid">
+    <div>
+      <strong>CiphAnon</strong>
+      <div style="color:var(--muted);margin-top:8px">Developer & Prototyper</div>
     </div>
 
-    <div style="margin-top:14px;color:var(--muted);font-size:13px">© <span id="year"></span> CiphAnon Studios — All rights reserved.</div>
+    <div>
+      <h4 style="margin:0 0 8px">Navigate</h4>
+      <a href="#about">About</a><br/>
+      <a href="#skills">Skills</a><br/>
+      <a href="#contact">Contact</a>
+    </div>
+
+    <div>
+      <h4 style="margin:0 0 8px">Socials</h4>
+      <a href="https://github.com/your-username" target="_blank" rel="noopener">GitHub</a><br/> <!-- EDIT -->
+      <a href="https://youtube.com/your-channel" target="_blank" rel="noopener">YouTube</a><br/> <!-- EDIT -->
+      <a href="https://twitter.com/your-handle" target="_blank" rel="noopener">Twitter</a>
+    </div>
   </div>
+
+  <div style="max-width:var(--maxw);margin:12px auto 40px;color:var(--muted);font-size:13px;padding:0 20px">© <span id="year"></span> CiphAnon — All rights reserved.</div>
 </footer>
 
-<!-- ========== Scripts (performance-minded) ========== -->
 <script>
-/* ============================
-  Utilities & small helpers
-  - rAF throttling
-  - IntersectionObserver reveals
-  - lazy image behavior via loading="lazy"
-  - respects prefers-reduced-motion
-============================ */
+  // set year
+  document.getElementById('year').textContent = new Date().getFullYear();
 
-// set year
-document.getElementById('year').textContent = new Date().getFullYear();
-
-// Reveal on scroll
-const ro = new IntersectionObserver((entries)=>{
-  for(const e of entries){
-    if(e.isIntersecting){ e.target.classList.add('show'); ro.unobserve(e.target); }
-  }
-}, { threshold: 0.12 });
-document.querySelectorAll('.reveal').forEach(el=> ro.observe(el));
-
-/* ===== Hero parallax (rAF throttled) ===== */
-(function(){
-  const scene = document.querySelector('.hero-frame');
-  const charWrap = document.getElementById('charWrap');
-  if(!scene || !charWrap) return;
-  let raf = null, last = {x:0,y:0};
-  function onMove(e){
-    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-    const r = scene.getBoundingClientRect();
-    const dx = (clientX - (r.left + r.width/2)) / (r.width || 1);
-    const dy = (clientY - (r.top + r.height/2)) / (r.height || 1);
-    last.x = dx; last.y = dy;
-    if(raf === null){
-      raf = requestAnimationFrame(()=> {
-        const tx = last.x * 14;
-        const ty = last.y * 10;
-        charWrap.style.transform = `translate3d(${tx}px, ${ty}px, 0)`;
-        raf = null;
-      });
-    }
-  }
-  scene.addEventListener('mousemove', onMove, {passive:true});
-  scene.addEventListener('touchmove', onMove, {passive:true});
-  scene.addEventListener('mouseleave', ()=> charWrap.style.transform = '', {passive:true});
-  function check(){ if(window.innerWidth < 720){ scene.removeEventListener('mousemove', onMove); scene.removeEventListener('touchmove', onMove); } }
-  check();
-  window.addEventListener('resize', check, {passive:true});
-})();
-
-/* ===== Counters (animate when visible) ===== */
-(function counters(){
-  const elHero = document.querySelector('.hero');
-  if(!elHero) return;
+  // reveal sections
   const io = new IntersectionObserver((entries)=>{
     for(const e of entries){
-      if(e.isIntersecting){
-        runCount('statYears',3,800);
-        runCount('statLangs',9,900);
-        runCount('statProjects',12,1000);
-        io.disconnect();
-      }
+      if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target); }
     }
-  }, { threshold: 0.3 });
-  io.observe(elHero);
-  function runCount(id,to,dur){
-    const el = document.getElementById(id);
-    if(!el) return;
-    let start = null;
-    function step(ts){
-      if(!start) start = ts;
-      const p = Math.min(1,(ts-start)/dur);
-      el.textContent = Math.floor(p*to);
-      if(p<1) requestAnimationFrame(step);
-      else el.textContent = to;
-    }
-    requestAnimationFrame(step);
-  }
-})();
+  }, {threshold:0.12});
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-/* ===== Project filters & search ===== */
-(function projectFiltering(){
-  const select = document.getElementById('filterSelect');
-  const search = document.getElementById('projectSearch');
-  const grid = document.getElementById('projectGrid');
-  function filter(){
-    const q = (search.value || '').trim().toLowerCase();
-    const type = select.value;
-    const cards = grid.querySelectorAll('.project-card');
-    cards.forEach(c=>{
-      const title = (c.dataset.title||'').toLowerCase();
-      const tags = (c.dataset.tags||'').toLowerCase();
-      const t = c.dataset.type || 'all';
-      const matchesType = (type === 'all') || (t === type);
-      const matchesQuery = !q || title.includes(q) || tags.includes(q);
-      c.style.display = (matchesType && matchesQuery) ? '' : 'none';
-    });
-  }
-  select && select.addEventListener('change', filter, {passive:true});
-  search && search.addEventListener('input', debounce(filter, 150), {passive:true});
-  // keyboard prev/next scroll for grid area (small offset)
-  const prevBtn = document.getElementById('prevProj');
-  const nextBtn = document.getElementById('nextProj');
-  prevBtn && prevBtn.addEventListener('click', ()=> scrollGrid(-360));
-  nextBtn && nextBtn.addEventListener('click', ()=> scrollGrid(360));
-  function scrollGrid(offset){ grid.scrollBy({left:offset, behavior:'smooth'}); }
-  // debounce util
-  function debounce(fn, wait){ let t; return (...a)=>{ clearTimeout(t); t=setTimeout(()=>fn(...a), wait); } }
-})();
-
-/* ===== Project modal preview ===== */
-(function projectModal(){
-  const modal = document.getElementById('modalBackdrop');
-  const title = document.getElementById('modalTitle');
-  const desc = document.getElementById('modalDesc');
-  const details = document.getElementById('modalDetails');
-  const gallery = document.getElementById('modalGallery');
-  const close = document.getElementById('modalClose');
-  function open(data){
-    title.textContent = data.title || '';
-    desc.textContent = data.desc || '';
-    details.textContent = data.details || '';
-    // gallery: if data.images exist (array), show thumbnails; else show nothing
-    gallery.innerHTML = '';
-    if(Array.isArray(data.images)){
-      data.images.forEach(src=>{
-        const img = document.createElement('img');
-        img.src = src; img.loading = 'lazy';
-        img.style.width='120px'; img.style.borderRadius='8px'; img.style.objectFit='cover';
-        gallery.appendChild(img);
-      });
-    }
-    modal.style.display='flex'; modal.setAttribute('aria-hidden','false');
-    close.focus();
-  }
-  function closeModal(){ modal.style.display='none'; modal.setAttribute('aria-hidden','true'); }
-  close && close.addEventListener('click', closeModal);
-  modal && modal.addEventListener('click', (e)=> { if(e.target === modal) closeModal(); });
-  document.querySelectorAll('.project-card').forEach(card=>{
-    card.addEventListener('click', ()=> {
-      const data = {
-        title: card.dataset.title,
-        desc: card.dataset.desc,
-        details: card.dataset.desc + ' — more details could be loaded from JSON.',
-        images: [ card.querySelector('img')?.src ].filter(Boolean)
-      };
-      try{ open(data); }catch(e){}
-    });
-    card.addEventListener('keydown', (e)=> { if(e.key === 'Enter' || e.key === ' ') { card.click(); e.preventDefault(); }});
-  });
-})();
-
-/* ===== Gallery hover parallax (rAF) ===== */
-(function galleryParallax(){
-  const cards = document.querySelectorAll('.g-card');
-  cards.forEach(card=>{
-    let raf=null;
+  // gentle parallax for hero character (rAF throttled)
+  (function(){
+    const frame = document.querySelector('.hero-frame');
+    const char = document.getElementById('charWrap');
+    if(!frame || !char) return;
+    let raf=null, last={x:0,y:0};
     function onMove(e){
-      const rect = card.getBoundingClientRect();
-      const cx = rect.left + rect.width/2;
-      const cy = rect.top + rect.height/2;
       const clientX = e.touches ? e.touches[0].clientX : e.clientX;
       const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-      const dx = (clientX - cx) / (rect.width/2);
-      const dy = (clientY - cy) / (rect.height/2);
-      if(raf) cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(()=> {
-        const img = card.querySelector('.g-thumb');
-        img.style.transform = `translate3d(${dx*6}px, ${dy*-6}px, 0) scale(1.02)`;
-      });
+      const r = frame.getBoundingClientRect();
+      const dx = (clientX - (r.left + r.width/2))/(r.width||1);
+      const dy = (clientY - (r.top + r.height/2))/(r.height||1);
+      last.x = dx; last.y = dy;
+      if(raf === null){
+        raf = requestAnimationFrame(()=> {
+          const tx = last.x * 10;
+          const ty = last.y * 8;
+          char.style.transform = `translate3d(${tx}px, ${ty}px, 0)`;
+          raf = null;
+        });
+      }
     }
-    function reset(){ const img = card.querySelector('.g-thumb'); if(img) img.style.transform = ''; }
-    card.addEventListener('mousemove', onMove, {passive:true});
-    card.addEventListener('touchmove', onMove, {passive:true});
-    card.addEventListener('mouseleave', reset, {passive:true});
-    card.addEventListener('touchend', reset, {passive:true});
-  });
-})();
+    frame.addEventListener('mousemove', onMove, {passive:true});
+    frame.addEventListener('touchmove', onMove, {passive:true});
+    frame.addEventListener('mouseleave', ()=> char.style.transform = '', {passive:true});
+    function check(){ if(window.innerWidth < 720){ frame.removeEventListener('mousemove', onMove); frame.removeEventListener('touchmove', onMove); } }
+    check(); window.addEventListener('resize', check, {passive:true});
+  })();
 
-/* ===== Testimonials ticker (cheap) ===== */
-(function testimonialsTicker(){
-  const el = document.querySelector('.testimonials');
-  if(!el) return;
-  let pos = 0, last = performance.now(), running = true;
-  function tick(ts){
-    if(!running){ last = ts; requestAnimationFrame(tick); return; }
-    const dt = ts - last; last = ts;
-    pos += dt * 0.02;
-    if(pos > el.scrollWidth - el.clientWidth) pos = 0;
-    el.scrollLeft = pos;
-    requestAnimationFrame(tick);
+  // skill cloud layout + gentle motion (no full spin)
+  (function(){
+    const cloud = document.getElementById('skillCloud');
+    if(!cloud) return;
+    const nodes = [...cloud.querySelectorAll('.skill')];
+    const r = Math.min(cloud.clientWidth, cloud.clientHeight)/2 - 36;
+    nodes.forEach(n=>{
+      const a = (parseFloat(n.dataset.angle)||0) * Math.PI/180;
+      const x = Math.cos(a) * r;
+      const y = Math.sin(a) * r;
+      n.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
+    });
+    // subtle weave motion using rAF (cheap)
+    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    let t=0;
+    function weave(){
+      t += 0.002;
+      const wobble = Math.sin(t)*2;
+      cloud.style.transform = `translateZ(0) rotate(${wobble}deg)`;
+      nodes.forEach(n=>{
+        // counter-rotate so labels remain readable
+        n.style.transform += ` rotate(${-wobble}deg)`;
+      });
+      requestAnimationFrame(weave);
+    }
+    requestAnimationFrame(weave);
+  })();
+
+  // counters (trigger once when hero visible)
+  (function(){
+    const hero = document.querySelector('.hero');
+    if(!hero) return;
+    const o = new IntersectionObserver((entries)=>{
+      for(const e of entries){
+        if(e.isIntersecting){
+          animate('yearsCount',3,700);
+          animate('langsCount',9,800);
+          animate('thingsCount',12,900);
+          o.disconnect();
+        }
+      }
+    }, {threshold:0.3});
+    o.observe(hero);
+    function animate(id,to,dur){
+      const el = document.getElementById(id);
+      if(!el) return;
+      let start=null;
+      function step(ts){
+        if(!start) start=ts;
+        const p = Math.min(1, (ts-start)/dur);
+        el.textContent = Math.floor(p*to);
+        if(p < 1) requestAnimationFrame(step);
+        else el.textContent = to;
+      }
+      requestAnimationFrame(step);
+    }
+  })();
+
+  // testimonials simple auto-scroll (cheap)
+  (function(){
+    const el = document.querySelector('.testimonials');
+    if(!el) return;
+    let pos=0,last=performance.now(),running=true;
+    function tick(ts){
+      if(!running){ last=ts; requestAnimationFrame(tick); return; }
+      const dt = ts-last; last=ts;
+      pos += dt*0.02;
+      if(pos > el.scrollWidth - el.clientWidth) pos = 0;
+      el.scrollLeft = pos;
+      requestAnimationFrame(tick);
+    }
+    el.addEventListener('mouseenter', ()=> running=false, {passive:true});
+    el.addEventListener('mouseleave', ()=> running=true, {passive:true});
+    if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches) requestAnimationFrame(tick);
+  })();
+
+  // contact demo
+  function contactSubmit(){
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const msg = document.getElementById('message').value.trim();
+    const out = document.getElementById('contactResult');
+    if(!name||!email||!msg){ out.textContent = 'Please fill all fields.'; return; }
+    out.textContent = 'Message sent (demo). Replace this with a real endpoint to receive messages.';
+    setTimeout(()=> out.textContent = '', 4500);
   }
-  el.addEventListener('mouseenter', ()=> running=false, {passive:true});
-  el.addEventListener('mouseleave', ()=> running=true, {passive:true});
-  if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches) requestAnimationFrame(tick);
-})();
+  function prefill(){
+    document.getElementById('name').value = 'Acme';
+    document.getElementById('email').value = 'hello@acme.test';
+    document.getElementById('message').value = 'We need a prototype to test mechanic X.';
+  }
 
-/* ===== Marquee pause on hover ===== */
-(function marqueePause(){
-  const m = document.querySelector('.marquee');
-  if(!m) return;
-  m.addEventListener('mouseenter', ()=> { const inr = m.querySelector('.marquee-inner'); if(inr) inr.style.animationPlayState='paused'; }, {passive:true});
-  m.addEventListener('mouseleave', ()=> { const inr = m.querySelector('.marquee-inner'); if(inr) inr.style.animationPlayState='running'; }, {passive:true});
-})();
+  // newsletter demo
+  function subscribe(){
+    const em = document.getElementById('newsEmail').value.trim();
+    const out = document.getElementById('newsResult');
+    if(!em){ out.textContent = 'Enter an email.'; return; }
+    out.textContent = 'Thanks — demo subscription saved. (Hook this to a provider for real signups.)';
+    setTimeout(()=> out.textContent = '', 4000);
+  }
 
-/* ===== FAQ accordion ===== */
-document.querySelectorAll('.faq-head').forEach(head=>{
-  const body = head.nextElementSibling;
-  head.addEventListener('click', ()=> {
-    const open = body.style.display === 'block' || body.style.display === '';
-    document.querySelectorAll('.faq-body').forEach(b=> b.style.display='none');
-    if(!open) body.style.display='block';
-  });
-  head.addEventListener('keydown', (e)=> { if(e.key==='Enter' || e.key===' ') { head.click(); e.preventDefault(); }});
-});
+  // focus outline: show only after keyboard navigation
+  (function(){
+    function onFirstTab(e){
+      if(e.key === 'Tab') document.body.classList.add('show-focus');
+      window.removeEventListener('keydown', onFirstTab);
+    }
+    window.addEventListener('keydown', onFirstTab);
+  })();
 
-/* ===== Newsletter demo ===== */
-function subscribe(){
-  const email = document.getElementById('email'); const msg = document.getElementById('newsMsg');
-  if(!email || !email.value){ msg.textContent='Enter an email'; return; }
-  msg.textContent = 'Thanks — demo subscription saved. (Replace with your real endpoint)';
-  setTimeout(()=> msg.textContent='', 4000);
-}
-
-/* ===== Contact demo submit ===== */
-function contactSubmit(){
-  const name = document.getElementById('contactName'); const email = document.getElementById('contactEmail'); const m = document.getElementById('contactMsg'); const out = document.getElementById('contactMsg');
-  if(!name.value || !email.value || !document.getElementById('contactMsg').value){ out.textContent='Fill all fields.'; return; }
-  out.textContent = 'Message received (demo). I will reply when this is hooked to real email.';
-  setTimeout(()=> out.textContent = '', 5000);
-}
-/* prefill demo data */
-function prefillDemo(){ document.getElementById('contactName').value='Acme Inc'; document.getElementById('contactEmail').value='hello@acme.test'; document.getElementById('contactMsg').value='We need a 2-week prototype to test mechanic X.'; }
-
-/* ===== Accessibility: focus visible only when keyboard used ===== */
-(function focusOutline(){
-  function handler(e){ if(e.key === 'Tab') document.body.classList.add('show-focus'); window.removeEventListener('keydown', handler); }
-  window.addEventListener('keydown', handler);
-})();
-
-/* ===== Optional: service worker registration (commented) ===== */
-/*
-if('serviceWorker' in navigator){
-  navigator.serviceWorker.register('/sw.js').then(()=> console.log('sw registered')).catch(()=>{});
-}
-*/
-
-/* Respect reduced motion: heavy loops are gated by preference checks above */
-
+  // Respect reduced motion: heavy loops are gated by the checks above.
 </script>
 </body>
 </html>
