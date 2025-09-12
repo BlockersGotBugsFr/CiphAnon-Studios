@@ -4,332 +4,208 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>CiphAnon — Personal Hub</title>
-<meta name="description" content="CiphAnon — personal hub: prototypes, tooling, demos & socials." />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+<meta name="description" content="CiphAnon — prototypes, tooling, demos & socials." />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg-1:#061017;
-    --bg-2:#071828;
-    --glass: rgba(255,255,255,0.04);
-    --muted:#93a6bb;
-    --accent-a:#ff9f1c;
-    --accent-b:#ff4d7a;
-    --card:#0f1722;
-    --radius:14px;
-    --maxw:1100px;
-    --shadow: 0 18px 50px rgba(2,8,20,0.6);
-    --fps-target:60;
+    --bg:#061018;
+    --panel:#0e1720;
+    --muted:#9fb0c4;
+    --text:#eaf6ff;
+    --accent:#8be4ff;
+    --accent-2:#8cffc1;
+    --glass: rgba(255,255,255,0.03);
+    --radius:12px;
+    --maxw:1000px;
+    --shadow: 0 12px 36px rgba(2,6,12,0.6);
   }
-
-  html,body{height:100%}
   *{box-sizing:border-box}
+  html,body{height:100%}
   body{
     margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;
-    color:#edf6ff;background:linear-gradient(180deg,var(--bg-1),var(--bg-2)) fixed;
-    -webkit-font-smoothing:antialiased;line-height:1.45;overflow-y:auto;
+    background:linear-gradient(180deg,var(--bg), #07121a);
+    color:var(--text);-webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;line-height:1.45;
   }
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:36px}
 
-  .wrap{max-width:var(--maxw);margin:0 auto;padding:28px;position:relative;z-index:5}
-  header{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:10px 0}
+  /* Header (minimal) */
+  header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 0}
   .brand{display:flex;align-items:center;gap:12px}
-  .brand .mark{width:54px;height:54px;border-radius:12px;overflow:hidden;flex:0 0 54px;box-shadow:0 8px 24px rgba(0,0,0,0.35)}
-  .brand .mark img{width:100%;height:100%;object-fit:cover;display:block}
-  .brand h1{font-size:16px;margin:0;font-weight:800}
-  .nav a{margin-left:14px;color:var(--muted);font-weight:700;text-decoration:none}
-  .nav a:hover{color:var(--accent-a)}
-  .cta-btn{background:linear-gradient(90deg,var(--accent-a),var(--accent-b));color:#071018;padding:10px 14px;border-radius:10px;border:0;font-weight:800;cursor:pointer;box-shadow:var(--shadow)}
+  .mark{width:56px;height:56px;border-radius:10px;overflow:hidden;background:linear-gradient(180deg,#0b1318,#0e1720);flex:0 0 56px;box-shadow:var(--shadow)}
+  .mark img{width:100%;height:100%;object-fit:cover;display:block}
+  .brand .name{font-weight:800;font-size:15px;letter-spacing:0.2px}
+  nav{display:flex;gap:14px;align-items:center}
+  nav a{color:var(--muted);font-weight:600;padding:6px;border-radius:8px}
+  nav a:hover{color:var(--accent)}
 
-  /* ------------------------------------------------------------
-     Background canvas (full bleed) + subtle watermark using image
-     ------------------------------------------------------------ */
-  .bg-canvas { position:fixed; inset:0; z-index:0; pointer-events:none; }
-  .bg-watermark { position:fixed; right:6%; top:8%; width:320px; height:200px; opacity:0.06; z-index:0; image-rendering:auto; pointer-events:none; filter:blur(2px) contrast(.9); }
+  /* Hero */
+  .hero{display:grid;grid-template-columns:1fr 360px;gap:28px;align-items:center;padding:46px 0}
+  .intro-kicker{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
+  .intro-title{font-size:40px;line-height:1.03;margin:8px 0;font-weight:800}
+  .intro-title .accent{background:linear-gradient(90deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .intro-sub{color:var(--muted);margin-top:12px;max-width:56ch}
+  .cta-row{margin-top:20px;display:flex;gap:10px;align-items:center}
+  .btn{padding:10px 14px;border-radius:10px;border:0;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#052027;font-weight:800;cursor:pointer}
+  .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted)}
 
-  /* HERO */
-  .hero{display:grid;grid-template-columns:1fr 420px;gap:30px;align-items:center;padding:52px 0 28px;position:relative;z-index:5}
-  .tag{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
-  .title{font-size:44px;line-height:1.02;margin:6px 0;font-weight:800}
-  .title .accent{background:linear-gradient(90deg,var(--accent-a),var(--accent-b));-webkit-background-clip:text;background-clip:text;color:transparent}
-  .strap{color:var(--muted);margin-top:12px;max-width:60ch;font-size:16px}
-  .buttons{display:flex;gap:12px;margin-top:20px;flex-wrap:wrap}
-  .small-badges{margin-top:18px;display:flex;gap:8px;flex-wrap:wrap}
-  .badge{background:var(--glass);border-radius:999px;padding:8px 12px;color:var(--muted);font-weight:700;border:1px solid rgba(255,255,255,0.03)}
+  /* portrait card */
+  .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:14px;border-radius:14px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:12px;align-items:center;justify-content:center}
+  .portrait{width:240px;height:240px;border-radius:10px;overflow:hidden;box-shadow:0 20px 40px rgba(0,0,0,0.5)}
+  .portrait img{width:100%;height:100%;object-fit:cover}
+  .card h3{margin:0;font-size:16px}
+  .card p{margin:0;color:var(--muted);text-align:center;font-size:13px}
 
-  /* HERO CARD (portrait) */
-  .card{
-    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-    border-radius:16px;padding:16px;box-shadow:var(--shadow);display:flex;gap:12px;align-items:center;
-  }
-  .portrait{width:240px;height:240px;border-radius:12px;overflow:hidden;flex:0 0 240px;box-shadow:0 20px 40px rgba(0,0,0,0.5)}
-  .portrait img{width:100%;height:100%;object-fit:cover;display:block}
-  .card-info{flex:1}
-  .card-info h3{margin:0 0 6px;font-size:18px}
-  .card-info p{margin:0;color:var(--muted)}
+  /* Skills */
+  .skills{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+  .chip{background:var(--glass);padding:8px 12px;border-radius:999px;color:var(--muted);font-weight:700;border:1px solid rgba(255,255,255,0.03);font-size:13px}
 
-  /* QUICK LINKS / SOCIAL HUB */
-  .social-hub{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
-  .social-btn{display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:12px;background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted);font-weight:800;text-decoration:none}
-  .social-btn:hover{background:linear-gradient(90deg,var(--accent-a),var(--accent-b));color:#071018}
+  /* Socials (compact) */
+  .socials{display:flex;gap:8px;margin-top:18px}
+  .socials a{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted);font-weight:700}
+  .socials a:hover{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#041016}
 
-  /* SKILL CARDS */
-  .skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-top:28px}
-  .skill{background:rgba(255,255,255,0.02);border-radius:12px;padding:14px;text-align:center;box-shadow:0 10px 24px rgba(0,0,0,0.45);transition:transform .18s}
-  .skill:hover{transform:translateY(-6px)}
-  .skill strong{display:block;font-size:15px;margin-top:8px}
+  /* Sections */
+  section{padding:36px 0;border-top:1px solid rgba(255,255,255,0.02)}
+  h2{font-size:18px;margin:0 0 10px;font-weight:700}
+  p.lead{color:var(--muted);margin:0}
 
-  /* FOOTER */
-  footer{margin-top:48px;padding:28px 0;text-align:center;color:var(--muted);font-size:13px}
+  /* Contact form */
+  .form{display:flex;flex-direction:column;gap:10px;max-width:760px}
+  .field{padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit}
+  .form-actions{display:flex;gap:10px;align-items:center}
 
-  /* floating quick actions */
-  .floating{position:fixed;right:18px;bottom:18px;display:flex;flex-direction:column;gap:8px;z-index:30}
-  .fab{width:48px;height:48px;border-radius:12px;background:var(--card);border:0;box-shadow:0 10px 30px rgba(0,0,0,0.5);color:var(--muted);cursor:pointer}
+  footer{padding:24px 0;color:var(--muted);font-size:13px;text-align:center}
 
-  /* accessibility & responsiveness */
+  /* small visual niceties */
   @media (max-width:980px){
     .hero{grid-template-columns:1fr;gap:20px}
     .portrait{width:200px;height:200px}
-    .card{flex-direction:row-reverse;align-items:center}
   }
   @media (prefers-reduced-motion: reduce){
-    .skill, .card, .portrait, .social-btn, .btn { transition: none !important; animation: none !important; }
+    *{transition:none!important}
   }
 </style>
 </head>
 <body>
-
-<!-- Canvas-based subtle orbs background (keeps CPU low) -->
-<canvas id="bgCanvas" class="bg-canvas" aria-hidden="true"></canvas>
-<!-- watermark image (low opacity) -->
-<img src="assets/StudiosImageT.png" alt="" class="bg-watermark" aria-hidden="true">
-
-<div class="wrap" role="main">
-  <header>
-    <div class="brand" aria-hidden="false">
-      <div class="mark">
-        <img src="assets/StudiosImageT.png" alt="logo mark" width="56" height="56" />
-      </div>
-      <div>
-        <h1>CiphAnon</h1>
-        <div style="font-size:12px;color:var(--muted)">personal hub</div>
-      </div>
-    </div>
-
-    <nav class="nav" aria-label="Main">
-      <a href="#about">about</a>
-      <a href="#skills">skills</a>
-      <a href="#contact">contact</a>
-    </nav>
-
-    <div>
-      <button class="cta-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">contact</button>
-    </div>
-  </header>
-
-  <section class="hero" aria-labelledby="heroTitle">
-    <div>
-      <div class="tag">hey — i'm CiphAnon</div>
-      <h1 id="heroTitle" class="title">Breaking code • building things • shipping fast <span class="accent">— that’s my lane</span></h1>
-      <p class="strap">3 years making prototypes, developer tools, and polished front-end interactions across web & game stacks.</p>
-
-      <div class="buttons">
-        <button class="cta-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get in touch</button>
-        <a class="social-btn" href="https://github.com/your-username" target="_blank" rel="noopener">GitHub</a> <!-- EDIT -->
-        <a class="social-btn" href="https://www.youtube.com/channel/your-channel" target="_blank" rel="noopener">YouTube</a> <!-- EDIT -->
-      </div>
-
-      <div class="small-badges" aria-hidden="true">
-        <div class="badge">plays well with: HTML • CSS • JS</div>
-        <div class="badge">engines: Godot • Unity</div>
-        <div class="badge">other: Python • Java • Lua</div>
-      </div>
-
-      <div class="skills" id="skillPreview" aria-hidden="false" style="margin-top:22px">
-        <div class="skill"><svg width="36" height="36" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="6" fill="#1F2937"/></svg><strong>HTML</strong></div>
-        <div class="skill"><svg width="36" height="36" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="6" fill="#0ea5a4"/></svg><strong>CSS</strong></div>
-        <div class="skill"><svg width="36" height="36" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="6" fill="#f59e0b"/></svg><strong>JavaScript</strong></div>
-        <div class="skill"><svg width="36" height="36" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="6" fill="#6ee7b7"/></svg><strong>Python</strong></div>
-        <div class="skill"><svg width="36" height="36" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="6" fill="#8b5cf6"/></svg><strong>Godot</strong></div>
-        <div class="skill"><svg width="36" height="36" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="6" fill="#ef4444"/></svg><strong>Unity</strong></div>
-      </div>
-    </div>
-
-    <!-- portrait card -->
-    <aside class="card" aria-hidden="false">
-      <div class="card-info">
-        <h3>Personal hub</h3>
-        <p style="color:var(--muted)">This page links my socials, demos, and quick contact. Use it as the central place to send people.</p>
-        <div class="social-hub" style="margin-top:14px">
-          <a class="social-btn" href="https://github.com/your-username" target="_blank" rel="noopener">GitHub</a> <!-- EDIT -->
-          <a class="social-btn" href="https://www.youtube.com/channel/your-channel" target="_blank" rel="noopener">YouTube</a> <!-- EDIT -->
-          <a class="social-btn" href="mailto:example@email.com">Email</a> <!-- EDIT -->
+  <div class="wrap" role="main">
+    <header>
+      <div class="brand">
+        <div class="mark"><img src="assets/StudiosImageT.png" alt="logo mark" loading="lazy"></div>
+        <div>
+          <div class="name">CiphAnon</div>
+          <div style="font-size:12px;color:var(--muted)">personal hub</div>
         </div>
       </div>
 
-      <div class="portrait" aria-hidden="true">
-        <img src="assets/1000007475.png" alt="CiphAnon portrait" loading="lazy" />
+      <nav aria-label="Main">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div>
+        <button class="btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Contact</button>
       </div>
-    </aside>
-  </section>
+    </header>
 
-  <section id="about" class="section" style="padding-top:10px">
-    <h2 style="font-size:22px;margin-bottom:8px">About</h2>
-    <p style="color:var(--muted);max-width:60ch">I build prototypes and small tooling that answer questions quickly. I like to ship small, measurable experiments — then iterate. If you want a demo or a short prototype, that’s what I do best.</p>
-  </section>
+    <section class="hero" aria-labelledby="hero-title">
+      <div>
+        <div class="intro-kicker">hello — i'm a maker</div>
+        <h1 id="hero-title" class="intro-title">I turn ideas into working prototypes — <span class="accent">fast, clear, and honest</span></h1>
+        <p class="intro-sub">3 years building front-end experiences, prototype systems, and small developer tools across web and game stacks. Focused work, fast iteration, clean code.</p>
 
-  <section id="skills" class="section">
-    <h2 style="font-size:22px;margin-bottom:8px">What I use</h2>
-    <div class="skills" aria-hidden="true">
-      <div class="skill"><strong>HTML</strong></div>
-      <div class="skill"><strong>CSS</strong></div>
-      <div class="skill"><strong>JavaScript</strong></div>
-      <div class="skill"><strong>Godot (GDScript)</strong></div>
-      <div class="skill"><strong>Unity / C#</strong></div>
-      <div class="skill"><strong>Lua</strong></div>
-      <div class="skill"><strong>Python</strong></div>
-      <div class="skill"><strong>Java</strong></div>
-      <div class="skill"><strong>Block Code</strong></div>
-    </div>
-  </section>
+        <div class="cta-row">
+          <button class="btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Let's work</button>
+          <a class="btn ghost" href="https://github.com/your-username" target="_blank" rel="noopener">GitHub</a> <!-- EDIT -->
+        </div>
 
-  <section id="contact" class="section" style="padding-bottom:80px">
-    <h2 style="font-size:22px;margin-bottom:8px">Contact</h2>
-    <p style="color:var(--muted);margin-bottom:12px">Short & direct: paste a quick brief and a timeline — I’ll reply with next steps.</p>
-    <form onsubmit="event.preventDefault(); demoSend()" style="max-width:720px;display:flex;flex-direction:column;gap:10px">
-      <input id="name" placeholder="Your name" required style="padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,.06);background:transparent;color:inherit" />
-      <input id="email" type="email" placeholder="Your email" required style="padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,.06);background:transparent;color:inherit" />
-      <textarea id="body" rows="5" placeholder="Short brief & timeline" required style="padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,.06);background:transparent;color:inherit"></textarea>
-      <div style="display:flex;gap:10px">
-        <button class="cta-btn" type="submit">Send (demo)</button>
-        <button class="social-btn" type="button" onclick="prefill()">Prefill demo</button>
+        <div class="skills" aria-hidden="true">
+          <div class="chip">HTML</div>
+          <div class="chip">CSS</div>
+          <div class="chip">JavaScript</div>
+          <div class="chip">Godot</div>
+          <div class="chip">Lua</div>
+          <div class="chip">Python</div>
+        </div>
       </div>
-      <div id="status" style="color:var(--muted);font-size:13px"></div>
-    </form>
-  </section>
 
-  <footer>
-    © <span id="year"></span> CiphAnon — personal hub
-  </footer>
-</div>
+      <aside class="card" aria-labelledby="profile-title">
+        <div class="portrait" role="img" aria-label="portrait">
+          <img src="assets/1000007475.png" alt="CiphAnon portrait" loading="lazy">
+        </div>
 
-<!-- floating controls -->
-<div class="floating" aria-hidden="true">
-  <button class="fab" id="topFab" title="Back to top">⬆</button>
-</div>
+        <div class="card-info" style="text-align:center">
+          <h3 id="profile-title">CiphAnon</h3>
+          <p style="color:var(--muted);font-size:13px;margin-top:6px">Prototyper • Toolsmith • Front-end</p>
+
+          <div class="socials" aria-label="Social links" style="margin-top:12px">
+            <a href="https://youtube.com/your-channel" target="_blank" rel="noopener">YouTube</a> <!-- EDIT -->
+            <a href="https://twitter.com/your-handle" target="_blank" rel="noopener">Twitter</a> <!-- EDIT -->
+            <a href="mailto:example@email.com">Email</a> <!-- EDIT -->
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section id="about" aria-labelledby="about-h">
+      <h2 id="about-h">About</h2>
+      <p class="lead">I build small, testable prototypes and practical tooling that helps teams make decisions quickly. If you want a short demo or a turnaround prototype, that’s my wheelhouse.</p>
+    </section>
+
+    <section id="skills" aria-labelledby="skills-h">
+      <h2 id="skills-h">Skills</h2>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:12px">
+        <div style="background:var(--panel);padding:12px;border-radius:10px;min-width:120px;box-shadow:var(--shadow)"><strong>HTML/CSS</strong><div style="color:var(--muted);font-size:13px">Front-end</div></div>
+        <div style="background:var(--panel);padding:12px;border-radius:10px;min-width:120px;box-shadow:var(--shadow)"><strong>JavaScript</strong><div style="color:var(--muted);font-size:13px">Interactivity</div></div>
+        <div style="background:var(--panel);padding:12px;border-radius:10px;min-width:120px;box-shadow:var(--shadow)"><strong>Godot / Unity</strong><div style="color:var(--muted);font-size:13px">Prototyping</div></div>
+        <div style="background:var(--panel);padding:12px;border-radius:10px;min-width:120px;box-shadow:var(--shadow)"><strong>Python / Java / Lua</strong><div style="color:var(--muted);font-size:13px">Tools & scripting</div></div>
+      </div>
+    </section>
+
+    <section id="contact" aria-labelledby="contact-h">
+      <h2 id="contact-h">Contact</h2>
+      <p class="lead" style="margin-bottom:10px">Short & direct — paste a brief and timeline. I’ll reply with next steps.</p>
+
+      <form class="form" onsubmit="event.preventDefault(); sendDemo()">
+        <input id="nm" class="field" placeholder="Your name" required />
+        <input id="em" class="field" type="email" placeholder="Email" required />
+        <textarea id="msg" class="field" rows="5" placeholder="Short brief & timeline" required></textarea>
+
+        <div class="form-actions">
+          <button class="btn" type="submit">Send (demo)</button>
+          <button class="btn ghost" type="button" onclick="prefill()">Prefill demo</button>
+        </div>
+
+        <div id="status" style="color:var(--muted);font-size:13px;margin-top:6px"></div>
+      </form>
+    </section>
+
+    <footer>© <span id="year"></span> CiphAnon — personal hub</footer>
+  </div>
 
 <script>
-/* -------------------------
-   small helpers & UI logic
-   ------------------------- */
+  // lightweight interactions
+  document.getElementById('year').textContent = new Date().getFullYear();
 
-document.getElementById('year').textContent = new Date().getFullYear();
-document.getElementById('topFab').addEventListener('click', ()=> window.scrollTo({top:0,behavior:'smooth'}));
-
-function demoSend(){
-  const n=document.getElementById('name').value.trim();
-  const e=document.getElementById('email').value.trim();
-  const b=document.getElementById('body').value.trim();
-  const out=document.getElementById('status');
-  if(!n||!e||!b){ out.textContent = 'Fill all fields.'; return; }
-  out.textContent = 'Message sent (demo) — this page is not wired to a backend.';
-  setTimeout(()=> out.textContent='',4200);
-}
-function prefill(){
-  document.getElementById('name').value='Acme Studio';
-  document.getElementById('email').value='hello@acme.test';
-  document.getElementById('body').value='We need a short prototype to test mechanic X. Timeline: 2 weeks.';
-}
-
-/* -------------------------
-   Canvas background: soft floating orbs
-   Lightweight, respects reduced-motion
-   ------------------------- */
-(function(){
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if(reduce) return; // skip animation if user prefers reduced motion
-
-  const canvas = document.getElementById('bgCanvas');
-  const ctx = canvas.getContext('2d');
-  let W = canvas.width = innerWidth;
-  let H = canvas.height = innerHeight;
-  const DPR = Math.min(2, window.devicePixelRatio || 1);
-  canvas.width = W * DPR; canvas.height = H * DPR; canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
-  ctx.scale(DPR, DPR);
-
-  // particle/light orb definition
-  const ORBS = [];
-  const ORB_COUNT = Math.max(6, Math.floor(W / 200));
-  for(let i=0;i<ORB_COUNT;i++){
-    ORBS.push({
-      x: Math.random() * W,
-      y: Math.random() * H,
-      r: 40 + Math.random()*90,
-      vx: (Math.random()*0.6 - 0.3),
-      vy: (Math.random()*0.3 - 0.15),
-      hue: 20 + Math.random()*340,
-      alpha: 0.06 + Math.random()*0.08,
-      drift: Math.random()*0.6
-    });
+  function sendDemo(){
+    const n = document.getElementById('nm').value.trim();
+    const e = document.getElementById('em').value.trim();
+    const m = document.getElementById('msg').value.trim();
+    const out = document.getElementById('status');
+    if(!n||!e||!m){ out.textContent = 'Please fill all fields.'; return; }
+    out.textContent = 'Message sent (demo). Replace with a real endpoint to receive messages.';
+    setTimeout(()=> out.textContent = '',4000);
   }
+  function prefill(){ document.getElementById('nm').value='Acme Studio'; document.getElementById('em').value='hello@acme.test'; document.getElementById('msg').value='We need a 2-week prototype to test mechanic X.'; }
 
-  let last = performance.now();
-  function step(now){
-    const dt = Math.min(40, now - last) / 16.666; last = now;
-    ctx.clearRect(0,0,W,H);
-    // soft gradient overlay (adds depth)
-    const grad = ctx.createLinearGradient(0,0,W,H);
-    grad.addColorStop(0,'rgba(8,14,20,0.08)');
-    grad.addColorStop(1,'rgba(6,12,18,0.12)');
-    ctx.fillStyle = grad;
-    ctx.fillRect(0,0,W,H);
-
-    // draw orbs
-    for(const o of ORBS){
-      o.x += o.vx * dt * (0.6 + o.drift);
-      o.y += o.vy * dt * (0.6 + o.drift/2);
-      // wrap
-      if(o.x < -o.r) o.x = W + o.r;
-      if(o.x > W + o.r) o.x = -o.r;
-      if(o.y < -o.r) o.y = H + o.r;
-      if(o.y > H + o.r) o.y = -o.r;
-
-      // radial gradient
-      const g = ctx.createRadialGradient(o.x, o.y, 0, o.x, o.y, o.r);
-      const color = `hsla(${o.hue},85%,62%,${o.alpha})`;
-      g.addColorStop(0, color);
-      g.addColorStop(0.25, color);
-      g.addColorStop(1, 'rgba(0,0,0,0)');
-      ctx.globalCompositeOperation = 'lighter';
-      ctx.fillStyle = g;
-      ctx.beginPath();
-      ctx.arc(o.x, o.y, o.r, 0, Math.PI*2);
-      ctx.fill();
-    }
-    ctx.globalCompositeOperation = 'source-over';
-    // schedule
-    requestAnimationFrame(step);
-  }
-
-  // resize handling
-  window.addEventListener('resize', ()=>{
-    W = canvas.width = innerWidth;
-    H = canvas.height = innerHeight;
-    canvas.width = W * DPR; canvas.height = H * DPR; canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
-    ctx.scale(DPR, DPR);
-  }, {passive:true});
-
-  requestAnimationFrame(step);
-})();
-
-/* -------------------------
-   Lightweight accessibility niceties
-   ------------------------- */
-(function(){
-  function showFocus(e){
-    if(e.key === 'Tab') document.body.classList.add('show-focus');
-    window.removeEventListener('keydown', showFocus);
-  }
-  window.addEventListener('keydown', showFocus);
-})();
+  // accessibility: show focus outlines for keyboard users only
+  (function(){
+    function onFirstTab(e){ if(e.key === 'Tab') document.body.classList.add('show-focus'); window.removeEventListener('keydown', onFirstTab); }
+    window.addEventListener('keydown', onFirstTab);
+  })();
 </script>
 </body>
 </html>
