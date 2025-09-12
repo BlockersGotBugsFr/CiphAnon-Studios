@@ -3,148 +3,160 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>CiphAnon — Developer & Prototyper</title>
-<meta name="description" content="CiphAnon — developer & prototyper. Fast prototypes, developer tooling, and polished front-end experiences." />
+<title>CiphAnon — Developer • Prototyper</title>
+<meta name="description" content="CiphAnon — prototypes, developer tooling, and polished front-end experiences." />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 <style>
-  /* ====== Theme & Base ====== */
+  /* =========================
+     THEME, RESET & VARIABLES
+     ========================= */
   :root{
-    --bg:#0b1116;
-    --card:#0f1720;
-    --muted:#98a9bd;
-    --accent:#ff8a3d;
-    --accent-2:#ff5e7a;
+    --bg-1: #06121a;
+    --bg-2: #071824;
+    --card: #0f1720;
+    --muted: #98a9bd;
+    --text: #eaf3fb;
+    --accent-1: #ff9f1c;
+    --accent-2: #ff5e7a;
     --glass: rgba(255,255,255,0.03);
-    --radius:12px;
-    --maxw:1100px;
+    --radius: 14px;
+    --maxw: 1200px;
     --ease: cubic-bezier(.2,.9,.3,1);
-    color-scheme: dark;
+    --shadow-1: 0 8px 30px rgba(2,6,12,0.55);
+  }
+  [data-theme="light"]{
+    --bg-1: #f6f8fa;
+    --bg-2: #eef2f6;
+    --card: #ffffff;
+    --muted: #4b5563;
+    --text: #0b1116;
+    --glass: rgba(11,17,22,0.04);
+    --shadow-1: 0 8px 30px rgba(11,17,22,0.06);
   }
   *{box-sizing:border-box}
   html,body{height:100%}
   body{
-    margin:0;
-    font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;
-    background: linear-gradient(180deg,var(--bg), #071018 140%);
-    color:#eaf3fb;
-    -webkit-font-smoothing:antialiased;
-    line-height:1.45;
+    margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;
+    background: linear-gradient(180deg,var(--bg-1),var(--bg-2));
+    color:var(--text);-webkit-font-smoothing:antialiased;line-height:1.45;
     scroll-behavior:smooth;
-    -webkit-text-size-adjust:100%;
   }
   img{max-width:100%;display:block}
   a{color:inherit}
   .container{max-width:var(--maxw);margin:0 auto;padding:28px}
 
-  /* ====== Header ====== */
-  header{position:sticky;top:12px;z-index:120;padding:10px 0}
-  .nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px;border-radius:14px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));box-shadow:0 8px 36px rgba(2,6,12,0.5)}
-  .brand{display:flex;align-items:center;gap:12px}
-  .logo{width:48px;height:48px;border-radius:10px;object-fit:contain}
+  /* =========================
+     NAV
+     ========================= */
+  header{position:sticky;top:12px;z-index:160;padding:10px 0}
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:12px;border-radius:16px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));box-shadow:var(--shadow-1)}
+  .brand{display:flex;gap:12px;align-items:center}
+  .logo{width:52px;height:52px;border-radius:12px;object-fit:cover}
   .brand h1{font-size:16px;margin:0}
   nav.primary{display:flex;gap:14px;align-items:center}
   nav.primary a{color:var(--muted);text-decoration:none;padding:6px;border-radius:8px;font-weight:600}
   .actions{display:flex;gap:10px;align-items:center}
-  .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;border:0;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#071018;font-weight:800;cursor:pointer}
-  .btn.minimal{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted);font-weight:700}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;border:0;background:linear-gradient(90deg,var(--accent-1),var(--accent-2));color:#071018;font-weight:800;cursor:pointer}
+  .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted);font-weight:700}
+  .icon-btn{background:transparent;border:0;padding:8px;border-radius:8px;cursor:pointer;color:var(--muted)}
 
-  /* ====== Hero ====== */
-  .hero{display:grid;grid-template-columns:1fr 420px;gap:36px;align-items:center;padding:42px 0}
+  /* =========================
+     HERO
+     ========================= */
+  .hero{display:grid;grid-template-columns:1fr 460px;gap:36px;align-items:center;padding:48px 0}
   .kicker{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
-  .title{font-size:40px;line-height:1.04;margin:8px 0 0}
-  .title .accent-text{background:linear-gradient(90deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .title{font-size:42px;line-height:1.03;margin:8px 0 0}
+  .title .accent{background:linear-gradient(90deg,var(--accent-1),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
   .subtitle{color:var(--muted);margin-top:14px;max-width:60ch}
-  .hero-actions{display:flex;gap:12px;margin-top:22px;flex-wrap:wrap}
-  .quick-stats{display:flex;gap:12px;margin-top:20px;flex-wrap:wrap}
-  .stat{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:10px 12px;border-radius:10px;min-width:110px;text-align:center}
+  .hero-ctas{display:flex;gap:12px;margin-top:22px;flex-wrap:wrap}
+  .stats{display:flex;gap:12px;margin-top:20px;flex-wrap:wrap}
+  .stat{background:var(--card);padding:10px 12px;border-radius:10px;min-width:120px;text-align:center;box-shadow:var(--shadow-1)}
   .stat strong{display:block;font-size:18px}
 
-  /* hero visual (simple & light) */
-  .hero-visual{height:360px;border-radius:12px;padding:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));position:relative;box-shadow:0 26px 70px rgba(2,6,12,0.6);overflow:hidden;contain:layout paint}
-  .visual-accent{position:absolute;left:12px;top:10px;width:140px;height:140px;border-radius:28%;filter:blur(64px);opacity:0.12;background:linear-gradient(90deg,var(--accent),var(--accent-2));pointer-events:none}
-  .portrait-wrap{position:absolute;right:16px;bottom:8px;width:260px;max-width:46%;pointer-events:none;will-change:transform}
-  .portrait{width:100%;border-radius:10px;display:block;filter:drop-shadow(0 20px 30px rgba(0,0,0,0.55))}
+  /* hero visual */
+  .hero-visual{height:420px;border-radius:16px;padding:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));position:relative;box-shadow:var(--shadow-1);overflow:hidden}
+  .bg-svg{position:absolute;inset:-20% -10% auto auto;width:640px;height:640px;filter:blur(72px);opacity:0.12;pointer-events:none}
+  .portrait-wrap{position:absolute;right:14px;bottom:12px;width:320px;max-width:52%;pointer-events:none;will-change:transform}
+  .portrait{width:100%;border-radius:12px;display:block;filter:drop-shadow(0 26px 36px rgba(0,0,0,0.55));}
 
-  /* ====== Main sections ====== */
+  /* subtle typed subtitle */
+  .typed{font-weight:700;color:var(--accent-2);margin-top:10px}
+
+  /* =========================
+     MAIN: CAPABILITIES + SKILLS
+     ========================= */
   section{padding:36px 0;border-bottom:1px solid rgba(255,255,255,0.02)}
-  section.headerless{border-bottom:0;padding-top:20px}
-  h2{margin:0 0 12px;font-size:20px}
-  p.lead{margin:0;color:var(--muted)}
-
-  /* capabilities grid */
-  .cap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}
-  .cap{background:var(--card);padding:16px;border-radius:10px;box-shadow:0 10px 30px rgba(2,6,12,0.35);transition:transform .18s var(--ease)}
-  .cap:hover{transform:translateY(-6px)}
+  .cap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:18px}
+  .cap{background:var(--card);padding:18px;border-radius:12px;box-shadow:var(--shadow-1);transition:transform .18s var(--ease)}
+  .cap:hover{transform:translateY(-8px)}
   .cap h3{margin:0 0 8px}
   .cap p{color:var(--muted);margin:0}
-
-  /* skills list */
   .skill-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
-  .skill-pill{background:var(--glass);padding:8px 10px;border-radius:999px;font-weight:700;color:var(--muted);border:1px solid rgba(255,255,255,0.03)}
+  .skill{background:var(--glass);padding:8px 10px;border-radius:999px;font-weight:700;color:var(--muted);border:1px solid rgba(255,255,255,0.03)}
 
-  /* socials row */
-  .social-row{display:flex;gap:12px;align-items:center;margin-top:14px}
-  .social-link{display:inline-flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.03);color:var(--muted);text-decoration:none;font-weight:700}
+  /* =========================
+     SOCIALS & YOUTUBE (lazy)
+     ========================= */
+  .social-row{display:flex;gap:12px;align-items:center;margin-top:14px;flex-wrap:wrap}
+  .social-link{display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.03);color:var(--muted);text-decoration:none;font-weight:700}
 
-  /* contact form */
-  .contact-grid{display:grid;grid-template-columns:1fr 320px;gap:20px}
+  .yt-placeholder{position:relative;background:#000;border-radius:10px;overflow:hidden;min-height:160px;display:flex;align-items:center;justify-content:center;cursor:pointer}
+  .yt-placeholder img{width:100%;height:100%;object-fit:cover;opacity:0.95;filter:brightness(.6)}
+  .yt-play{position:absolute;display:inline-flex;align-items:center;justify-content:center;width:64px;height:64px;border-radius:999px;background:linear-gradient(90deg,var(--accent-1),var(--accent-2));box-shadow:0 8px 30px rgba(0,0,0,0.4);color:#071018;font-weight:800;font-size:18px}
+
+  /* =========================
+     TESTIMONIALS (tiny)
+     ========================= */
+  .testimonials{display:flex;gap:12px;overflow:auto;padding:8px 0;scroll-snap-type:x mandatory}
+  .test{flex:0 0 300px;min-width:240px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));padding:14px;border-radius:12px;box-shadow:var(--shadow-1);scroll-snap-align:start}
+
+  /* =========================
+     CONTACT / FOOTER
+     ========================= */
+  .contact-grid{display:grid;grid-template-columns:1fr 320px;gap:18px;margin-top:12px}
   .field{display:block;width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit}
   .form-actions{display:flex;gap:10px;margin-top:10px}
-
-  /* testimonials small */
-  .testimonials{display:flex;gap:12px;overflow:auto;padding:8px 0;scroll-snap-type:x mandatory}
-  .test{flex:0 0 300px;min-width:240px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));padding:14px;border-radius:12px;box-shadow:0 10px 22px rgba(2,6,12,0.34);scroll-snap-align:start}
-
-  /* footer */
   footer{padding:28px 0;color:var(--muted)}
-  .footer-grid{display:flex;gap:20px;flex-wrap:wrap;align-items:flex-start}
-  .footer-grid div{min-width:200px}
+  .footer-grid{display:flex;gap:20px;flex-wrap:wrap}
 
-  /* reveal helper */
-  .reveal{opacity:0;transform:translateY(12px);transition:opacity .5s var(--ease),transform .5s var(--ease)}
+  /* floating back-to-top & theme toggle */
+  .floating{position:fixed;right:18px;bottom:18px;z-index:240;display:flex;flex-direction:column;gap:8px}
+  .fab{width:48px;height:48px;border-radius:12px;background:var(--card);display:inline-grid;place-items:center;box-shadow:var(--shadow-1);cursor:pointer;border:0;color:var(--muted)}
+
+  /* reveal helper & reduced motion */
+  .reveal{opacity:0;transform:translateY(12px);transition:opacity .55s var(--ease),transform .55s var(--ease)}
   .reveal.show{opacity:1;transform:none}
+  @media (prefers-reduced-motion: reduce){
+    .reveal{transition:none!important}
+  }
 
   /* responsive */
-  @media (max-width:980px){
-    .hero{grid-template-columns:1fr}
-    .hero-visual{height:300px}
-    .cap-grid{grid-template-columns:repeat(2,1fr)}
-    .contact-grid{grid-template-columns:1fr}
-  }
-  @media (max-width:520px){
-    .cap-grid{grid-template-columns:1fr}
-  }
-
-  /* reduced motion */
-  @media (prefers-reduced-motion: reduce){
-    .reveal, .portrait-wrap { transition: none !important; animation: none !important; }
-  }
-
-  /* focus styles (keyboard users) */
-  :focus{outline:none}
-  .show-focus :focus{outline:3px solid rgba(255,138,61,0.14);outline-offset:4px;border-radius:6px}
+  @media (max-width:1000px){.hero{grid-template-columns:1fr}.hero-visual{height:320px}.cap-grid{grid-template-columns:repeat(2,1fr)}.contact-grid{grid-template-columns:1fr}.portrait-wrap{display:none}}
+  @media (max-width:560px){.cap-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
+
 <header>
-  <div class="container nav" role="navigation" aria-label="Main navigation">
-    <div class="brand" aria-hidden="false">
-      <img src="assets/logo.png" alt="CiphAnon logo" class="logo" loading="lazy" /> <!-- EDIT: replace -->
+  <div class="container nav" role="navigation" aria-label="Main">
+    <div class="brand">
+      <img src="assets/logo.png" alt="CiphAnon logo" class="logo" loading="lazy" /> <!-- EDIT: your logo -->
       <div>
         <h1>CiphAnon</h1>
         <div style="font-size:12px;color:var(--muted)">Developer • Prototyper</div>
       </div>
     </div>
 
-    <nav class="primary" aria-label="Primary">
+    <nav class="primary" aria-label="Primary navigation">
       <a href="#about">About</a>
       <a href="#capabilities">Capabilities</a>
       <a href="#contact">Contact</a>
     </nav>
 
     <div class="actions">
-      <a class="btn.minimal" href="https://github.com/your-username" target="_blank" rel="noopener">GitHub</a> <!-- EDIT -->
+      <button class="icon-btn" id="themeToggle" aria-label="Toggle theme">🌓</button>
+      <a class="btn ghost" href="mailto:example@email.com">Email</a> <!-- EDIT -->
       <a class="btn" href="#contact">Hire</a>
     </div>
   </div>
@@ -154,78 +166,86 @@
   <!-- HERO -->
   <section class="hero" aria-labelledby="hero-title">
     <div>
-      <div class="kicker">Hi — I'm a developer</div>
-      <h1 id="hero-title" class="title">I build <span class="accent-text">fast prototypes</span> and tooling that scales.</h1>
-      <p class="subtitle lead">3 years of hands-on experience across web and game engines. I focus on building demonstrable prototypes, practical developer tooling, and refined front-end experiences.</p>
-
-      <div class="hero-actions">
-        <a class="btn" href="#contact">Request a quote</a>
-        <a class="btn.minimal" href="mailto:example@email.com">Email</a> <!-- EDIT -->
+      <div class="kicker">Hello — I'm a developer</div>
+      <h1 id="hero-title" class="title">I build <span class="accent">fast prototypes</span> and developer tooling that ships.</h1>
+      <div class="subtitle lead">
+        3 years of hands-on experience across HTML, CSS, JavaScript, Godot, Lua, Java, Unity, Block Code and Python.
+        I deliver focused prototypes, practical tooling, and polished front-end experiences.
       </div>
 
-      <div class="quick-stats" aria-hidden="true">
-        <div class="stat"><strong id="statYears">0</strong><span style="display:block;color:var(--muted);font-size:13px">Years</span></div>
-        <div class="stat"><strong id="statLangs">0</strong><span style="display:block;color:var(--muted);font-size:13px">Languages & engines</span></div>
-        <div class="stat"><strong id="statWorks">0</strong><span style="display:block;color:var(--muted);font-size:13px">Demos & tools</span></div>
+      <div class="typed" aria-hidden="true" id="typedLine">Interactive prototypes · Dev tooling · UX polish</div>
+
+      <div class="hero-ctas">
+        <a class="btn" href="#contact">Request Quote</a>
+        <a class="btn ghost" href="https://github.com/your-username" target="_blank" rel="noopener">GitHub</a> <!-- EDIT -->
+      </div>
+
+      <div class="stats" aria-hidden="true">
+        <div class="stat"><strong id="statYears">0</strong><span style="color:var(--muted)">Years</span></div>
+        <div class="stat"><strong id="statLangs">0</strong><span style="color:var(--muted)">Languages</span></div>
+        <div class="stat"><strong id="statWorks">0</strong><span style="color:var(--muted)">Demos/tools</span></div>
       </div>
     </div>
 
     <div class="hero-visual reveal" aria-hidden="true">
-      <div class="visual-accent" aria-hidden="true"></div>
+      <!-- decorative blurred svg -->
+      <svg class="bg-svg" viewBox="0 0 600 600" aria-hidden="true">
+        <defs>
+          <linearGradient id="g1" x1="0" x2="1"><stop offset="0" stop-color="#ff9f1c"/><stop offset="1" stop-color="#ff5e7a"/></linearGradient>
+        </defs>
+        <circle cx="300" cy="300" r="260" fill="url(#g1)"/>
+      </svg>
 
+      <!-- portrait (parallax + bob) -->
       <div class="portrait-wrap" id="portraitWrap" aria-hidden="false">
-        <img src="assets/char.png" alt="CiphAnon character" class="portrait" loading="lazy" /> <!-- EDIT: optional -->
+        <img src="assets/char.png" alt="Character" class="portrait" loading="lazy" /> <!-- EDIT -->
       </div>
     </div>
   </section>
 
   <!-- ABOUT -->
-  <section id="about" class="reveal" aria-labelledby="about-title">
-    <h2 id="about-title">About</h2>
-    <p class="lead">I help teams and individuals move from idea → playable prototype quickly, and I build small, reliable developer tools that save time. My work prioritizes clarity, performance, and maintainable code.</p>
+  <section id="about" class="reveal" aria-labelledby="aboutTitle">
+    <h2 id="aboutTitle">About</h2>
+    <p class="lead">I help teams move from idea to playable prototype quickly and build small, reliable tooling that saves time. My deliverables are practical, tested, and production-minded.</p>
   </section>
 
   <!-- CAPABILITIES -->
-  <section id="capabilities" class="reveal" aria-labelledby="cap-title">
-    <h2 id="cap-title">Capabilities</h2>
+  <section id="capabilities" class="reveal" aria-labelledby="capTitle">
+    <h2 id="capTitle">Capabilities</h2>
     <div class="cap-grid" role="list">
       <div class="cap" role="listitem">
-        <h3>Rapid Prototypes</h3>
-        <p>Playable demos to validate mechanics, core loops and UX in days — iterated based on testing and feedback.</p>
+        <h3>Rapid Prototyping</h3>
+        <p>Playable demos that validate mechanics and interaction quickly.</p>
       </div>
       <div class="cap" role="listitem">
         <h3>Developer Tooling</h3>
-        <p>Small, pragmatic scripts and utilities (Python/JS) to speed builds, automate repetitive work, and standardize local dev workflows.</p>
+        <p>Small utilities and scripts (Python/JS) to automate and speed development.</p>
       </div>
       <div class="cap" role="listitem">
-        <h3>UI & Interaction</h3>
-        <p>Polished front-end experiences with attention to accessibility, micro-interaction, and performance.</p>
+        <h3>UI & polish</h3>
+        <p>Front-end work with attention to accessibility, micro-interactions, and performance.</p>
       </div>
     </div>
 
-    <div style="margin-top:14px">
-      <div class="skill-list" aria-hidden="true">
-        <span class="skill-pill">HTML</span>
-        <span class="skill-pill">CSS</span>
-        <span class="skill-pill">JavaScript</span>
-        <span class="skill-pill">Godot (GDScript)</span>
-        <span class="skill-pill">Lua</span>
-        <span class="skill-pill">Java</span>
-        <span class="skill-pill">Unity</span>
-        <span class="skill-pill">Python</span>
-        <span class="skill-pill">Block Code</span>
-      </div>
+    <div class="skill-list" aria-hidden="true">
+      <span class="skill">HTML</span>
+      <span class="skill">CSS</span>
+      <span class="skill">JavaScript</span>
+      <span class="skill">Godot</span>
+      <span class="skill">Lua</span>
+      <span class="skill">Java</span>
+      <span class="skill">Unity</span>
+      <span class="skill">Python</span>
+      <span class="skill">Block Code</span>
     </div>
   </section>
 
-  <!-- SOCIALS & TESTIMONIALS -->
-  <section class="reveal" aria-labelledby="social-title">
-    <h2 id="social-title">Connect & Social</h2>
-
-    <div style="display:flex;gap:28px;align-items:flex-start;flex-wrap:wrap">
-      <div style="min-width:260px">
-        <p class="lead" style="margin-bottom:10px">Find me on these channels — subscribe for short dev notes, demos, and walkthroughs.</p>
-
+  <!-- SOCIALS + YOUTUBE (lazy embed) -->
+  <section class="reveal" aria-labelledby="socialsTitle">
+    <h2 id="socialsTitle">Socials & Media</h2>
+    <div style="display:flex;gap:18px;flex-wrap:wrap;align-items:flex-start">
+      <div style="flex:1;min-width:280px">
+        <p class="lead">Follow for demos, short walkthroughs, and development notes.</p>
         <div class="social-row" role="list">
           <a class="social-link" href="https://github.com/your-username" target="_blank" rel="noopener">GitHub</a> <!-- EDIT -->
           <a class="social-link" href="https://www.youtube.com/channel/your-channel" target="_blank" rel="noopener">YouTube</a> <!-- EDIT -->
@@ -234,37 +254,44 @@
         </div>
       </div>
 
-      <div style="flex:1;min-width:260px">
-        <h3 style="margin:0 0 8px">What people say</h3>
-        <div class="testimonials" role="list">
-          <div class="test" role="listitem"><p>"Fast prototypes and clear communication — excellent result."</p><strong>— Reviewer</strong></div>
-          <div class="test" role="listitem"><p>"Tooling reduced repetitive tasks significantly."</p><strong>— Team Lead</strong></div>
+      <div style="width:420px;min-width:280px">
+        <!-- Lazy YouTube: replace data-video with your video id or channel embed -->
+        <div class="yt-placeholder" id="ytLazy" data-video="dQw4w9WgXcQ" aria-label="YouTube video placeholder" role="button" tabindex="0">
+          <img src="https://i.ytimg.com/vi/dQw4w9WgXcQ/maxresdefault.jpg" alt="YouTube thumbnail" loading="lazy" />
+          <div class="yt-play" aria-hidden="true">▶</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CONTACT -->
-  <section id="contact" class="reveal" aria-labelledby="contact-title">
-    <h2 id="contact-title">Contact</h2>
+  <!-- TESTIMONIALS -->
+  <section class="reveal" aria-labelledby="testTitle">
+    <h2 id="testTitle">Testimonials</h2>
+    <div class="testimonials" role="list">
+      <div class="test" role="listitem"><p>"Clear communication and fast results — the prototype helped us decide quickly."</p><strong>— Alex</strong></div>
+      <div class="test" role="listitem"><p>"Small tooling improvements saved hours of work weekly."</p><strong>— Sam</strong></div>
+    </div>
+  </section>
 
+  <!-- CONTACT -->
+  <section id="contact" class="reveal" aria-labelledby="contactTitle">
+    <h2 id="contactTitle">Contact</h2>
     <div class="contact-grid" role="form" aria-label="Contact form">
-      <form onsubmit="event.preventDefault(); handleContact();" style="display:flex;flex-direction:column;gap:8px">
-        <input id="c-name" class="field" name="name" type="text" placeholder="Your name" required />
-        <input id="c-email" class="field" name="email" type="email" placeholder="Your email" required />
-        <textarea id="c-message" class="field" name="message" placeholder="Brief description of the project or question" rows="6" required></textarea>
+      <form onsubmit="event.preventDefault(); handleContact()" style="display:flex;flex-direction:column;gap:8px">
+        <input id="name" class="field" type="text" placeholder="Your name" required />
+        <input id="email" class="field" type="email" placeholder="Your email" required />
+        <textarea id="message" class="field" rows="6" placeholder="Short description (scope, timeline)" required></textarea>
         <div class="form-actions">
           <button class="btn" type="submit">Send message</button>
-          <button class="btn.minimal" type="button" onclick="prefillContact()">Prefill demo</button>
+          <button class="btn ghost" type="button" onclick="prefill()">Prefill demo</button>
         </div>
         <div id="contactStatus" style="color:var(--muted);font-size:13px"></div>
       </form>
 
-      <aside style="min-width:260px">
-        <div style="background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));padding:14px;border-radius:10px">
-          <strong style="display:block">Availability</strong>
-          <div style="color:var(--muted);margin-top:8px">I typically take on short prototype sprints and small tooling projects. For inquiries, include scope and timeline.</div>
-          <div style="margin-top:12px"><strong>Response time</strong><div style="color:var(--muted);font-size:13px">Usually 1–3 business days.</div></div>
+      <aside>
+        <div style="background:var(--card);padding:14px;border-radius:10px;box-shadow:var(--shadow-1)">
+          <strong>Availability</strong>
+          <div style="color:var(--muted);margin-top:8px">Typically available for 1–4 week prototype sprints and small tooling tasks. Tell me roughly what you need and your timeline.</div>
         </div>
       </aside>
     </div>
@@ -287,32 +314,58 @@
 
     <div>
       <h4 style="margin:0 0 8px">Contact</h4>
-      <a href="mailto:example@email.com">example@email.com</a><br/> <!-- EDIT -->
-      <div style="color:var(--muted);margin-top:8px;font-size:13px">© <span id="year"></span> CiphAnon — All rights reserved.</div>
+      <a href="mailto:example@email.com">example@email.com</a>
+      <div style="color:var(--muted);margin-top:10px;font-size:13px">© <span id="year"></span> CiphAnon</div>
     </div>
   </div>
 </footer>
 
-<script>
-/* ===== Lightweight Interactions & Accessibility ===== */
+<!-- floating controls -->
+<div class="floating" aria-hidden="false">
+  <button class="fab" id="themeFab" aria-label="Toggle theme">🌓</button>
+  <button class="fab" id="topFab" aria-label="Back to top">⬆</button>
+</div>
 
-/* set year */
+<script>
+/* =========================
+   PERFORMANCE-MINDED INTERACTIONS
+   ========================= */
+/* Helpers */
+const prefersReduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* Set year */
 document.getElementById('year').textContent = new Date().getFullYear();
 
-/* reveal on scroll (cheap) */
-const io = new IntersectionObserver((entries) => {
-  for (const e of entries) {
-    if (e.isIntersecting) { e.target.classList.add('show'); io.unobserve(e.target); }
+/* Reveal on scroll */
+const io = new IntersectionObserver((entries)=>{
+  for(const e of entries){
+    if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target); }
   }
-}, { threshold: 0.12 });
+},{threshold:0.12});
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-/* gentle portrait parallax (rAF throttled) */
-(function(){
-  const wrap = document.getElementById('portraitWrap');
+/* Typed subtitle (simple) */
+(function typed(){
+  if(prefersReduce) return;
+  const el = document.getElementById('typedLine');
+  if(!el) return;
+  const lines = ['Interactive prototypes','Dev tooling','UX polish'];
+  let i=0, pos=0, forward=true;
+  function step(){
+    const text = lines[i];
+    if(forward){ pos++; el.textContent = text.slice(0,pos); if(pos===text.length){ forward=false; setTimeout(step,900); return; } }
+    else { pos--; el.textContent = text.slice(0,pos); if(pos===0){ forward=true; i=(i+1)%lines.length; } }
+    setTimeout(step, forward ? 28 : 18);
+  }
+  step();
+})();
+
+/* Portrait parallax (rAF throttled) */
+(function portraitParallax(){
   const frame = document.querySelector('.hero-visual');
-  if(!wrap || !frame) return;
-  let raf = null, last = {x:0,y:0};
+  const wrap = document.getElementById('portraitWrap');
+  if(!frame || !wrap) return;
+  let raf=null, last={x:0,y:0};
   function onMove(e){
     const clientX = e.touches ? e.touches[0].clientX : e.clientX;
     const clientY = e.touches ? e.touches[0].clientY : e.clientY;
@@ -322,7 +375,7 @@ document.querySelectorAll('.reveal').forEach(el => io.observe(el));
     last.x = dx; last.y = dy;
     if(raf === null){
       raf = requestAnimationFrame(()=> {
-        wrap.style.transform = `translate3d(${last.x * 8}px, ${last.y * 6}px, 0)`;
+        wrap.style.transform = `translate3d(${last.x*8}px, ${last.y*6}px, 0)`;
         raf = null;
       });
     }
@@ -334,30 +387,29 @@ document.querySelectorAll('.reveal').forEach(el => io.observe(el));
   check(); window.addEventListener('resize', check, {passive:true});
 })();
 
-/* counters (run once when hero visible) */
-(function(){
+/* Counters */
+(function counters(){
   const hero = document.querySelector('.hero');
   if(!hero) return;
-  const obs = new IntersectionObserver((entries) => {
+  const obs = new IntersectionObserver((entries)=>{
     for(const e of entries){
       if(e.isIntersecting){
-        animateCount('statYears', 3, 700);
-        animateCount('statLangs', 9, 800);
-        animateCount('statWorks', 12, 900);
+        animate('statYears',3,800);
+        animate('statLangs',9,900);
+        animate('statWorks',12,1000);
         obs.disconnect();
       }
     }
-  }, {threshold:0.3});
+  },{threshold:0.3});
   obs.observe(hero);
-
-  function animateCount(id, to, dur){
+  function animate(id,to,dur){
     const el = document.getElementById(id);
     if(!el) return;
-    let start = null;
+    let start=null;
     function step(ts){
       if(!start) start = ts;
-      const p = Math.min(1, (ts - start)/dur);
-      el.textContent = Math.floor(p * to);
+      const p = Math.min(1, (ts-start)/dur);
+      el.textContent = Math.floor(p*to);
       if(p < 1) requestAnimationFrame(step);
       else el.textContent = to;
     }
@@ -365,50 +417,87 @@ document.querySelectorAll('.reveal').forEach(el => io.observe(el));
   }
 })();
 
-/* testimonials auto-scroll (low cost) */
-(function(){
+/* Lazy YouTube embed (click-to-load) */
+(function ytLazy(){
+  const p = document.getElementById('ytLazy');
+  if(!p) return;
+  function load(){
+    const vid = p.dataset.video;
+    if(!vid) return;
+    const iframe = document.createElement('iframe');
+    iframe.src = `https://www.youtube.com/embed/${encodeURIComponent(vid)}?rel=0&showinfo=0&autoplay=1`;
+    iframe.width = '100%'; iframe.height = '100%';
+    iframe.allow = 'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture';
+    iframe.allowFullscreen = true;
+    iframe.style.border = '0';
+    p.innerHTML = '';
+    p.appendChild(iframe);
+  }
+  p.addEventListener('click', load, {passive:true});
+  p.addEventListener('keydown', (e)=> { if(e.key === 'Enter' || e.key === ' ') { load(); e.preventDefault(); } });
+})();
+
+/* Testimonials auto-scroll (cheap) */
+(function testimonials(){
   const el = document.querySelector('.testimonials');
   if(!el) return;
-  let pos = 0, last = performance.now(), running = true;
+  let pos=0,last=performance.now(),running=true;
   function tick(ts){
-    if(!running){ last = ts; requestAnimationFrame(tick); return; }
-    const dt = ts - last; last = ts;
-    pos += dt * 0.02;
+    if(!running){ last=ts; requestAnimationFrame(tick); return; }
+    const dt = ts-last; last = ts;
+    pos += dt*0.02;
     if(pos > el.scrollWidth - el.clientWidth) pos = 0;
     el.scrollLeft = pos;
     requestAnimationFrame(tick);
   }
-  el.addEventListener('mouseenter', ()=> running = false, {passive:true});
-  el.addEventListener('mouseleave', ()=> running = true, {passive:true});
-  if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches) requestAnimationFrame(tick);
+  el.addEventListener('mouseenter', ()=> running=false, {passive:true});
+  el.addEventListener('mouseleave', ()=> running=true, {passive:true});
+  if(!prefersReduce) requestAnimationFrame(tick);
 })();
 
-/* contact demo (replace with real endpoint) */
+/* Contact demo submit */
 function handleContact(){
-  const name = document.getElementById('c-name').value.trim();
-  const email = document.getElementById('c-email').value.trim();
-  const msg = document.getElementById('c-message').value.trim();
+  const name = document.getElementById('name').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const message = document.getElementById('message').value.trim();
   const out = document.getElementById('contactStatus');
-  if(!name || !email || !msg){ out.textContent = 'Please fill all fields.'; return; }
-  out.textContent = 'Message sent (demo). Replace this with a real backend or form provider.';
-  setTimeout(()=> out.textContent = '', 4500);
+  if(!name || !email || !message){ out.textContent = 'Please fill all fields.'; return; }
+  out.textContent = 'Message sent (demo). Replace with a real endpoint for production.';
+  setTimeout(()=> out.textContent = '', 4000);
 }
-function prefillContact(){
-  document.getElementById('c-name').value = 'Acme Studio';
-  document.getElementById('c-email').value = 'hello@acme.test';
-  document.getElementById('c-message').value = 'Hi — would like a 2-week prototype to test an idea.';
+function prefill(){
+  document.getElementById('name').value = 'Acme Studio';
+  document.getElementById('email').value = 'hello@acme.test';
+  document.getElementById('message').value = 'We need a 2-week prototype to test mechanic X.';
 }
 
-/* accessibility: show focus outlines only after keyboard navigation */
-(function(){
-  function onFirstTab(e){
-    if(e.key === 'Tab') document.body.classList.add('show-focus');
-    window.removeEventListener('keydown', onFirstTab);
-  }
+/* Floating controls */
+document.getElementById('topFab').addEventListener('click', ()=> window.scrollTo({top:0,behavior:'smooth'}));
+document.getElementById('themeFab').addEventListener('click', toggleTheme);
+document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+
+function toggleTheme(){
+  const cur = document.documentElement.getAttribute('data-theme');
+  const next = cur === 'light' ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+}
+(function initTheme(){
+  const saved = localStorage.getItem('theme');
+  const prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+  if(saved) document.documentElement.setAttribute('data-theme', saved);
+  else if(prefersLight) document.documentElement.setAttribute('data-theme','light');
+  else document.documentElement.setAttribute('data-theme','dark');
+})();
+
+/* Accessibility: focus outlines only after keyboard nav */
+(function focusOutline(){
+  function onFirstTab(e){ if(e.key === 'Tab') document.body.classList.add('show-focus'); window.removeEventListener('keydown', onFirstTab); }
   window.addEventListener('keydown', onFirstTab);
 })();
 
-/* Respect prefers-reduced-motion: heavy loops are gated above */
+/* Respect reduced motion already considered above */
+
 </script>
 </body>
 </html>
