@@ -1,354 +1,173 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>CiphAnon Studios</title>
-<meta name="description" content="CiphAnon — prototypes, developer tooling, and polished front-end experiences." />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+<meta name="description" content="CiphAnon — prototypes, developer tooling, and polished front-end experiences.">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 <style>
-/* ---------------------------
-   Variables / Reset
-   --------------------------- */
-:root{
-  --bg-1:#06121a; --bg-2:#071824;
-  --card:#0f1720; --muted:#98a9bd; --text:#eaf3fb;
-  --accent-1:#ff9f1c; --accent-2:#ff5e7a;
-  --glass: rgba(255,255,255,0.03);
-  --maxw:1200px; --radius:12px; --ease:cubic-bezier(.2,.9,.3,1);
-  --shadow: 0 12px 30px rgba(2,6,12,0.5);
-  --btn-shadow: 0 8px 22px rgba(2,6,12,0.35);
-  --fab-fill: #e3e3e3;
-}
-[data-theme="light"]{
-  --bg-1:#f6f8fa; --bg-2:#eef2f6;
-  --card:#ffffff; --muted:#475569; --text:#071018;
-  --glass: rgba(11,17,22,0.04);
-  --shadow: 0 10px 30px rgba(11,17,22,0.06);
-  --btn-shadow: 0 8px 22px rgba(11,17,22,0.06);
-  --fab-fill: #071018;
-}
-*{box-sizing:border-box}
-html,body{height:100%}
-body{
-  margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;
-  background: linear-gradient(180deg,var(--bg-1),var(--bg-2));
-  color:var(--text); -webkit-font-smoothing:antialiased; line-height:1.45;
-  scroll-behavior:smooth;
-}
-.container{max-width:var(--maxw);margin:0 auto;padding:20px}
+  :root{
+    --bg-1:#06121a;--bg-2:#071824;--card:#0f1720;
+    --muted:#98a9bd;--text:#eaf3fb;
+    --accent-1:#ff9f1c;--accent-2:#ff5e7a;
+    --glass:rgba(255,255,255,0.03);--radius:14px;
+    --maxw:1200px;--ease:cubic-bezier(.2,.9,.3,1);
+    --shadow-1:0 8px 30px rgba(2,6,12,0.55);
+  }
+  [data-theme="light"]{
+    --bg-1:#f6f8fa;--bg-2:#eef2f6;--card:#ffffff;
+    --muted:#4b5563;--text:#0b1116;
+    --glass:rgba(11,17,22,0.04);
+    --shadow-1:0 8px 30px rgba(11,17,22,0.06);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%;font-family:Inter,sans-serif;background:linear-gradient(180deg,var(--bg-1),var(--bg-2));color:var(--text);scroll-behavior:smooth}
+  a{text-decoration:none;color:inherit}
+  img{max-width:100%;display:block}
 
-/* ---------------------------
-   Header — FULL WIDTH (SOLID)
-   --------------------------- */
-header{position:sticky;top:0;z-index:220}
-.header-row{
-  width:100%; background:var(--card); border-bottom:1px solid rgba(0,0,0,0.06);
-  box-shadow:var(--shadow);
-}
-.nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 0}
-.brand{display:flex;gap:12px;align-items:center}
-.logo{width:48px;height:48px;border-radius:10px;object-fit:cover}
-.brand h1{font-size:16px;margin:0}
-.nav .primary{display:flex;gap:14px;align-items:center}
-.nav .primary a{color:var(--muted);text-decoration:none;padding:6px;border-radius:8px;font-weight:600}
-.actions{display:flex;gap:10px;align-items:center}
+  /* STATUS BAR */
+  #statusBar{
+    position:fixed;top:0;left:0;width:100%;height:36px;
+    background:var(--card);color:var(--muted);
+    display:flex;justify-content:flex-end;align-items:center;
+    gap:14px;padding:0 16px;box-shadow:var(--shadow-1);z-index:300;
+    font-size:13px;
+  }
+  #statusBar div{display:flex;align-items:center;gap:4px;}
+  #statusBar svg{display:inline-block;vertical-align:middle;}
 
-/* Button basics */
-.btn{
-  display:inline-flex;align-items:center;gap:8px;padding:9px 12px;border-radius:10px;border:0;
-  background:linear-gradient(90deg,var(--accent-1),var(--accent-2));color:#071018;font-weight:800;
-  cursor:pointer;box-shadow:var(--btn-shadow);transition:transform .18s var(--ease),box-shadow .18s var(--ease);
-}
-.btn.ghost{
-  background:transparent;border:1px solid rgba(0,0,0,0.06);color:var(--muted);font-weight:700;box-shadow:none;
-  padding:8px 12px;
-}
-.btn:hover{transform:translateY(-3px);box-shadow:0 18px 40px rgba(0,0,0,0.18)}
-.icon-btn{background:transparent;border:0;padding:8px;border-radius:8px;cursor:pointer;color:var(--muted)}
+  /* HEADER */
+  header{position:sticky;top:36px;width:100%;z-index:160}
+  .nav{display:flex;justify-content:space-between;align-items:center;padding:12px 28px;background:var(--card);box-shadow:var(--shadow-1)}
+  .brand{display:flex;gap:12px;align-items:center}
+  .brand h1{font-size:16px}
+  nav.primary{display:flex;gap:14px;align-items:center}
+  nav.primary a{color:var(--muted);padding:6px;border-radius:8px;font-weight:600}
+  .actions{display:flex;gap:10px;align-items:center}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;border:0;background:linear-gradient(90deg,var(--accent-1),var(--accent-2));color:#071018;font-weight:800;cursor:pointer;transition:transform .15s ease}
+  .btn:hover{transform:translateY(-2px)}
+  .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted)}
+  .icon-btn{background:transparent;border:0;padding:8px;border-radius:8px;cursor:pointer;color:var(--muted)}
 
-/* ---------------------------
-   Hire dropdown (SVG toggle)
-   --------------------------- */
-.hire-dropdown{position:relative;display:inline-block}
-.hire-svg-btn{
-  display:inline-grid;place-items:center;padding:8px;border-radius:10px;border:0;background:transparent;cursor:pointer;
-  transition:background .18s var(--ease), transform .15s var(--ease);
-}
-.hire-svg-btn:hover{background:var(--glass)}
-.hire-svg-btn svg{width:22px;height:22px;display:block;fill:currentColor}
-.sr-only{position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap;border:0;padding:0;margin:-1px}
+  /* DROPDOWN */
+  .dropdown{position:relative;display:inline-block}
+  .dropdown-content{display:none;position:absolute;right:0;top:42px;background:var(--card);min-width:160px;border-radius:10px;box-shadow:var(--shadow-1);overflow:hidden;z-index:400}
+  .dropdown-content a{color:var(--text);padding:10px 14px;display:block;transition:background .15s ease}
+  .dropdown-content a:hover{background:linear-gradient(90deg,var(--accent-1),var(--accent-2));color:#071018}
+  .dropdown:hover .dropdown-content{display:block}
 
-/* menu panel */
-.hire-menu{
-  position:absolute;right:0;top:calc(100% + 10px);min-width:220px;background:var(--card);border-radius:10px;padding:6px;
-  box-shadow:0 12px 30px rgba(2,6,12,0.25);border:1px solid rgba(0,0,0,0.06);transform-origin:top right;
-  opacity:0;transform:translateY(-8px) scale(.995);pointer-events:none;transition:opacity .18s var(--ease), transform .18s var(--ease);
-  z-index:240;
-}
-.hire-dropdown.open .hire-menu{opacity:1;transform:none;pointer-events:auto}
-.hire-menu a{display:block;padding:10px 12px;border-radius:8px;text-decoration:none;color:var(--muted);font-weight:700;margin:6px 0}
-.hire-menu a:hover,.hire-menu a:focus{background:linear-gradient(90deg,var(--accent-1),var(--accent-2));color:#071018;outline:none}
+  /* HERO */
+  .hero{display:grid;grid-template-columns:1fr 460px;gap:36px;align-items:center;padding:48px 0}
+  .kicker{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
+  .title{font-size:42px;line-height:1.03;margin:8px 0 0}
+  .title .accent{background:linear-gradient(90deg,var(--accent-1),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .subtitle{color:var(--muted);margin-top:14px;max-width:60ch}
+  .hero-ctas{display:flex;gap:12px;margin-top:22px;flex-wrap:wrap}
+  .hero-visual{height:420px;border-radius:16px;padding:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));position:relative;box-shadow:var(--shadow-1);overflow:hidden}
+  .bg-svg{position:absolute;inset:-20% -10%;width:640px;height:640px;filter:blur(72px);opacity:0.12;pointer-events:none}
+  .portrait-wrap{position:absolute;right:14px;bottom:12px;width:320px;max-width:52%;pointer-events:none}
+  .portrait{width:100%;border-radius:12px;filter:drop-shadow(0 26px 36px rgba(0,0,0,0.55));}
 
-/* ---------------------------
-   Hero / content (slight polish)
-   --------------------------- */
-.hero{display:grid;grid-template-columns:1fr 460px;gap:36px;align-items:center;padding:48px 0}
-.kicker{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
-.title{font-size:42px;line-height:1.03;margin:8px 0 0}
-.title .accent{background:linear-gradient(90deg,var(--accent-1),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
-.subtitle{color:var(--muted);margin-top:14px;max-width:60ch}
-.hero-visual{height:420px;border-radius:12px;padding:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));position:relative;overflow:hidden}
-.bg-svg{position:absolute;inset:-15% -10% auto auto;width:560px;height:560px;filter:blur(48px);opacity:0.12;pointer-events:none}
-.portrait{width:100%;border-radius:12px;display:block;filter:drop-shadow(0 24px 36px rgba(2,6,12,0.45))}
-
-/* small typed effect */
-.typed{font-weight:700;color:var(--accent-2);margin-top:10px}
-.typed::after{content:"|";margin-left:6px;color:var(--accent-2);animation:blink 0.8s infinite}
-@keyframes blink{0%,50%{opacity:1}51%,100%{opacity:0}}
-
-/* ---------------------------
-   Floating FAB (Back to top)
-   --------------------------- */
-.floating{position:fixed;right:18px;bottom:18px;z-index:260;display:flex;flex-direction:column;gap:10px}
-.fab{width:46px;height:46px;border-radius:12px;background:var(--card);display:inline-grid;place-items:center;cursor:pointer;border:0;box-shadow:var(--shadow);transition:transform .18s var(--ease), box-shadow .18s var(--ease)}
-.fab:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(0,0,0,0.18)}
-.fab:focus{outline:2px solid rgba(0,0,0,0.06);outline-offset:4px}
-
-.fab-icons{width:24px;height:24px;position:relative;display:inline-block}
-.fab-icons svg{position:absolute;left:0;top:0;width:24px;height:24px;opacity:0;transform:translateY(6px) scale(.98);transition:opacity .32s var(--ease), transform .32s var(--ease), fill .28s var(--ease)}
-.fab-icons svg.active{opacity:1;transform:none;fill:var(--fab-fill)}
-
-/* subtle click pop */
-.fab--pop{animation:pop .36s var(--ease) both}
-@keyframes pop{0%{transform:translateY(0) scale(1)}30%{transform:translateY(-6px) scale(1.06)}100%{transform:translateY(0) scale(1)}}
-
-/* ---------------------------
-   Small responsive rules
-   --------------------------- */
-@media (max-width:1000px){.hero{grid-template-columns:1fr}.hero-visual{height:320px}}
-@media (max-width:560px){.cap-grid{grid-template-columns:1fr}.logo{width:40px;height:40px}}
-/* respect reduced motion */
-@media (prefers-reduced-motion: reduce){.fab-icons svg, .hire-menu, .btn{transition:none!important}}
+  @media (max-width:1000px){.hero{grid-template-columns:1fr}.hero-visual{height:320px}.portrait-wrap{display:none}}
 </style>
 </head>
 <body>
 
+<!-- STATUS BAR -->
+<div id="statusBar">
+  <div>
+    <svg xmlns="http://www.w3.org/2000/svg" height="18" viewBox="0 -960 960 960" width="18" fill="currentColor"><path d="M480-120q-99 0-168.5-69.5T242-360q0-99 69.5-168.5T480-598q99 0 168.5 69.5T718-360q0 99-69.5 168.5T480-120Zm10-103 130-75-34-57-96 55v-190h-60v196l-70 40 34 57 62-36Z"/></svg>
+    <span id="statusTime">00:00</span>
+  </div>
+  <div>
+    <svg xmlns="http://www.w3.org/2000/svg" height="18" viewBox="0 -960 960 960" width="18" fill="currentColor"><path d="M160-240q-50 0-85-35t-35-85v-240q0-50 35-85t85-35h540q50 0 85 35t35 85v240q0 50-35 85t-85 35H160Zm0-80h540q17 0 28.5-11.5T740-360v-240q0-17-11.5-28.5T700-640H160q-17 0-28.5 11.5T120-600v240q0 17 11.5 28.5T160-320Zm700-60v-200h20q17 0 28.5 11.5T920-540v120q0 17-11.5 28.5T880-380h-20Z"/></svg>
+    <span id="statusBattery">--%</span>
+  </div>
+</div>
+
 <!-- HEADER -->
 <header>
-  <div class="header-row">
-    <div class="container nav" role="navigation" aria-label="Main">
-      <div class="brand">
-        <img src="assets/logo.png" alt="CiphAnon logo" class="logo" loading="lazy">
-        <div>
-          <h1>CiphAnon Studios</h1>
-          <div style="font-size:12px;color:var(--muted)">Coder • Idk What Else ngl</div>
-        </div>
+  <div class="nav">
+    <div class="brand">
+      <img src="https://via.placeholder.com/52" alt="CiphAnon logo" class="logo">
+      <div>
+        <h1>CiphAnon Studios</h1>
+        <div style="font-size:12px;color:var(--muted)">Coder • Developer</div>
       </div>
-
-      <nav class="primary" aria-label="Primary navigation">
-        <a href="#about">About</a>
-        <a href="#capabilities">Capabilities</a>
-        <a href="#contact">Contact</a>
-      </nav>
-
-      <div class="actions">
-        <button id="themeToggle" class="icon-btn" aria-label="Toggle theme">🌓</button>
-        <a class="btn ghost" href="mailto:example@email.com">Email</a>
-
-        <!-- Hire dropdown: your provided dot-grid SVG (uses currentColor) -->
-        <div class="hire-dropdown" id="hireDropdown">
-          <button id="hireToggle" class="hire-svg-btn" aria-haspopup="true" aria-expanded="false" aria-controls="hireMenu" title="Hire options">
-            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor" aria-hidden="true" focusable="false">
-              <path d="M240-160q-33 0-56.5-23.5T160-240q0-33 23.5-56.5T240-320q33 0 56.5 23.5T320-240q0 33-23.5 56.5T240-160Zm240 0q-33 0-56.5-23.5T400-240q0-33 23.5-56.5T480-320q33 0 56.5 23.5T560-240q0 33-23.5 56.5T480-160Zm240 0q-33 0-56.5-23.5T640-240q0-33 23.5-56.5T720-320q33 0 56.5 23.5T800-240q0 33-23.5 56.5T720-160ZM240-400q-33 0-56.5-23.5T160-480q0-33 23.5-56.5T240-560q33 0 56.5 23.5T320-480q0 33-23.5 56.5T240-400Zm240 0q-33 0-56.5-23.5T400-480q0-33 23.5-56.5T480-560q33 0 56.5 23.5T560-480q0 33-23.5 56.5T480-400Zm240 0q-33 0-56.5-23.5T640-480q0-33 23.5-56.5T720-560q33 0 56.5 23.5T800-480q0 33-23.5 56.5T720-400ZM240-640q-33 0-56.5-23.5T160-720q0-33 23.5-56.5T240-800q33 0 56.5 23.5T320-720q0 33-23.5 56.5T240-640Zm240 0q-33 0-56.5-23.5T400-720q0-33 23.5-56.5T480-800q33 0 56.5 23.5T560-720q0 33-23.5 56.5T480-640Zm240 0q-33 0-56.5-23.5T640-720q0-33 23.5-56.5T720-800q33 0 56.5 23.5T800-720q0 33-23.5 56.5T720-640Z"/>
-            </svg>
-            <span class="sr-only">Hire options</span>
-          </button>
-
-          <div class="hire-menu" id="hireMenu" role="menu" aria-labelledby="hireToggle" hidden>
-            <a role="menuitem" href="#contact" data-action="quote">Request Quote</a>
-            <a role="menuitem" href="mailto:example@email.com?subject=Consultation" data-action="consult">Consultation</a>
-            <a role="menuitem" href="mailto:example@email.com?subject=Code%20Audit" data-action="audit">Code Audit</a>
-            <a role="menuitem" href="#pricing" data-action="pricing">Package Pricing</a>
-            <a role="menuitem" href="#schedule" data-action="schedule">Schedule Meeting</a>
-          </div>
+    </div>
+    <nav class="primary">
+      <a href="#about">About</a>
+      <a href="#capabilities">Capabilities</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="actions">
+      <button class="icon-btn" id="themeToggle">🌓</button>
+      <a class="btn ghost" href="mailto:example@email.com">Email</a>
+      <div class="dropdown">
+        <button class="btn">Hire ▼</button>
+        <div class="dropdown-content">
+          <a href="#contact">Request Quote</a>
+          <a href="mailto:example@email.com">Email Me</a>
+          <a href="https://github.com/your-username" target="_blank">GitHub</a>
         </div>
       </div>
     </div>
   </div>
 </header>
 
-<!-- MAIN -->
+<!-- HERO -->
 <main class="container">
-  <section class="hero" aria-labelledby="hero-title">
+  <section class="hero">
     <div>
       <div class="kicker">Hello — I'm a developer</div>
-      <h1 id="hero-title" class="title">I build <span class="accent">fast prototypes</span> and developer tooling that ships.</h1>
-      <div class="subtitle">3 years of hands-on experience across HTML, CSS, JavaScript, Godot, Lua, Java, Unity, Block Code and Python.</div>
-      <div class="typed" id="typedLine" aria-hidden="true"></div>
-
-      <div style="margin-top:20px;display:flex;gap:10px;flex-wrap:wrap">
+      <h1 class="title">I build <span class="accent">fast prototypes</span> and tooling.</h1>
+      <div class="subtitle">Experience across HTML, CSS, JS, Lua, Python, Godot, Unity.</div>
+      <div class="hero-ctas">
         <a class="btn" href="#contact">Request Quote</a>
-        <a class="btn ghost" href="https://github.com/your-username" target="_blank" rel="noopener">GitHub</a>
-      </div>
-
-      <div style="display:flex;gap:12px;margin-top:16px">
-        <div style="background:var(--card);padding:10px 12px;border-radius:8px;box-shadow:var(--shadow)"><strong id="statYears">3</strong><div style="color:var(--muted)">Years</div></div>
-        <div style="background:var(--card);padding:10px 12px;border-radius:8px;box-shadow:var(--shadow)"><strong id="statLangs">9</strong><div style="color:var(--muted)">Languages</div></div>
-        <div style="background:var(--card);padding:10px 12px;border-radius:8px;box-shadow:var(--shadow)"><strong id="statWorks">12</strong><div style="color:var(--muted)">Demos/tools</div></div>
+        <a class="btn ghost" href="https://github.com/your-username">GitHub</a>
       </div>
     </div>
-
-    <div class="hero-visual" aria-hidden="true">
-      <svg class="bg-svg" viewBox="0 0 600 600" aria-hidden="true"><defs><linearGradient id="g1" x1="0" x2="1"><stop offset="0" stop-color="#ff9f1c"/><stop offset="1" stop-color="#ff5e7a"/></linearGradient></defs><circle cx="300" cy="300" r="260" fill="url(#g1)"/></svg>
-      <img src="assets/char.png" alt="Character" class="portrait" loading="lazy">
+    <div class="hero-visual">
+      <svg class="bg-svg" viewBox="0 0 600 600" aria-hidden="true">
+        <circle cx="300" cy="300" r="260" fill="url(#grad)"/>
+        <defs><linearGradient id="grad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff9f1c"/><stop offset="1" stop-color="#ff5e7a"/></linearGradient></defs>
+      </svg>
+      <div class="portrait-wrap"><img src="https://via.placeholder.com/320" class="portrait" alt="Character"></div>
     </div>
   </section>
 
-  <section id="about" style="margin-top:24px"><h2>About</h2><p style="color:var(--muted)">I help teams move from idea to playable prototype quickly and build small, reliable tooling that saves time.</p></section>
-
-  <section id="capabilities"><h2>Capabilities</h2>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:12px">
-      <div style="background:var(--card);padding:16px;border-radius:10px;box-shadow:var(--shadow)"><h3>Rapid Prototyping</h3><p style="color:var(--muted)">Playable demos that validate mechanics quickly.</p></div>
-      <div style="background:var(--card);padding:16px;border-radius:10px;box-shadow:var(--shadow)"><h3>Developer Tooling</h3><p style="color:var(--muted)">Utilities and scripts to automate workflows.</p></div>
-      <div style="background:var(--card);padding:16px;border-radius:10px;box-shadow:var(--shadow)"><h3>UI &amp; polish</h3><p style="color:var(--muted)">Front-end with accessibility, interactions, and performance.</p></div>
-    </div>
-  </section>
+  <section id="about"><h2>About</h2><p>I help teams move from idea to playable prototype quickly and build small, reliable tooling that saves time.</p></section>
+  <section id="capabilities"><h2>Capabilities</h2><p>Rapid prototyping, small tools, front-end, games, automation.</p></section>
+  <section id="contact"><h2>Contact</h2><p>Email me or use the Hire dropdown.</p></section>
 </main>
 
-<footer style="margin-top:32px;padding:28px 0;color:var(--muted)">
-  <div class="container" style="display:flex;gap:20px;flex-wrap:wrap;align-items:flex-start">
-    <div><strong>CiphAnon</strong><div style="color:var(--muted);margin-top:8px">Developer &amp; Prototyper</div></div>
-    <div><h4>Navigate</h4><a href="#about">About</a><br><a href="#capabilities">Capabilities</a><br><a href="#contact">Contact</a></div>
-    <div><h4>Contact</h4><a href="mailto:example@email.com">example@email.com</a>
-      <div style="color:var(--muted);margin-top:10px;font-size:13px">© <span id="year">2025</span> CiphAnon</div>
-    </div>
-  </div>
-</footer>
-
-<!-- Floating controls -->
-<div class="floating" aria-hidden="false">
-  <button id="themeFab" class="fab" aria-label="Toggle theme">🌓</button>
-
-  <button id="topFab" class="fab" aria-label="Back to top" title="Back to top">
-    <span class="fab-icons" aria-hidden="true">
-      <svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg"><path d="M480-528 296-344l-56-56 240-240 240 240-56 56-184-184Z"/></svg>
-      <svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg"><path d="M440-240v-368L296-464l-56-56 240-240 240 240-56 56-144-144v368h-80Z"/></svg>
-      <svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg"><path d="M440-727 256-544l-56-56 280-280 280 280-56 57-184-184v287h-80v-287Zm0 487v-120h80v120h-80Zm0 160v-80h80v80h-80Z"/></svg>
-    </span>
-  </button>
-</div>
-
 <script>
-/* ---------------------------
-   Small interactions
-   --------------------------- */
-document.getElementById('year').textContent = new Date().getFullYear();
-
-/* typed line */
-(function(){
-  const el = document.getElementById('typedLine'); if(!el) return;
-  const lines = ['Interactive prototypes','Dev tooling','UX polish','Fast iterations','Clean UI','Playable demos'];
-  let i=0,pos=0,forward=true;
-  function step(){
-    const text = lines[i];
-    if(forward){ pos++; el.textContent = text.slice(0,pos); if(pos===text.length){ forward=false; setTimeout(step,900); return } }
-    else{ pos--; el.textContent = text.slice(0,pos); if(pos===0){ forward=true; i=(i+1)%lines.length } }
-    setTimeout(step, forward?60:35 );
+  // TIME UPDATE
+  function updateTime(){ 
+    const now=new Date();
+    const h=now.getHours().toString().padStart(2,'0');
+    const m=now.getMinutes().toString().padStart(2,'0');
+    document.getElementById('statusTime').textContent=h+':'+m;
   }
-  step();
-})();
+  setInterval(updateTime,1000);
+  updateTime();
 
-/* theme */
-function toggleTheme(){
-  const cur = document.documentElement.getAttribute('data-theme') || 'light';
-  const next = cur === 'light' ? 'dark' : 'light';
-  document.documentElement.setAttribute('data-theme', next);
-  try{ localStorage.setItem('theme', next) }catch(e){}
-}
-document.getElementById('themeFab').addEventListener('click', toggleTheme);
-document.getElementById('themeToggle').addEventListener('click', toggleTheme);
-(function(){ try{ const s = localStorage.getItem('theme'); if(s) document.documentElement.setAttribute('data-theme', s) }catch(e){} })();
-
-/* back-to-top: only animate when near bottom */
-(function(){
-  const topFab = document.getElementById('topFab');
-  const svgs = Array.from(topFab.querySelectorAll('svg'));
-  let index = 0, interval = null;
-  const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const THRESH = 120;
-
-  function setActive(i){
-    svgs.forEach((s,idx)=> s.classList.toggle('active', idx===i));
-    index = i;
+  // BATTERY SIMULATION (for demo purposes)
+  let batteryLevel=100;
+  function updateBattery(){
+    document.getElementById('statusBattery').textContent=batteryLevel+'%';
+    batteryLevel--;
+    if(batteryLevel<0) batteryLevel=100;
   }
-  setActive(0);
+  setInterval(updateBattery,60000);
+  updateBattery();
 
-  function cycle(){
-    setActive((index+1) % svgs.length);
-  }
-  function start(){
-    if(REDUCED || interval) return;
-    interval = setInterval(cycle, 900);
-  }
-  function stop(){
-    if(interval){ clearInterval(interval); interval = null; }
-    setActive(0);
-  }
-
-  function check(){
-    const atBottom = (window.innerHeight + window.scrollY) >= (document.documentElement.scrollHeight - THRESH);
-    if(atBottom) start(); else stop();
-  }
-  check();
-  window.addEventListener('scroll', check, {passive:true});
-  window.addEventListener('resize', check);
-
-  topFab.addEventListener('click', () => {
-    topFab.classList.remove('fab--pop'); void topFab.offsetWidth; topFab.classList.add('fab--pop');
-    window.scrollTo({top:0, behavior:'smooth'});
+  // THEME TOGGLE
+  document.getElementById('themeToggle').addEventListener('click',()=>{
+    document.documentElement.dataset.theme = document.documentElement.dataset.theme==='light'?'dark':'light';
   });
-  topFab.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' ') { e.preventDefault(); topFab.click(); } });
-
-  window.addEventListener('unload', ()=>{ if(interval) clearInterval(interval) });
-})();
-
-/* Hire dropdown: accessible */
-(function(){
-  const root = document.getElementById('hireDropdown'); if(!root) return;
-  const toggle = document.getElementById('hireToggle'); const menu = document.getElementById('hireMenu');
-  const items = Array.from(menu.querySelectorAll('[role="menuitem"]'));
-  let open = false;
-
-  function openMenu(focus=true){
-    open = true; root.classList.add('open'); menu.hidden = false; toggle.setAttribute('aria-expanded','true');
-    requestAnimationFrame(()=> root.classList.add('open'));
-    if(focus) items[0]?.focus();
-  }
-  function closeMenu(retFocus=true){
-    open = false; root.classList.remove('open'); toggle.setAttribute('aria-expanded','false');
-    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) menu.hidden = true; else setTimeout(()=> menu.hidden = true, 180);
-    if(retFocus) toggle.focus();
-  }
-
-  toggle.addEventListener('click', (e)=>{ e.stopPropagation(); open ? closeMenu() : openMenu(); });
-  toggle.addEventListener('keydown', (e)=>{ if(e.key==='ArrowDown' || e.key==='Enter' || e.key===' ') { e.preventDefault(); openMenu(true); } else if(e.key==='Escape') closeMenu(); });
-
-  menu.addEventListener('keydown', (e)=>{
-    const idx = items.indexOf(document.activeElement);
-    if(e.key==='ArrowDown'){ e.preventDefault(); items[(idx+1)%items.length].focus(); }
-    if(e.key==='ArrowUp'){ e.preventDefault(); items[(idx-1+items.length)%items.length].focus(); }
-    if(e.key==='Home'){ e.preventDefault(); items[0].focus(); }
-    if(e.key==='End'){ e.preventDefault(); items[items.length-1].focus(); }
-    if(e.key==='Escape'){ e.preventDefault(); closeMenu(); }
-    if(e.key==='Tab'){ closeMenu(false); }
-  });
-
-  window.addEventListener('click', (ev)=>{ if(!root.contains(ev.target) && open) closeMenu(false); }, {capture:true, passive:true});
-  items.forEach(it=> it.addEventListener('click', ()=> { closeMenu(false); }));
-  window.addEventListener('keydown', (e)=>{ if(e.key==='Escape' && open) closeMenu(); });
-})();
 </script>
 </body>
 </html>
