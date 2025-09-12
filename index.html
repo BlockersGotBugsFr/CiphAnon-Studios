@@ -3,117 +3,148 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>CiphAnon — Home</title>
-<meta name="description" content="CiphAnon — developer & prototyper. 3 years experience across many languages and engines." />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+<title>CiphAnon — Developer & Prototyper</title>
+<meta name="description" content="CiphAnon — developer & prototyper. Fast prototypes, developer tooling, and polished front-end experiences." />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 <style>
+  /* ====== Theme & Base ====== */
   :root{
-    --bg:#041018; --panel:#0d1722; --muted:#99aebb;
-    --accent1:#ff9f1c; --accent2:#ff5e7a; --glass:rgba(255,255,255,0.03);
-    --maxw:1100px; --radius:12px; --ease:cubic-bezier(.2,.9,.3,1);
+    --bg:#0b1116;
+    --card:#0f1720;
+    --muted:#98a9bd;
+    --accent:#ff8a3d;
+    --accent-2:#ff5e7a;
+    --glass: rgba(255,255,255,0.03);
+    --radius:12px;
+    --maxw:1100px;
+    --ease: cubic-bezier(.2,.9,.3,1);
+    color-scheme: dark;
   }
   *{box-sizing:border-box}
   html,body{height:100%}
   body{
-    margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
-    background: linear-gradient(180deg,var(--bg), #021018 140%);
-    color:#eaf5ff;-webkit-font-smoothing:antialiased;line-height:1.45;
+    margin:0;
+    font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;
+    background: linear-gradient(180deg,var(--bg), #071018 140%);
+    color:#eaf3fb;
+    -webkit-font-smoothing:antialiased;
+    line-height:1.45;
     scroll-behavior:smooth;
+    -webkit-text-size-adjust:100%;
   }
-  img{display:block;max-width:100%}
+  img{max-width:100%;display:block}
   a{color:inherit}
-  .container{max-width:var(--maxw);margin:0 auto;padding:20px}
+  .container{max-width:var(--maxw);margin:0 auto;padding:28px}
 
-  /* NAV */
+  /* ====== Header ====== */
   header{position:sticky;top:12px;z-index:120;padding:10px 0}
-  .nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px;border-radius:12px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));box-shadow:0 8px 30px rgba(2,6,12,0.45)}
-  .brand{display:flex;gap:12px;align-items:center}
-  .logo{width:44px;height:44px;border-radius:10px;object-fit:contain}
-  nav.links{display:flex;gap:12px;align-items:center}
-  nav.links a{color:var(--muted);padding:6px 8px;border-radius:8px;font-weight:700}
-  .actions{display:flex;gap:8px}
-  .btn{background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#041018;padding:10px 14px;border-radius:10px;font-weight:800;border:0;cursor:pointer}
-  .btn.secondary{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted);font-weight:700}
-  .btn:focus{outline:3px solid rgba(255,159,28,0.12);outline-offset:3px}
+  .nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px;border-radius:14px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));box-shadow:0 8px 36px rgba(2,6,12,0.5)}
+  .brand{display:flex;align-items:center;gap:12px}
+  .logo{width:48px;height:48px;border-radius:10px;object-fit:contain}
+  .brand h1{font-size:16px;margin:0}
+  nav.primary{display:flex;gap:14px;align-items:center}
+  nav.primary a{color:var(--muted);text-decoration:none;padding:6px;border-radius:8px;font-weight:600}
+  .actions{display:flex;gap:10px;align-items:center}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;border:0;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#071018;font-weight:800;cursor:pointer}
+  .btn.minimal{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted);font-weight:700}
 
-  /* HERO */
-  .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;padding:56px 0}
-  .hero h1{font-size:40px;margin:0;line-height:1.02}
-  .accent-text{background:linear-gradient(90deg,var(--accent1),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
-  .lead{color:var(--muted);margin-top:12px;font-size:1.02rem;max-width:56ch}
-  .hero-ctas{display:flex;gap:12px;margin-top:18px;flex-wrap:wrap}
-  .pills{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
-  .pill{background:var(--glass);padding:8px 12px;border-radius:999px;color:var(--muted);font-weight:700;border:1px solid rgba(255,255,255,0.03)}
+  /* ====== Hero ====== */
+  .hero{display:grid;grid-template-columns:1fr 420px;gap:36px;align-items:center;padding:42px 0}
+  .kicker{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
+  .title{font-size:40px;line-height:1.04;margin:8px 0 0}
+  .title .accent-text{background:linear-gradient(90deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .subtitle{color:var(--muted);margin-top:14px;max-width:60ch}
+  .hero-actions{display:flex;gap:12px;margin-top:22px;flex-wrap:wrap}
+  .quick-stats{display:flex;gap:12px;margin-top:20px;flex-wrap:wrap}
+  .stat{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:10px 12px;border-radius:10px;min-width:110px;text-align:center}
+  .stat strong{display:block;font-size:18px}
 
-  .hero-frame{height:380px;border-radius:12px;padding:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));position:relative;box-shadow:0 20px 50px rgba(2,6,12,0.6);overflow:hidden;contain:layout paint}
-  .grad-blob{position:absolute;left:14px;top:10px;width:160px;height:160px;border-radius:40%;filter:blur(46px);opacity:0.14;background:linear-gradient(90deg,var(--accent1),var(--accent2))}
-  .char-wrap{position:absolute;right:14px;bottom:10px;width:260px;transform-origin:center;will-change:transform;pointer-events:none}
-  .char{width:100%;display:block;filter:drop-shadow(0 16px 28px rgba(2,6,12,0.5));transform-origin:center}
-  .bob{animation:bob 5.6s ease-in-out infinite}
-  @keyframes bob{0%{transform:translateY(0)}50%{transform:translateY(-6px)}100%{transform:translateY(0)}}
+  /* hero visual (simple & light) */
+  .hero-visual{height:360px;border-radius:12px;padding:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));position:relative;box-shadow:0 26px 70px rgba(2,6,12,0.6);overflow:hidden;contain:layout paint}
+  .visual-accent{position:absolute;left:12px;top:10px;width:140px;height:140px;border-radius:28%;filter:blur(64px);opacity:0.12;background:linear-gradient(90deg,var(--accent),var(--accent-2));pointer-events:none}
+  .portrait-wrap{position:absolute;right:16px;bottom:8px;width:260px;max-width:46%;pointer-events:none;will-change:transform}
+  .portrait{width:100%;border-radius:10px;display:block;filter:drop-shadow(0 20px 30px rgba(0,0,0,0.55))}
 
-  /* SKILLS CLOUD (gentle) */
-  .section{margin-top:28px}
-  .skills-wrap{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
-  .skill-cloud{position:relative;width:300px;height:300px;border-radius:999px;display:flex;align-items:center;justify-content:center;contain:layout paint}
-  .skill{position:absolute;left:50%;top:50%;transform-origin:0 0;background:rgba(255,255,255,0.03);padding:8px 12px;border-radius:999px;color:#fff;font-weight:700}
-  .skill.small{font-size:12px;padding:6px 8px}
+  /* ====== Main sections ====== */
+  section{padding:36px 0;border-bottom:1px solid rgba(255,255,255,0.02)}
+  section.headerless{border-bottom:0;padding-top:20px}
+  h2{margin:0 0 12px;font-size:20px}
+  p.lead{margin:0;color:var(--muted)}
 
-  /* ABOUT / EXPERIENCE */
-  .about{max-width:60ch;color:var(--muted)}
-  .whatido{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}
-  .what{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));padding:12px;border-radius:10px;box-shadow:0 10px 28px rgba(2,6,12,0.35)}
+  /* capabilities grid */
+  .cap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}
+  .cap{background:var(--card);padding:16px;border-radius:10px;box-shadow:0 10px 30px rgba(2,6,12,0.35);transition:transform .18s var(--ease)}
+  .cap:hover{transform:translateY(-6px)}
+  .cap h3{margin:0 0 8px}
+  .cap p{color:var(--muted);margin:0}
 
-  /* SOCIALS */
-  .socials{display:flex;gap:10px;align-items:center;margin-top:14px}
-  .social-btn{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:var(--glass);border:1px solid rgba(255,255,255,0.03);font-weight:700;color:var(--muted);text-decoration:none}
-  .social-btn .dot{width:10px;height:10px;border-radius:50%;background:var(--accent1);box-shadow:0 6px 18px rgba(255,159,28,0.08);}
+  /* skills list */
+  .skill-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .skill-pill{background:var(--glass);padding:8px 10px;border-radius:999px;font-weight:700;color:var(--muted);border:1px solid rgba(255,255,255,0.03)}
 
-  /* TESTIMONIALS */
+  /* socials row */
+  .social-row{display:flex;gap:12px;align-items:center;margin-top:14px}
+  .social-link{display:inline-flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.03);color:var(--muted);text-decoration:none;font-weight:700}
+
+  /* contact form */
+  .contact-grid{display:grid;grid-template-columns:1fr 320px;gap:20px}
+  .field{display:block;width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit}
+  .form-actions{display:flex;gap:10px;margin-top:10px}
+
+  /* testimonials small */
   .testimonials{display:flex;gap:12px;overflow:auto;padding:8px 0;scroll-snap-type:x mandatory}
-  .test{flex:0 0 280px;min-width:240px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));padding:12px;border-radius:12px;box-shadow:0 10px 22px rgba(2,6,12,0.34);scroll-snap-align:start}
+  .test{flex:0 0 300px;min-width:240px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));padding:14px;border-radius:12px;box-shadow:0 10px 22px rgba(2,6,12,0.34);scroll-snap-align:start}
 
-  /* CONTACT / NEWSLETTER */
-  .contact-wrap{display:flex;gap:18px;flex-wrap:wrap;align-items:flex-start;margin-top:18px}
-  .contact-box{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));padding:14px;border-radius:12px}
-  .input{padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit;min-width:220px}
-
-  /* FOOTER */
-  footer{margin-top:28px;padding:28px 0;border-top:1px solid rgba(255,255,255,0.02);color:var(--muted)}
-  .footer-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  /* footer */
+  footer{padding:28px 0;color:var(--muted)}
+  .footer-grid{display:flex;gap:20px;flex-wrap:wrap;align-items:flex-start}
+  .footer-grid div{min-width:200px}
 
   /* reveal helper */
-  .reveal{opacity:0;transform:translateY(14px);transition:opacity .55s var(--ease),transform .55s var(--ease)}
+  .reveal{opacity:0;transform:translateY(12px);transition:opacity .5s var(--ease),transform .5s var(--ease)}
   .reveal.show{opacity:1;transform:none}
-  @media (prefers-reduced-motion: reduce){
-    .bob,.reveal{animation:none !important;transition:none !important}
-  }
 
   /* responsive */
-  @media (max-width:980px){.hero{grid-template-columns:1fr}.skill-cloud{width:220px;height:220px}.char-wrap{display:none}}
-  @media (max-width:600px){.whatido{grid-template-columns:1fr}.testimonials{overflow:auto}}
+  @media (max-width:980px){
+    .hero{grid-template-columns:1fr}
+    .hero-visual{height:300px}
+    .cap-grid{grid-template-columns:repeat(2,1fr)}
+    .contact-grid{grid-template-columns:1fr}
+  }
+  @media (max-width:520px){
+    .cap-grid{grid-template-columns:1fr}
+  }
+
+  /* reduced motion */
+  @media (prefers-reduced-motion: reduce){
+    .reveal, .portrait-wrap { transition: none !important; animation: none !important; }
+  }
+
+  /* focus styles (keyboard users) */
+  :focus{outline:none}
+  .show-focus :focus{outline:3px solid rgba(255,138,61,0.14);outline-offset:4px;border-radius:6px}
 </style>
 </head>
 <body>
-
 <header>
   <div class="container nav" role="navigation" aria-label="Main navigation">
-    <div class="brand">
-      <img src="assets/logo.png" alt="logo" class="logo" loading="lazy" />
+    <div class="brand" aria-hidden="false">
+      <img src="assets/logo.png" alt="CiphAnon logo" class="logo" loading="lazy" /> <!-- EDIT: replace -->
       <div>
-        <div style="font-weight:800">CiphAnon</div>
-        <div style="font-size:12px;color:var(--muted)">Developer & Prototyper</div>
+        <h1>CiphAnon</h1>
+        <div style="font-size:12px;color:var(--muted)">Developer • Prototyper</div>
       </div>
     </div>
 
-    <nav class="links" aria-label="Primary links">
+    <nav class="primary" aria-label="Primary">
       <a href="#about">About</a>
-      <a href="#skills">Skills</a>
+      <a href="#capabilities">Capabilities</a>
       <a href="#contact">Contact</a>
     </nav>
 
     <div class="actions">
-      <a class="btn secondary" href="https://github.com/your-username" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn.minimal" href="https://github.com/your-username" target="_blank" rel="noopener">GitHub</a> <!-- EDIT -->
       <a class="btn" href="#contact">Hire</a>
     </div>
   </div>
@@ -123,128 +154,121 @@
   <!-- HERO -->
   <section class="hero" aria-labelledby="hero-title">
     <div>
-      <h1 id="hero-title"><span class="accent-text">CiphAnon</span> — clean code, playful prototypes, fast iteration.</h1>
-      <p class="lead">3 years experience across HTML, CSS, JavaScript, Godot (GDScript), Lua, Java, Unity, Block Code, and Python. I focus on rapid prototyping, developer-first tooling, and UX-focused interactions.</p>
+      <div class="kicker">Hi — I'm a developer</div>
+      <h1 id="hero-title" class="title">I build <span class="accent-text">fast prototypes</span> and tooling that scales.</h1>
+      <p class="subtitle lead">3 years of hands-on experience across web and game engines. I focus on building demonstrable prototypes, practical developer tooling, and refined front-end experiences.</p>
 
-      <div class="hero-ctas">
-        <a class="btn" href="#contact">Get in touch</a>
-        <a class="btn secondary" href="#skills">See skills</a>
+      <div class="hero-actions">
+        <a class="btn" href="#contact">Request a quote</a>
+        <a class="btn.minimal" href="mailto:example@email.com">Email</a> <!-- EDIT -->
       </div>
 
-      <div class="pills" aria-hidden="true">
-        <span class="pill">Prototyping</span>
-        <span class="pill">Tooling</span>
-        <span class="pill">UX</span>
-      </div>
-
-      <div class="stats-row" aria-hidden="true" style="margin-top:14px">
-        <div class="stat"><strong id="yearsCount">0</strong><small style="color:var(--muted)">Years coding</small></div>
-        <div class="stat"><strong id="langsCount">0</strong><small style="color:var(--muted)">Languages & engines</small></div>
-        <div class="stat"><strong id="thingsCount">0</strong><small style="color:var(--muted)">Projects / Demos</small></div>
+      <div class="quick-stats" aria-hidden="true">
+        <div class="stat"><strong id="statYears">0</strong><span style="display:block;color:var(--muted);font-size:13px">Years</span></div>
+        <div class="stat"><strong id="statLangs">0</strong><span style="display:block;color:var(--muted);font-size:13px">Languages & engines</span></div>
+        <div class="stat"><strong id="statWorks">0</strong><span style="display:block;color:var(--muted);font-size:13px">Demos & tools</span></div>
       </div>
     </div>
 
-    <div class="hero-frame reveal" aria-hidden="true">
-      <div class="grad-blob" aria-hidden="true"></div>
+    <div class="hero-visual reveal" aria-hidden="true">
+      <div class="visual-accent" aria-hidden="true"></div>
 
-      <div class="char-wrap bob" id="charWrap" aria-hidden="false">
-        <img src="assets/char.png" alt="character" class="char" loading="lazy" />
+      <div class="portrait-wrap" id="portraitWrap" aria-hidden="false">
+        <img src="assets/char.png" alt="CiphAnon character" class="portrait" loading="lazy" /> <!-- EDIT: optional -->
       </div>
     </div>
   </section>
 
   <!-- ABOUT -->
-  <section id="about" class="section reveal" aria-labelledby="about-title">
+  <section id="about" class="reveal" aria-labelledby="about-title">
     <h2 id="about-title">About</h2>
-    <p class="about">I’m a developer with ~3 years of hands-on experience across web and game environments. I build prototypes to test ideas quickly, create small tooling that improves developer flow, and ship clean front-end experiences with usability and performance in mind. (Full details & code samples are available on request.)</p>
+    <p class="lead">I help teams and individuals move from idea → playable prototype quickly, and I build small, reliable developer tools that save time. My work prioritizes clarity, performance, and maintainable code.</p>
+  </section>
 
-    <div class="whatido" style="margin-top:12px">
-      <div class="what"><strong>Prototype & iterate</strong><div style="color:var(--muted);margin-top:6px">Fast experiments to validate mechanics and UX.</div></div>
-      <div class="what"><strong>Developer tooling</strong><div style="color:var(--muted);margin-top:6px">Scripts, small libs, and build helpers that save time.</div></div>
-      <div class="what"><strong>UI & polish</strong><div style="color:var(--muted);margin-top:6px">Clear interfaces and interaction feedback that feels good.</div></div>
+  <!-- CAPABILITIES -->
+  <section id="capabilities" class="reveal" aria-labelledby="cap-title">
+    <h2 id="cap-title">Capabilities</h2>
+    <div class="cap-grid" role="list">
+      <div class="cap" role="listitem">
+        <h3>Rapid Prototypes</h3>
+        <p>Playable demos to validate mechanics, core loops and UX in days — iterated based on testing and feedback.</p>
+      </div>
+      <div class="cap" role="listitem">
+        <h3>Developer Tooling</h3>
+        <p>Small, pragmatic scripts and utilities (Python/JS) to speed builds, automate repetitive work, and standardize local dev workflows.</p>
+      </div>
+      <div class="cap" role="listitem">
+        <h3>UI & Interaction</h3>
+        <p>Polished front-end experiences with attention to accessibility, micro-interaction, and performance.</p>
+      </div>
+    </div>
+
+    <div style="margin-top:14px">
+      <div class="skill-list" aria-hidden="true">
+        <span class="skill-pill">HTML</span>
+        <span class="skill-pill">CSS</span>
+        <span class="skill-pill">JavaScript</span>
+        <span class="skill-pill">Godot (GDScript)</span>
+        <span class="skill-pill">Lua</span>
+        <span class="skill-pill">Java</span>
+        <span class="skill-pill">Unity</span>
+        <span class="skill-pill">Python</span>
+        <span class="skill-pill">Block Code</span>
+      </div>
     </div>
   </section>
 
-  <!-- SKILLS CLOUD -->
-  <section id="skills" class="section reveal" aria-labelledby="skills-title">
-    <h2 id="skills-title">Skills (visual)</h2>
+  <!-- SOCIALS & TESTIMONIALS -->
+  <section class="reveal" aria-labelledby="social-title">
+    <h2 id="social-title">Connect & Social</h2>
 
-    <div class="skills-wrap">
-      <div class="skill-cloud" id="skillCloud" aria-hidden="true">
-        <div class="skill small" data-angle="0">HTML</div>
-        <div class="skill" data-angle="40">CSS</div>
-        <div class="skill" data-angle="80">JavaScript</div>
-        <div class="skill small" data-angle="120">Godot</div>
-        <div class="skill" data-angle="160">Lua</div>
-        <div class="skill" data-angle="200">Java</div>
-        <div class="skill small" data-angle="240">Unity</div>
-        <div class="skill" data-angle="280">Python</div>
-        <div class="skill small" data-angle="320">Block Code</div>
+    <div style="display:flex;gap:28px;align-items:flex-start;flex-wrap:wrap">
+      <div style="min-width:260px">
+        <p class="lead" style="margin-bottom:10px">Find me on these channels — subscribe for short dev notes, demos, and walkthroughs.</p>
+
+        <div class="social-row" role="list">
+          <a class="social-link" href="https://github.com/your-username" target="_blank" rel="noopener">GitHub</a> <!-- EDIT -->
+          <a class="social-link" href="https://www.youtube.com/channel/your-channel" target="_blank" rel="noopener">YouTube</a> <!-- EDIT -->
+          <a class="social-link" href="https://twitter.com/your-handle" target="_blank" rel="noopener">Twitter</a> <!-- EDIT -->
+          <a class="social-link" href="mailto:example@email.com">Email</a> <!-- EDIT -->
+        </div>
       </div>
 
-      <div style="flex:1;min-width:240px">
-        <p style="color:var(--muted);margin-top:0">A visual snapshot of the languages and engines I use. Hover over the cloud (desktop) for a subtle tilt — everything is performance-friendly and respects reduced-motion preferences.</p>
-
-        <div class="socials" aria-label="Social links">
-          <a class="social-btn" href="https://github.com/your-username" target="_blank" rel="noopener"> <!-- EDIT -->
-            <span class="dot" style="background:#6cc644"></span> GitHub
-          </a>
-          <a class="social-btn" href="https://youtube.com/your-channel" target="_blank" rel="noopener"> <!-- EDIT -->
-            <span class="dot" style="background:#FF0000"></span> YouTube
-          </a>
-          <a class="social-btn" href="https://twitter.com/your-handle" target="_blank" rel="noopener"> <!-- EDIT -->
-            <span class="dot" style="background:#1DA1F2"></span> Twitter
-          </a>
-          <a class="social-btn" href="mailto:example@email.com">
-            <span class="dot" style="background:#ff9f1c"></span> Email
-          </a>
+      <div style="flex:1;min-width:260px">
+        <h3 style="margin:0 0 8px">What people say</h3>
+        <div class="testimonials" role="list">
+          <div class="test" role="listitem"><p>"Fast prototypes and clear communication — excellent result."</p><strong>— Reviewer</strong></div>
+          <div class="test" role="listitem"><p>"Tooling reduced repetitive tasks significantly."</p><strong>— Team Lead</strong></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- TESTIMONIALS -->
-  <section class="section reveal" aria-labelledby="test-title">
-    <h2 id="test-title">Testimonials</h2>
-    <div class="testimonials" role="list" aria-label="Testimonials">
-      <div class="test" role="listitem"><p>"Quick, clear, and the prototype felt real." </p><strong>— Alex</strong></div>
-      <div class="test" role="listitem"><p>"Helpful tooling that made local builds easy." </p><strong>— Sam</strong></div>
-      <div class="test" role="listitem"><p>"Great communicator and clean code." </p><strong>— Rina</strong></div>
-    </div>
-  </section>
-
-  <!-- CONTACT / NEWSLETTER -->
-  <section id="contact" class="section reveal" aria-labelledby="contact-title">
+  <!-- CONTACT -->
+  <section id="contact" class="reveal" aria-labelledby="contact-title">
     <h2 id="contact-title">Contact</h2>
 
-    <div class="contact-wrap">
-      <div class="contact-box" style="flex:1;min-width:260px">
-        <form id="contactForm" onsubmit="event.preventDefault(); contactSubmit();" aria-label="Contact form">
-          <input id="name" class="input" type="text" placeholder="Your name" required style="margin-bottom:8px" />
-          <input id="email" class="input" type="email" placeholder="Your email" required style="margin-bottom:8px" />
-          <textarea id="message" class="input" placeholder="Short brief (what do you need?)" required style="height:96px;margin-bottom:8px"></textarea>
-          <div style="display:flex;gap:8px">
-            <button class="btn" type="submit">Send (demo)</button>
-            <button class="btn secondary" type="button" onclick="prefill()">Prefill</button>
-          </div>
-          <div id="contactResult" style="margin-top:8px;color:var(--muted)"></div>
-        </form>
-      </div>
-
-      <div style="width:320px">
-        <div class="contact-box">
-          <h4 style="margin:0 0 8px">Newsletter</h4>
-          <p style="color:var(--muted);margin:0 0 10px">Short monthly notes on prototypes and small dev tips. No spam.</p>
-          <form id="newsForm" onsubmit="event.preventDefault(); subscribe()" aria-label="Newsletter form" style="display:flex;gap:8px">
-            <input id="newsEmail" class="input" type="email" placeholder="you@email.com" required />
-            <button class="btn" type="submit">Subscribe</button>
-          </form>
-          <div id="newsResult" style="margin-top:8px;color:var(--muted)"></div>
+    <div class="contact-grid" role="form" aria-label="Contact form">
+      <form onsubmit="event.preventDefault(); handleContact();" style="display:flex;flex-direction:column;gap:8px">
+        <input id="c-name" class="field" name="name" type="text" placeholder="Your name" required />
+        <input id="c-email" class="field" name="email" type="email" placeholder="Your email" required />
+        <textarea id="c-message" class="field" name="message" placeholder="Brief description of the project or question" rows="6" required></textarea>
+        <div class="form-actions">
+          <button class="btn" type="submit">Send message</button>
+          <button class="btn.minimal" type="button" onclick="prefillContact()">Prefill demo</button>
         </div>
-      </div>
+        <div id="contactStatus" style="color:var(--muted);font-size:13px"></div>
+      </form>
+
+      <aside style="min-width:260px">
+        <div style="background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));padding:14px;border-radius:10px">
+          <strong style="display:block">Availability</strong>
+          <div style="color:var(--muted);margin-top:8px">I typically take on short prototype sprints and small tooling projects. For inquiries, include scope and timeline.</div>
+          <div style="margin-top:12px"><strong>Response time</strong><div style="color:var(--muted);font-size:13px">Usually 1–3 business days.</div></div>
+        </div>
+      </aside>
     </div>
   </section>
-
 </main>
 
 <footer>
@@ -257,173 +281,134 @@
     <div>
       <h4 style="margin:0 0 8px">Navigate</h4>
       <a href="#about">About</a><br/>
-      <a href="#skills">Skills</a><br/>
+      <a href="#capabilities">Capabilities</a><br/>
       <a href="#contact">Contact</a>
     </div>
 
     <div>
-      <h4 style="margin:0 0 8px">Socials</h4>
-      <a href="https://github.com/your-username" target="_blank" rel="noopener">GitHub</a><br/> <!-- EDIT -->
-      <a href="https://youtube.com/your-channel" target="_blank" rel="noopener">YouTube</a><br/> <!-- EDIT -->
-      <a href="https://twitter.com/your-handle" target="_blank" rel="noopener">Twitter</a>
+      <h4 style="margin:0 0 8px">Contact</h4>
+      <a href="mailto:example@email.com">example@email.com</a><br/> <!-- EDIT -->
+      <div style="color:var(--muted);margin-top:8px;font-size:13px">© <span id="year"></span> CiphAnon — All rights reserved.</div>
     </div>
   </div>
-
-  <div style="max-width:var(--maxw);margin:12px auto 40px;color:var(--muted);font-size:13px;padding:0 20px">© <span id="year"></span> CiphAnon — All rights reserved.</div>
 </footer>
 
 <script>
-  // set year
-  document.getElementById('year').textContent = new Date().getFullYear();
+/* ===== Lightweight Interactions & Accessibility ===== */
 
-  // reveal sections
-  const io = new IntersectionObserver((entries)=>{
-    for(const e of entries){
-      if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target); }
-    }
-  }, {threshold:0.12});
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+/* set year */
+document.getElementById('year').textContent = new Date().getFullYear();
 
-  // gentle parallax for hero character (rAF throttled)
-  (function(){
-    const frame = document.querySelector('.hero-frame');
-    const char = document.getElementById('charWrap');
-    if(!frame || !char) return;
-    let raf=null, last={x:0,y:0};
-    function onMove(e){
-      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-      const r = frame.getBoundingClientRect();
-      const dx = (clientX - (r.left + r.width/2))/(r.width||1);
-      const dy = (clientY - (r.top + r.height/2))/(r.height||1);
-      last.x = dx; last.y = dy;
-      if(raf === null){
-        raf = requestAnimationFrame(()=> {
-          const tx = last.x * 10;
-          const ty = last.y * 8;
-          char.style.transform = `translate3d(${tx}px, ${ty}px, 0)`;
-          raf = null;
-        });
-      }
-    }
-    frame.addEventListener('mousemove', onMove, {passive:true});
-    frame.addEventListener('touchmove', onMove, {passive:true});
-    frame.addEventListener('mouseleave', ()=> char.style.transform = '', {passive:true});
-    function check(){ if(window.innerWidth < 720){ frame.removeEventListener('mousemove', onMove); frame.removeEventListener('touchmove', onMove); } }
-    check(); window.addEventListener('resize', check, {passive:true});
-  })();
+/* reveal on scroll (cheap) */
+const io = new IntersectionObserver((entries) => {
+  for (const e of entries) {
+    if (e.isIntersecting) { e.target.classList.add('show'); io.unobserve(e.target); }
+  }
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-  // skill cloud layout + gentle motion (no full spin)
-  (function(){
-    const cloud = document.getElementById('skillCloud');
-    if(!cloud) return;
-    const nodes = [...cloud.querySelectorAll('.skill')];
-    const r = Math.min(cloud.clientWidth, cloud.clientHeight)/2 - 36;
-    nodes.forEach(n=>{
-      const a = (parseFloat(n.dataset.angle)||0) * Math.PI/180;
-      const x = Math.cos(a) * r;
-      const y = Math.sin(a) * r;
-      n.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
-    });
-    // subtle weave motion using rAF (cheap)
-    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    let t=0;
-    function weave(){
-      t += 0.002;
-      const wobble = Math.sin(t)*2;
-      cloud.style.transform = `translateZ(0) rotate(${wobble}deg)`;
-      nodes.forEach(n=>{
-        // counter-rotate so labels remain readable
-        n.style.transform += ` rotate(${-wobble}deg)`;
+/* gentle portrait parallax (rAF throttled) */
+(function(){
+  const wrap = document.getElementById('portraitWrap');
+  const frame = document.querySelector('.hero-visual');
+  if(!wrap || !frame) return;
+  let raf = null, last = {x:0,y:0};
+  function onMove(e){
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+    const r = frame.getBoundingClientRect();
+    const dx = (clientX - (r.left + r.width/2)) / (r.width || 1);
+    const dy = (clientY - (r.top + r.height/2)) / (r.height || 1);
+    last.x = dx; last.y = dy;
+    if(raf === null){
+      raf = requestAnimationFrame(()=> {
+        wrap.style.transform = `translate3d(${last.x * 8}px, ${last.y * 6}px, 0)`;
+        raf = null;
       });
-      requestAnimationFrame(weave);
     }
-    requestAnimationFrame(weave);
-  })();
+  }
+  frame.addEventListener('mousemove', onMove, {passive:true});
+  frame.addEventListener('touchmove', onMove, {passive:true});
+  frame.addEventListener('mouseleave', ()=> wrap.style.transform = '', {passive:true});
+  function check(){ if(window.innerWidth < 720){ frame.removeEventListener('mousemove', onMove); frame.removeEventListener('touchmove', onMove); } }
+  check(); window.addEventListener('resize', check, {passive:true});
+})();
 
-  // counters (trigger once when hero visible)
-  (function(){
-    const hero = document.querySelector('.hero');
-    if(!hero) return;
-    const o = new IntersectionObserver((entries)=>{
-      for(const e of entries){
-        if(e.isIntersecting){
-          animate('yearsCount',3,700);
-          animate('langsCount',9,800);
-          animate('thingsCount',12,900);
-          o.disconnect();
-        }
+/* counters (run once when hero visible) */
+(function(){
+  const hero = document.querySelector('.hero');
+  if(!hero) return;
+  const obs = new IntersectionObserver((entries) => {
+    for(const e of entries){
+      if(e.isIntersecting){
+        animateCount('statYears', 3, 700);
+        animateCount('statLangs', 9, 800);
+        animateCount('statWorks', 12, 900);
+        obs.disconnect();
       }
-    }, {threshold:0.3});
-    o.observe(hero);
-    function animate(id,to,dur){
-      const el = document.getElementById(id);
-      if(!el) return;
-      let start=null;
-      function step(ts){
-        if(!start) start=ts;
-        const p = Math.min(1, (ts-start)/dur);
-        el.textContent = Math.floor(p*to);
-        if(p < 1) requestAnimationFrame(step);
-        else el.textContent = to;
-      }
-      requestAnimationFrame(step);
     }
-  })();
+  }, {threshold:0.3});
+  obs.observe(hero);
 
-  // testimonials simple auto-scroll (cheap)
-  (function(){
-    const el = document.querySelector('.testimonials');
+  function animateCount(id, to, dur){
+    const el = document.getElementById(id);
     if(!el) return;
-    let pos=0,last=performance.now(),running=true;
-    function tick(ts){
-      if(!running){ last=ts; requestAnimationFrame(tick); return; }
-      const dt = ts-last; last=ts;
-      pos += dt*0.02;
-      if(pos > el.scrollWidth - el.clientWidth) pos = 0;
-      el.scrollLeft = pos;
-      requestAnimationFrame(tick);
+    let start = null;
+    function step(ts){
+      if(!start) start = ts;
+      const p = Math.min(1, (ts - start)/dur);
+      el.textContent = Math.floor(p * to);
+      if(p < 1) requestAnimationFrame(step);
+      else el.textContent = to;
     }
-    el.addEventListener('mouseenter', ()=> running=false, {passive:true});
-    el.addEventListener('mouseleave', ()=> running=true, {passive:true});
-    if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches) requestAnimationFrame(tick);
-  })();
-
-  // contact demo
-  function contactSubmit(){
-    const name = document.getElementById('name').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const msg = document.getElementById('message').value.trim();
-    const out = document.getElementById('contactResult');
-    if(!name||!email||!msg){ out.textContent = 'Please fill all fields.'; return; }
-    out.textContent = 'Message sent (demo). Replace this with a real endpoint to receive messages.';
-    setTimeout(()=> out.textContent = '', 4500);
+    requestAnimationFrame(step);
   }
-  function prefill(){
-    document.getElementById('name').value = 'Acme';
-    document.getElementById('email').value = 'hello@acme.test';
-    document.getElementById('message').value = 'We need a prototype to test mechanic X.';
+})();
+
+/* testimonials auto-scroll (low cost) */
+(function(){
+  const el = document.querySelector('.testimonials');
+  if(!el) return;
+  let pos = 0, last = performance.now(), running = true;
+  function tick(ts){
+    if(!running){ last = ts; requestAnimationFrame(tick); return; }
+    const dt = ts - last; last = ts;
+    pos += dt * 0.02;
+    if(pos > el.scrollWidth - el.clientWidth) pos = 0;
+    el.scrollLeft = pos;
+    requestAnimationFrame(tick);
   }
+  el.addEventListener('mouseenter', ()=> running = false, {passive:true});
+  el.addEventListener('mouseleave', ()=> running = true, {passive:true});
+  if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches) requestAnimationFrame(tick);
+})();
 
-  // newsletter demo
-  function subscribe(){
-    const em = document.getElementById('newsEmail').value.trim();
-    const out = document.getElementById('newsResult');
-    if(!em){ out.textContent = 'Enter an email.'; return; }
-    out.textContent = 'Thanks — demo subscription saved. (Hook this to a provider for real signups.)';
-    setTimeout(()=> out.textContent = '', 4000);
+/* contact demo (replace with real endpoint) */
+function handleContact(){
+  const name = document.getElementById('c-name').value.trim();
+  const email = document.getElementById('c-email').value.trim();
+  const msg = document.getElementById('c-message').value.trim();
+  const out = document.getElementById('contactStatus');
+  if(!name || !email || !msg){ out.textContent = 'Please fill all fields.'; return; }
+  out.textContent = 'Message sent (demo). Replace this with a real backend or form provider.';
+  setTimeout(()=> out.textContent = '', 4500);
+}
+function prefillContact(){
+  document.getElementById('c-name').value = 'Acme Studio';
+  document.getElementById('c-email').value = 'hello@acme.test';
+  document.getElementById('c-message').value = 'Hi — would like a 2-week prototype to test an idea.';
+}
+
+/* accessibility: show focus outlines only after keyboard navigation */
+(function(){
+  function onFirstTab(e){
+    if(e.key === 'Tab') document.body.classList.add('show-focus');
+    window.removeEventListener('keydown', onFirstTab);
   }
+  window.addEventListener('keydown', onFirstTab);
+})();
 
-  // focus outline: show only after keyboard navigation
-  (function(){
-    function onFirstTab(e){
-      if(e.key === 'Tab') document.body.classList.add('show-focus');
-      window.removeEventListener('keydown', onFirstTab);
-    }
-    window.addEventListener('keydown', onFirstTab);
-  })();
-
-  // Respect reduced motion: heavy loops are gated by the checks above.
+/* Respect prefers-reduced-motion: heavy loops are gated above */
 </script>
 </body>
 </html>
