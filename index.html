@@ -8,166 +8,281 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 <style>
+  /* =========================
+     THEME, RESET & VARIABLES
+     ========================= */
   :root{
-    --bg-1:#06121a;--bg-2:#071824;--card:#0f1720;
-    --muted:#98a9bd;--text:#eaf3fb;
-    --accent-1:#ff9f1c;--accent-2:#ff5e7a;
-    --glass:rgba(255,255,255,0.03);--radius:14px;
-    --maxw:1200px;--ease:cubic-bezier(.2,.9,.3,1);
-    --shadow-1:0 8px 30px rgba(2,6,12,0.55);
+    --bg-1: #06121a;
+    --bg-2: #071824;
+    --card: #0f1720;
+    --muted: #98a9bd;
+    --text: #eaf3fb;
+    --accent-1: #ff9f1c;
+    --accent-2: #ff5e7a;
+    --glass: rgba(255,255,255,0.03);
+    --radius: 14px;
+    --maxw: 1200px;
+    --ease: cubic-bezier(.2,.9,.3,1);
+    --shadow-1: 0 8px 30px rgba(2,6,12,0.55);
   }
   [data-theme="light"]{
-    --bg-1:#f6f8fa;--bg-2:#eef2f6;--card:#ffffff;
-    --muted:#4b5563;--text:#0b1116;
-    --glass:rgba(11,17,22,0.04);
-    --shadow-1:0 8px 30px rgba(11,17,22,0.06);
+    --bg-1: #f6f8fa;
+    --bg-2: #eef2f6;
+    --card: #ffffff;
+    --muted: #4b5563;
+    --text: #0b1116;
+    --glass: rgba(11,17,22,0.04);
+    --shadow-1: 0 8px 30px rgba(11,17,22,0.06);
   }
-  *{box-sizing:border-box;margin:0;padding:0}
-  html,body{height:100%;font-family:Inter,sans-serif;background:linear-gradient(180deg,var(--bg-1),var(--bg-2));color:var(--text);scroll-behavior:smooth}
-  a{text-decoration:none;color:inherit}
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;
+    background: linear-gradient(180deg,var(--bg-1),var(--bg-2));
+    color:var(--text);-webkit-font-smoothing:antialiased;line-height:1.45;
+    scroll-behavior:smooth;
+  }
   img{max-width:100%;display:block}
+  a{color:inherit;text-decoration:none}
+  .container{max-width:var(--maxw);margin:0 auto;padding:28px}
 
-  /* STATUS BAR */
-  #statusBar{
-    position:fixed;top:0;left:0;width:100%;height:36px;
-    background:var(--card);color:var(--muted);
-    display:flex;justify-content:flex-end;align-items:center;
-    gap:14px;padding:0 16px;box-shadow:var(--shadow-1);z-index:300;
-    font-size:13px;
-  }
-  #statusBar div{display:flex;align-items:center;gap:4px;}
-  #statusBar svg{display:inline-block;vertical-align:middle;}
-
-  /* HEADER */
-  header{position:sticky;top:36px;width:100%;z-index:160}
-  .nav{display:flex;justify-content:space-between;align-items:center;padding:12px 28px;background:var(--card);box-shadow:var(--shadow-1)}
+  /* =========================
+     NAV
+     ========================= */
+  header{position:sticky;top:0;z-index:160;padding:10px 0;width:100%;background:var(--bg-1)}
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:12px 0}
   .brand{display:flex;gap:12px;align-items:center}
-  .brand h1{font-size:16px}
+  .logo{width:52px;height:52px;border-radius:12px;object-fit:cover}
+  .brand h1{font-size:16px;margin:0}
   nav.primary{display:flex;gap:14px;align-items:center}
-  nav.primary a{color:var(--muted);padding:6px;border-radius:8px;font-weight:600}
+  nav.primary a{color:var(--muted);text-decoration:none;padding:6px;border-radius:8px;font-weight:600}
   .actions{display:flex;gap:10px;align-items:center}
-  .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;border:0;background:linear-gradient(90deg,var(--accent-1),var(--accent-2));color:#071018;font-weight:800;cursor:pointer;transition:transform .15s ease}
-  .btn:hover{transform:translateY(-2px)}
-  .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted)}
+
+  /* Buttons */
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;border:0;background:linear-gradient(90deg,var(--accent-1),var(--accent-2));color:#071018;font-weight:800;cursor:pointer;transition:all .2s}
+  .btn:hover{opacity:.85}
+  .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted);font-weight:700}
   .icon-btn{background:transparent;border:0;padding:8px;border-radius:8px;cursor:pointer;color:var(--muted)}
 
-  /* DROPDOWN */
+  /* Dropdown */
   .dropdown{position:relative;display:inline-block}
-  .dropdown-content{display:none;position:absolute;right:0;top:42px;background:var(--card);min-width:160px;border-radius:10px;box-shadow:var(--shadow-1);overflow:hidden;z-index:400}
-  .dropdown-content a{color:var(--text);padding:10px 14px;display:block;transition:background .15s ease}
-  .dropdown-content a:hover{background:linear-gradient(90deg,var(--accent-1),var(--accent-2));color:#071018}
-  .dropdown:hover .dropdown-content{display:block}
+  .dropdown-content{
+    display:none;
+    position:absolute;
+    right:0;
+    top:42px;
+    background:var(--card);
+    min-width:160px;
+    border-radius:10px;
+    box-shadow:var(--shadow-1);
+    overflow:hidden;
+    z-index:400;
+    transition:opacity .2s ease, transform .2s ease;
+    transform:translateY(-10px);
+  }
+  .dropdown-content a{
+    color:var(--text);
+    padding:10px 14px;
+    display:block;
+    transition:background .15s, color .15s;
+  }
+  .dropdown-content a:hover{
+    background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
+    color:#071018;
+  }
+  .dropdown:hover .dropdown-content{
+    display:block;
+    opacity:1;
+    transform:translateY(0);
+  }
 
-  /* HERO */
+  /* =========================
+     HERO
+     ========================= */
   .hero{display:grid;grid-template-columns:1fr 460px;gap:36px;align-items:center;padding:48px 0}
   .kicker{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
   .title{font-size:42px;line-height:1.03;margin:8px 0 0}
   .title .accent{background:linear-gradient(90deg,var(--accent-1),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
   .subtitle{color:var(--muted);margin-top:14px;max-width:60ch}
   .hero-ctas{display:flex;gap:12px;margin-top:22px;flex-wrap:wrap}
-  .hero-visual{height:420px;border-radius:16px;padding:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));position:relative;box-shadow:var(--shadow-1);overflow:hidden}
-  .bg-svg{position:absolute;inset:-20% -10%;width:640px;height:640px;filter:blur(72px);opacity:0.12;pointer-events:none}
-  .portrait-wrap{position:absolute;right:14px;bottom:12px;width:320px;max-width:52%;pointer-events:none}
-  .portrait{width:100%;border-radius:12px;filter:drop-shadow(0 26px 36px rgba(0,0,0,0.55));}
+  .stats{display:flex;gap:12px;margin-top:20px;flex-wrap:wrap}
+  .stat{background:var(--card);padding:10px 12px;border-radius:10px;min-width:120px;text-align:center;box-shadow:var(--shadow-1)}
+  .stat strong{display:block;font-size:18px}
 
-  @media (max-width:1000px){.hero{grid-template-columns:1fr}.hero-visual{height:320px}.portrait-wrap{display:none}}
+  /* hero visual */
+  .hero-visual{height:420px;border-radius:16px;padding:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));position:relative;box-shadow:var(--shadow-1);overflow:hidden}
+  .bg-svg{position:absolute;inset:-20% -10% auto auto;width:640px;height:640px;filter:blur(72px);opacity:0.12;pointer-events:none}
+  .portrait-wrap{position:absolute;right:14px;bottom:12px;width:320px;max-width:52%;pointer-events:none;will-change:transform}
+  .portrait{width:100%;border-radius:12px;display:block;filter:drop-shadow(0 26px 36px rgba(0,0,0,0.55));}
+
+  /* subtle typed subtitle */
+  .typed{font-weight:700;color:var(--accent-2);margin-top:10px}
+  .typed::after{content:"|";margin-left:4px;color:var(--accent-2);animation:blink 0.8s infinite}
+  @keyframes blink{0%,50%{opacity:1}51%,100%{opacity:0}}
+
+  /* =========================
+     MAIN: CAPABILITIES + SKILLS
+     ========================= */
+  section{padding:36px 0;border-bottom:1px solid rgba(255,255,255,0.02)}
+  .cap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:18px}
+  .cap{background:var(--card);padding:18px;border-radius:12px;box-shadow:var(--shadow-1);transition:transform .18s var(--ease)}
+  .cap:hover{transform:translateY(-8px)}
+  .cap h3{margin:0 0 8px}
+  .cap p{color:var(--muted);margin:0}
+  .skill-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .skill{background:var(--glass);padding:8px 10px;border-radius:999px;font-weight:700;color:var(--muted);border:1px solid rgba(255,255,255,0.03)}
+
+  /* =========================
+     CONTACT / FOOTER
+     ========================= */
+  .contact-grid{display:grid;grid-template-columns:1fr 320px;gap:18px;margin-top:12px}
+  .field{display:block;width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit}
+  .form-actions{display:flex;gap:10px;margin-top:10px}
+  footer{padding:28px 0;color:var(--muted)}
+  .footer-grid{display:flex;gap:20px;flex-wrap:wrap}
+
+  /* floating back-to-top & theme toggle */
+  .floating{position:fixed;right:18px;bottom:18px;z-index:240;display:flex;flex-direction:column;gap:8px}
+  .fab{width:48px;height:48px;border-radius:12px;background:var(--card);display:inline-grid;place-items:center;box-shadow:var(--shadow-1);cursor:pointer;border:0;color:var(--muted)}
+
+  /* reveal helper & reduced motion */
+  .reveal{opacity:0;transform:translateY(12px);transition:opacity .55s var(--ease),transform .55s var(--ease)}
+  .reveal.show{opacity:1;transform:none}
+  @media (prefers-reduced-motion: reduce){.reveal{transition:none!important}}
+
+  /* responsive */
+  @media (max-width:1000px){.hero{grid-template-columns:1fr}.hero-visual{height:320px}.cap-grid{grid-template-columns:repeat(2,1fr)}.contact-grid{grid-template-columns:1fr}.portrait-wrap{display:none}}
+  @media (max-width:560px){.cap-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 
-<!-- STATUS BAR -->
-<div id="statusBar">
-  <div>
-    <svg xmlns="http://www.w3.org/2000/svg" height="18" viewBox="0 -960 960 960" width="18" fill="currentColor"><path d="M480-120q-99 0-168.5-69.5T242-360q0-99 69.5-168.5T480-598q99 0 168.5 69.5T718-360q0 99-69.5 168.5T480-120Zm10-103 130-75-34-57-96 55v-190h-60v196l-70 40 34 57 62-36Z"/></svg>
-    <span id="statusTime">00:00</span>
-  </div>
-  <div>
-    <svg xmlns="http://www.w3.org/2000/svg" height="18" viewBox="0 -960 960 960" width="18" fill="currentColor"><path d="M160-240q-50 0-85-35t-35-85v-240q0-50 35-85t85-35h540q50 0 85 35t35 85v240q0 50-35 85t-85 35H160Zm0-80h540q17 0 28.5-11.5T740-360v-240q0-17-11.5-28.5T700-640H160q-17 0-28.5 11.5T120-600v240q0 17 11.5 28.5T160-320Zm700-60v-200h20q17 0 28.5 11.5T920-540v120q0 17-11.5 28.5T880-380h-20Z"/></svg>
-    <span id="statusBattery">--%</span>
-  </div>
-</div>
-
-<!-- HEADER -->
 <header>
-  <div class="nav">
+  <div class="container nav" role="navigation" aria-label="Main">
     <div class="brand">
-      <img src="https://via.placeholder.com/52" alt="CiphAnon logo" class="logo">
+      <img src="assets/logo.png" alt="CiphAnon logo" class="logo" loading="lazy">
       <div>
         <h1>CiphAnon Studios</h1>
-        <div style="font-size:12px;color:var(--muted)">Coder • Developer</div>
+        <div style="font-size:12px;color:var(--muted)">Coder • Idk What Else ngl</div>
       </div>
     </div>
-    <nav class="primary">
+
+    <nav class="primary" aria-label="Primary navigation">
       <a href="#about">About</a>
       <a href="#capabilities">Capabilities</a>
       <a href="#contact">Contact</a>
     </nav>
+
     <div class="actions">
-      <button class="icon-btn" id="themeToggle">🌓</button>
+      <button class="icon-btn" id="themeToggle" aria-label="Toggle theme">🌓</button>
       <a class="btn ghost" href="mailto:example@email.com">Email</a>
+
+      <!-- Dropdown -->
       <div class="dropdown">
         <button class="btn">Hire ▼</button>
         <div class="dropdown-content">
           <a href="#contact">Request Quote</a>
-          <a href="mailto:example@email.com">Email Me</a>
-          <a href="https://github.com/your-username" target="_blank">GitHub</a>
+          <a href="E-mag.html">E-mag</a>
+          <a href="https://github.com/your-username" target="_blank" rel="noopener">GitHub</a>
         </div>
       </div>
     </div>
   </div>
 </header>
 
-<!-- HERO -->
 <main class="container">
-  <section class="hero">
+  <!-- HERO -->
+  <section class="hero" aria-labelledby="hero-title">
     <div>
       <div class="kicker">Hello — I'm a developer</div>
-      <h1 class="title">I build <span class="accent">fast prototypes</span> and tooling.</h1>
-      <div class="subtitle">Experience across HTML, CSS, JS, Lua, Python, Godot, Unity.</div>
+      <h1 id="hero-title" class="title">I build <span class="accent">fast prototypes</span> and developer tooling that ships.</h1>
+      <div class="subtitle lead">
+        3 years of hands-on experience across HTML, CSS, JavaScript, Godot, Lua, Java, Unity, Block Code and Python.
+      </div>
+
+      <div class="typed" aria-hidden="true" id="typedLine"></div>
+
       <div class="hero-ctas">
         <a class="btn" href="#contact">Request Quote</a>
-        <a class="btn ghost" href="https://github.com/your-username">GitHub</a>
+        <a class="btn ghost" href="https://github.com/your-username" target="_blank" rel="noopener">GitHub</a>
+      </div>
+
+      <div class="stats" aria-hidden="true">
+        <div class="stat"><strong id="statYears">3</strong><span style="color:var(--muted)">Years</span></div>
+        <div class="stat"><strong id="statLangs">9</strong><span style="color:var(--muted)">Languages</span></div>
+        <div class="stat"><strong id="statWorks">12</strong><span style="color:var(--muted)">Demos/tools</span></div>
       </div>
     </div>
-    <div class="hero-visual">
+
+    <div class="hero-visual reveal show" aria-hidden="true">
       <svg class="bg-svg" viewBox="0 0 600 600" aria-hidden="true">
-        <circle cx="300" cy="300" r="260" fill="url(#grad)"/>
-        <defs><linearGradient id="grad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff9f1c"/><stop offset="1" stop-color="#ff5e7a"/></linearGradient></defs>
+        <defs><linearGradient id="g1" x1="0" x2="1"><stop offset="0" stop-color="#ff9f1c"/><stop offset="1" stop-color="#ff5e7a"/></linearGradient></defs>
+        <circle cx="300" cy="300" r="260" fill="url(#g1)"/>
       </svg>
-      <div class="portrait-wrap"><img src="https://via.placeholder.com/320" class="portrait" alt="Character"></div>
+      <div class="portrait-wrap" id="portraitWrap"><img src="assets/char.png" alt="Character" class="portrait" loading="lazy"></div>
     </div>
   </section>
 
-  <section id="about"><h2>About</h2><p>I help teams move from idea to playable prototype quickly and build small, reliable tooling that saves time.</p></section>
-  <section id="capabilities"><h2>Capabilities</h2><p>Rapid prototyping, small tools, front-end, games, automation.</p></section>
-  <section id="contact"><h2>Contact</h2><p>Email me or use the Hire dropdown.</p></section>
+  <!-- ABOUT -->
+  <section id="about" class="reveal show"><h2>About</h2><p class="lead">I help teams move from idea to playable prototype quickly and build small, reliable tooling that saves time.</p></section>
+
+  <!-- CAPABILITIES -->
+  <section id="capabilities" class="reveal show"><h2>Capabilities</h2>
+    <div class="cap-grid">
+      <div class="cap"><h3>Rapid Prototyping</h3><p>Playable demos that validate mechanics quickly.</p></div>
+      <div class="cap"><h3>Developer Tooling</h3><p>Utilities and scripts to automate workflows.</p></div>
+      <div class="cap"><h3>UI &amp; polish</h3><p>Front-end with accessibility, interactions, and performance.</p></div>
+    </div>
+    <div class="skill-list">
+      <span class="skill">HTML</span><span class="skill">CSS</span><span class="skill">JavaScript</span><span class="skill">Godot</span><span class="skill">Lua</span><span class="skill">Java</span><span class="skill">Unity</span><span class="skill">Python</span><span class="skill">Block Code</span>
+    </div>
+  </section>
 </main>
 
+<footer>
+  <div class="container footer-grid">
+    <div><strong>CiphAnon</strong><div style="color:var(--muted);margin-top:8px">Developer &amp; Prototyper</div></div>
+    <div><h4>Navigate</h4><a href="#about">About</a><br><a href="#capabilities">Capabilities</a><br><a href="#contact">Contact</a></div>
+    <div><h4>Contact</h4><a href="mailto:example@email.com">example@email.com</a><div style="color:var(--muted);margin-top:10px;font-size:13px">© <span id="year">2025</span> CiphAnon</div></div>
+  </div>
+</footer>
+
+<div class="floating"><button class="fab" id="themeFab" aria-label="Toggle theme">🌓</button><button class="fab" id="topFab" aria-label="Back to top">⬆</button></div>
+
 <script>
-  // TIME UPDATE
-  function updateTime(){ 
-    const now=new Date();
-    const h=now.getHours().toString().padStart(2,'0');
-    const m=now.getMinutes().toString().padStart(2,'0');
-    document.getElementById('statusTime').textContent=h+':'+m;
-  }
-  setInterval(updateTime,1000);
-  updateTime();
+/* =========================
+   INTERACTIONS
+   ========================= */
+document.getElementById('year').textContent = new Date().getFullYear();
 
-  // BATTERY SIMULATION (for demo purposes)
-  let batteryLevel=100;
-  function updateBattery(){
-    document.getElementById('statusBattery').textContent=batteryLevel+'%';
-    batteryLevel--;
-    if(batteryLevel<0) batteryLevel=100;
+/* Typed subtitle with blinking cursor */
+(function typed(){
+  const el = document.getElementById('typedLine');
+  if(!el) return;
+  const lines = ['Interactive prototypes','Dev tooling','UX polish','Fast iterations','Clean UI','Playable demos'];
+  let i=0,pos=0,forward=true;
+  function step(){
+    const text=lines[i];
+    if(forward){pos++;el.textContent=text.slice(0,pos);
+      if(pos===text.length){forward=false;setTimeout(step,1000);return;}
+    }else{pos--;el.textContent=text.slice(0,pos);
+      if(pos===0){forward=true;i=(i+1)%lines.length;}
+    }
+    setTimeout(step,forward?60:40);
   }
-  setInterval(updateBattery,60000);
-  updateBattery();
+  step();
+})();
 
-  // THEME TOGGLE
-  document.getElementById('themeToggle').addEventListener('click',()=>{
-    document.documentElement.dataset.theme = document.documentElement.dataset.theme==='light'?'dark':'light';
-  });
+/* Back-to-top */
+document.getElementById('topFab').addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+document.getElementById('themeFab').addEventListener('click',toggleTheme);
+document.getElementById('themeToggle').addEventListener('click',toggleTheme);
+function toggleTheme(){
+  const cur=document.documentElement.getAttribute('data-theme');
+  const next=cur==='light'?'dark':'light';
+  document.documentElement.setAttribute('data-theme',next);
+  localStorage.setItem('theme',next);
+}
 </script>
 </body>
 </html>
