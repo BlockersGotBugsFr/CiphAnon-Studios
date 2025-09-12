@@ -1,12 +1,12 @@
 <!doctype html>
 <html lang="en" data-theme="light">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>CiphAnon Studios</title>
-<meta name="description" content="CiphAnon — prototypes, developer tooling, and polished front-end experiences.">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<meta name="description" content="CiphAnon — prototypes, developer tooling, and polished front-end experiences." />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
 <style>
   /* =========================
      THEME, RESET & VARIABLES
@@ -25,10 +25,9 @@
     --ease: cubic-bezier(.2,.9,.3,1);
     --shadow-1: 0 8px 30px rgba(2,6,12,0.55);
 
-    /* icon / fab variables */
     --fab-bg: var(--card);
-    --fab-fill: #e3e3e3; /* icon color (default) */
-    --fab-hover-fill: #071018; /* if needed for hover contrast */
+    --fab-fill: #e3e3e3;
+    --fab-hover-fill: #071018;
     --fab-transition: 320ms var(--ease);
   }
   [data-theme="light"]{
@@ -40,11 +39,11 @@
     --glass: rgba(11,17,22,0.04);
     --shadow-1: 0 8px 30px rgba(11,17,22,0.06);
 
-    /* light theme icon color (darker icon so it remains visible) */
     --fab-bg: var(--card);
     --fab-fill: #071018;
     --fab-hover-fill: #ffffff;
   }
+
   *{box-sizing:border-box}
   html,body{height:100%}
   body{
@@ -55,13 +54,19 @@
   }
   img{max-width:100%;display:block}
   a{color:inherit}
-  .container{max-width:var(--maxw);margin:0 auto;padding:28px}
+  .container{max-width:var(--maxw);margin:0 auto;padding:20px 28px}
 
   /* =========================
-     NAV
+     FULL-WIDTH HEADER (nav-bar)
      ========================= */
-  header{position:sticky;top:12px;z-index:160;padding:10px 0}
-  .nav{display:flex;align-items:center;justify-content:space-between;padding:12px;border-radius:16px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));box-shadow:var(--shadow-1)}
+  header{position:sticky;top:0;z-index:160}
+  .nav-bar{
+    width:100%;
+    background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    box-shadow: var(--shadow-1);
+    backdrop-filter: blur(6px);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:12px 0}
   .brand{display:flex;gap:12px;align-items:center}
   .logo{width:52px;height:52px;border-radius:12px;object-fit:cover}
   .brand h1{font-size:16px;margin:0}
@@ -72,8 +77,11 @@
   .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted);font-weight:700}
   .icon-btn{background:transparent;border:0;padding:8px;border-radius:8px;cursor:pointer;color:var(--muted)}
 
+  /* make the nav look "flat" (no bubble) */
+  .nav{background:transparent;border-radius:0;padding:10px 0}
+
   /* =========================
-     HERO
+     HERO & MAIN (unchanged)
      ========================= */
   .hero{display:grid;grid-template-columns:1fr 460px;gap:36px;align-items:center;padding:48px 0}
   .kicker{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
@@ -84,56 +92,24 @@
   .stats{display:flex;gap:12px;margin-top:20px;flex-wrap:wrap}
   .stat{background:var(--card);padding:10px 12px;border-radius:10px;min-width:120px;text-align:center;box-shadow:var(--shadow-1)}
   .stat strong{display:block;font-size:18px}
-
-  /* hero visual */
   .hero-visual{height:420px;border-radius:16px;padding:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));position:relative;box-shadow:var(--shadow-1);overflow:hidden}
   .bg-svg{position:absolute;inset:-20% -10% auto auto;width:640px;height:640px;filter:blur(72px);opacity:0.12;pointer-events:none}
   .portrait-wrap{position:absolute;right:14px;bottom:12px;width:320px;max-width:52%;pointer-events:none;will-change:transform}
   .portrait{width:100%;border-radius:12px;display:block;filter:drop-shadow(0 26px 36px rgba(0,0,0,0.55));}
-
-  /* subtle typed subtitle */
   .typed{font-weight:700;color:var(--accent-2);margin-top:10px}
   .typed::after{content:"|";margin-left:4px;color:var(--accent-2);animation:blink 0.8s infinite}
   @keyframes blink{0%,50%{opacity:1}51%,100%{opacity:0}}
 
-  /* =========================
-     MAIN: CAPABILITIES + SKILLS
-     ========================= */
   section{padding:36px 0;border-bottom:1px solid rgba(255,255,255,0.02)}
   .cap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:18px}
   .cap{background:var(--card);padding:18px;border-radius:12px;box-shadow:var(--shadow-1);transition:transform .18s var(--ease)}
   .cap:hover{transform:translateY(-8px)}
-  .cap h3{margin:0 0 8px}
-  .cap p{color:var(--muted);margin:0}
   .skill-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
   .skill{background:var(--glass);padding:8px 10px;border-radius:999px;font-weight:700;color:var(--muted);border:1px solid rgba(255,255,255,0.03)}
 
   /* =========================
-     SOCIALS & YOUTUBE (lazy)
+     FAB & Arrow SVG cycling
      ========================= */
-  .social-row{display:flex;gap:12px;align-items:center;margin-top:14px;flex-wrap:wrap}
-  .social-link{display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.03);color:var(--muted);text-decoration:none;font-weight:700}
-
-  .yt-placeholder{position:relative;background:#000;border-radius:10px;overflow:hidden;min-height:160px;display:flex;align-items:center;justify-content:center;cursor:pointer}
-  .yt-placeholder img{width:100%;height:100%;object-fit:cover;opacity:0.95;filter:brightness(.6)}
-  .yt-play{position:absolute;display:inline-flex;align-items:center;justify-content:center;width:64px;height:64px;border-radius:999px;background:linear-gradient(90deg,var(--accent-1),var(--accent-2));box-shadow:0 8px 30px rgba(0,0,0,0.4);color:#071018;font-weight:800;font-size:18px}
-
-  /* =========================
-     TESTIMONIALS (tiny)
-     ========================= */
-  .testimonials{display:flex;gap:12px;overflow:auto;padding:8px 0;scroll-snap-type:x mandatory}
-  .test{flex:0 0 300px;min-width:240px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));padding:14px;border-radius:12px;box-shadow:var(--shadow-1);scroll-snap-align:start}
-
-  /* =========================
-     CONTACT / FOOTER
-     ========================= */
-  .contact-grid{display:grid;grid-template-columns:1fr 320px;gap:18px;margin-top:12px}
-  .field{display:block;width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit}
-  .form-actions{display:flex;gap:10px;margin-top:10px}
-  footer{padding:28px 0;color:var(--muted)}
-  .footer-grid{display:flex;gap:20px;flex-wrap:wrap}
-
-  /* floating back-to-top & theme toggle */
   .floating{position:fixed;right:18px;bottom:18px;z-index:240;display:flex;flex-direction:column;gap:8px}
   .fab{
     width:48px;height:48px;border-radius:12px;background:var(--fab-bg);display:inline-grid;place-items:center;box-shadow:var(--shadow-1);
@@ -143,7 +119,6 @@
   .fab:focus{outline:2px solid rgba(255,255,255,0.06);outline-offset:2px}
   .fab:hover{box-shadow:0 12px 36px rgba(0,0,0,0.28)}
 
-  /* --- icon area and SVG cycling --- */
   .fab-icons{width:24px;height:24px;display:inline-block;position:relative}
   .fab-icons svg{
     position:absolute;left:0;top:0;width:24px;height:24px;display:block;
@@ -153,26 +128,19 @@
     will-change:opacity,transform,fill;
     pointer-events:none;
   }
-  .fab-icons svg.active{
-    opacity:1; transform:none;
-  }
+  .fab-icons svg.active{ opacity:1; transform:none; }
 
-  /* subtle bounce when you click it (so it feels lively) */
   .fab--pop{animation:fab-pop .36s var(--ease) both}
-  @keyframes fab-pop{
-    0%{transform:translateY(0) scale(1)}
-    30%{transform:translateY(-6px) scale(1.06)}
-    100%{transform:translateY(0) scale(1)}
-  }
+  @keyframes fab-pop{0%{transform:translateY(0) scale(1)}30%{transform:translateY(-6px) scale(1.06)}100%{transform:translateY(0) scale(1)}}
 
-  /* reveal helper & reduced motion */
-  .reveal{opacity:0;transform:translateY(12px);transition:opacity .55s var(--ease),transform .55s var(--ease)}
-  .reveal.show{opacity:1;transform:none}
-  @media (prefers-reduced-motion: reduce){.reveal{transition:none!important} .fab-icons svg{transition:none!important}}
-
-  /* Hire dropdown styles */
+  /* =========================
+     Hire dropdown (toggle is now an SVG) 
+     ========================= */
   .hire-dropdown{position:relative;display:inline-block}
-  .hire-dropdown .btn{display:flex;align-items:center;gap:8px}
+  /* we keep the button styling to wrap the svg nicely */
+  .hire-svg-btn{display:inline-flex;align-items:center;justify-content:center;padding:10px;border-radius:10px;border:0;background:linear-gradient(90deg,var(--accent-1),var(--accent-2));cursor:pointer}
+  .hire-svg-btn svg{display:block;width:18px;height:18px;flex:0 0 18px}
+  .sr-only{position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap;border:0;padding:0;margin:-1px}
   .hire-menu{
     position:absolute;right:0;top:calc(100% + 10px);
     min-width:220px;background:var(--card);border-radius:12px;padding:8px;
@@ -181,23 +149,19 @@
     transform-origin:top right;transition:opacity .22s var(--ease),transform .22s var(--ease);
     opacity:0;transform:translateY(-6px) scale(.98);pointer-events:none;
   }
-  .hire-menu a{
-    display:block;padding:10px 12px;border-radius:8px;text-decoration:none;color:var(--muted);
-    font-weight:700;border:1px solid transparent;margin:4px 0;
-  }
-  .hire-menu a:hover,
-  .hire-menu a:focus{
-    background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
-    color:#071018;border-color:rgba(255,255,255,0.02);outline:none;
-  }
+  .hire-menu a{display:block;padding:10px 12px;border-radius:8px;text-decoration:none;color:var(--muted);font-weight:700;border:1px solid transparent;margin:4px 0}
+  .hire-menu a:hover,.hire-menu a:focus{background:linear-gradient(90deg,var(--accent-1),var(--accent-2));color:#071018;border-color:rgba(255,255,255,0.02);outline:none}
   .hire-dropdown.open .hire-menu{opacity:1;transform:none;pointer-events:auto}
 
-  /* small caret rotation for visual feedback */
-  #hireToggle svg{transition:transform .22s var(--ease)}
-  .hire-dropdown.open #hireToggle svg{transform:rotate(180deg)}
+  /* rotate little caret in svg if dropdown open */
+  .hire-toggle-caret{transition:transform .22s var(--ease)}
+  .hire-dropdown.open .hire-toggle-caret{transform:rotate(180deg)}
 
-  /* keyboard focus styles */
-  .hire-menu a:focus{box-shadow:0 6px 18px rgba(0,0,0,0.12)}
+  /* reduced motion */
+  @media (prefers-reduced-motion: reduce){
+    .fab-icons svg{transition:none!important}
+    .hire-menu{transition:none!important}
+  }
 
   /* responsive */
   @media (max-width:1000px){.hero{grid-template-columns:1fr}.hero-visual{height:320px}.cap-grid{grid-template-columns:repeat(2,1fr)}.contact-grid{grid-template-columns:1fr}.portrait-wrap{display:none}}
@@ -207,39 +171,47 @@
 <body>
 
 <header>
-  <div class="container nav" role="navigation" aria-label="Main">
-    <div class="brand">
-      <img src="assets/logo.png" alt="CiphAnon logo" class="logo" loading="lazy">
-      <div>
-        <h1>CiphAnon Studios</h1>
-        <div style="font-size:12px;color:var(--muted)">Coder • Idk What Else ngl</div>
-      </div>
-    </div>
-    <nav class="primary" aria-label="Primary navigation">
-      <a href="#about">About</a>
-      <a href="#capabilities">Capabilities</a>
-      <a href="#contact">Contact</a>
-    </nav>
-    <div class="actions">
-      <button class="icon-btn" id="themeToggle" aria-label="Toggle theme"></button>
-      <a class="btn ghost" href="mailto:example@email.com">Email</a>
-
-      <!-- Hire dropdown -->
-      <div class="hire-dropdown" id="hireDropdown">
-        <button class="btn" id="hireToggle" aria-haspopup="true" aria-expanded="false" aria-controls="hireMenu">
-          Hire <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" focusable="false" style="margin-left:6px;opacity:.9"><path d="M7 10l5 5 5-5z" fill="currentColor"/></svg>
-        </button>
-        <div class="hire-menu" id="hireMenu" role="menu" aria-labelledby="hireToggle" hidden>
-          <a role="menuitem" href="#contact" data-action="quote">Request Quote</a>
-          <a role="menuitem" href="mailto:example@email.com?subject=Consultation" 
-             data-action="consult">Consultation</a>
-          <a role="menuitem" href="mailto:example@email.com?subject=Code%20Audit" 
-             data-action="audit">Code Audit</a>
-          <a role="menuitem" href="#pricing" data-action="pricing">Package Pricing</a>
-          <a role="menuitem" href="#schedule" data-action="schedule">Schedule Meeting</a>
+  <!-- full-bleed nav-bar -->
+  <div class="nav-bar">
+    <div class="container nav" role="navigation" aria-label="Main">
+      <div class="brand">
+        <img src="assets/logo.png" alt="CiphAnon logo" class="logo" loading="lazy">
+        <div>
+          <h1>CiphAnon Studios</h1>
+          <div style="font-size:12px;color:var(--muted)">Coder • Idk What Else ngl</div>
         </div>
       </div>
 
+      <nav class="primary" aria-label="Primary navigation">
+        <a href="#about">About</a>
+        <a href="#capabilities">Capabilities</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div class="actions">
+        <button class="icon-btn" id="themeToggle" aria-label="Toggle theme"></button>
+        <a class="btn ghost" href="mailto:example@email.com">Email</a>
+
+        <!-- Hire dropdown: toggle is an SVG-only control (with sr-only label) -->
+        <div class="hire-dropdown" id="hireDropdown">
+          <button id="hireToggle" aria-haspopup="true" aria-expanded="false" aria-controls="hireMenu" class="hire-svg-btn" title="Hire">
+            <!-- SVG menu icon (this is the toggle) -->
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+              <!-- simple briefcase / menu glyph + caret — you can change the path if you want a different icon -->
+              <path d="M10 2h4a1 1 0 0 1 1 1v2h3a1 1 0 0 1 1 1v3h-2V7h-3v2H9V7H6v2H4V6a1 1 0 0 1 1-1h3V3a1 1 0 0 1 1-1h2z" fill="currentColor"/>
+            </svg>
+            <span class="sr-only">Hire options</span>
+          </button>
+
+          <div class="hire-menu" id="hireMenu" role="menu" aria-labelledby="hireToggle" hidden>
+            <a role="menuitem" href="#contact" data-action="quote">Request Quote</a>
+            <a role="menuitem" href="mailto:example@email.com?subject=Consultation" data-action="consult">Consultation</a>
+            <a role="menuitem" href="mailto:example@email.com?subject=Code%20Audit" data-action="audit">Code Audit</a>
+            <a role="menuitem" href="#pricing" data-action="pricing">Package Pricing</a>
+            <a role="menuitem" href="#schedule" data-action="schedule">Schedule Meeting</a>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </header>
@@ -304,10 +276,10 @@
 <div class="floating">
   <button class="fab" id="themeFab" aria-label="Toggle theme">🌓</button>
 
-  <!-- topFab: contains 3 stacked svgs that crossfade/slide into view -->
+  <!-- topFab: contains 3 stacked svgs that will only animate when near the bottom -->
   <button class="fab" id="topFab" aria-label="Back to top" title="Back to top">
     <span class="fab-icons" aria-hidden="true">
-      <!-- svg #1 -->
+      <!-- svg #1 (static default) -->
       <svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
         <path d="M480-528 296-344l-56-56 240-240 240 240-56 56-184-184Z"/>
       </svg>
@@ -347,7 +319,7 @@ document.getElementById('year').textContent = new Date().getFullYear();
   step();
 })();
 
-/* THEME toggling (single global function used by both header and floating toggle) */
+/* THEME toggling */
 function toggleTheme(){
   const cur = document.documentElement.getAttribute('data-theme') || 'light';
   const next = cur === 'light' ? 'dark' : 'light';
@@ -365,61 +337,72 @@ document.getElementById('themeToggle').addEventListener('click', toggleTheme);
   } catch(e){}
 })();
 
-/* Back-to-top behavior + SVG cycling + smooth color transition */
+/* Back-to-top behavior + SVG cycling only when near bottom */
 (function fabNav(){
   const topFab = document.getElementById('topFab');
   const svgWrap = topFab.querySelector('.fab-icons');
   const svgs = Array.from(svgWrap.querySelectorAll('svg'));
-  let cur = 0;
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  // initialize: show the first svg
-  svgs.forEach((s, i) => s.classList.toggle('active', i === 0));
-
-  // cycle function
-  function cycleStep(){
-    const prev = cur;
-    cur = (cur + 1) % svgs.length;
-    svgs[prev].classList.remove('active');
-    svgs[cur].classList.add('active');
-  }
-
-  // run the cycle periodically (if user doesn't prefer reduced motion)
   let cycleInterval = null;
-  if(!reduced){
-    cycleInterval = setInterval(cycleStep, 900); // ~0.9s per step
+  let cur = 0;
+  const BOTTOM_THRESHOLD = 120; // px from bottom to trigger animation
+
+  // helper to set active index (with smooth transition)
+  function setActive(idx){
+    svgs.forEach((s,i)=>s.classList.toggle('active', i===idx));
+    cur = idx;
   }
 
-  // click behavior: scroll to top with smoothness and pop animation
+  // show first svg by default
+  setActive(0);
+
+  // cycle step
+  function cycleStep(){
+    const next = (cur + 1) % svgs.length;
+    setActive(next);
+  }
+
+  function startCycle(){
+    if(reduced) return;
+    if(cycleInterval) return;
+    // start cycling (every ~900ms)
+    cycleInterval = setInterval(cycleStep, 900);
+  }
+  function stopCycle(){
+    if(cycleInterval){
+      clearInterval(cycleInterval);
+      cycleInterval = null;
+    }
+    // reset to first (static) icon so it's not left mid-animation
+    setActive(0);
+  }
+
+  // determine if near bottom
+  function checkNearBottom(){
+    const atBottom = (window.innerHeight + window.scrollY) >= (document.documentElement.scrollHeight - BOTTOM_THRESHOLD);
+    if(atBottom){
+      startCycle();
+    } else {
+      stopCycle();
+    }
+  }
+
+  // initial check on load
+  checkNearBottom();
+
+  // monitor scroll/resizes
+  window.addEventListener('scroll', checkNearBottom, {passive:true});
+  window.addEventListener('resize', checkNearBottom);
+
+  // click behavior: scroll to top with smoothness and small pop
   topFab.addEventListener('click', function(e){
     topFab.classList.remove('fab--pop');
-    void topFab.offsetWidth; // reflow to restart animation
+    void topFab.offsetWidth; // force reflow
     topFab.classList.add('fab--pop');
     window.scrollTo({top:0,behavior:'smooth'});
   });
 
-  // optionally make the icon cycle faster while scrolling up (visual feedback)
-  let scrollTimer = null;
-  window.addEventListener('scroll', () => {
-    if(scrollTimer) clearTimeout(scrollTimer);
-    const isScrollingUp = (window.scrollYPrev || 0) > window.scrollY;
-    window.scrollYPrev = window.scrollY;
-
-    if(isScrollingUp && !reduced){
-      svgs.forEach((s) => s.classList.remove('active'));
-      svgs[1 % svgs.length].classList.add('active');
-
-      scrollTimer = setTimeout(() => {
-        svgs.forEach((s,i) => s.classList.toggle('active', i === cur));
-      }, 600);
-    } else {
-      scrollTimer = setTimeout(() => {
-        svgs.forEach((s,i) => s.classList.toggle('active', i === cur));
-      }, 800);
-    }
-  }, {passive:true});
-
-  // keyboard activation for accessibility
+  // keyboard activation
   topFab.addEventListener('keydown', (e) => {
     if(e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
@@ -427,11 +410,8 @@ document.getElementById('themeToggle').addEventListener('click', toggleTheme);
     }
   });
 
-  // cleanup before unload
-  window.addEventListener('unload', () => {
-    if(cycleInterval) clearInterval(cycleInterval);
-  });
-
+  // cleanup
+  window.addEventListener('unload', ()=>{ if(cycleInterval) clearInterval(cycleInterval); });
 })();
 
 /* Hire dropdown: accessible toggle, keyboard navigation, outside click close */
