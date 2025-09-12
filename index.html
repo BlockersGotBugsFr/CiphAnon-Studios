@@ -8,206 +8,136 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
 <style>
-  /* =========================
-     THEME, RESET & VARIABLES
-     ========================= */
-  :root{
-    --bg-1: #06121a;
-    --bg-2: #071824;
-    --card: #0f1720;
-    --muted: #98a9bd;
-    --text: #eaf3fb;
-    --accent-1: #ff9f1c;
-    --accent-2: #ff5e7a;
-    --glass: rgba(255,255,255,0.03);
-    --radius: 14px;
-    --maxw: 1200px;
-    --ease: cubic-bezier(.2,.9,.3,1);
-    --shadow-1: 0 8px 30px rgba(2,6,12,0.55);
+/* ---------------------------
+   Variables / Reset
+   --------------------------- */
+:root{
+  --bg-1:#06121a; --bg-2:#071824;
+  --card:#0f1720; --muted:#98a9bd; --text:#eaf3fb;
+  --accent-1:#ff9f1c; --accent-2:#ff5e7a;
+  --glass: rgba(255,255,255,0.03);
+  --maxw:1200px; --radius:12px; --ease:cubic-bezier(.2,.9,.3,1);
+  --shadow: 0 12px 30px rgba(2,6,12,0.5);
+  --btn-shadow: 0 8px 22px rgba(2,6,12,0.35);
+  --fab-fill: #e3e3e3;
+}
+[data-theme="light"]{
+  --bg-1:#f6f8fa; --bg-2:#eef2f6;
+  --card:#ffffff; --muted:#475569; --text:#071018;
+  --glass: rgba(11,17,22,0.04);
+  --shadow: 0 10px 30px rgba(11,17,22,0.06);
+  --btn-shadow: 0 8px 22px rgba(11,17,22,0.06);
+  --fab-fill: #071018;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;
+  background: linear-gradient(180deg,var(--bg-1),var(--bg-2));
+  color:var(--text); -webkit-font-smoothing:antialiased; line-height:1.45;
+  scroll-behavior:smooth;
+}
+.container{max-width:var(--maxw);margin:0 auto;padding:20px}
 
-    --fab-bg: var(--card);
-    --fab-fill: #e3e3e3;
-    --fab-hover-fill: #071018;
-    --fab-transition: 320ms var(--ease);
+/* ---------------------------
+   Header — FULL WIDTH (SOLID)
+   --------------------------- */
+header{position:sticky;top:0;z-index:220}
+.header-row{
+  width:100%; background:var(--card); border-bottom:1px solid rgba(0,0,0,0.06);
+  box-shadow:var(--shadow);
+}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 0}
+.brand{display:flex;gap:12px;align-items:center}
+.logo{width:48px;height:48px;border-radius:10px;object-fit:cover}
+.brand h1{font-size:16px;margin:0}
+.nav .primary{display:flex;gap:14px;align-items:center}
+.nav .primary a{color:var(--muted);text-decoration:none;padding:6px;border-radius:8px;font-weight:600}
+.actions{display:flex;gap:10px;align-items:center}
 
-    /* button effect tuning */
-    --btn-shadow: 0 8px 24px rgba(2,6,12,0.45);
-    --btn-elevate: translateY(-4px);
-  }
-  [data-theme="light"]{
-    --bg-1: #f6f8fa;
-    --bg-2: #eef2f6;
-    --card: #ffffff;
-    --muted: #4b5563;
-    --text: #0b1116;
-    --glass: rgba(11,17,22,0.04);
-    --shadow-1: 0 8px 30px rgba(11,17,22,0.06);
+/* Button basics */
+.btn{
+  display:inline-flex;align-items:center;gap:8px;padding:9px 12px;border-radius:10px;border:0;
+  background:linear-gradient(90deg,var(--accent-1),var(--accent-2));color:#071018;font-weight:800;
+  cursor:pointer;box-shadow:var(--btn-shadow);transition:transform .18s var(--ease),box-shadow .18s var(--ease);
+}
+.btn.ghost{
+  background:transparent;border:1px solid rgba(0,0,0,0.06);color:var(--muted);font-weight:700;box-shadow:none;
+  padding:8px 12px;
+}
+.btn:hover{transform:translateY(-3px);box-shadow:0 18px 40px rgba(0,0,0,0.18)}
+.icon-btn{background:transparent;border:0;padding:8px;border-radius:8px;cursor:pointer;color:var(--muted)}
 
-    --fab-bg: var(--card);
-    --fab-fill: #071018;
-    --fab-hover-fill: #ffffff;
+/* ---------------------------
+   Hire dropdown (SVG toggle)
+   --------------------------- */
+.hire-dropdown{position:relative;display:inline-block}
+.hire-svg-btn{
+  display:inline-grid;place-items:center;padding:8px;border-radius:10px;border:0;background:transparent;cursor:pointer;
+  transition:background .18s var(--ease), transform .15s var(--ease);
+}
+.hire-svg-btn:hover{background:var(--glass)}
+.hire-svg-btn svg{width:22px;height:22px;display:block;fill:currentColor}
+.sr-only{position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap;border:0;padding:0;margin:-1px}
 
-    --btn-shadow: 0 8px 24px rgba(11,17,22,0.08);
-  }
+/* menu panel */
+.hire-menu{
+  position:absolute;right:0;top:calc(100% + 10px);min-width:220px;background:var(--card);border-radius:10px;padding:6px;
+  box-shadow:0 12px 30px rgba(2,6,12,0.25);border:1px solid rgba(0,0,0,0.06);transform-origin:top right;
+  opacity:0;transform:translateY(-8px) scale(.995);pointer-events:none;transition:opacity .18s var(--ease), transform .18s var(--ease);
+  z-index:240;
+}
+.hire-dropdown.open .hire-menu{opacity:1;transform:none;pointer-events:auto}
+.hire-menu a{display:block;padding:10px 12px;border-radius:8px;text-decoration:none;color:var(--muted);font-weight:700;margin:6px 0}
+.hire-menu a:hover,.hire-menu a:focus{background:linear-gradient(90deg,var(--accent-1),var(--accent-2));color:#071018;outline:none}
 
-  *{box-sizing:border-box}
-  html,body{height:100%}
-  body{
-    margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;
-    background: linear-gradient(180deg,var(--bg-1),var(--bg-2));
-    color:var(--text);-webkit-font-smoothing:antialiased;line-height:1.45;
-    scroll-behavior:smooth;
-  }
-  img{max-width:100%;display:block}
-  a{color:inherit}
-  .container{max-width:var(--maxw);margin:0 auto;padding:20px 28px}
+/* ---------------------------
+   Hero / content (slight polish)
+   --------------------------- */
+.hero{display:grid;grid-template-columns:1fr 460px;gap:36px;align-items:center;padding:48px 0}
+.kicker{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
+.title{font-size:42px;line-height:1.03;margin:8px 0 0}
+.title .accent{background:linear-gradient(90deg,var(--accent-1),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.subtitle{color:var(--muted);margin-top:14px;max-width:60ch}
+.hero-visual{height:420px;border-radius:12px;padding:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));position:relative;overflow:hidden}
+.bg-svg{position:absolute;inset:-15% -10% auto auto;width:560px;height:560px;filter:blur(48px);opacity:0.12;pointer-events:none}
+.portrait{width:100%;border-radius:12px;display:block;filter:drop-shadow(0 24px 36px rgba(2,6,12,0.45))}
 
-  /* =========================
-     FULL-WIDTH HEADER (solid)
-     ========================= */
-  header{position:sticky;top:0;z-index:160}
-  .nav-bar{
-    width:100%;
-    background: var(--card); /* solid background so you can't see through */
-    box-shadow: var(--shadow-1);
-    border-bottom: 1px solid rgba(0,0,0,0.06);
-  }
-  .nav{display:flex;align-items:center;justify-content:space-between;padding:12px 0}
-  .brand{display:flex;gap:12px;align-items:center}
-  .logo{width:52px;height:52px;border-radius:12px;object-fit:cover}
-  .brand h1{font-size:16px;margin:0}
-  nav.primary{display:flex;gap:14px;align-items:center}
-  nav.primary a{color:var(--muted);text-decoration:none;padding:6px;border-radius:8px;font-weight:600}
-  .actions{display:flex;gap:10px;align-items:center}
-  .btn{
-    display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;border:0;
-    background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
-    color:#071018;font-weight:800;cursor:pointer;position:relative;overflow:visible;
-    transition:transform .24s var(--ease), box-shadow .24s var(--ease), filter .24s var(--ease);
-    box-shadow: var(--btn-shadow);
-  }
-  .btn.ghost{
-    background:transparent;border:1px solid rgba(0,0,0,0.06);color:var(--muted);font-weight:700;box-shadow:none;
-    transition:background .18s var(--ease), color .18s var(--ease), border-color .18s var(--ease);
-  }
-  .icon-btn{background:transparent;border:0;padding:8px;border-radius:8px;cursor:pointer;color:var(--muted);transition:transform .18s var(--ease)}
+/* small typed effect */
+.typed{font-weight:700;color:var(--accent-2);margin-top:10px}
+.typed::after{content:"|";margin-left:6px;color:var(--accent-2);animation:blink 0.8s infinite}
+@keyframes blink{0%,50%{opacity:1}51%,100%{opacity:0}}
 
-  /* cool button hover / active effects */
-  .btn:hover{ transform: var(--btn-elevate); filter:brightness(1.02); box-shadow: 0 18px 36px rgba(0,0,0,0.22) }
-  .btn:active{ transform: translateY(-2px) scale(.995) }
-  .btn.ghost:hover{ background: linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01)); border-color: rgba(0,0,0,0.09); color: var(--text); }
+/* ---------------------------
+   Floating FAB (Back to top)
+   --------------------------- */
+.floating{position:fixed;right:18px;bottom:18px;z-index:260;display:flex;flex-direction:column;gap:10px}
+.fab{width:46px;height:46px;border-radius:12px;background:var(--card);display:inline-grid;place-items:center;cursor:pointer;border:0;box-shadow:var(--shadow);transition:transform .18s var(--ease), box-shadow .18s var(--ease)}
+.fab:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(0,0,0,0.18)}
+.fab:focus{outline:2px solid rgba(0,0,0,0.06);outline-offset:4px}
 
-  /* focus ring (keyboard) */
-  .btn:focus, .icon-btn:focus, .hire-svg-btn:focus{
-    outline: none;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.18), 0 0 0 4px rgba(255,159,28,0.12);
-  }
+.fab-icons{width:24px;height:24px;position:relative;display:inline-block}
+.fab-icons svg{position:absolute;left:0;top:0;width:24px;height:24px;opacity:0;transform:translateY(6px) scale(.98);transition:opacity .32s var(--ease), transform .32s var(--ease), fill .28s var(--ease)}
+.fab-icons svg.active{opacity:1;transform:none;fill:var(--fab-fill)}
 
-  /* small animated shine on primary buttons */
-  .btn::after{
-    content:"";position:absolute;left:-40%;top:0;width:40%;height:100%;
-    background:linear-gradient(120deg, rgba(255,255,255,0.12), rgba(255,255,255,0.02), rgba(255,255,255,0.12));
-    transform:skewX(-20deg) translateX(-100%);transition:transform .9s var(--ease);
-    pointer-events:none;opacity:0.6;
-  }
-  .btn:hover::after{ transform:skewX(-20deg) translateX(220%); opacity:1 }
+/* subtle click pop */
+.fab--pop{animation:pop .36s var(--ease) both}
+@keyframes pop{0%{transform:translateY(0) scale(1)}30%{transform:translateY(-6px) scale(1.06)}100%{transform:translateY(0) scale(1)}}
 
-  /* =========================
-     HERO & MAIN (unchanged)
-     ========================= */
-  .hero{display:grid;grid-template-columns:1fr 460px;gap:36px;align-items:center;padding:48px 0}
-  .kicker{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
-  .title{font-size:42px;line-height:1.03;margin:8px 0 0}
-  .title .accent{background:linear-gradient(90deg,var(--accent-1),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
-  .subtitle{color:var(--muted);margin-top:14px;max-width:60ch}
-  .hero-ctas{display:flex;gap:12px;margin-top:22px;flex-wrap:wrap}
-  .stats{display:flex;gap:12px;margin-top:20px;flex-wrap:wrap}
-  .stat{background:var(--card);padding:10px 12px;border-radius:10px;min-width:120px;text-align:center;box-shadow:var(--shadow-1)}
-  .stat strong{display:block;font-size:18px}
-  .hero-visual{height:420px;border-radius:16px;padding:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));position:relative;box-shadow:var(--shadow-1);overflow:hidden}
-  .bg-svg{position:absolute;inset:-20% -10% auto auto;width:640px;height:640px;filter:blur(72px);opacity:0.12;pointer-events:none}
-  .portrait-wrap{position:absolute;right:14px;bottom:12px;width:320px;max-width:52%;pointer-events:none;will-change:transform}
-  .portrait{width:100%;border-radius:12px;display:block;filter:drop-shadow(0 26px 36px rgba(0,0,0,0.55));}
-  .typed{font-weight:700;color:var(--accent-2);margin-top:10px}
-  .typed::after{content:"|";margin-left:4px;color:var(--accent-2);animation:blink 0.8s infinite}
-  @keyframes blink{0%,50%{opacity:1}51%,100%{opacity:0}}
-
-  section{padding:36px 0;border-bottom:1px solid rgba(255,255,255,0.02)}
-  .cap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:18px}
-  .cap{background:var(--card);padding:18px;border-radius:12px;box-shadow:var(--shadow-1);transition:transform .18s var(--ease)}
-  .cap:hover{transform:translateY(-8px)}
-  .skill-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
-  .skill{background:var(--glass);padding:8px 10px;border-radius:999px;font-weight:700;color:var(--muted);border:1px solid rgba(255,255,255,0.03)}
-
-  /* =========================
-     FAB & Arrow SVG cycling
-     ========================= */
-  .floating{position:fixed;right:18px;bottom:18px;z-index:240;display:flex;flex-direction:column;gap:8px}
-  .fab{
-    width:48px;height:48px;border-radius:12px;background:var(--fab-bg);display:inline-grid;place-items:center;box-shadow:var(--shadow-1);
-    cursor:pointer;border:0;color:var(--muted);position:relative;overflow:visible;
-    transition:background var(--fab-transition), box-shadow var(--fab-transition), transform .18s var(--ease);
-  }
-  .fab:focus{outline:2px solid rgba(255,255,255,0.06);outline-offset:2px}
-  .fab:hover{box-shadow:0 12px 36px rgba(0,0,0,0.28); transform: translateY(-4px) }
-
-  .fab-icons{width:24px;height:24px;display:inline-block;position:relative}
-  .fab-icons svg{
-    position:absolute;left:0;top:0;width:24px;height:24px;display:block;
-    opacity:0; transform:translateY(6px) scale(0.98);
-    transition:opacity .35s var(--ease), transform .35s var(--ease), fill .4s var(--ease);
-    fill: var(--fab-fill);
-    will-change:opacity,transform,fill;
-    pointer-events:none;
-  }
-  .fab-icons svg.active{ opacity:1; transform:none; }
-
-  .fab--pop{animation:fab-pop .36s var(--ease) both}
-  @keyframes fab-pop{0%{transform:translateY(0) scale(1)}30%{transform:translateY(-6px) scale(1.06)}100%{transform:translateY(0) scale(1)}}
-
-  /* =========================
-     Hire dropdown (toggle uses provided SVG)
-     ========================= */
-  .hire-dropdown{position:relative;display:inline-block}
-  .hire-svg-btn{
-    display:inline-flex;align-items:center;justify-content:center;padding:10px;border-radius:10px;border:0;
-    background:linear-gradient(90deg,var(--accent-1),var(--accent-2));cursor:pointer;color:var(--fab-fill);
-    transition:transform .18s var(--ease), box-shadow .18s var(--ease), filter .18s var(--ease);
-    box-shadow: var(--btn-shadow);
-  }
-  .hire-svg-btn svg{display:block;width:18px;height:18px;flex:0 0 18px;color:var(--fab-fill)}
-  .sr-only{position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap;border:0;padding:0;margin:-1px}
-  .hire-menu{
-    position:absolute;right:0;top:calc(100% + 10px);
-    min-width:220px;background:var(--card);border-radius:12px;padding:8px;
-    box-shadow:0 10px 30px rgba(2,6,12,0.45);border:1px solid rgba(0,0,0,0.06);z-index:220;
-    transform-origin:top right;transition:opacity .22s var(--ease),transform .22s var(--ease);
-    opacity:0;transform:translateY(-6px) scale(.98);pointer-events:none;
-  }
-  .hire-menu a{display:block;padding:10px 12px;border-radius:8px;text-decoration:none;color:var(--muted);font-weight:700;border:1px solid transparent;margin:4px 0}
-  .hire-menu a:hover,.hire-menu a:focus{background:linear-gradient(90deg,var(--accent-1),var(--accent-2));color:#071018;border-color:rgba(255,255,255,0.02);outline:none}
-  .hire-dropdown.open .hire-menu{opacity:1;transform:none;pointer-events:auto}
-
-  .hire-toggle-caret{transition:transform .22s var(--ease)}
-  .hire-dropdown.open .hire-toggle-caret{transform:rotate(180deg)}
-
-  /* reduced motion */
-  @media (prefers-reduced-motion: reduce){
-    .btn::after{display:none}
-    .fab-icons svg{transition:none!important}
-    .hire-menu{transition:none!important}
-  }
-
-  /* responsive */
-  @media (max-width:1000px){.hero{grid-template-columns:1fr}.hero-visual{height:320px}.cap-grid{grid-template-columns:repeat(2,1fr)}.contact-grid{grid-template-columns:1fr}.portrait-wrap{display:none}}
-  @media (max-width:560px){.cap-grid{grid-template-columns:1fr}}
+/* ---------------------------
+   Small responsive rules
+   --------------------------- */
+@media (max-width:1000px){.hero{grid-template-columns:1fr}.hero-visual{height:320px}}
+@media (max-width:560px){.cap-grid{grid-template-columns:1fr}.logo{width:40px;height:40px}}
+/* respect reduced motion */
+@media (prefers-reduced-motion: reduce){.fab-icons svg, .hire-menu, .btn{transition:none!important}}
 </style>
 </head>
 <body>
 
+<!-- HEADER -->
 <header>
-  <!-- full-bleed solid nav-bar -->
-  <div class="nav-bar">
+  <div class="header-row">
     <div class="container nav" role="navigation" aria-label="Main">
       <div class="brand">
         <img src="assets/logo.png" alt="CiphAnon logo" class="logo" loading="lazy">
@@ -224,13 +154,12 @@
       </nav>
 
       <div class="actions">
-        <button class="icon-btn" id="themeToggle" aria-label="Toggle theme"></button>
+        <button id="themeToggle" class="icon-btn" aria-label="Toggle theme">🌓</button>
         <a class="btn ghost" href="mailto:example@email.com">Email</a>
 
-        <!-- Hire dropdown: toggle replaced with user's menu SVG (uses currentColor) -->
+        <!-- Hire dropdown: your provided dot-grid SVG (uses currentColor) -->
         <div class="hire-dropdown" id="hireDropdown">
-          <button id="hireToggle" aria-haspopup="true" aria-expanded="false" aria-controls="hireMenu" class="hire-svg-btn" title="Hire">
-            <!-- user-provided SVG; changed fill to currentColor so it matches theme -->
+          <button id="hireToggle" class="hire-svg-btn" aria-haspopup="true" aria-expanded="false" aria-controls="hireMenu" title="Hire options">
             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor" aria-hidden="true" focusable="false">
               <path d="M240-160q-33 0-56.5-23.5T160-240q0-33 23.5-56.5T240-320q33 0 56.5 23.5T320-240q0 33-23.5 56.5T240-160Zm240 0q-33 0-56.5-23.5T400-240q0-33 23.5-56.5T480-320q33 0 56.5 23.5T560-240q0 33-23.5 56.5T480-160Zm240 0q-33 0-56.5-23.5T640-240q0-33 23.5-56.5T720-320q33 0 56.5 23.5T800-240q0 33-23.5 56.5T720-160ZM240-400q-33 0-56.5-23.5T160-480q0-33 23.5-56.5T240-560q33 0 56.5 23.5T320-480q0 33-23.5 56.5T240-400Zm240 0q-33 0-56.5-23.5T400-480q0-33 23.5-56.5T480-560q33 0 56.5 23.5T560-480q0 33-23.5 56.5T480-400Zm240 0q-33 0-56.5-23.5T640-480q0-33 23.5-56.5T720-560q33 0 56.5 23.5T800-480q0 33-23.5 56.5T720-400ZM240-640q-33 0-56.5-23.5T160-720q0-33 23.5-56.5T240-800q33 0 56.5 23.5T320-720q0 33-23.5 56.5T240-640Zm240 0q-33 0-56.5-23.5T400-720q0-33 23.5-56.5T480-800q33 0 56.5 23.5T560-720q0 33-23.5 56.5T480-640Zm240 0q-33 0-56.5-23.5T640-720q0-33 23.5-56.5T720-800q33 0 56.5 23.5T800-720q0 33-23.5 56.5T720-640Z"/>
             </svg>
@@ -250,262 +179,175 @@
   </div>
 </header>
 
+<!-- MAIN -->
 <main class="container">
-  <!-- HERO -->
   <section class="hero" aria-labelledby="hero-title">
     <div>
       <div class="kicker">Hello — I'm a developer</div>
       <h1 id="hero-title" class="title">I build <span class="accent">fast prototypes</span> and developer tooling that ships.</h1>
-      <div class="subtitle lead">
-        3 years of hands-on experience across HTML, CSS, JavaScript, Godot, Lua, Java, Unity, Block Code and Python.
-      </div>
+      <div class="subtitle">3 years of hands-on experience across HTML, CSS, JavaScript, Godot, Lua, Java, Unity, Block Code and Python.</div>
+      <div class="typed" id="typedLine" aria-hidden="true"></div>
 
-      <div class="typed" aria-hidden="true" id="typedLine"></div>
-
-      <div class="hero-ctas">
+      <div style="margin-top:20px;display:flex;gap:10px;flex-wrap:wrap">
         <a class="btn" href="#contact">Request Quote</a>
         <a class="btn ghost" href="https://github.com/your-username" target="_blank" rel="noopener">GitHub</a>
       </div>
 
-      <div class="stats" aria-hidden="true">
-        <div class="stat"><strong id="statYears">3</strong><span style="color:var(--muted)">Years</span></div>
-        <div class="stat"><strong id="statLangs">9</strong><span style="color:var(--muted)">Languages</span></div>
-        <div class="stat"><strong id="statWorks">12</strong><span style="color:var(--muted)">Demos/tools</span></div>
+      <div style="display:flex;gap:12px;margin-top:16px">
+        <div style="background:var(--card);padding:10px 12px;border-radius:8px;box-shadow:var(--shadow)"><strong id="statYears">3</strong><div style="color:var(--muted)">Years</div></div>
+        <div style="background:var(--card);padding:10px 12px;border-radius:8px;box-shadow:var(--shadow)"><strong id="statLangs">9</strong><div style="color:var(--muted)">Languages</div></div>
+        <div style="background:var(--card);padding:10px 12px;border-radius:8px;box-shadow:var(--shadow)"><strong id="statWorks">12</strong><div style="color:var(--muted)">Demos/tools</div></div>
       </div>
     </div>
 
-    <div class="hero-visual reveal show" aria-hidden="true">
-      <svg class="bg-svg" viewBox="0 0 600 600" aria-hidden="true">
-        <defs><linearGradient id="g1" x1="0" x2="1"><stop offset="0" stop-color="#ff9f1c"/><stop offset="1" stop-color="#ff5e7a"/></linearGradient></defs>
-        <circle cx="300" cy="300" r="260" fill="url(#g1)"/>
-      </svg>
-      <div class="portrait-wrap" id="portraitWrap"><img src="assets/char.png" alt="Character" class="portrait" loading="lazy"></div>
+    <div class="hero-visual" aria-hidden="true">
+      <svg class="bg-svg" viewBox="0 0 600 600" aria-hidden="true"><defs><linearGradient id="g1" x1="0" x2="1"><stop offset="0" stop-color="#ff9f1c"/><stop offset="1" stop-color="#ff5e7a"/></linearGradient></defs><circle cx="300" cy="300" r="260" fill="url(#g1)"/></svg>
+      <img src="assets/char.png" alt="Character" class="portrait" loading="lazy">
     </div>
   </section>
 
-  <!-- ABOUT -->
-  <section id="about" class="reveal show"><h2>About</h2><p class="lead">I help teams move from idea to playable prototype quickly and build small, reliable tooling that saves time.</p></section>
+  <section id="about" style="margin-top:24px"><h2>About</h2><p style="color:var(--muted)">I help teams move from idea to playable prototype quickly and build small, reliable tooling that saves time.</p></section>
 
-  <!-- CAPABILITIES -->
-  <section id="capabilities" class="reveal show"><h2>Capabilities</h2>
-    <div class="cap-grid">
-      <div class="cap"><h3>Rapid Prototyping</h3><p>Playable demos that validate mechanics quickly.</p></div>
-      <div class="cap"><h3>Developer Tooling</h3><p>Utilities and scripts to automate workflows.</p></div>
-      <div class="cap"><h3>UI &amp; polish</h3><p>Front-end with accessibility, interactions, and performance.</p></div>
-    </div>
-    <div class="skill-list">
-      <span class="skill">HTML</span><span class="skill">CSS</span><span class="skill">JavaScript</span><span class="skill">Godot</span><span class="skill">Lua</span><span class="skill">Java</span><span class="skill">Unity</span><span class="skill">Python</span><span class="skill">Block Code</span>
+  <section id="capabilities"><h2>Capabilities</h2>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:12px">
+      <div style="background:var(--card);padding:16px;border-radius:10px;box-shadow:var(--shadow)"><h3>Rapid Prototyping</h3><p style="color:var(--muted)">Playable demos that validate mechanics quickly.</p></div>
+      <div style="background:var(--card);padding:16px;border-radius:10px;box-shadow:var(--shadow)"><h3>Developer Tooling</h3><p style="color:var(--muted)">Utilities and scripts to automate workflows.</p></div>
+      <div style="background:var(--card);padding:16px;border-radius:10px;box-shadow:var(--shadow)"><h3>UI &amp; polish</h3><p style="color:var(--muted)">Front-end with accessibility, interactions, and performance.</p></div>
     </div>
   </section>
 </main>
 
-<footer>
-  <div class="container footer-grid">
+<footer style="margin-top:32px;padding:28px 0;color:var(--muted)">
+  <div class="container" style="display:flex;gap:20px;flex-wrap:wrap;align-items:flex-start">
     <div><strong>CiphAnon</strong><div style="color:var(--muted);margin-top:8px">Developer &amp; Prototyper</div></div>
     <div><h4>Navigate</h4><a href="#about">About</a><br><a href="#capabilities">Capabilities</a><br><a href="#contact">Contact</a></div>
-    <div><h4>Contact</h4><a href="mailto:example@email.com">example@email.com</a><div style="color:var(--muted);margin-top:10px;font-size:13px">© <span id="year">2025</span> CiphAnon</div></div>
+    <div><h4>Contact</h4><a href="mailto:example@email.com">example@email.com</a>
+      <div style="color:var(--muted);margin-top:10px;font-size:13px">© <span id="year">2025</span> CiphAnon</div>
+    </div>
   </div>
 </footer>
 
-<div class="floating">
-  <button class="fab" id="themeFab" aria-label="Toggle theme">🌓</button>
+<!-- Floating controls -->
+<div class="floating" aria-hidden="false">
+  <button id="themeFab" class="fab" aria-label="Toggle theme">🌓</button>
 
-  <!-- topFab: contains 3 stacked svgs -->
-  <button class="fab" id="topFab" aria-label="Back to top" title="Back to top">
+  <button id="topFab" class="fab" aria-label="Back to top" title="Back to top">
     <span class="fab-icons" aria-hidden="true">
-      <!-- svg #1 (static default) -->
-      <svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
-        <path d="M480-528 296-344l-56-56 240-240 240 240-56 56-184-184Z"/>
-      </svg>
-      <!-- svg #2 -->
-      <svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
-        <path d="M440-240v-368L296-464l-56-56 240-240 240 240-56 56-144-144v368h-80Z"/>
-      </svg>
-      <!-- svg #3 -->
-      <svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
-        <path d="M440-727 256-544l-56-56 280-280 280 280-56 57-184-184v287h-80v-287Zm0 487v-120h80v120h-80Zm0 160v-80h80v80h-80Z"/>
-      </svg>
+      <svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg"><path d="M480-528 296-344l-56-56 240-240 240 240-56 56-184-184Z"/></svg>
+      <svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg"><path d="M440-240v-368L296-464l-56-56 240-240 240 240-56 56-144-144v368h-80Z"/></svg>
+      <svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg"><path d="M440-727 256-544l-56-56 280-280 280 280-56 57-184-184v287h-80v-287Zm0 487v-120h80v120h-80Zm0 160v-80h80v80h-80Z"/></svg>
     </span>
   </button>
 </div>
 
 <script>
-/* =========================
-   INTERACTIONS
-   ========================= */
+/* ---------------------------
+   Small interactions
+   --------------------------- */
 document.getElementById('year').textContent = new Date().getFullYear();
 
-/* Typed subtitle with blinking cursor */
-(function typed(){
-  const el = document.getElementById('typedLine');
-  if(!el) return;
+/* typed line */
+(function(){
+  const el = document.getElementById('typedLine'); if(!el) return;
   const lines = ['Interactive prototypes','Dev tooling','UX polish','Fast iterations','Clean UI','Playable demos'];
   let i=0,pos=0,forward=true;
   function step(){
-    const text=lines[i];
-    if(forward){pos++;el.textContent=text.slice(0,pos);
-      if(pos===text.length){forward=false;setTimeout(step,1000);return;}
-    }else{pos--;el.textContent=text.slice(0,pos);
-      if(pos===0){forward=true;i=(i+1)%lines.length;}
-    }
-    setTimeout(step,forward?60:40);
+    const text = lines[i];
+    if(forward){ pos++; el.textContent = text.slice(0,pos); if(pos===text.length){ forward=false; setTimeout(step,900); return } }
+    else{ pos--; el.textContent = text.slice(0,pos); if(pos===0){ forward=true; i=(i+1)%lines.length } }
+    setTimeout(step, forward?60:35 );
   }
   step();
 })();
 
-/* THEME toggling */
+/* theme */
 function toggleTheme(){
   const cur = document.documentElement.getAttribute('data-theme') || 'light';
   const next = cur === 'light' ? 'dark' : 'light';
   document.documentElement.setAttribute('data-theme', next);
-  try { localStorage.setItem('theme', next); } catch(e){}
+  try{ localStorage.setItem('theme', next) }catch(e){}
 }
 document.getElementById('themeFab').addEventListener('click', toggleTheme);
 document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+(function(){ try{ const s = localStorage.getItem('theme'); if(s) document.documentElement.setAttribute('data-theme', s) }catch(e){} })();
 
-/* restore theme on load */
-(function restoreTheme(){
-  try {
-    const saved = localStorage.getItem('theme');
-    if(saved) document.documentElement.setAttribute('data-theme', saved);
-  } catch(e){}
-})();
-
-/* Back-to-top behavior + SVG cycling only when near bottom */
-(function fabNav(){
+/* back-to-top: only animate when near bottom */
+(function(){
   const topFab = document.getElementById('topFab');
-  const svgWrap = topFab.querySelector('.fab-icons');
-  const svgs = Array.from(svgWrap.querySelectorAll('svg'));
-  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let cycleInterval = null;
-  let cur = 0;
-  const BOTTOM_THRESHOLD = 120; // px from bottom to trigger animation
+  const svgs = Array.from(topFab.querySelectorAll('svg'));
+  let index = 0, interval = null;
+  const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const THRESH = 120;
 
-  function setActive(idx){
-    svgs.forEach((s,i)=>s.classList.toggle('active', i===idx));
-    cur = idx;
+  function setActive(i){
+    svgs.forEach((s,idx)=> s.classList.toggle('active', idx===i));
+    index = i;
   }
-
   setActive(0);
 
-  function cycleStep(){
-    const next = (cur + 1) % svgs.length;
-    setActive(next);
+  function cycle(){
+    setActive((index+1) % svgs.length);
   }
-
-  function startCycle(){
-    if(reduced) return;
-    if(cycleInterval) return;
-    cycleInterval = setInterval(cycleStep, 900);
+  function start(){
+    if(REDUCED || interval) return;
+    interval = setInterval(cycle, 900);
   }
-  function stopCycle(){
-    if(cycleInterval){
-      clearInterval(cycleInterval);
-      cycleInterval = null;
-    }
+  function stop(){
+    if(interval){ clearInterval(interval); interval = null; }
     setActive(0);
   }
 
-  function checkNearBottom(){
-    const atBottom = (window.innerHeight + window.scrollY) >= (document.documentElement.scrollHeight - BOTTOM_THRESHOLD);
-    if(atBottom){
-      startCycle();
-    } else {
-      stopCycle();
-    }
+  function check(){
+    const atBottom = (window.innerHeight + window.scrollY) >= (document.documentElement.scrollHeight - THRESH);
+    if(atBottom) start(); else stop();
   }
+  check();
+  window.addEventListener('scroll', check, {passive:true});
+  window.addEventListener('resize', check);
 
-  checkNearBottom();
-  window.addEventListener('scroll', checkNearBottom, {passive:true});
-  window.addEventListener('resize', checkNearBottom);
-
-  topFab.addEventListener('click', function(e){
-    topFab.classList.remove('fab--pop');
-    void topFab.offsetWidth;
-    topFab.classList.add('fab--pop');
-    window.scrollTo({top:0,behavior:'smooth'});
+  topFab.addEventListener('click', () => {
+    topFab.classList.remove('fab--pop'); void topFab.offsetWidth; topFab.classList.add('fab--pop');
+    window.scrollTo({top:0, behavior:'smooth'});
   });
+  topFab.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' ') { e.preventDefault(); topFab.click(); } });
 
-  topFab.addEventListener('keydown', (e) => {
-    if(e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      topFab.click();
-    }
-  });
-
-  window.addEventListener('unload', ()=>{ if(cycleInterval) clearInterval(cycleInterval); });
+  window.addEventListener('unload', ()=>{ if(interval) clearInterval(interval) });
 })();
 
-/* Hire dropdown: accessible toggle, keyboard navigation, outside click close */
-(function hireDropdown(){
-  const dropdown = document.getElementById('hireDropdown');
-  if(!dropdown) return;
-  const toggle = document.getElementById('hireToggle');
-  const menu = document.getElementById('hireMenu');
+/* Hire dropdown: accessible */
+(function(){
+  const root = document.getElementById('hireDropdown'); if(!root) return;
+  const toggle = document.getElementById('hireToggle'); const menu = document.getElementById('hireMenu');
   const items = Array.from(menu.querySelectorAll('[role="menuitem"]'));
   let open = false;
 
-  function openMenu(focusFirst=true){
-    open = true;
-    dropdown.classList.add('open');
-    menu.hidden = false;
-    toggle.setAttribute('aria-expanded','true');
-    requestAnimationFrame(()=>{ dropdown.classList.add('open'); });
-    if(focusFirst) items[0]?.focus();
+  function openMenu(focus=true){
+    open = true; root.classList.add('open'); menu.hidden = false; toggle.setAttribute('aria-expanded','true');
+    requestAnimationFrame(()=> root.classList.add('open'));
+    if(focus) items[0]?.focus();
   }
-  function closeMenu(returnFocus=true){
-    open = false;
-    dropdown.classList.remove('open');
-    toggle.setAttribute('aria-expanded','false');
-    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
-      menu.hidden = true;
-    } else {
-      setTimeout(()=>{ menu.hidden = true; }, 200);
-    }
-    if(returnFocus) toggle.focus();
+  function closeMenu(retFocus=true){
+    open = false; root.classList.remove('open'); toggle.setAttribute('aria-expanded','false');
+    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) menu.hidden = true; else setTimeout(()=> menu.hidden = true, 180);
+    if(retFocus) toggle.focus();
   }
 
-  toggle.addEventListener('click', (e) => {
-    e.stopPropagation();
-    open ? closeMenu() : openMenu();
-  });
+  toggle.addEventListener('click', (e)=>{ e.stopPropagation(); open ? closeMenu() : openMenu(); });
+  toggle.addEventListener('keydown', (e)=>{ if(e.key==='ArrowDown' || e.key==='Enter' || e.key===' ') { e.preventDefault(); openMenu(true); } else if(e.key==='Escape') closeMenu(); });
 
-  toggle.addEventListener('keydown', (e) => {
-    if(e.key === 'ArrowDown' || e.key === 'Enter' || e.key === ' '){
-      e.preventDefault();
-      openMenu(true);
-    } else if(e.key === 'Escape'){
-      closeMenu();
-    }
-  });
-
-  menu.addEventListener('keydown', (e) => {
+  menu.addEventListener('keydown', (e)=>{
     const idx = items.indexOf(document.activeElement);
-    if(e.key === 'ArrowDown'){ e.preventDefault(); items[(idx+1) % items.length].focus(); }
-    if(e.key === 'ArrowUp'){ e.preventDefault(); items[(idx-1 + items.length) % items.length].focus(); }
-    if(e.key === 'Home'){ e.preventDefault(); items[0].focus(); }
-    if(e.key === 'End'){ e.preventDefault(); items[items.length-1].focus(); }
-    if(e.key === 'Escape'){ e.preventDefault(); closeMenu(); }
-    if(e.key === 'Tab'){ closeMenu(false); }
+    if(e.key==='ArrowDown'){ e.preventDefault(); items[(idx+1)%items.length].focus(); }
+    if(e.key==='ArrowUp'){ e.preventDefault(); items[(idx-1+items.length)%items.length].focus(); }
+    if(e.key==='Home'){ e.preventDefault(); items[0].focus(); }
+    if(e.key==='End'){ e.preventDefault(); items[items.length-1].focus(); }
+    if(e.key==='Escape'){ e.preventDefault(); closeMenu(); }
+    if(e.key==='Tab'){ closeMenu(false); }
   });
 
-  window.addEventListener('click', (ev) => {
-    if(!dropdown.contains(ev.target) && open){
-      closeMenu(false);
-    }
-  }, {capture:true, passive:true});
-
-  items.forEach((it) => {
-    it.addEventListener('click', () => {
-      dropdown.classList.add('clicked');
-      setTimeout(()=>dropdown.classList.remove('clicked'), 220);
-      closeMenu(false);
-    });
-  });
-
-  window.addEventListener('keydown', (e) => {
-    if(e.key === 'Escape' && open){ closeMenu(); }
-  });
+  window.addEventListener('click', (ev)=>{ if(!root.contains(ev.target) && open) closeMenu(false); }, {capture:true, passive:true});
+  items.forEach(it=> it.addEventListener('click', ()=> { closeMenu(false); }));
+  window.addEventListener('keydown', (e)=>{ if(e.key==='Escape' && open) closeMenu(); });
 })();
 </script>
 </body>
