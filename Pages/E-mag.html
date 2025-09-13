@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E-mag | Hub</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #111;
+      color: #fff;
+      text-align: center;
+    }
+
+    header {
+      padding: 20px;
+      background: #222;
+      font-size: 1.5em;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    .items-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      padding: 30px;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .item-card {
+      background: #1e1e1e;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+      transition: transform 0.2s, background 0.2s;
+      cursor: pointer;
+    }
+
+    .item-card:hover {
+      transform: translateY(-5px);
+      background: #2b2b2b;
+    }
+
+    .item-card h3 {
+      margin: 0 0 10px;
+      font-size: 1.2em;
+    }
+
+    .item-card p {
+      font-size: 0.9em;
+      color: #bbb;
+      margin-bottom: 15px;
+    }
+
+    .item-card button {
+      background: #007bff;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 6px;
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .item-card button:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <header>E-mag | Hub</header>
+
+  <div class="items-container">
+    <div class="item-card">
+      <h3>001</h3>
+      <p>Module ready.</p>
+      <button onclick="openItem('001.html')">Open</button>
+    </div>
+
+    <div class="item-card">
+      <h3>002</h3>
+      <p>Module ready.</p>
+      <button onclick="openItem('002.html')">Open</button>
+    </div>
+
+    <div class="item-card">
+      <h3>003</h3>
+      <p>Module ready.</p>
+      <button onclick="openItem('003.html')">Open</button>
+    </div>
+
+    <div class="item-card">
+      <h3>004</h3>
+      <p>Module ready.</p>
+      <button onclick="openItem('004.html')">Open</button>
+    </div>
+  </div>
+
+  <script>
+    function openItem(url) {
+      let win = window.open("about:blank", "_blank");
+      win.document.write(`
+        <html>
+          <head>
+            <title>Module</title>
+            <style>
+              body { margin:0; overflow:hidden; background:#000; }
+              iframe { width:100vw; height:100vh; border:none; }
+            </style>
+          </head>
+          <body>
+            <iframe src="${url}"></iframe>
+          </body>
+        </html>
+      `);
+      win.document.close();
+    }
+  </script>
+
+</body>
+</html>
