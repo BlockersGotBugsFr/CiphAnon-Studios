@@ -6,40 +6,50 @@
 <title>E-mag | Secret Hub</title>
 <style>
   body {
-    margin:0; padding:0; font-family: Arial, sans-serif;
-    background: #111; color: #fff; text-align:center;
+    margin:0; padding:0; font-family: Inter, Arial, sans-serif;
+    background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+    color:#fff; text-align:center;
+    min-height:100vh;
   }
   header {
-    padding: 20px; background: #222; font-size: 1.5em; font-weight: bold;
-    letter-spacing: 1px;
+    padding: 25px; background: rgba(0,0,0,0.5); backdrop-filter: blur(6px);
+    font-size: 1.8em; font-weight: bold; letter-spacing: 1px;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.5);
   }
   .items-container {
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:20px;
-    padding:30px;
-    max-width:1100px;
+    gap:25px;
+    padding:40px;
+    max-width:1200px;
     margin:auto;
   }
   .item-card {
-    background: #1e1e1e;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.4);
-    transition: transform 0.2s, background 0.2s;
+    background: rgba(255,255,255,0.05);
+    padding:25px;
+    border-radius:16px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+    transition: transform 0.25s, box-shadow 0.25s, background 0.25s;
     cursor:pointer;
+    display:flex; flex-direction:column; align-items:center;
   }
   .item-card:hover {
-    transform: translateY(-5px);
-    background: #2b2b2b;
+    transform: translateY(-8px);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.7);
+    background: rgba(255,255,255,0.08);
   }
-  .item-card h3 { margin:0 0 10px; font-size:1.2em; }
-  .item-card p { font-size:0.9em; color:#bbb; margin-bottom:15px; }
+  .item-card h3 { margin:0 0 12px; font-size:1.4em; color:#ff9f1c; }
+  .item-card p { font-size:0.95em; color:#ccc; margin-bottom:20px; }
   .item-card button {
-    background:#007bff; border:none; padding:10px 15px; border-radius:6px;
-    color:#fff; font-weight:bold; cursor:pointer; transition: background 0.2s;
+    background: linear-gradient(90deg,#ff9f1c,#ff5e7a);
+    border:none; padding:10px 18px; border-radius:8px;
+    color:#071018; font-weight:700; cursor:pointer; font-size:0.95em;
+    transition: transform 0.2s, box-shadow 0.2s;
   }
-  .item-card button:hover { background:#0056b3; }
+  .item-card button:hover {
+    transform: translateY(-3px);
+    box-shadow:0 10px 25px rgba(0,0,0,0.4);
+  }
 </style>
 </head>
 <body>
@@ -66,26 +76,25 @@
 
 <script>
 function openExternal(url){
-  // Open a blank popup
   let win = window.open('about:blank', '_blank', 'width=1000,height=700');
 
-  // Write content with iframe and back button
   win.document.write(`
     <html>
       <head>
         <title>Secret Module</title>
         <style>
-          body { margin:0; display:flex; flex-direction:column; height:100vh; background:#000; color:#fff; font-family:Arial,sans-serif; }
+          body { margin:0; display:flex; flex-direction:column; height:100vh; background:#111; color:#fff; font-family:Inter, Arial, sans-serif; }
           iframe { flex:1; border:none; width:100%; }
-          .topbar { padding:12px; background:#222; display:flex; justify-content:space-between; align-items:center; }
-          .topbar button { padding:6px 12px; border:none; border-radius:6px; background:#007bff; color:#fff; cursor:pointer; }
-          .topbar button:hover { background:#0056b3; }
+          .topbar { padding:12px 20px; background: linear-gradient(90deg,#ff9f1c,#ff5e7a); display:flex; justify-content:space-between; align-items:center; font-weight:bold; color:#071018; }
+          .topbar button { padding:6px 14px; border:none; border-radius:6px; background:#071018; color:#ff9f1c; cursor:pointer; font-weight:bold; transition: transform 0.15s; }
+          .topbar button:hover { transform: translateY(-2px); background:#333; }
         </style>
       </head>
       <body>
         <div class="topbar">
+          <button onclick="window.location.href='../index.html'">Home</button>
           <span>Secret Module</span>
-          <button onclick="window.location.href='../index.html'">Back Home</button>
+          <button onclick="window.location.href='../Pages/E-mag.html'">Back to E-mag</button>
         </div>
         <iframe src="${url}"></iframe>
       </body>
