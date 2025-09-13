@@ -3,86 +3,99 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CiphAnon Studios | E mag</title>
+<title>CiphAnon Studios</title>
 <style>
   body {
-    margin:0; padding:0;
-    font-family: Arial, sans-serif;
-    background:#fff;
-    color:#000;
+    margin:0; padding:0; font-family: Inter, Arial, sans-serif;
+    background: white;
+    color:#fff; text-align:center;
+    min-height:100vh;
   }
   header {
-    padding:15px;
-    background:#eee;
-    text-align:center;
-    font-weight:bold;
+    padding: 25px; background: rgba(0,0,0,0.5); backdrop-filter: blur(6px);
+    font-size: 1.8em; font-weight: bold; letter-spacing: 1px;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.5);
   }
-  nav {
-    display:flex;
-    justify-content:center;
-    gap:10px;
-    background:#ddd;
-    padding:10px;
+  .items-container {
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:25px;
+    padding:40px;
+    max-width:1200px;
+    margin:auto;
   }
-  nav button {
-    padding:6px 12px;
-    border:1px solid #aaa;
-    background:#f9f9f9;
+  .item-card {
+    background: rgba(255,255,255,0.05);
+    padding:25px;
+    border-radius:16px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+    transition: transform 0.25s, box-shadow 0.25s, background 0.25s;
     cursor:pointer;
+    display:flex; flex-direction:column; align-items:center;
   }
-  nav button:hover { background:#ccc; }
-  #home {
-    padding:30px;
-    text-align:center;
+  .item-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.7);
+    background: rgba(255,255,255,0.08);
+  }
+  .item-card h3 { margin:0 0 12px; font-size:1.4em; color:#ff9f1c; }
+  .item-card p { font-size:0.95em; color:#ccc; margin-bottom:20px; }
+  .item-card button {
+    background: black;
+    border:none; padding:10px 18px; border-radius:8px;
+    color:#071018; font-weight:700; cursor:pointer; font-size:0.95em;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .item-card button:hover {
+    transform: translateY(-3px);
+    box-shadow:0 10px 25px rgba(0,0,0,0.4);
   }
 </style>
 </head>
 <body>
 
-<header>CiphAnon Studios | E mag</header>
+<header>CiphAnon Studios | E-mag</header>
 
-<nav>
-  <button onclick="showHome()">Home</button>
-  <button onclick="openExternal('https://example.com')">1</button>
-  <button onclick="openExternal('https://supergisfire.com.cdn.cloudflare.net/')">2</button>
-  <button onclick="openExternal('https://www.algebra.casa/')">3</button>
-  <button onclick="openExternal('https://example.com/file')">4</button>
-</nav>
-
-<div id="home">
-  <h2>Home</h2>
-  <p>Select a number above to open in a new tab.</p>
+<div class="items-container">
+  <div class="item-card">
+    <h3>001</h3>
+    <p>Blank</p>
+    <button onclick="openExternal('https://supergisfire.com.cdn.cloudflare.net/')">Open</button>
+  </div>
+  <div class="item-card">
+    <h3>002</h3>
+    <p>Blank</p>
+    <button onclick="openExternal('https://www.algebra.casa/')">Open</button>
+  </div>
 </div>
 
 <script>
-function showHome(){
-  document.getElementById('home').style.display = 'block';
-}
-
 function openExternal(url){
   let win = window.open('about:blank', '_blank', 'width=1000,height=700');
+
   win.document.write(`
     <html>
       <head>
         <title>CiphAnon Studios</title>
         <style>
-          body { margin:0; display:flex; flex-direction:column; height:100vh; background:#111; color:#fff; font-family:Arial, sans-serif; }
+          body { margin:0; display:flex; flex-direction:column; height:100vh; background:#111; color:#fff; font-family:Inter, Arial, sans-serif; }
           iframe { flex:1; border:none; width:100%; }
-          .topbar { padding:10px; background:#eee; display:flex; justify-content:space-between; align-items:center; color:#000; font-weight:bold; }
-          .topbar button { padding:4px 10px; border:none; border-radius:4px; background:#ccc; color:#000; cursor:pointer; }
-          .topbar button:hover { background:#bbb; }
+          .topbar { padding:12px 20px; background: gray; display:flex; justify-content:space-between; align-items:center; font-weight:bold; color:#071018; }
+          .topbar button { padding:6px 14px; border:none; border-radius:6px; background:#071018; color:#ff9f1c; cursor:pointer; font-weight:bold; transition: transform 0.15s; }
+          .topbar button:hover { transform: translateY(-2px); background:#333; }
         </style>
       </head>
       <body>
         <div class="topbar">
-          <button onclick="window.close()">Close</button>
+          <button onclick="window.location.href='../index.html'">Home</button>
           <span>CiphAnon Studios</span>
-          <button onclick="window.location.href='../index.html'">Back</button>
+          <button onclick="window.location.href='../Pages/E-mag.html'">Back to E-mag</button>
         </div>
         <iframe src="${url}"></iframe>
       </body>
     </html>
   `);
+
   win.document.close();
 }
 </script>
