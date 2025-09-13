@@ -5,36 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CiphAnon Studios | E mag</title>
 <style>
-  body {
-    margin:0; padding:0;
-    font-family: Arial, sans-serif;
-    background:#fff;
-    color:#000;
-  }
-  header {
-    padding:15px;
-    background:#eee;
-    text-align:center;
-    font-weight:bold;
-  }
-  nav {
-    display:flex;
-    justify-content:center;
-    gap:10px;
-    background:#ddd;
-    padding:10px;
-  }
-  nav button {
-    padding:6px 12px;
-    border:1px solid #aaa;
-    background:#f9f9f9;
-    cursor:pointer;
-  }
+  body { margin:0; font-family:Arial,sans-serif; background:#fff; color:#000; }
+  header { padding:20px; text-align:center; font-weight:bold; background:#eee; }
+  nav { display:flex; justify-content:center; gap:10px; background:#ddd; padding:10px; }
+  nav button { padding:6px 12px; cursor:pointer; border:1px solid #aaa; background:#f9f9f9; }
   nav button:hover { background:#ccc; }
-  #home {
-    padding:30px;
-    text-align:center;
-  }
+  .tab-buttons { display:flex; justify-content:center; gap:10px; margin:20px 0; }
+  .tab-buttons button { padding:6px 12px; cursor:pointer; border:1px solid #aaa; background:#f9f9f9; }
+  .tab-buttons button:hover { background:#ccc; }
+  .tab-content { display:none; padding:20px; max-width:800px; margin:auto; }
+  .tab-content.active { display:block; }
+  .card { border:1px solid #ccc; padding:10px; margin:10px 0; }
 </style>
 </head>
 <body>
@@ -42,35 +23,40 @@
 <header>CiphAnon Studios | E mag</header>
 
 <nav>
-  <button onclick="showHome()">Home</button>
-  <button onclick="openExternal('https://example.com')">1</button>
-  <button onclick="openExternal('https://supergisfire.com.cdn.cloudflare.net/')">2</button>
-  <button onclick="openExternal('https://www.algebra.casa/')">3</button>
-  <button onclick="openExternal('https://www.blooket.com/')">4</button>
+  <button onclick="openSection('home')">Home</button>
+  <button onclick="openGames()">1</button>
+  <button onclick="openSectionPlaceholder(2)">2</button>
+  <button onclick="openSectionPlaceholder(3)">3</button>
+  <button onclick="openSectionPlaceholder(4)">4</button>
 </nav>
 
-<div id="home">
-  <h2>Home</h2>
-  <p>Select a number above to open in a new tab.</p>
+<div id="home" style="padding:30px; text-align:center;">
+  <h2>Welcome to E mag</h2>
+  <p>Select a number above to open the corresponding section.</p>
 </div>
 
 <script>
-function showHome(){
-  document.getElementById('home').style.display = 'block';
+function openSectionPlaceholder(num){
+  alert('Section ' + num + ' placeholder. Will open a page with content here.');
 }
 
-function openExternal(url){
+function openGames(){
   let win = window.open('about:blank', '_blank', 'width=1000,height=700');
   win.document.write(`
     <html>
       <head>
-        <title>CiphAnon Studios</title>
+        <title>Games | CiphAnon Studios</title>
         <style>
-          body { margin:0; display:flex; flex-direction:column; height:100vh; background:#111; color:#fff; font-family:Arial, sans-serif; }
-          iframe { flex:1; border:none; width:100%; }
-          .topbar { padding:10px; background:#eee; display:flex; justify-content:space-between; align-items:center; color:#000; font-weight:bold; }
-          .topbar button { padding:4px 10px; border:none; border-radius:4px; background:#ccc; color:#000; cursor:pointer; }
+          body { margin:0; font-family:Arial,sans-serif; }
+          .topbar { padding:10px; background:#eee; display:flex; justify-content:space-between; font-weight:bold; }
+          .topbar button { padding:4px 10px; border:none; background:#ccc; cursor:pointer; }
           .topbar button:hover { background:#bbb; }
+          .tab-buttons { display:flex; justify-content:center; gap:10px; margin:20px 0; }
+          .tab-buttons button { padding:6px 12px; cursor:pointer; border:1px solid #aaa; background:#f9f9f9; }
+          .tab-buttons button:hover { background:#ccc; }
+          .tab-content { display:none; padding:20px; max-width:800px; margin:auto; }
+          .tab-content.active { display:block; }
+          .card { border:1px solid #ccc; padding:10px; margin:10px 0; }
         </style>
       </head>
       <body>
@@ -79,7 +65,25 @@ function openExternal(url){
           <span>CiphAnon Studios</span>
           <button onclick="window.location.href='../index.html'">Back</button>
         </div>
-        <iframe src="${url}"></iframe>
+        <div class="tab-buttons">
+          <button onclick="showTab('games')">Games</button>
+          <button onclick="showTab('gamesites')">Game Sites</button>
+        </div>
+        <div id="games" class="tab-content active">
+          <div class="card"><h3>Game 1</h3><button onclick="window.location.href='https://example.com/game1'">Play</button></div>
+          <div class="card"><h3>Game 2</h3><button onclick="window.location.href='https://example.com/game2'">Play</button></div>
+        </div>
+        <div id="gamesites" class="tab-content">
+          <div class="card"><h3>Site 1</h3><button onclick="window.location.href='https://supergisfire.com.cdn.cloudflare.net/'">Open</button></div>
+          <div class="card"><h3>Site 2</h3><button onclick="window.location.href='https://www.algebra.casa/'">Open</button></div>
+        </div>
+
+        <script>
+          function showTab(id){
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+          }
+        </script>
       </body>
     </html>
   `);
