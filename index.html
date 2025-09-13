@@ -107,10 +107,6 @@ header{position:sticky;top:0;z-index:220}
 @media (max-width:1000px){.hero{grid-template-columns:1fr}.hero-visual{height:320px}}
 @media (max-width:560px){.cap-grid{grid-template-columns:1fr}.logo{width:40px;height:40px}}
 @media (prefers-reduced-motion: reduce){.fab-icons svg, .hire-menu, .btn{transition:none!important}}
-   .stats {
-    font-size: 1.5em;
-    margin: 10px 0;
-  }
 </style>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
@@ -198,9 +194,8 @@ header{position:sticky;top:0;z-index:220}
       <div style="background:var(--card);padding:16px;border-radius:10px;box-shadow:var(--shadow)"><h3>blank</h3><p style="color:var(--muted)">blank</p></div>
     </div>
   </section>
-  
-  <div class="stats">👥 Current Visitors (this tab): <span id="onlineCount">0</span></div>
-<div class="stats">📈 Total Visits: <span id="totalVisits">0</span></div>
+
+  <a href="https://flagcounter.me/details/gc8"><img src="https://flagcounter.me/gc8/" alt="Flag Counter"></a>
 </main>
 
 <footer style="margin-top:32px;padding:28px 0;color:var(--muted)">
@@ -341,42 +336,7 @@ document.getElementById('themeToggle').addEventListener('click', toggleTheme);
   window.addEventListener('keydown', (e)=>{ if(e.key==='Escape' && open) closeMenu(); });
 })();
 
-    // ======= Total Visits using CountAPI =======
-  const totalVisitsSpan = document.getElementById('totalVisits');
-  const namespace = "your-github-username"; // Replace with your GitHub username
-  const key = "your-repo-name"; // Replace with your repo name
-
-  function updateTotalVisits() {
-    fetch(`https://api.countapi.xyz/hit/${namespace}/${key}`)
-      .then(res => res.json())
-      .then(data => {
-        totalVisitsSpan.innerText = data.value;
-      })
-      .catch(err => console.error(err));
-  }
-
-  updateTotalVisits();
-  setInterval(updateTotalVisits, 10000); // update every 10 seconds
-
-  // ======= Current Visitors on this tab =======
-  const onlineSpan = document.getElementById('onlineCount');
-
-  function updateOnlineCount() {
-    // store timestamp in sessionStorage
-    const now = Date.now();
-    sessionStorage.setItem('lastVisit', now);
-    
-    // count active tabs in same browser session
-    let count = 0;
-    for (let i = 0; i < sessionStorage.length; i++) {
-      const key = sessionStorage.key(i);
-      if (key.startsWith('lastVisit')) count++;
-    }
-    onlineSpan.innerText = 1; // always 1 for this tab
-  }
-
-  updateOnlineCount();
-  setInterval(updateOnlineCount, 5000);
+ 
 </script>
 
 </body>
