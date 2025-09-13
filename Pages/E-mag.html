@@ -7,52 +7,49 @@
 <style>
   body {
     margin:0; padding:0; font-family: Inter, Arial, sans-serif;
-    background: #06121a; color:#eaf3fb; text-align:center;
+    background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+    color:#fff; text-align:center;
     min-height:100vh;
   }
   header {
-    padding: 25px; background:#0f1720; font-size:1.8em; font-weight:bold;
-    letter-spacing:1px; border-bottom:1px solid rgba(255,255,255,0.06);
-    box-shadow: 0 12px 30px rgba(2,6,12,0.5);
+    padding: 25px; background: rgba(0,0,0,0.5); backdrop-filter: blur(6px);
+    font-size: 1.8em; font-weight: bold; letter-spacing: 1px;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.5);
   }
   .items-container {
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:20px;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:25px;
     padding:40px;
     max-width:1200px;
     margin:auto;
   }
   .item-card {
-    background: #0f1720;
-    padding:20px;
-    border-radius:12px;
-    box-shadow: 0 6px 20px rgba(2,6,12,0.5);
-    transition: transform 0.2s, box-shadow 0.2s;
+    background: rgba(255,255,255,0.05);
+    padding:25px;
+    border-radius:16px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+    transition: transform 0.25s, box-shadow 0.25s, background 0.25s;
     cursor:pointer;
-    display:flex; flex-direction:column; align-items:flex-start;
+    display:flex; flex-direction:column; align-items:center;
   }
   .item-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 30px rgba(2,6,12,0.7);
+    transform: translateY(-8px);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.7);
+    background: rgba(255,255,255,0.08);
   }
-  .item-header {
-    display:flex; justify-content:space-between; width:100%; align-items:center;
+  .item-card h3 { margin:0 0 12px; font-size:1.4em; color:#ff9f1c; }
+  .item-card p { font-size:0.95em; color:#ccc; margin-bottom:20px; }
+  .item-card button {
+    background: linear-gradient(90deg,#ff9f1c,#ff5e7a);
+    border:none; padding:10px 18px; border-radius:8px;
+    color:#071018; font-weight:700; cursor:pointer; font-size:0.95em;
+    transition: transform 0.2s, box-shadow 0.2s;
   }
-  .item-header h3 { margin:0; font-size:1.3em; color:#ff9f1c; }
-  .arrow {
-    display:inline-block; transition: transform 0.2s; font-size:1.2em;
+  .item-card button:hover {
+    transform: translateY(-3px);
+    box-shadow:0 10px 25px rgba(0,0,0,0.4);
   }
-  .item-content {
-    margin-top:10px; overflow:hidden; max-height:0;
-    transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
-    opacity:0; color:#98a9bd; font-size:0.95em;
-  }
-  .item-card.open .item-content { max-height:200px; opacity:1; }
-  .item-card.open .arrow { transform: rotate(90deg); }
-  .typed { font-weight:700; color:#ff5e7a; display:inline-block; }
-  .typed::after { content:"|"; margin-left:4px; animation:blink 0.8s infinite; color:#ff5e7a; }
-  @keyframes blink{0%,50%{opacity:1}51%,100%{opacity:0}}
 </style>
 </head>
 <body>
@@ -61,57 +58,50 @@
 
 <div class="items-container">
   <div class="item-card">
-    <div class="item-header" onclick="toggleCard(this)">
-      <h3>001</h3>
-      <span class="arrow">▶</span>
-    </div>
-    <div class="item-content" data-typed="Interactive prototypes, Dev tooling, UX polish">
-      <span class="typed"></span>
-    </div>
+    <h3>001</h3>
+    <p>Secret Module</p>
+    <button onclick="openExternal('https://example-game.com')">Open</button>
   </div>
-
   <div class="item-card">
-    <div class="item-header" onclick="toggleCard(this)">
-      <h3>002</h3>
-      <span class="arrow">▶</span>
-    </div>
-    <div class="item-content" data-typed="Secret module for testing features, Hidden experiments">
-      <span class="typed"></span>
-    </div>
+    <h3>002</h3>
+    <p>Secret Module</p>
+    <button onclick="openExternal('https://another-site.com')">Open</button>
   </div>
-
   <div class="item-card">
-    <div class="item-header" onclick="toggleCard(this)">
-      <h3>003</h3>
-      <span class="arrow">▶</span>
-    </div>
-    <div class="item-content" data-typed="CiphAnon Studios exclusive content">
-      <span class="typed"></span>
-    </div>
+    <h3>003</h3>
+    <p>CiphAnon Studios</p>
+    <button onclick="openExternal('https://www.algebra.casa/')">Open</button>
   </div>
 </div>
 
 <script>
-// Toggle collapsible cards
-function toggleCard(header){
-  const card = header.parentElement;
-  card.classList.toggle('open');
-  const content = card.querySelector('.typed');
-  if(card.classList.contains('open')) startTyping(content, card.querySelector('.item-content').dataset.typed);
-  else { content.textContent = ''; }
-}
+function openExternal(url){
+  let win = window.open('about:blank', '_blank', 'width=1000,height=700');
 
-// Typing animation
-function startTyping(el, text){
-  let i=0;
-  function step(){
-    if(i <= text.length){
-      el.textContent = text.slice(0,i);
-      i++;
-      setTimeout(step,50);
-    }
-  }
-  step();
+  win.document.write(`
+    <html>
+      <head>
+        <title>Secret Module</title>
+        <style>
+          body { margin:0; display:flex; flex-direction:column; height:100vh; background:#111; color:#fff; font-family:Inter, Arial, sans-serif; }
+          iframe { flex:1; border:none; width:100%; }
+          .topbar { padding:12px 20px; background: linear-gradient(90deg,#ff9f1c,#ff5e7a); display:flex; justify-content:space-between; align-items:center; font-weight:bold; color:#071018; }
+          .topbar button { padding:6px 14px; border:none; border-radius:6px; background:#071018; color:#ff9f1c; cursor:pointer; font-weight:bold; transition: transform 0.15s; }
+          .topbar button:hover { transform: translateY(-2px); background:#333; }
+        </style>
+      </head>
+      <body>
+        <div class="topbar">
+          <button onclick="window.location.href='../index.html'">Home</button>
+          <span>Secret Module</span>
+          <button onclick="window.location.href='../Pages/E-mag.html'">Back to E-mag</button>
+        </div>
+        <iframe src="${url}"></iframe>
+      </body>
+    </html>
+  `);
+
+  win.document.close();
 }
 </script>
 
