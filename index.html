@@ -107,7 +107,13 @@ header{position:sticky;top:0;z-index:220}
 @media (max-width:1000px){.hero{grid-template-columns:1fr}.hero-visual{height:320px}}
 @media (max-width:560px){.cap-grid{grid-template-columns:1fr}.logo{width:40px;height:40px}}
 @media (prefers-reduced-motion: reduce){.fab-icons svg, .hire-menu, .btn{transition:none!important}}
+  .stats {
+    font-size: 1.5em;
+    margin: 10px 0;
+  }
 </style>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 </head>
 <body>
 
@@ -193,6 +199,9 @@ header{position:sticky;top:0;z-index:220}
     </div>
   </section>
 </main>
+
+  <div class="stats">👥 Online Users: <span id="onlineCount">0</span></div>
+<div class="stats">📈 Total Visits: <span id="totalVisits">0</span></div>
 
 <footer style="margin-top:32px;padding:28px 0;color:var(--muted)">
   <div class="container" style="display:flex;gap:20px;flex-wrap:wrap;align-items:flex-start">
@@ -331,6 +340,53 @@ document.getElementById('themeToggle').addEventListener('click', toggleTheme);
   window.addEventListener('click', (ev)=>{ if(!root.contains(ev.target) && open) closeMenu(false); }, {capture:true, passive:true});
   window.addEventListener('keydown', (e)=>{ if(e.key==='Escape' && open) closeMenu(); });
 })();
+
+    // ======= Firebase Config =======
+  const firebaseConfig = {
+    apiKey: "YOUR_API_KEY",
+    authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+    databaseURL: "https://YOUR_PROJECT_ID.firebaseio.com",
+    projectId: "YOUR_PROJECT_ID",
+    storageBucket: "YOUR_PROJECT_ID.appspot.com",
+    messagingSenderId: "YOUR_SENDER_ID",
+    appId: "YOUR_APP_ID"
+  };
+
+  // Initialize Firebase
+  const app = firebase.initializeApp(firebaseConfig);
+  const db = firebase.database();
+
+  // ======= References =======
+  const onlineRef = db.ref('onlineUsers');
+  const visitsRef = db.ref('totalVisits');
+
+  // ======= Track Total Visits =======
+  visitsRef.transaction(current => (current || 0) + 1);
+
+  // ======= Track Online Users =======
+  const userId = Date.now() + Math.random().toString(36).substr(2,5);
+  const userRef = onlineRef.child(userId);
+  userRef.set(true);
+  userRef.onDisconnect().remove();
+
+  // ======= Update Online Users Display =======
+  onlineRef.on('value', snapshot => {
+    const count = snapshot.numChildren();
+    document.getElementById('onlineCount').innerText = count;
+  });
+
+  // ======= Update Total Visits Display =======
+  visitsRef.on('value', snapshot => {
+    const total = snapshot.val() || 0;
+    document.getElementById('totalVisits').innerText = total;
+  });
+
+  // ======= Optional Auto Refresh (every 5 seconds) =======
+  setInterval(() => {
+    onlineRef.once('value').then(snapshot => {
+      document.getElementById('onlineCount').innerText = snapshot.numChildren();
+    });
+  }, 5000);
 </script>
 
 </body>
