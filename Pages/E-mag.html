@@ -7,7 +7,8 @@
 <style>
   body {
     margin:0; padding:0; font-family: Inter, Arial, sans-serif;
-    background: #06121a; color:#eaf3fb; text-align:center; min-height:100vh;
+    background: #06121a; color:#eaf3fb; text-align:center;
+    min-height:100vh;
   }
   header {
     padding: 25px; background:#0f1720; font-size:1.8em; font-weight:bold;
@@ -16,7 +17,7 @@
   }
   .items-container {
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
     gap:20px;
     padding:40px;
     max-width:1200px;
@@ -60,7 +61,7 @@
 
 <div class="items-container">
   <div class="item-card">
-    <div class="item-header" onclick="openModule('https://example-game.com')">
+    <div class="item-header" onclick="toggleCard(this)">
       <h3>001</h3>
       <span class="arrow">▶</span>
     </div>
@@ -70,7 +71,7 @@
   </div>
 
   <div class="item-card">
-    <div class="item-header" onclick="openModule('https://another-site.com')">
+    <div class="item-header" onclick="toggleCard(this)">
       <h3>002</h3>
       <span class="arrow">▶</span>
     </div>
@@ -80,7 +81,7 @@
   </div>
 
   <div class="item-card">
-    <div class="item-header" onclick="openModule('https://www.algebra.casa/')">
+    <div class="item-header" onclick="toggleCard(this)">
       <h3>003</h3>
       <span class="arrow">▶</span>
     </div>
@@ -91,63 +92,26 @@
 </div>
 
 <script>
-function openModule(url){
-  // Open a blank popup
-  let win = window.open('about:blank', '_blank', 'width=1000,height=700');
+// Toggle collapsible cards
+function toggleCard(header){
+  const card = header.parentElement;
+  card.classList.toggle('open');
+  const content = card.querySelector('.typed');
+  if(card.classList.contains('open')) startTyping(content, card.querySelector('.item-content').dataset.typed);
+  else { content.textContent = ''; }
+}
 
-  win.document.write(\`
-    <html>
-      <head>
-        <title>Secret Module</title>
-        <style>
-          body { margin:0; display:flex; flex-direction:column; height:100vh; background:#06121a; color:#eaf3fb; font-family:Inter, Arial, sans-serif; }
-          iframe { flex:1; border:none; width:100%; transition: max-height 0.3s ease; }
-          .topbar { padding:12px 20px; background:#0f1720; display:flex; justify-content:space-between; align-items:center; font-weight:bold; color:#eaf3fb; border-bottom:1px solid rgba(255,255,255,0.06); box-shadow:0 8px 20px rgba(2,6,12,0.5); cursor:pointer; }
-          .topbar .buttons { display:flex; gap:10px; }
-          .topbar button { padding:6px 14px; border:none; border-radius:6px; background:#1e293b; color:#eaf3fb; cursor:pointer; font-weight:600; }
-          .topbar button:hover { background:#334155; }
-          .arrow { display:inline-block; transition: transform 0.2s; margin-right:8px; }
-          .typed { font-weight:700; color:#ff5e7a; display:inline-block; max-width:70%; white-space:nowrap; overflow:hidden; }
-          .typed::after { content:"|"; margin-left:4px; animation:blink 0.8s infinite; color:#ff5e7a; }
-          @keyframes blink{0%,50%{opacity:1}51%,100%{opacity:0}}
-        </style>
-      </head>
-      <body>
-        <div class="topbar" onclick="toggleIframe()">
-          <span><span class="arrow">▶</span> <span class="typed"></span></span>
-          <div class="buttons">
-            <button onclick="window.location.href='../index.html'; event.stopPropagation()">Home</button>
-            <button onclick="window.location.href='../Pages/E-mag.html'; event.stopPropagation()">Back to E-mag</button>
-          </div>
-        </div>
-        <iframe id="moduleFrame" src="\${url}"></iframe>
-
-        <script>
-          const typedEl = document.querySelector('.typed');
-          const lines = ['Interactive prototypes','Dev tooling','UX polish','Fast iterations','Clean UI','Playable demos'];
-          let i=0, pos=0, forward=true;
-          function step(){
-            const text = lines[i];
-            if(forward){ pos++; typedEl.textContent = text.slice(0,pos); if(pos===text.length){ forward=false; setTimeout(step,900); return } }
-            else{ pos--; typedEl.textContent = text.slice(0,pos); if(pos===0){ forward=true; i=(i+1)%lines.length } }
-            setTimeout(step, forward?60:35 );
-          }
-          step();
-
-          const iframe = document.getElementById('moduleFrame');
-          const arrow = document.querySelector('.arrow');
-          let open = true;
-          function toggleIframe(){
-            open = !open;
-            if(open){ iframe.style.maxHeight = '100%'; arrow.style.transform='rotate(0deg)'; }
-            else{ iframe.style.maxHeight='0'; arrow.style.transform='rotate(90deg)'; }
-          }
-        <\/script>
-      </body>
-    </html>
-  \`);
-
-  win.document.close();
+// Typing animation
+function startTyping(el, text){
+  let i=0;
+  function step(){
+    if(i <= text.length){
+      el.textContent = text.slice(0,i);
+      i++;
+      setTimeout(step,50);
+    }
+  }
+  step();
 }
 </script>
 
