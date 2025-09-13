@@ -65,14 +65,36 @@
 </div>
 
 <script>
-// Function to show home on main page
+// Show home on main page
 function openHome(){
   document.getElementById('home').style.display = 'block';
 }
 
-// Function to open a section in about:blank with iframe
+// Open a new iframe page for a URL
+function openIframe(url){
+  var win = window.open('about:blank', '_blank', 'width=1000,height=700');
+  var iframeHTML = 
+    '<html><head><title>CiphAnon Studios</title><style>' +
+    'body{margin:0;display:flex;flex-direction:column;height:100vh;font-family:Arial,sans-serif;background:#111;color:#fff;}' +
+    'iframe{flex:1;border:none;width:100%;}' +
+    '.topbar{padding:12px 20px;background:gray;display:flex;justify-content:space-between;align-items:center;font-weight:bold;color:#071018;}' +
+    '.topbar button{padding:6px 14px;border:none;border-radius:6px;background:#071018;color:#ff9f1c;cursor:pointer;font-weight:bold;transition: transform 0.15s;}' +
+    '.topbar button:hover{transform: translateY(-2px);background:#333;}' +
+    '</style></head><body>' +
+    '<div class="topbar">' +
+    '<button onclick="window.close()">Close</button>' +
+    '<span>CiphAnon Studios</span>' +
+    '<button onclick=\\"window.location.href=\\\'../index.html\\\'\\">Back</button>' +
+    '</div>' +
+    '<iframe src="'+url+'"></iframe>' +
+    '</body></html>';
+  win.document.write(iframeHTML);
+  win.document.close();
+}
+
+// Open a section page
 function openSection(sectionNumber){
-  let urls = {
+  var sectionUrls = {
     1: [
       {title:'Game 1', url:'https://example.com/game1'},
       {title:'Game 2', url:'https://example.com/game2'},
@@ -92,75 +114,36 @@ function openSection(sectionNumber){
     ]
   };
 
-  const sectionItems = urls[sectionNumber] || [];
+  var items = sectionUrls[sectionNumber] || [];
+  var win = window.open('about:blank', '_blank', 'width=1000,height=700');
 
-  let win = window.open('about:blank', '_blank', 'width=1000,height=700');
+  // Build cards
+  var cardsHTML = '';
+  items.forEach(function(item){
+    cardsHTML += '<div style="border:1px solid #ccc;padding:10px;margin:10px 0;">' +
+                 '<h3>'+item.title+'</h3>' +
+                 '<button onclick="('+openIframe.toString()+')(\''+item.url+'\')">Open</button>' +
+                 '</div>';
+  });
 
-  // Build HTML content for cards
-  let cardsHTML = sectionItems.map(item => {
-    return `
-      <div style="border:1px solid #ccc; padding:10px; margin:10px 0;">
-        <h3>${item.title}</h3>
-        <button onclick="openIframe('${item.url}')">Open</button>
-      </div>
-    `;
-  }).join('');
+  var sectionHTML = 
+    '<html><head><title>Section '+sectionNumber+' | CiphAnon Studios</title><style>' +
+    'body{margin:0;font-family:Arial,sans-serif;background:#111;color:#fff;}' +
+    '.topbar{padding:12px 20px;background:gray;display:flex;justify-content:space-between;align-items:center;font-weight:bold;color:#071018;}' +
+    '.topbar button{padding:6px 14px;border:none;border-radius:6px;background:#071018;color:#ff9f1c;cursor:pointer;font-weight:bold;transition: transform 0.15s;}' +
+    '.topbar button:hover{transform: translateY(-2px);background:#333;}' +
+    'button{margin-top:5px;padding:6px 10px;cursor:pointer;border:none;border-radius:6px;background:#222;color:#ff9f1c;}' +
+    'button:hover{background:#333;}' +
+    '</style></head><body>' +
+    '<div class="topbar">' +
+    '<button onclick="window.close()">Close</button>' +
+    '<span>CiphAnon Studios</span>' +
+    '<button onclick=\\"window.location.href=\\\'../index.html\\\'\\">Back</button>' +
+    '</div>' +
+    '<div style="padding:20px;">'+cardsHTML+'</div>' +
+    '</body></html>';
 
-  win.document.write(`
-    <html>
-      <head>
-        <title>Section ${sectionNumber} | CiphAnon Studios</title>
-        <style>
-          body { margin:0; font-family:Arial,sans-serif; background:#111; color:#fff; }
-          .topbar { padding:12px 20px; background: gray; display:flex; justify-content:space-between; align-items:center; font-weight:bold; color:#071018; }
-          .topbar button { padding:6px 14px; border:none; border-radius:6px; background:#071018; color:#ff9f1c; cursor:pointer; font-weight:bold; transition: transform 0.15s; }
-          .topbar button:hover { transform: translateY(-2px); background:#333; }
-          .card { border:1px solid #ccc; padding:10px; margin:10px 0; }
-          button { margin-top:5px; padding:6px 10px; cursor:pointer; border:none; border-radius:6px; background:#222; color:#ff9f1c; }
-          button:hover { background:#333; }
-        </style>
-      </head>
-      <body>
-        <div class="topbar">
-          <button onclick="window.close()">Close</button>
-          <span>CiphAnon Studios</span>
-          <button onclick="window.location.href='../index.html'">Back</button>
-        </div>
-        <div style="padding:20px;">
-          ${cardsHTML}
-        </div>
-        <script>
-          function openIframe(url){
-            let win2 = window.open('about:blank', '_blank', 'width=1000,height=700');
-            win2.document.write(\`
-              <html>
-                <head>
-                  <title>CiphAnon Studios</title>
-                  <style>
-                    body { margin:0; display:flex; flex-direction:column; height:100vh; background:#111; color:#fff; font-family:Arial,sans-serif; }
-                    iframe { flex:1; border:none; width:100%; }
-                    .topbar { padding:12px 20px; background: gray; display:flex; justify-content:space-between; align-items:center; font-weight:bold; color:#071018; }
-                    .topbar button { padding:6px 14px; border:none; border-radius:6px; background:#071018; color:#ff9f1c; cursor:pointer; font-weight:bold; transition: transform 0.15s; }
-                    .topbar button:hover { transform: translateY(-2px); background:#333; }
-                  </style>
-                </head>
-                <body>
-                  <div class="topbar">
-                    <button onclick="window.close()">Close</button>
-                    <span>CiphAnon Studios</span>
-                    <button onclick="window.location.href='../index.html'">Back</button>
-                  </div>
-                  <iframe src="\${url}"></iframe>
-                </body>
-              </html>
-            \`);
-            win2.document.close();
-          }
-        </script>
-      </body>
-    </html>
-  `);
-
+  win.document.write(sectionHTML);
   win.document.close();
 }
 </script>
