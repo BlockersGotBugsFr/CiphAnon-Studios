@@ -147,9 +147,9 @@ function openExternal(url){
       <head>
         <title>CiphAnon Studios</title>
         <style>
-          body { margin:0; display:flex; flex-direction:column; height:100vh; background: #0e0e0e; color: white; font-family:Inter, Arial, sans-serif; position:relative;}
+          body { margin:0; display:flex; flex-direction:column; height:100vh; background:#0e0e0e; color:white; font-family:Inter, Arial, sans-serif; position:relative;}
           iframe { flex:1; border:none; width:100%; }
-          .topbar { padding:12px 20px; background: black; display:flex; justify-content:space-between; align-items:center; font-weight:bold; color: orange; }
+          .topbar { padding:12px 20px; background:black; display:flex; justify-content:space-between; align-items:center; font-weight:bold; color: orange; }
           .topbar .left, .topbar .right { display:flex; align-items:center; gap:12px; }
           .topbar img.logo { height:32px; }
           .topbar button { padding:6px 14px; border:none; border-radius:6px; background:#071018; color:#ff9f1c; cursor:pointer; font-weight:bold; transition: transform 0.15s; }
@@ -171,7 +171,7 @@ function openExternal(url){
           #overlay-image {
             display:none;
             position:fixed; top:0; left:0; width:100%; height:100%;
-            background: src('white.png') center/cover no-repeat;
+            background: url('https://via.placeholder.com/1920x1080') center/cover no-repeat;
             z-index:9999;
           }
         </style>
@@ -179,7 +179,7 @@ function openExternal(url){
       <body>
         <div class="topbar">
           <div class="left">
-            <img class="logo" src="StudioImageT.png" alt="Logo">
+            <img class="logo" src="https://via.placeholder.com/100x32?text=Logo" alt="Logo">
             <div class="dropdown">
               <button>Random Stuff</button>
               <div class="dropdown-content">
@@ -197,16 +197,16 @@ function openExternal(url){
             </div>
           </div>
           <div class="right">
-            <button onclick="window.open('https://www.youtube.com/@CiphAnonStudios','_blank')">YouTube</button>
+            <button onclick="window.open('https://www.youtube.com/@yourchannel','_blank')">YouTube</button>
             <button onclick="window.close()">Close</button>
           </div>
         </div>
         <iframe src="${url}"></iframe>
         <div id="overlay-image"></div>
         <script>
-          let overlay = document.getElementById('overlay-image');
-          document.addEventListener('keydown', (e) => {
-            if(e.code === 'Space') {
+          const overlay = document.getElementById('overlay-image');
+          document.addEventListener('keydown', e => {
+            if(e.code === 'Space'){
               e.preventDefault();
               overlay.style.display = overlay.style.display === 'none' ? 'block' : 'none';
             }
