@@ -182,7 +182,8 @@ function openExternal(url){
   win.document.write(popupHTML);
   win.document.close();
 
-  const videoSrc = 'assets/studios-animation.mp4'; // <-- updated filename, no spaces
+  // Use absolute URL to make sure the video loads
+  const videoSrc = window.location.origin + '/assets/studios-animation.mp4';
 
   const checkReady = setInterval(() => {
     try {
@@ -192,11 +193,13 @@ function openExternal(url){
 
       clearInterval(checkReady);
 
+      // Wire topbar buttons
       const closeLeft = doc.getElementById('closeLeft');
       const closeRight = doc.getElementById('closeRight');
       if (closeLeft) closeLeft.addEventListener('click', () => win.close());
       if (closeRight) closeRight.addEventListener('click', () => win.close());
 
+      // Video overlay
       const overlay = doc.getElementById('videoOverlay');
       const video = doc.createElement('video');
 
@@ -207,9 +210,7 @@ function openExternal(url){
       video.setAttribute('id', 'introVideo');
 
       overlay.appendChild(video);
-
-      const p = video.play();
-      if (p && p.catch) p.catch(() => {});
+      video.play().catch(()=>{});
 
       function hideOverlay(){
         overlay.style.opacity = '0';
