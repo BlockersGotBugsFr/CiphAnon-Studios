@@ -141,29 +141,31 @@
 
 <script>
 function playIntroThenOpen(url){
-  // Prevent multiple overlays
   if(document.getElementById('introOverlay')) return;
 
-  // Create overlay
+  // Overlay
   const overlay = document.createElement('div');
   overlay.id = 'introOverlay';
-  overlay.style.position = 'fixed';
-  overlay.style.top = '0';
-  overlay.style.left = '0';
-  overlay.style.width = '100%';
-  overlay.style.height = '100%';
-  overlay.style.background = 'black';
-  overlay.style.zIndex = '9999';
-  overlay.style.display = 'flex';
-  overlay.style.justifyContent = 'center';
-  overlay.style.alignItems = 'center';
-  overlay.style.transition = 'opacity 1s ease';
+  Object.assign(overlay.style, {
+    position: 'fixed',
+    top: '0',
+    left: '0',
+    width: '100%',
+    height: '100%',
+    background: 'black',
+    zIndex: '9999',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    transition: 'opacity 1s ease'
+  });
 
-  // Video element
+  // Video
   const video = document.createElement('video');
-  video.src = 'assets/studios-animation.mp4';
+  video.src = 'assets/studios-animation.mp4'; // full video file
   video.autoplay = true;
-  video.muted = true;
+  video.muted = false; // 🔊 allow audio
+  video.controls = false;
   video.playsInline = true;
   video.style.width = '100%';
   video.style.height = '100%';
@@ -172,18 +174,19 @@ function playIntroThenOpen(url){
   overlay.appendChild(video);
   document.body.appendChild(overlay);
 
-  function finishIntro(){
+  // When video ends → fade out overlay, then open popup
+  video.addEventListener('ended', () => {
     overlay.style.opacity = '0';
     setTimeout(()=>{
       if(overlay.parentNode) overlay.parentNode.removeChild(overlay);
       openPopup(url);
     },1000);
-  }
+  });
 
-  video.addEventListener('ended', finishIntro);
-  overlay.addEventListener('click', finishIntro);
-  document.addEventListener('keydown', e=>{
-    if(e.key==='Escape') finishIntro();
+  // Try to force play (in case autoplay blocks)
+  const p = video.play();
+  if(p && p.catch) p.catch(err => {
+    console.warn("Autoplay blocked:", err);
   });
 }
 
