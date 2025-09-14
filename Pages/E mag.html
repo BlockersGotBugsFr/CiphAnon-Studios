@@ -26,7 +26,7 @@
     border-radius:6px; transition: background 0.2s;
   }
   nav a:hover { background:#222; }
-
+ 
   section {
     padding:50px 20px;
     max-width:1200px; margin:auto;
@@ -35,7 +35,7 @@
     font-size:2em; margin-bottom:25px; color:#ff9f1c;
     text-shadow:0 2px 8px rgba(0,0,0,0.6);
   }
-
+ 
   .items-container {
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
@@ -147,77 +147,72 @@ function openExternal(url){
       <head>
         <title>CiphAnon Studios</title>
         <style>
-          body { margin:0; display:flex; flex-direction:column; height:100vh; background:#0e0e0e; color:white; font-family:Inter, Arial, sans-serif; position:relative;}
+          body { margin:0; display:flex; flex-direction:column; height:100vh; background: orange; color: white; font-family:Inter, Arial, sans-serif; }
           iframe { flex:1; border:none; width:100%; }
           .topbar { padding:12px 20px; background:black; display:flex; justify-content:space-between; align-items:center; font-weight:bold; color: orange; }
-          .topbar .left, .topbar .right { display:flex; align-items:center; gap:12px; }
-          .topbar img.logo { height:32px; }
-          .topbar button { padding:6px 14px; border:none; border-radius:6px; background:#071018; color:#ff9f1c; cursor:pointer; font-weight:bold; transition: transform 0.15s; }
-          .topbar button:hover { transform: translateY(-2px); background:#333; }
-          .dropdown { position:relative; }
-          .dropdown-content {
-            display:none;
-            position:absolute;
-            top:36px; left:0;
-            background:#111; min-width:150px;
-            border-radius:6px; box-shadow:0 8px 16px rgba(0,0,0,0.5);
-            z-index:1000;
-          }
-          .dropdown-content a {
-            display:block; padding:10px 14px; color:#ff9f1c; text-decoration:none; transition: background 0.2s;
-          }
-          .dropdown-content a:hover { background:#222; }
-          .dropdown:hover .dropdown-content { display:block; }
-          #overlay-image {
-            display:none;
-            position:fixed; top:0; left:0; width:100%; height:100%;
-            background: url('https://via.placeholder.com/1920x1080') center/cover no-repeat;
-            z-index:9999;
-          }
+.topbar .left, .topbar .right { display:flex; align-items:center; gap:12px; }
+.topbar img.logo { height:32px; }
+.topbar button { padding:6px 14px; border:none; border-radius:6px; background:#071018; color:#ff9f1c; cursor:pointer; font-weight:bold; transition: transform 0.15s; }
+.topbar button:hover { transform: translateY(-2px); background:#333; }
+.dropdown { position:relative; }
+.dropdown-content {
+  display:none;
+  position:absolute;
+  top:36px; left:0;
+  background:#111; min-width:150px;
+  border-radius:6px; box-shadow:0 8px 16px rgba(0,0,0,0.5);
+  z-index:1000;
+}
+.dropdown-content a {
+  display:block; padding:10px 14px; color:#ff9f1c; text-decoration:none; transition: background 0.2s;
+}
+.dropdown-content a:hover { background:#222; }
+.dropdown:hover .dropdown-content { display:block; }
+#overlay-image {
+  display:none;
+  position:fixed; top:0; left:0; width:100%; height:100%;
+  background: url('https://via.placeholder.com/1920x1080') center/cover no-repeat;
+  z-index:9999;
         </style>
       </head>
       <body>
         <div class="topbar">
-          <div class="left">
-            <img class="logo" src="https://via.placeholder.com/100x32?text=Logo" alt="Logo">
-            <div class="dropdown">
-              <button>Random Stuff</button>
-              <div class="dropdown-content">
-                <a href="#">Option 1</a>
-                <a href="#">Option 2</a>
-                <a href="#">Option 3</a>
-              </div>
-            </div>
-            <div class="dropdown">
-              <button>Settings</button>
-              <div class="dropdown-content">
-                <a href="#">Setting 1</a>
-                <a href="#">Setting 2</a>
-              </div>
-            </div>
-          </div>
-          <div class="right">
-            <button onclick="window.open('https://www.youtube.com/@yourchannel','_blank')">YouTube</button>
-            <button onclick="window.close()">Close</button>
-          </div>
+        <div class="left">
+        <img class="logo" src="StudiosImageT.png" alt="Logo">
+        <div class="dropdown">
+        <button>Settings</button>
+        <div class="dropdown-content">
+        <a href="#">Setting 1</a>
+        <a href="#">Setting 2</a>
+        </div>
+        </div>
+        </div>
+        <div class="right">
+        <button onclick="window.open('https://www.youtube.com/@CiphAnonStudios','_blank')">YouTube</button>
+        <button onclick="window.close()">Close</button>
+        </div>
+        </div>
+          <button onclick="window.close()">Close</button>
+          <span>CiphAnon Studios</span>
+          <button onclick="window.location.href='../Pages/E mag.html'">Back</button>
         </div>
         <iframe src="${url}"></iframe>
         <div id="overlay-image"></div>
-        <script>
-          const overlay = document.getElementById('overlay-image');
-          document.addEventListener('keydown', e => {
-            if(e.code === 'Space'){
-              e.preventDefault();
-              overlay.style.display = overlay.style.display === 'none' ? 'block' : 'none';
-            }
-          });
-        </script>
       </body>
     </html>
   `);
 
   win.document.close();
 }
+
+  const overlay =
+    document.getElementById('white.png');
+  document.addEventListener('keydown', e => {
+    if (e.code === 'space'){
+      e.preventDefault();
+      overlay.style.Display = overlay.stle.display === 'none' ? 'block' : 'none';
+    }
+  });
 </script>
 
 </body>
