@@ -148,9 +148,9 @@ function openExternal(url){
       <head>
         <title>CiphAnon Studios</title>
         <style>
-          body { margin:0; display:flex; flex-direction:column; height:100vh; background: orange; color: white; font-family:Inter, Arial, sans-serif; }
+          body { margin:0; display:flex; flex-direction:column; height:100vh; background: orange; color: white; font-family:Inter, Arial, sans-serif; overflow:hidden; }
           iframe { flex:1; border:none; width:100%; }
-          .topbar { padding:12px 20px; background: black; display:flex; justify-content:space-between; align-items:center; font-weight:bold; color: orange; }
+          .topbar { padding:12px 20px; background: black; display:flex; justify-content:space-between; align-items:center; font-weight:bold; color: orange; z-index:10; position:relative; }
           .topbar button { padding:6px 14px; border:none; border-radius:6px; background:#071018; color:#ff9f1c; cursor:pointer; font-weight:bold; transition: transform 0.15s; }
           .topbar button:hover { transform: translateY(-2px); background:#333; }
 
@@ -192,14 +192,6 @@ function openExternal(url){
             setTimeout(() => video.remove(), 1000); // remove after fade
           });
         </script>
-      </body>
-    </html>
-  `);
-
-  win.document.close();
-}
-</script>
-
       </body>
     </html>
   `);
