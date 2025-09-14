@@ -196,7 +196,7 @@ function openExternal(url){
   win.document.close();
 
   // compute absolute video URL relative to this page (ensures correct path even on GitHub Pages)
-  const videoSrc = new URL('assets/Studios Animation.mp4', location.href).href;
+  const videoSrc = new URL('assets/studios-animation.mp4', location.href).href;
 
   // wait until popup document is ready, then attach handlers and create video element inside popup
   const checkReady = setInterval(() => {
