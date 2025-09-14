@@ -141,55 +141,88 @@
 
 <script>
 function openExternal(url){
+  // Open new window
   let win = window.open('about:blank', '_blank', 'width=1000,height=700');
 
+  // Write basic HTML structure
   win.document.write(`
     <html>
       <head>
         <title>CiphAnon Studios</title>
         <style>
-          body { margin:0; display:flex; flex-direction:column; height:100vh; background: orange; color: white; font-family:Inter, Arial, sans-serif; overflow:hidden; }
-          iframe { flex:1; border:none; width:100%; }
-          .topbar { padding:12px 20px; background: black; display:flex; justify-content:space-between; align-items:center; font-weight:bold; color: orange; z-index:10; position:relative; }
-          .topbar button { padding:6px 14px; border:none; border-radius:6px; background:#071018; color:#ff9f1c; cursor:pointer; font-weight:bold; transition: transform 0.15s; }
-          .topbar button:hover { transform: translateY(-2px); background:#333; }
+          body {
+            margin:0; display:flex; flex-direction:column; height:100vh;
+            background: orange; color:white; font-family:Inter, Arial, sans-serif;
+            overflow:hidden;
+          }
+          iframe {
+            flex:1; border:none; width:100%;
+          }
+          .topbar {
+            padding:12px 20px;
+            background:black; display:flex;
+            justify-content:space-between;
+            align-items:center;
+            font-weight:bold; color:orange;
+            position:relative; z-index:10;
+          }
+          .topbar button {
+            padding:6px 14px; border:none; border-radius:6px;
+            background:#071018; color:#ff9f1c; cursor:pointer; font-weight:bold;
+            transition: transform 0.15s;
+          }
+          .topbar button:hover {
+            transform: translateY(-2px); background:#333;
+          }
 
           /* Video overlay */
-          #introVideo {
-            position: absolute;
-            top:0;
-            left:0;
-            width:100%;
-            height:100%;
-            object-fit:cover;
-            z-index:1000;
-            transition: opacity 1s ease;
+          #videoContainer {
+            position:absolute; top:0; left:0; width:100%; height:100%;
+            z-index:1000; background:black;
+            display:flex; justify-content:center; align-items:center;
           }
-          #introVideo.fadeOut {
-            opacity:0;
-            pointer-events:none;
+          #videoContainer video {
+            width:100%; height:100%; object-fit:cover;
           }
         </style>
       </head>
       <body>
+        <!-- Topbar -->
         <div class="topbar">
           <button onclick="window.close()"></button>
           <span>CiphAnon Studios</span>
           <button onclick="window.close()">Close</button>
         </div>
 
-        <!-- Video overlay -->
-        <video id="introVideo" autoplay muted>
-          <source src="Studios Animation.mp4" type="video/mp4">
-        </video>
+        <!-- Video container -->
+        <div id="videoContainer"></div>
 
+        <!-- Iframe -->
         <iframe src="${url}"></iframe>
 
         <script>
-          const video = document.getElementById('introVideo');
+          // Create and play video
+          const container = document.getElementById('videoContainer');
+          const video = document.createElement('video');
+          video.src = 'Studios Animation.mp4'; // your video file
+          video.autoplay = true;
+          video.muted = true;
+          video.playsInline = true;
+          container.appendChild(video);
+
+          // Fade out video when finished
           video.addEventListener('ended', () => {
-            video.classList.add('fadeOut');
-            setTimeout(() => video.remove(), 1000); // remove after fade
+            container.style.transition = 'opacity 1s ease';
+            container.style.opacity = '0';
+            setTimeout(() => container.remove(), 1000);
+          });
+
+          // Optional: make video skip on click
+          container.addEventListener('click', () => {
+            video.pause();
+            container.style.transition = 'opacity 0.5s ease';
+            container.style.opacity = '0';
+            setTimeout(() => container.remove(), 500);
           });
         </script>
       </body>
@@ -199,6 +232,7 @@ function openExternal(url){
   win.document.close();
 }
 </script>
+
 
 </body>
 </html>
