@@ -88,12 +88,12 @@
     <div class="item-card">
       <h3>G 001</h3>
       <p>Blank</p>
-      <button onclick="openExternal('https://example.com/game1')">P</button>
+      <button onclick="playIntroThenOpen('https://example.com/game1')">P</button>
     </div>
     <div class="item-card">
       <h3>G 002</h3>
       <p>Blank</p>
-      <button onclick="openExternal('https://example.com/game2')">P</button>
+      <button onclick="playIntroThenOpen('https://example.com/game2')">P</button>
     </div>
   </div>
 </section>
@@ -105,12 +105,12 @@
     <div class="item-card">
       <h3>001</h3>
       <p>Blank</p>
-      <button onclick="openExternal('https://supergisfire.com.cdn.cloudflare.net/')">Open</button>
+      <button onclick="playIntroThenOpen('https://supergisfire.com.cdn.cloudflare.net/')">Open</button>
     </div>
     <div class="item-card">
       <h3>002</h3>
       <p>Blank</p>
-      <button onclick="openExternal('https://www.algebra.casa/')">Open</button>
+      <button onclick="playIntroThenOpen('https://www.algebra.casa/')">Open</button>
     </div>
   </div>
 </section>
@@ -122,7 +122,7 @@
     <div class="item-card">
       <h3>M 001</h3>
       <p>Blank</p>
-      <button onclick="openExternal('https://example.com/movie1')">W</button>
+      <button onclick="playIntroThenOpen('https://example.com/movie1')">W</button>
     </div>
   </div>
 </section>
@@ -134,102 +134,87 @@
     <div class="item-card">
       <h3>001</h3>
       <p>Blank</p>
-      <button onclick="openExternal('https://example.com/file1')">D</button>
+      <button onclick="playIntroThenOpen('https://example.com/file1')">D</button>
     </div>
   </div>
 </section>
 
 <script>
-function openExternal(url){
-  const win = window.open('about:blank', '_blank', 'width=1000,height=700');
+// Plays intro video first, then opens popup
+function playIntroThenOpen(url){
+  // Create overlay
+  const overlay = document.createElement('div');
+  overlay.style.position = 'fixed';
+  overlay.style.top = '0';
+  overlay.style.left = '0';
+  overlay.style.width = '100%';
+  overlay.style.height = '100%';
+  overlay.style.background = 'black';
+  overlay.style.zIndex = '10000';
+  overlay.style.display = 'flex';
+  overlay.style.justifyContent = 'center';
+  overlay.style.alignItems = 'center';
+  overlay.style.transition = 'opacity 1s ease';
 
+  // Create video
+  const video = document.createElement('video');
+  video.src = 'assets/studios-animation.mp4'; // path to your video
+  video.autoplay = true;
+  video.muted = true;
+  video.playsInline = true;
+  video.style.width = '100%';
+  video.style.height = '100%';
+  video.style.objectFit = 'cover';
+
+  overlay.appendChild(video);
+  document.body.appendChild(overlay);
+
+  function finishIntro(){
+    overlay.style.opacity = '0';
+    setTimeout(()=>{
+      document.body.removeChild(overlay);
+      openPopup(url);
+    },1000);
+  }
+
+  video.addEventListener('ended', finishIntro);
+  overlay.addEventListener('click', finishIntro);
+  document.addEventListener('keydown', e=>{
+    if(e.key==='Escape') finishIntro();
+  });
+}
+
+// Opens the about:blank popup with iframe and topbar
+function openPopup(url){
+  const win = window.open('about:blank','_blank','width=1000,height=700');
   const popupHTML = `
     <!DOCTYPE html>
     <html lang="en">
     <head>
-      <meta charset="utf-8" />
-      <meta name="viewport" content="width=device-width,initial-scale=1" />
+      <meta charset="utf-8"/>
+      <meta name="viewport" content="width=device-width,initial-scale=1"/>
       <title>CiphAnon Studios</title>
       <style>
-        body { margin:0; display:flex; flex-direction:column; height:100vh; background: orange; color: white; font-family:Inter, Arial, sans-serif; }
-        iframe { flex:1; border:none; width:100%; display:none; }
-        .topbar { padding:12px 20px; background: black; display:flex; justify-content:space-between; align-items:center; font-weight:bold; color: orange; position:relative; z-index:5; }
-        .topbar button { padding:6px 14px; border:none; border-radius:6px; background:#071018; color:#ff9f1c; cursor:pointer; font-weight:bold; transition: transform 0.15s; }
-        .topbar button:hover { transform: translateY(-2px); background:#333; }
-        #videoOverlay {
-          position:fixed; top:0; left:0; width:100%; height:100%;
-          background:black; z-index:1000; display:flex; justify-content:center; align-items:center;
-          transition: opacity 1s ease;
-        }
-        #videoOverlay video { width:100%; height:100%; object-fit:cover; }
+        body{margin:0;display:flex;flex-direction:column;height:100vh;background:orange;color:white;font-family:Inter,Arial,sans-serif;}
+        iframe{flex:1;border:none;width:100%;}
+        .topbar{padding:12px 20px;background:black;display:flex;justify-content:space-between;align-items:center;font-weight:bold;color:orange;}
+        .topbar button{padding:6px 14px;border:none;border-radius:6px;background:#071018;color:#ff9f1c;cursor:pointer;font-weight:bold;transition:transform 0.15s;}
+        .topbar button:hover{transform:translateY(-2px);background:#333;}
       </style>
     </head>
     <body>
       <div class="topbar">
-        <button id="closeLeft">✖</button>
+        <button onclick="window.close()">✖</button>
         <span>CiphAnon Studios</span>
-        <button id="closeRight">Close</button>
+        <button onclick="window.close()">Close</button>
       </div>
-
-      <div id="videoOverlay"></div>
-
-      <iframe id="siteFrame" src="${url}"></iframe>
+      <iframe src="${url}"></iframe>
     </body>
     </html>
   `;
-
   win.document.open();
   win.document.write(popupHTML);
   win.document.close();
-
-  // Use absolute URL to make sure the video loads
-  const videoSrc = window.location.origin + '/assets/studios-animation.mp4';
-
-  const checkReady = setInterval(() => {
-    try {
-      if (!win || win.closed) { clearInterval(checkReady); return; }
-      const doc = win.document;
-      if (!doc || !doc.body) return;
-
-      clearInterval(checkReady);
-
-      // Wire topbar buttons
-      const closeLeft = doc.getElementById('closeLeft');
-      const closeRight = doc.getElementById('closeRight');
-      if (closeLeft) closeLeft.addEventListener('click', () => win.close());
-      if (closeRight) closeRight.addEventListener('click', () => win.close());
-
-      // Video overlay
-      const overlay = doc.getElementById('videoOverlay');
-      const video = doc.createElement('video');
-
-      video.src = videoSrc;
-      video.autoplay = true;
-      video.muted = true;
-      video.playsInline = true;
-      video.setAttribute('id', 'introVideo');
-
-      overlay.appendChild(video);
-      video.play().catch(()=>{});
-
-      function hideOverlay(){
-        overlay.style.opacity = '0';
-        setTimeout(() => {
-          if (overlay && overlay.parentNode) overlay.parentNode.removeChild(overlay);
-          const iframe = doc.getElementById('siteFrame');
-          if (iframe) iframe.style.display = 'block';
-        }, 1000);
-      }
-
-      video.addEventListener('ended', hideOverlay);
-      overlay.addEventListener('click', hideOverlay);
-      doc.addEventListener('keydown', (e) => { if (e.key==='Escape') hideOverlay(); });
-
-    } catch(err){
-      console.error('popup setup error', err);
-      clearInterval(checkReady);
-    }
-  }, 50);
 }
 </script>
 
