@@ -143,28 +143,24 @@
 function playIntroThenOpen(url){
   if(document.getElementById('introOverlay')) return;
 
-  // Overlay
   const overlay = document.createElement('div');
   overlay.id = 'introOverlay';
-  Object.assign(overlay.style, {
-    position: 'fixed',
-    top: '0',
-    left: '0',
-    width: '100%',
-    height: '100%',
-    background: 'black',
-    zIndex: '9999',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    transition: 'opacity 1s ease'
-  });
+  overlay.style.position = 'fixed';
+  overlay.style.top = '0';
+  overlay.style.left = '0';
+  overlay.style.width = '100%';
+  overlay.style.height = '100%';
+  overlay.style.background = 'black';
+  overlay.style.zIndex = '9999';
+  overlay.style.display = 'flex';
+  overlay.style.justifyContent = 'center';
+  overlay.style.alignItems = 'center';
+  overlay.style.transition = 'opacity 1s ease';
 
-  // Video
   const video = document.createElement('video');
-  video.src = 'lv_0_20250831190250.mp4'; // full video file
+  video.src = 'studios-animation.mp4'; // put video in same folder as this HTML
   video.autoplay = true;
-  video.muted = false; // 🔊 allow audio
+  video.muted = true; 
   video.controls = false;
   video.playsInline = true;
   video.style.width = '100%';
@@ -174,20 +170,41 @@ function playIntroThenOpen(url){
   overlay.appendChild(video);
   document.body.appendChild(overlay);
 
-  // When video ends → fade out overlay, then open popup
-  video.addEventListener('ended', () => {
+  // Fallback timer in case video fails to load or autoplay
+  const fallbackTimer = setTimeout(() => {
+    finishIntro();
+  }, 6000); // 6 seconds max
+
+  const playPromise = video.play();
+  if(playPromise !== undefined){
+    playPromise.then(()=>{
+      video.muted = false;
+    }).catch(err=>{
+      console.warn("Autoplay failed:", err);
+      finishIntro();
+    });
+  }
+
+  let minTimeReached = false;
+  let videoEnded = false;
+
+  setTimeout(()=>{ minTimeReached = true; maybeFinish(); }, 3000);
+  video.onended = ()=>{ videoEnded = true; maybeFinish(); };
+
+  function maybeFinish(){
+    if(minTimeReached && videoEnded){
+      finishIntro();
+    }
+  }
+
+  function finishIntro(){
+    clearTimeout(fallbackTimer);
     overlay.style.opacity = '0';
     setTimeout(()=>{
-      if(overlay.parentNode) overlay.parentNode.removeChild(overlay);
+      overlay.remove();
       openPopup(url);
     },1000);
-  });
-
-  // Try to force play (in case autoplay blocks)
-  const p = video.play();
-  if(p && p.catch) p.catch(err => {
-    console.warn("Autoplay blocked:", err);
-  });
+  }
 }
 
 function openPopup(url){
