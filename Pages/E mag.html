@@ -141,8 +141,10 @@
 
 <script>
 function playIntroThenOpen(url){
+  // Prevent multiple overlays
   if(document.getElementById('introOverlay')) return;
 
+  // Create overlay
   const overlay = document.createElement('div');
   overlay.id = 'introOverlay';
   overlay.style.position = 'fixed';
@@ -157,10 +159,11 @@ function playIntroThenOpen(url){
   overlay.style.alignItems = 'center';
   overlay.style.transition = 'opacity 1s ease';
 
+  // Video element
   const video = document.createElement('video');
-  video.src = 'studios-animation.mp4'; // put video in same folder as this HTML
+  video.src = 'studios-animation.mp4'; // Make sure file is in same folder
   video.autoplay = true;
-  video.muted = true; 
+  video.muted = true; // must be muted for autoplay to work
   video.controls = false;
   video.playsInline = true;
   video.style.width = '100%';
@@ -170,41 +173,17 @@ function playIntroThenOpen(url){
   overlay.appendChild(video);
   document.body.appendChild(overlay);
 
-  // Fallback timer in case video fails to load or autoplay
-  const fallbackTimer = setTimeout(() => {
-    finishIntro();
-  }, 6000); // 6 seconds max
+  // Attempt to play the video (muted)
+  video.play().catch(() => console.warn("Video autoplay failed"));
 
-  const playPromise = video.play();
-  if(playPromise !== undefined){
-    playPromise.then(()=>{
-      video.muted = false;
-    }).catch(err=>{
-      console.warn("Autoplay failed:", err);
-      finishIntro();
-    });
-  }
-
-  let minTimeReached = false;
-  let videoEnded = false;
-
-  setTimeout(()=>{ minTimeReached = true; maybeFinish(); }, 3000);
-  video.onended = ()=>{ videoEnded = true; maybeFinish(); };
-
-  function maybeFinish(){
-    if(minTimeReached && videoEnded){
-      finishIntro();
-    }
-  }
-
-  function finishIntro(){
-    clearTimeout(fallbackTimer);
+  // Force video to show at least 3 seconds
+  setTimeout(() => {
     overlay.style.opacity = '0';
     setTimeout(()=>{
       overlay.remove();
       openPopup(url);
-    },1000);
-  }
+    }, 1000);
+  }, 3000);
 }
 
 function openPopup(url){
