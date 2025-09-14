@@ -140,25 +140,28 @@
 </section>
 
 <script>
-// Plays intro video first, then opens popup
 function playIntroThenOpen(url){
+  // Prevent multiple overlays
+  if(document.getElementById('introOverlay')) return;
+
   // Create overlay
   const overlay = document.createElement('div');
+  overlay.id = 'introOverlay';
   overlay.style.position = 'fixed';
   overlay.style.top = '0';
   overlay.style.left = '0';
   overlay.style.width = '100%';
   overlay.style.height = '100%';
   overlay.style.background = 'black';
-  overlay.style.zIndex = '10000';
+  overlay.style.zIndex = '9999';
   overlay.style.display = 'flex';
   overlay.style.justifyContent = 'center';
   overlay.style.alignItems = 'center';
   overlay.style.transition = 'opacity 1s ease';
 
-  // Create video
+  // Video element
   const video = document.createElement('video');
-  video.src = 'assets/studios-animation.mp4'; // path to your video
+  video.src = 'assets/studios-animation.mp4';
   video.autoplay = true;
   video.muted = true;
   video.playsInline = true;
@@ -172,7 +175,7 @@ function playIntroThenOpen(url){
   function finishIntro(){
     overlay.style.opacity = '0';
     setTimeout(()=>{
-      document.body.removeChild(overlay);
+      if(overlay.parentNode) overlay.parentNode.removeChild(overlay);
       openPopup(url);
     },1000);
   }
@@ -184,14 +187,13 @@ function playIntroThenOpen(url){
   });
 }
 
-// Opens the about:blank popup with iframe and topbar
 function openPopup(url){
   const win = window.open('about:blank','_blank','width=1000,height=700');
   const popupHTML = `
     <!DOCTYPE html>
     <html lang="en">
     <head>
-      <meta charset="utf-8"/>
+      <meta charset="UTF-8"/>
       <meta name="viewport" content="width=device-width,initial-scale=1"/>
       <title>CiphAnon Studios</title>
       <style>
