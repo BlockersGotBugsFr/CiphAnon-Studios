@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comparison Page</title>
+    <style>
+        /* Basic styles for the page */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+        }
+
+        /* Navigation styles */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        /* Dropdown button */
+        .dropbtn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 5px;
+        }
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+        .dropdown-content a.active {
+            font-weight: bold;
+            background-color: #ddd;
+        }
+
+        /* Go back button */
+        .back-btn {
+            background-color: #555;
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        /* Content sections */
+        .content-section {
+            display: none; /* Hide all sections by default */
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+            margin-top: 10px;
+        }
+        .content-section.active {
+            display: block; /* Show the active section */
+        }
+        h2 {
+            margin-top: 0;
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Comparison of Filtering Solutions</h1>
+
+        <div class="navbar">
+            <div class="dropdown">
+                <button onclick="toggleDropdown()" class="dropbtn">Section Topic</button>
+                <div id="myDropdown" class="dropdown-content">
+                    <a href="#deledao-section" class="nav-link active" onclick="showSection('deledao-section')">Deledao</a>
+                    <a href="#iboss-section" class="nav-link" onclick="showSection('iboss-section')">iBoss</a>
+                    <a href="#other-section" class="nav-link" onclick="showSection('other-section')">Other Things</a>
+                </div>
+            </div>
+            <a href="../index.html" class="back-btn">Back to home</a>
+        </div>
+
+        <div id="deledao-section" class="content-section active">
+            <h2>Deledao </h2>
+            <p>Deledao is an artificial intelligence (AI) powered web filtering and student wellness platform designed for K-12 educational settings. The technology is installed on school-issued devices, such as Chromebooks, Windows, Macs, and iOS devices, to monitor and regulate students' online activity both on and off campus. 
+What Deledao does
+Deledao provides a suite of products that use AI to go beyond traditional keyword and domain-based filters. The platform includes: 
+Real-time content filtering: Its patented AI, known as "InstantAI," analyzes the content of a webpage, including text, images, and videos, in real time.
+Image and video blurring: If the AI detects inappropriate or distracting visuals, it instantly blurs or mutes the content without blocking the entire domain. This is particularly useful for social media sites like YouTube, where educational and inappropriate content can coexist.
+Contextual analysis: The AI understands context and slang, making it more effective than simple keyword-based filters that might accidentally block legitimate content like "adult education".
+Classroom management: A feature called "ActiveInstruct" allows teachers to monitor students' screens, communicate with them individually or in groups, and provide customized learning resources.
+Teachers are alerted when students attempt to go off-task, and the platform can assign a "Time on Task" score based on a student's digital engagement level.
+Student wellness monitoring: The "ActivePulse" module uses AI to detect potentially harmful online behavior, such as cyberbullying, self-harm, or emotional distress, by analyzing a student's online queries and activity.
+Instant alerts are sent to administrators, and the system can generate a summary of a student's browsing history for further review.
+Distraction reduction: The platform's goal is to minimize digital distractions that can derail a student's focus during digital learning. By immediately blocking or blurring non-educational content, it helps students stay engaged with their lessons.
+Privacy protection: Deledao also has anti-tracking features to protect students' data privacy by shielding their online activity from third-party advertisers. </p>
+            <!-- Add more content here -->
+        </div>
+
+        <div id="iboss-section" class="content-section">
+            <h2>iBoss</h2>
+            <p>iBoss is a cloud security company that provides Zero Trust Service Edge (SSE) to organizations, including businesses and schools, to protect users accessing the internet on any device, from any location. Its primary purpose is to eliminate the need for traditional on-premise security hardware by delivering network security as a service in the cloud. 
+What iBoss does
+Zero Trust security: iBoss operates on a "Zero Trust" principle, which means it doesn't automatically trust any user or device. Instead, it verifies every access request before granting permission to applications and data, whether the user is on or off-site.
+Cloud-based web filtering: The platform provides web filtering, compliance enforcement, malware defense, and data loss prevention (DLP) by processing all internet traffic through its cloud-based architecture.
+Encrypted traffic inspection: iBoss can perform deep inspection of encrypted SSL/TLS traffic, which is essential for detecting threats hidden in secure web connections.
+Zero Trust Browser Isolation: For added security, especially for third-party contractors and unmanaged devices, iBoss uses browser isolation. It streams content to the user's browser as pixels, isolating web data from the device and preventing unauthorized downloads or malware infections.
+Consolidated platform: iBoss integrates various security functions into a single Software-as-a-Service (SaaS) platform, eliminating the complexity and cost of managing multiple security tools.
+K-12 solutions: For the education sector, iBoss provides a unified platform with features such as student safety monitoring, classroom management, a parent portal, and AI-powered threat detection. </p>
+            <!-- Add more content here -->
+        </div>
+
+        <div id="other-section" class="content-section">
+            <h2>Other Things</h2>
+            <p>(Blank)</p>
+            <!-- Add more content here -->
+        </div>
+
+    </div>
+
+    <script>
+        // Toggle the dropdown menu visibility
+        function toggleDropdown() {
+            document.getElementById("myDropdown").classList.toggle("show");
+        }
+
+        // Show the selected content section
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+
+            // Update active link in dropdown
+            const links = document.querySelectorAll('.nav-link');
+            links.forEach(link => {
+                link.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropbtn')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                for (let i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>
