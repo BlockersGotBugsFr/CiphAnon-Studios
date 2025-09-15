@@ -3,165 +3,120 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Records - CiphAnon Studios</title>
+<title>PolyTrack Leaderboard</title>
 <style>
-  body { margin:0; font-family: Inter, Arial, sans-serif; background:#0e0e0e; color:#fff; text-align:center; }
-  header { padding:20px; background: rgba(0,0,0,0.8); font-size:1.8em; font-weight:bold; text-shadow: 0 2px 6px rgba(0,0,0,0.5);}
-  section { padding:40px 20px; max-width:1000px; margin:auto; }
-  input, button { padding:10px; margin:5px; border-radius:6px; border:none; font-size:1em; }
-  input { width:200px; }
-  button { cursor:pointer; background:#ff9f1c; color:black; font-weight:bold; }
-  button:hover { background:#ff7700; }
-  .hidden { display:none; }
-  .profile, .leaderboard { margin-top:20px; text-align:left; }
-  table { width:100%; border-collapse:collapse; margin-top:15px; }
-  th, td { padding:10px; border:1px solid #fff; text-align:center; }
+  body { margin:0; font-family: Inter, Arial, sans-serif; background:#0e0e0e; color:#fff; text-align:center; overflow-x:hidden;}
+  header { padding:20px; background: rgba(0,0,0,0.8); font-size:1.8em; font-weight:bold; text-shadow:0 2px 6px rgba(0,0,0,0.5);}
+  section { padding:50px 15px; max-width:900px; margin:auto; border-bottom:1px solid #333; position:relative; overflow:hidden;}
+  h2 { color:#ff9f1c; text-shadow:0 2px 8px rgba(0,0,0,0.6); position:relative; z-index:2; }
+  table { width:100%; border-collapse:collapse; margin-top:10px; position:relative; z-index:2;}
+  th, td { padding:8px; border:1px solid #fff; text-align:center; }
   th { background:#222; }
   td img { max-width:60px; border-radius:6px; }
-  .nav-buttons { margin-top:20px; }
+  input, button, select { padding:8px; margin:5px; border-radius:6px; border:none; font-size:0.95em; }
+  button { cursor:pointer; background:#ff9f1c; color:black; font-weight:bold; }
+  button:hover { background:#ff7700; }
+  #submission { margin-top:30px; text-align:left; max-width:500px; margin-left:auto; margin-right:auto; }
+  /* Background images & videos for each section */
+  .bg-image, .bg-video {
+    position:absolute; top:0; left:-10%; width:120%; height:120%; object-fit:cover; opacity:0.15; transform:rotate(-5deg); z-index:1;
+  }
+  .bg-video { opacity:0.1; }
 </style>
 </head>
 <body>
 
-<header>CiphAnon Studios | Records</header>
+<header>PolyTrack Leaderboard</header>
 
-<section id="login-section">
-  <h2>Login / Create Account</h2>
-  <input type="text" id="username" placeholder="Username"><br>
-  <input type="password" id="password" placeholder="Password (8+ chars)"><br>
-  <button onclick="handleLogin()">Login / Create</button>
-  <p id="login-msg"></p>
-</section>
+<div id="tracks-container">
+  <!-- JS will generate Track sections with slanted background images/videos -->
+</div>
 
-<section id="profile-section" class="hidden">
-  <h2>Welcome, <span id="display-username"></span>!</h2>
-  <div class="nav-buttons">
-    <button onclick="showProfile()">Profile</button>
-    <button onclick="showLeaderboard()">Leaderboard</button>
-    <button onclick="logout()">Logout</button>
-    <button onclick="goHome()">Back to Home</button>
-  </div>
-  <div class="profile">
-    <h3>Your Profile</h3>
-    <p>Time spent on site: <span id="time-spent">0</span> seconds</p>
-    <input type="number" id="score-input" placeholder="Your Score / Time"><br>
-    <input type="file" id="proof-input" accept="image/*"><br>
-    <button onclick="submitScore()">Submit Score</button>
-  </div>
-  <div class="leaderboard hidden">
-    <h3>Global Leaderboard</h3>
-    <table>
-      <thead>
-        <tr><th>Username</th><th>Score / Time</th><th>Proof</th></tr>
-      </thead>
-      <tbody id="leaderboard-body"></tbody>
-    </table>
-  </div>
+<section id="submission">
+  <h2>Submit Your Score</h2>
+  <p>To submit a score: </p>
+  <ul>
+    <li>Enter your <strong>Username</strong>.</li>
+    <li>Choose which <strong>Track</strong> you played.</li>
+    <li>Upload a <strong>picture of your score</strong>.</li>
+    <li>If you are the fastest, you may earn a Discord rank.</li>
+  </ul>
+  <input type="text" id="submit-username" placeholder="Username"><br>
+  <select id="submit-track"></select><br>
+  <input type="file" id="submit-proof" accept="image/*"><br>
+  <button onclick="submitScore()">Submit Score</button>
 </section>
 
 <script>
-  let currentUser = null;
-  let startTime = Date.now();
+  const tracksContainer = document.getElementById('tracks-container');
+  const trackData = {};
+  const trackBackgrounds = [
+    'bg1.jpg','bg2.jpg','bg3.jpg','bg4.jpg','bg5.jpg','bg6.jpg','bg7.jpg','bg8.jpg','bg9.jpg','bg10.jpg','bg11.jpg','bg12.jpg','bg13.jpg'
+  ]; // Add your background image/video filenames here
 
-  function handleLogin(){
-    const uname = document.getElementById('username').value.trim();
-    const pass = document.getElementById('password').value.trim();
-    const msg = document.getElementById('login-msg');
+  for(let i=1;i<=13;i++){
+    trackData['Track '+i] = [];
+    const sec = document.createElement('section');
+    sec.id = 'track-'+i;
 
-    if(uname === '' || pass === ''){
-      msg.textContent = 'Enter both username and password.';
-      return;
-    }
-    if(pass.length < 8){
-      msg.textContent = 'Password must be at least 8 characters.';
-      return;
-    }
-
-    let users = JSON.parse(localStorage.getItem('users')||'{}');
-    if(users[uname]){
-      if(users[uname].password !== pass){
-        msg.textContent = 'Incorrect password.';
-        return;
-      }
+    // Use image or video background randomly
+    let bgTag;
+    if(i%3===0){ // every 3rd track a video
+      bgTag = `<video class="bg-video" autoplay loop muted playsinline src="${trackBackgrounds[i-1]}"></video>`;
     } else {
-      users[uname] = {password:pass, scores:[]};
-      localStorage.setItem('users', JSON.stringify(users));
+      bgTag = `<img class="bg-image" src="${trackBackgrounds[i-1]}" alt="bg">`;
     }
 
-    currentUser = uname;
-    msg.textContent = '';
-    showProfile();
+    sec.innerHTML = bgTag + `
+      <h2>Track ${i}</h2>
+      <table>
+        <thead><tr><th>Username</th><th>Proof</th></tr></thead>
+        <tbody id="track-body-${i}"></tbody>
+      </table>`;
+    tracksContainer.appendChild(sec);
+
+    // populate dropdown
+    const option = document.createElement('option');
+    option.value = 'Track '+i;
+    option.textContent = 'Track '+i;
+    document.getElementById('submit-track').appendChild(option);
   }
 
-  function showProfile(){
-    document.getElementById('login-section').classList.add('hidden');
-    document.getElementById('profile-section').classList.remove('hidden');
-    document.querySelector('.profile').classList.remove('hidden');
-    document.querySelector('.leaderboard').classList.add('hidden');
-    document.getElementById('display-username').textContent = currentUser;
-    updateTimeSpent();
-  }
+  // Load from localStorage
+  const savedScores = JSON.parse(localStorage.getItem('polytrackScores')||'{}');
+  Object.assign(trackData,savedScores);
+  updateTables();
 
-  function showLeaderboard(){
-    document.querySelector('.profile').classList.add('hidden');
-    document.querySelector('.leaderboard').classList.remove('hidden');
-    const tbody = document.getElementById('leaderboard-body');
-    tbody.innerHTML = '';
-    const users = JSON.parse(localStorage.getItem('users')||'{}');
-    for(const uname in users){
-      users[uname].scores.forEach(entry=>{
+  function updateTables(){
+    for(let i=1;i<=13;i++){
+      const tbody = document.getElementById('track-body-'+i);
+      tbody.innerHTML = '';
+      trackData['Track '+i].forEach(entry=>{
         const tr = document.createElement('tr');
         const imgTag = entry.proof ? `<img src="${entry.proof}" alt="proof">` : '';
-        tr.innerHTML = `<td>${uname}</td><td>${entry.score}</td><td>${imgTag}</td>`;
+        tr.innerHTML = `<td>${entry.username}</td><td>${imgTag}</td>`;
         tbody.appendChild(tr);
       });
     }
   }
 
   function submitScore(){
-    const scoreInput = document.getElementById('score-input').value.trim();
-    const proofFile = document.getElementById('proof-input').files[0];
-    if(scoreInput === '') return alert('Enter a score.');
-
-    const users = JSON.parse(localStorage.getItem('users')||'{}');
+    const username = document.getElementById('submit-username').value.trim();
+    const track = document.getElementById('submit-track').value;
+    const file = document.getElementById('submit-proof').files[0];
+    if(!username || !file) return alert('Please enter username and choose a proof image.');
 
     const reader = new FileReader();
     reader.onload = function(e){
       const proofData = e.target.result;
-      users[currentUser].scores.push({score:scoreInput, proof:proofData});
-      localStorage.setItem('users', JSON.stringify(users));
-      document.getElementById('score-input').value = '';
-      document.getElementById('proof-input').value = '';
-      alert('Score submitted!');
-      showLeaderboard();
+      trackData[track].push({username:username, proof:proofData});
+      localStorage.setItem('polytrackScores', JSON.stringify(trackData));
+      updateTables();
+      document.getElementById('submit-username').value = '';
+      document.getElementById('submit-proof').value = '';
+      alert('Score submitted! Admin will verify if you are the winner.');
     };
-    if(proofFile) reader.readAsDataURL(proofFile);
-    else {
-      users[currentUser].scores.push({score:scoreInput, proof:null});
-      localStorage.setItem('users', JSON.stringify(users));
-      document.getElementById('score-input').value = '';
-      alert('Score submitted!');
-      showLeaderboard();
-    }
-  }
-
-  function updateTimeSpent(){
-    const interval = setInterval(()=>{
-      if(!currentUser) return clearInterval(interval);
-      const users = JSON.parse(localStorage.getItem('users')||'{}');
-      const delta = Math.floor((Date.now()-startTime)/1000);
-      document.getElementById('time-spent').textContent = delta;
-    },1000);
-  }
-
-  function logout(){
-    currentUser = null;
-    document.getElementById('profile-section').classList.add('hidden');
-    document.getElementById('login-section').classList.remove('hidden');
-  }
-
-  function goHome(){
-    window.location.href='../index.html';
+    reader.readAsDataURL(file);
   }
 </script>
 
