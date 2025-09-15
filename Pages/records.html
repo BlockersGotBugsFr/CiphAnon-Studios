@@ -1,1 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Records - CiphAnon Studios</title>
+<style>
+  body { margin:0; font-family: Inter, Arial, sans-serif; background:#0e0e0e; color:#fff; text-align:center; }
+  header { padding:20px; background: rgba(0,0,0,0.8); font-size:1.8em; font-weight:bold; text-shadow: 0 2px 6px rgba(0,0,0,0.5);}
+  section { padding:40px 20px; max-width:1000px; margin:auto; }
+  input, button { padding:10px; margin:5px; border-radius:6px; border:none; font-size:1em; }
+  input { width:200px; }
+  button { cursor:pointer; background:#ff9f1c; color:black; font-weight:bold; }
+  button:hover { background:#ff7700; }
+  .hidden { display:none; }
+  .profile, .leaderboard { margin-top:20px; text-align:left; }
+  table { width:100%; border-collapse:collapse; margin-top:15px; }
+  th, td { padding:10px; border:1px solid #fff; text-align:center; }
+  th { background:#222; }
+  td img { max-width:60px; border-radius:6px; }
+  .nav-buttons { margin-top:20px; }
+</style>
+</head>
+<body>
 
+<header>CiphAnon Studios | Records</header>
+
+<section id="login-section">
+  <h2>Login / Create Account</h2>
+  <input type="text" id="username" placeholder="Username"><br>
+  <input type="password" id="password" placeholder="Password (8+ chars)"><br>
+  <button onclick="handleLogin()">Login / Create</button>
+  <p id="login-msg"></p>
+</section>
+
+<section id="profile-section" class="hidden">
+  <h2>Welcome, <span id="display-username"></span>!</h2>
+  <div class="nav-buttons">
+    <button onclick="showProfile()">Profile</button>
+    <button onclick="showLeaderboard()">Leaderboard</button>
+    <button onclick="logout()">Logout</button>
+    <button onclick="goHome()">Back to Home</button>
+  </div>
+  <div class="profile">
+    <h3>Your Profile</h3>
+    <p>Time spent on site: <span id="time-spent">0</span> seconds</p>
+    <input type="number" id="score-input" placeholder="Your Score / Time"><br>
+    <input type="file" id="proof-input" accept="image/*"><br>
+    <button onclick="submitScore()">Submit Score</button>
+  </div>
+  <div class="leaderboard hidden">
+    <h3>Global Leaderboard</h3>
+    <table>
+      <thead>
+        <tr><th>Username</th><th>Score / Time</th><th>Proof</th></tr>
+      </thead>
+      <tbody id="leaderboard-body"></tbody>
+    </table>
+  </div>
+</section>
+
+<script>
+  let currentUser = null;
+  let startTime = Date.now();
+
+  function handleLogin(){
+    const uname = document.getElementById('username').value.trim();
+    const pass = document.getElementById('password').value.trim();
+    const msg = document.getElementById('login-msg');
+
+    if(uname === '' || pass === ''){
+      msg.textContent = 'Enter both username and password.';
+      return;
+    }
+    if(pass.length < 8){
+      msg.textContent = 'Password must be at least 8 characters.';
+      return;
+    }
+
+    let users = JSON.parse(localStorage.getItem('users')||'{}');
+    if(users[uname]){
+      if(users[uname].password !== pass){
+        msg.textContent = 'Incorrect password.';
+        return;
+      }
+    } else {
+      users[uname] = {password:pass, scores:[]};
+      localStorage.setItem('users', JSON.stringify(users));
+    }
+
+    currentUser = uname;
+    msg.textContent = '';
+    showProfile();
+  }
+
+  function showProfile(){
+    document.getElementById('login-section').classList.add('hidden');
+    document.getElementById('profile-section').classList.remove('hidden');
+    document.querySelector('.profile').classList.remove('hidden');
+    document.querySelector('.leaderboard').classList.add('hidden');
+    document.getElementById('display-username').textContent = currentUser;
+    updateTimeSpent();
+  }
+
+  function showLeaderboard(){
+    document.querySelector('.profile').classList.add('hidden');
+    document.querySelector('.leaderboard').classList.remove('hidden');
+    const tbody = document.getElementById('leaderboard-body');
+    tbody.innerHTML = '';
+    const users = JSON.parse(localStorage.getItem('users')||'{}');
+    for(const uname in users){
+      users[uname].scores.forEach(entry=>{
+        const tr = document.createElement('tr');
+        const imgTag = entry.proof ? `<img src="${entry.proof}" alt="proof">` : '';
+        tr.innerHTML = `<td>${uname}</td><td>${entry.score}</td><td>${imgTag}</td>`;
+        tbody.appendChild(tr);
+      });
+    }
+  }
+
+  function submitScore(){
+    const scoreInput = document.getElementById('score-input').value.trim();
+    const proofFile = document.getElementById('proof-input').files[0];
+    if(scoreInput === '') return alert('Enter a score.');
+
+    const users = JSON.parse(localStorage.getItem('users')||'{}');
+
+    const reader = new FileReader();
+    reader.onload = function(e){
+      const proofData = e.target.result;
+      users[currentUser].scores.push({score:scoreInput, proof:proofData});
+      localStorage.setItem('users', JSON.stringify(users));
+      document.getElementById('score-input').value = '';
+      document.getElementById('proof-input').value = '';
+      alert('Score submitted!');
+      showLeaderboard();
+    };
+    if(proofFile) reader.readAsDataURL(proofFile);
+    else {
+      users[currentUser].scores.push({score:scoreInput, proof:null});
+      localStorage.setItem('users', JSON.stringify(users));
+      document.getElementById('score-input').value = '';
+      alert('Score submitted!');
+      showLeaderboard();
+    }
+  }
+
+  function updateTimeSpent(){
+    const interval = setInterval(()=>{
+      if(!currentUser) return clearInterval(interval);
+      const users = JSON.parse(localStorage.getItem('users')||'{}');
+      const delta = Math.floor((Date.now()-startTime)/1000);
+      document.getElementById('time-spent').textContent = delta;
+    },1000);
+  }
+
+  function logout(){
+    currentUser = null;
+    document.getElementById('profile-section').classList.add('hidden');
+    document.getElementById('login-section').classList.remove('hidden');
+  }
+
+  function goHome(){
+    window.location.href='../index.html';
+  }
+</script>
+
+</body>
+</html>
