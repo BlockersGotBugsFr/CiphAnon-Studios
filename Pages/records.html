@@ -3,116 +3,746 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PolyTrack Editable Leaderboard</title>
+<title>Poly Track Leaderboard</title>
 <style>
-  body {
-    margin:0; font-family:'Inter',sans-serif; background:#0e0e0e; color:#fff;
-  }
-  header {
-    position:sticky; top:0; background:rgba(0,0,0,0.85); padding:20px; text-align:center; font-size:2em; font-weight:bold; z-index:1000;
-  }
-  .back-btn {
-    position:fixed; top:20px; left:20px; padding:8px 14px; background:black; border:none; border-radius:6px; color:#ff9f1c; font-weight:bold; cursor:pointer; z-index:1001;
-  }
-  nav {
-    display:flex; flex-wrap:wrap; justify-content:center; gap:6px; padding:10px; background:#111; position:sticky; top:80px; z-index:999;
-  }
-  nav button {
-    padding:5px 10px; background:#222; border:none; border-radius:6px; color:#ff9f1c; font-weight:bold; cursor:pointer; transition:0.2s;
-  }
-  nav button:hover { background:#333; transform:translateY(-1px); }
-  section { padding:40px 10px; max-width:1200px; margin:auto; position:relative; }
-  section h2 { font-size:1.8em; margin-bottom:15px; color:#ff9f1c; text-shadow:0 1px 5px rgba(0,0,0,0.5); }
-  table { width:100%; border-collapse:collapse; font-size:0.85em; }
-  th, td { padding:6px 10px; border-bottom:1px solid #222; text-align:left; }
-  tr:hover { background:rgba(255,255,255,0.05); }
-  .first { background: rgba(255,159,28,0.3); font-weight:bold; }
-  .second { background: rgba(192,192,192,0.3); font-weight:bold; }
-  .third { background: rgba(205,127,50,0.3); font-weight:bold; }
-  .top5 { background: rgba(255,255,255,0.08); }
-  .bg-img { position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; opacity:0.05; transform:rotate(-3deg); z-index:-1; }
-  input { width: 90%; background:rgba(0,0,0,0.3); border:none; color:white; padding:2px 4px; border-radius:4px; }
-  input:focus { outline:1px solid #ff9f1c; }
-  .typing { display:inline-block; border-right:2px solid #ff9f1c; white-space:nowrap; overflow:hidden; }
+  body { margin:0; font-family:Inter,Arial,sans-serif; background:#0e0e0e; color:#fff; text-align:center; }
+  header { padding:20px; background:rgba(0,0,0,0.8); backdrop-filter:blur(8px); font-size:2em; color:#ff9f1c; font-weight:bold; text-shadow:0 2px 8px rgba(0,0,0,0.6); }
+  nav { display:flex; justify-content:center; flex-wrap:wrap; gap:5px; background:#111; padding:10px 0; position:sticky; top:0; z-index:1000; }
+  nav a { color:#ff9f1c; text-decoration:none; font-weight:bold; padding:6px 12px; border-radius:6px; transition:0.2s; }
+  nav a:hover { background:#222; }
+  section { padding:40px 10px; max-width:1200px; margin:auto; border-bottom:1px solid #222; }
+  section h2 { font-size:1.8em; color:#ff9f1c; margin-bottom:20px; min-height:2em; display:inline-block; border-right: .15em solid #ff9f1c; overflow:hidden; white-space:nowrap; animation:typing 1.5s steps(20,end), blink-caret 0.7s step-end infinite; }
+  @keyframes typing { from { width:0 } to { width:100% } }
+  @keyframes blink-caret { 50% { border-color: transparent; } }
+  .leaderboard a { display:block; color:#ccc; text-decoration:none; padding:4px 8px; margin:2px 0; border-radius:6px; background:rgba(255,255,255,0.05); transition:0.2s; }
+  .leaderboard a:hover { background:rgba(255,255,255,0.1); transform:translateX(3px); }
+  .top1 { background: gold; color:black; font-weight:bold; }
+  .top2 { background: silver; color:black; font-weight:bold; }
+  .top3 { background: #cd7f32; color:black; font-weight:bold; }
+  .top4, .top5 { background: rgba(255,159,28,0.3); color:black; font-weight:bold; }
+  .back-button { display:inline-block; margin:20px auto; padding:10px 20px; background:black; color:#ff9f1c; text-decoration:none; font-weight:bold; border-radius:6px; transition:0.2s; }
+  .back-button:hover { background:#222; }
 </style>
 </head>
 <body>
 
-<header>PolyTrack Leaderboard</header>
-<button class="back-btn" onclick="window.location.href='index.html'">Back</button>
-<nav id="sectionNav"></nav>
-<div id="tracksContainer"></div>
+<header>Poly Track Leaderboards</header>
 
-<script>
-const totalTracks=13;
-const totalEntries=50;
+<nav>
+  <a href="#track1">Track 1</a>
+  <a href="#track2">Track 2</a>
+  <a href="#track3">Track 3</a>
+  <a href="#track4">Track 4</a>
+  <a href="#track5">Track 5</a>
+  <a href="#track6">Track 6</a>
+  <a href="#track7">Track 7</a>
+  <a href="#track8">Track 8</a>
+  <a href="#track9">Track 9</a>
+  <a href="#track10">Track 10</a>
+  <a href="#track11">Track 11</a>
+  <a href="#track12">Track 12</a>
+  <a href="#track13">Track 13</a>
+</nav>
 
-const sectionNav=document.getElementById('sectionNav');
-const tracksContainer=document.getElementById('tracksContainer');
+<!-- 13 Tracks with 50 entries each -->
+<!-- To save space, the below is Track 1 fully populated; Tracks 2–13 follow the same pattern -->
+<section id="track1">
+  <h2>Track 1</h2>
+  <div class="leaderboard">
+    <a class="top1">ToonyTime - 00:24.776</a>
+    <a class="top2">User2 - </a>
+    <a class="top3">User3 - </a>
+    <a class="top4">User4 - </a>
+    <a class="top5">User5 - </a>
+    <a>User6 - 01:00</a>
+    <a>User7 - 01:02</a>
+    <a>User8 - 01:05</a>
+    <a>User9 - 01:07</a>
+    <a>User10 - 01:10</a>
+    <a>User11 - 01:12</a>
+    <a>User12 - 01:15</a>
+    <a>User13 - 01:17</a>
+    <a>User14 - 01:20</a>
+    <a>User15 - 01:22</a>
+    <a>User16 - 01:25</a>
+    <a>User17 - 01:27</a>
+    <a>User18 - 01:30</a>
+    <a>User19 - 01:32</a>
+    <a>User20 - 01:35</a>
+    <a>User21 - 01:37</a>
+    <a>User22 - 01:40</a>
+    <a>User23 - 01:42</a>
+    <a>User24 - 01:45</a>
+    <a>User25 - 01:47</a>
+    <a>User26 - 01:50</a>
+    <a>User27 - 01:52</a>
+    <a>User28 - 01:55</a>
+    <a>User29 - 01:57</a>
+    <a>User30 - 02:00</a>
+    <a>User31 - 02:02</a>
+    <a>User32 - 02:05</a>
+    <a>User33 - 02:07</a>
+    <a>User34 - 02:10</a>
+    <a>User35 - 02:12</a>
+    <a>User36 - 02:15</a>
+    <a>User37 - 02:17</a>
+    <a>User38 - 02:20</a>
+    <a>User39 - 02:22</a>
+    <a>User40 - 02:25</a>
+    <a>User41 - 02:27</a>
+    <a>User42 - 02:30</a>
+    <a>User43 - 02:32</a>
+    <a>User44 - 02:35</a>
+    <a>User45 - 02:37</a>
+    <a>User46 - 02:40</a>
+    <a>User47 - 02:42</a>
+    <a>User48 - 02:45</a>
+    <a>User49 - 02:47</a>
+    <a>User50 - 02:50</a>
+  </div>
+</section>
 
-// Create navigation buttons
-for(let i=1;i<=totalTracks;i++){
-  const btn=document.createElement('button');
-  btn.textContent=`Track ${i}`;
-  btn.onclick=()=>document.getElementById(`track${i}`).scrollIntoView({behavior:'smooth'});
-  sectionNav.appendChild(btn);
-}
+<!-- Repeat Track 2 to Track 13 -->
+<section id="track2"><h2>Track 2</h2><div class="leaderboard">
+<a class="top1">ToonyTime - 00:22.007</a>
+  <a class="top2">User2 - 00:48</a>
+  <a class="top3">User3 - 00:51</a>
+  <a class="top4">User4 - 00:53</a>
+  <a class="top5">User5 - 00:56</a>
+<a>User6 - 01:01</a>
+  <a>User7 - 01:03</a>
+  <a>User8 - 01:06</a>
+  <a>User9 - 01:08</a>
+  <a>User10 - 01:11</a>
+<a>User11 - 01:13</a>
+  <a>User12 - 01:16</a>
+  <a>User13 - 01:18</a>
+  <a>User14 - 01:21</a>
+  <a>User15 - 01:23</a>
+<a>User16 - 01:26</a>
+  <a>User17 - 01:28</a>
+  <a>User18 - 01:31</a>
+  <a>User19 - 01:33</a>
+  <a>User20 - 01:36</a>
+<a>User21 - 01:38</a>
+  <a>User22 - 01:41</a>
+  <a>User23 - 01:43</a>
+  <a>User24 - 01:46</a>
+  <a>User25 - 01:48</a>
+<a>User26 - 01:51</a>
+  <a>User27 - 01:53</a>
+  <a>User28 - 01:56</a>
+  <a>User29 - 01:58</a>
+  <a>User30 - 02:01</a>
+<a>User31 - 02:03</a>
+  <a>User32 - 02:06</a>
+  <a>User33 - 02:08</a>
+  <a>User34 - 02:11</a>
+  <a>User35 - 02:13</a>
+<a>User36 - 02:16</a>
+  <a>User37 - 02:18</a>
+  <a>User38 - 02:21</a>
+  <a>User39 - 02:23</a>
+  <a>User40 - 02:26</a>
+<a>User41 - 02:28</a>
+  <a>User42 - 02:31</a>
+  <a>User43 - 02:33</a>
+  <a>User44 - 02:36</a>
+  <a>User45 - 02:38</a>
+<a>User46 - 02:41</a>
+  <a>User47 - 02:43</a>
+  <a>User48 - 02:46</a>
+  <a>User49 - 02:48</a>
+  <a>User50 - 02:51</a>
+</div></section>
 
-// Create tracks and editable leaderboard
-for(let t=1;t<=totalTracks;t++){
-  const sec=document.createElement('section');
-  sec.id=`track${t}`;
+  <section id="track3"><h2>Track 3</h2><div class="leaderboard">
+<a class="top1">ToonyTime - 00:18.222</a>
+  <a class="top2">User2 - 00:48</a>
+  <a class="top3">User3 - 00:51</a>
+  <a class="top4">User4 - 00:53</a>
+  <a class="top5">User5 - 00:56</a>
+<a>User6 - 01:01</a>
+  <a>User7 - 01:03</a>
+  <a>User8 - 01:06</a>
+  <a>User9 - 01:08</a>
+  <a>User10 - 01:11</a>
+<a>User11 - 01:13</a>
+  <a>User12 - 01:16</a>
+  <a>User13 - 01:18</a>
+  <a>User14 - 01:21</a>
+  <a>User15 - 01:23</a>
+<a>User16 - 01:26</a>
+  <a>User17 - 01:28</a>
+  <a>User18 - 01:31</a>
+  <a>User19 - 01:33</a>
+  <a>User20 - 01:36</a>
+<a>User21 - 01:38</a>
+  <a>User22 - 01:41</a>
+  <a>User23 - 01:43</a>
+  <a>User24 - 01:46</a>
+  <a>User25 - 01:48</a>
+<a>User26 - 01:51</a>
+  <a>User27 - 01:53</a>
+  <a>User28 - 01:56</a>
+  <a>User29 - 01:58</a>
+  <a>User30 - 02:01</a>
+<a>User31 - 02:03</a>
+  <a>User32 - 02:06</a>
+  <a>User33 - 02:08</a>
+  <a>User34 - 02:11</a>
+  <a>User35 - 02:13</a>
+<a>User36 - 02:16</a>
+  <a>User37 - 02:18</a>
+  <a>User38 - 02:21</a>
+  <a>User39 - 02:23</a>
+  <a>User40 - 02:26</a>
+<a>User41 - 02:28</a>
+  <a>User42 - 02:31</a>
+  <a>User43 - 02:33</a>
+  <a>User44 - 02:36</a>
+  <a>User45 - 02:38</a>
+<a>User46 - 02:41</a>
+  <a>User47 - 02:43</a>
+  <a>User48 - 02:46</a>
+  <a>User49 - 02:48</a>
+  <a>User50 - 02:51</a>
+</div></section>
 
-  const bg=document.createElement('img');
-  bg.src='placeholder-bg.jpg'; // optional background
-  bg.className='bg-img';
-  sec.appendChild(bg);
+  <section id="track4"><h2>Track 4</h2><div class="leaderboard">
+<a class="top1">ToonyTime - 00:21.979</a>
+  <a class="top2">User2 - 00:48</a>
+  <a class="top3">User3 - 00:51</a>
+  <a class="top4">User4 - 00:53</a>
+  <a class="top5">User5 - 00:56</a>
+<a>User6 - 01:01</a>
+  <a>User7 - 01:03</a>
+  <a>User8 - 01:06</a>
+  <a>User9 - 01:08</a>
+  <a>User10 - 01:11</a>
+<a>User11 - 01:13</a>
+  <a>User12 - 01:16</a>
+  <a>User13 - 01:18</a>
+  <a>User14 - 01:21</a>
+  <a>User15 - 01:23</a>
+<a>User16 - 01:26</a>
+  <a>User17 - 01:28</a>
+  <a>User18 - 01:31</a>
+  <a>User19 - 01:33</a>
+  <a>User20 - 01:36</a>
+<a>User21 - 01:38</a>
+  <a>User22 - 01:41</a>
+  <a>User23 - 01:43</a>
+  <a>User24 - 01:46</a>
+  <a>User25 - 01:48</a>
+<a>User26 - 01:51</a>
+  <a>User27 - 01:53</a>
+  <a>User28 - 01:56</a>
+  <a>User29 - 01:58</a>
+  <a>User30 - 02:01</a>
+<a>User31 - 02:03</a>
+  <a>User32 - 02:06</a>
+  <a>User33 - 02:08</a>
+  <a>User34 - 02:11</a>
+  <a>User35 - 02:13</a>
+<a>User36 - 02:16</a>
+  <a>User37 - 02:18</a>
+  <a>User38 - 02:21</a>
+  <a>User39 - 02:23</a>
+  <a>User40 - 02:26</a>
+<a>User41 - 02:28</a>
+  <a>User42 - 02:31</a>
+  <a>User43 - 02:33</a>
+  <a>User44 - 02:36</a>
+  <a>User45 - 02:38</a>
+<a>User46 - 02:41</a>
+  <a>User47 - 02:43</a>
+  <a>User48 - 02:46</a>
+  <a>User49 - 02:48</a>
+  <a>User50 - 02:51</a>
+</div></section>
 
-  const h2=document.createElement('h2');
-  h2.innerHTML=`<span class="typing">Track ${t}</span>`;
-  sec.appendChild(h2);
+  <section id="track5"><h2>Track 5</h2><div class="leaderboard">
+<a class="top1">ToonyTime - 00:47.729</a>
+  <a class="top2">User2 - 00:48</a>
+  <a class="top3">User3 - 00:51</a>
+  <a class="top4">User4 - 00:53</a>
+  <a class="top5">User5 - 00:56</a>
+<a>User6 - 01:01</a>
+  <a>User7 - 01:03</a>
+  <a>User8 - 01:06</a>
+  <a>User9 - 01:08</a>
+  <a>User10 - 01:11</a>
+<a>User11 - 01:13</a>
+  <a>User12 - 01:16</a>
+  <a>User13 - 01:18</a>
+  <a>User14 - 01:21</a>
+  <a>User15 - 01:23</a>
+<a>User16 - 01:26</a>
+  <a>User17 - 01:28</a>
+  <a>User18 - 01:31</a>
+  <a>User19 - 01:33</a>
+  <a>User20 - 01:36</a>
+<a>User21 - 01:38</a>
+  <a>User22 - 01:41</a>
+  <a>User23 - 01:43</a>
+  <a>User24 - 01:46</a>
+  <a>User25 - 01:48</a>
+<a>User26 - 01:51</a>
+  <a>User27 - 01:53</a>
+  <a>User28 - 01:56</a>
+  <a>User29 - 01:58</a>
+  <a>User30 - 02:01</a>
+<a>User31 - 02:03</a>
+  <a>User32 - 02:06</a>
+  <a>User33 - 02:08</a>
+  <a>User34 - 02:11</a>
+  <a>User35 - 02:13</a>
+<a>User36 - 02:16</a>
+  <a>User37 - 02:18</a>
+  <a>User38 - 02:21</a>
+  <a>User39 - 02:23</a>
+  <a>User40 - 02:26</a>
+<a>User41 - 02:28</a>
+  <a>User42 - 02:31</a>
+  <a>User43 - 02:33</a>
+  <a>User44 - 02:36</a>
+  <a>User45 - 02:38</a>
+<a>User46 - 02:41</a>
+  <a>User47 - 02:43</a>
+  <a>User48 - 02:46</a>
+  <a>User49 - 02:48</a>
+  <a>User50 - 02:51</a>
+</div></section>
 
-  const table=document.createElement('table');
-  const thead=document.createElement('thead');
-  thead.innerHTML='<tr><th>Position</th><th>Username</th><th>Time (s)</th></tr>';
-  table.appendChild(thead);
 
-  const tbody=document.createElement('tbody');
-  for(let p=1;p<=totalEntries;p++){
-    const tr=document.createElement('tr');
-    if(p===1) tr.className='first top5';
-    else if(p===2) tr.className='second top5';
-    else if(p===3) tr.className='third top5';
-    else if(p<=5) tr.className='top5';
-    tr.innerHTML=`
-      <td>${p}</td>
-      <td><input type="text" placeholder="Player${p}"></td>
-      <td><input type="number" placeholder="${(Math.random()*60).toFixed(2)}"></td>
-    `;
-    tbody.appendChild(tr);
-  }
-  table.appendChild(tbody);
-  sec.appendChild(table);
+  <section id="track6"><h2>Track 6</h2><div class="leaderboard">
+<a class="top1">ToonyTime - 00:41.274</a>
+  <a class="top2">User2 - 00:48</a>
+  <a class="top3">User3 - 00:51</a>
+  <a class="top4">User4 - 00:53</a>
+  <a class="top5">User5 - 00:56</a>
+<a>User6 - 01:01</a>
+  <a>User7 - 01:03</a>
+  <a>User8 - 01:06</a>
+  <a>User9 - 01:08</a>
+  <a>User10 - 01:11</a>
+<a>User11 - 01:13</a>
+  <a>User12 - 01:16</a>
+  <a>User13 - 01:18</a>
+  <a>User14 - 01:21</a>
+  <a>User15 - 01:23</a>
+<a>User16 - 01:26</a>
+  <a>User17 - 01:28</a>
+  <a>User18 - 01:31</a>
+  <a>User19 - 01:33</a>
+  <a>User20 - 01:36</a>
+<a>User21 - 01:38</a>
+  <a>User22 - 01:41</a>
+  <a>User23 - 01:43</a>
+  <a>User24 - 01:46</a>
+  <a>User25 - 01:48</a>
+<a>User26 - 01:51</a>
+  <a>User27 - 01:53</a>
+  <a>User28 - 01:56</a>
+  <a>User29 - 01:58</a>
+  <a>User30 - 02:01</a>
+<a>User31 - 02:03</a>
+  <a>User32 - 02:06</a>
+  <a>User33 - 02:08</a>
+  <a>User34 - 02:11</a>
+  <a>User35 - 02:13</a>
+<a>User36 - 02:16</a>
+  <a>User37 - 02:18</a>
+  <a>User38 - 02:21</a>
+  <a>User39 - 02:23</a>
+  <a>User40 - 02:26</a>
+<a>User41 - 02:28</a>
+  <a>User42 - 02:31</a>
+  <a>User43 - 02:33</a>
+  <a>User44 - 02:36</a>
+  <a>User45 - 02:38</a>
+<a>User46 - 02:41</a>
+  <a>User47 - 02:43</a>
+  <a>User48 - 02:46</a>
+  <a>User49 - 02:48</a>
+  <a>User50 - 02:51</a>
+</div></section>
 
-  tracksContainer.appendChild(sec);
-}
+  <section id="track7"><h2>Track 7</h2><div class="leaderboard">
+<a class="top1">ToonyTime - 00:29.627</a>
+  <a class="top2">User2 - 00:48</a>
+  <a class="top3">User3 - 00:51</a>
+  <a class="top4">User4 - 00:53</a>
+  <a class="top5">User5 - 00:56</a>
+<a>User6 - 01:01</a>
+  <a>User7 - 01:03</a>
+  <a>User8 - 01:06</a>
+  <a>User9 - 01:08</a>
+  <a>User10 - 01:11</a>
+<a>User11 - 01:13</a>
+  <a>User12 - 01:16</a>
+  <a>User13 - 01:18</a>
+  <a>User14 - 01:21</a>
+  <a>User15 - 01:23</a>
+<a>User16 - 01:26</a>
+  <a>User17 - 01:28</a>
+  <a>User18 - 01:31</a>
+  <a>User19 - 01:33</a>
+  <a>User20 - 01:36</a>
+<a>User21 - 01:38</a>
+  <a>User22 - 01:41</a>
+  <a>User23 - 01:43</a>
+  <a>User24 - 01:46</a>
+  <a>User25 - 01:48</a>
+<a>User26 - 01:51</a>
+  <a>User27 - 01:53</a>
+  <a>User28 - 01:56</a>
+  <a>User29 - 01:58</a>
+  <a>User30 - 02:01</a>
+<a>User31 - 02:03</a>
+  <a>User32 - 02:06</a>
+  <a>User33 - 02:08</a>
+  <a>User34 - 02:11</a>
+  <a>User35 - 02:13</a>
+<a>User36 - 02:16</a>
+  <a>User37 - 02:18</a>
+  <a>User38 - 02:21</a>
+  <a>User39 - 02:23</a>
+  <a>User40 - 02:26</a>
+<a>User41 - 02:28</a>
+  <a>User42 - 02:31</a>
+  <a>User43 - 02:33</a>
+  <a>User44 - 02:36</a>
+  <a>User45 - 02:38</a>
+<a>User46 - 02:41</a>
+  <a>User47 - 02:43</a>
+  <a>User48 - 02:46</a>
+  <a>User49 - 02:48</a>
+  <a>User50 - 02:51</a>
+</div></section>
 
-// Typing animation
-const typingEls=document.querySelectorAll('.typing');
-typingEls.forEach(el=>{
-  const text=el.textContent;
-  el.textContent='';
-  let i=0;
-  function typeChar(){
-    if(i<text.length){
-      el.textContent+=text.charAt(i);
-      i++;
-      setTimeout(typeChar,50);
-    }
-  }
-  typeChar();
-});
-</script>
+  <section id="track8"><h2>Track 8</h2><div class="leaderboard">
+<a class="top1">ToonyTime - 01:04.481</a>
+  <a class="top2">User2 - 00:48</a>
+  <a class="top3">User3 - 00:51</a>
+  <a class="top4">User4 - 00:53</a>
+  <a class="top5">User5 - 00:56</a>
+<a>User6 - 01:01</a>
+  <a>User7 - 01:03</a>
+  <a>User8 - 01:06</a>
+  <a>User9 - 01:08</a>
+  <a>User10 - 01:11</a>
+<a>User11 - 01:13</a>
+  <a>User12 - 01:16</a>
+  <a>User13 - 01:18</a>
+  <a>User14 - 01:21</a>
+  <a>User15 - 01:23</a>
+<a>User16 - 01:26</a>
+  <a>User17 - 01:28</a>
+  <a>User18 - 01:31</a>
+  <a>User19 - 01:33</a>
+  <a>User20 - 01:36</a>
+<a>User21 - 01:38</a>
+  <a>User22 - 01:41</a>
+  <a>User23 - 01:43</a>
+  <a>User24 - 01:46</a>
+  <a>User25 - 01:48</a>
+<a>User26 - 01:51</a>
+  <a>User27 - 01:53</a>
+  <a>User28 - 01:56</a>
+  <a>User29 - 01:58</a>
+  <a>User30 - 02:01</a>
+<a>User31 - 02:03</a>
+  <a>User32 - 02:06</a>
+  <a>User33 - 02:08</a>
+  <a>User34 - 02:11</a>
+  <a>User35 - 02:13</a>
+<a>User36 - 02:16</a>
+  <a>User37 - 02:18</a>
+  <a>User38 - 02:21</a>
+  <a>User39 - 02:23</a>
+  <a>User40 - 02:26</a>
+<a>User41 - 02:28</a>
+  <a>User42 - 02:31</a>
+  <a>User43 - 02:33</a>
+  <a>User44 - 02:36</a>
+  <a>User45 - 02:38</a>
+<a>User46 - 02:41</a>
+  <a>User47 - 02:43</a>
+  <a>User48 - 02:46</a>
+  <a>User49 - 02:48</a>
+  <a>User50 - 02:51</a>
+</div></section>
 
+<section id="track9"><h2>Track 9</h2><div class="leaderboard">
+<a class="top1">ToonyTime - 00:29.467</a>
+  <a class="top2">User2 - 00:48</a>
+  <a class="top3">User3 - 00:51</a>
+  <a class="top4">User4 - 00:53</a>
+  <a class="top5">User5 - 00:56</a>
+<a>User6 - 01:01</a>
+  <a>User7 - 01:03</a>
+  <a>User8 - 01:06</a>
+  <a>User9 - 01:08</a>
+  <a>User10 - 01:11</a>
+<a>User11 - 01:13</a>
+  <a>User12 - 01:16</a>
+  <a>User13 - 01:18</a>
+  <a>User14 - 01:21</a>
+  <a>User15 - 01:23</a>
+<a>User16 - 01:26</a>
+  <a>User17 - 01:28</a>
+  <a>User18 - 01:31</a>
+  <a>User19 - 01:33</a>
+  <a>User20 - 01:36</a>
+<a>User21 - 01:38</a>
+  <a>User22 - 01:41</a>
+  <a>User23 - 01:43</a>
+  <a>User24 - 01:46</a>
+  <a>User25 - 01:48</a>
+<a>User26 - 01:51</a>
+  <a>User27 - 01:53</a>
+  <a>User28 - 01:56</a>
+  <a>User29 - 01:58</a>
+  <a>User30 - 02:01</a>
+<a>User31 - 02:03</a>
+  <a>User32 - 02:06</a>
+  <a>User33 - 02:08</a>
+  <a>User34 - 02:11</a>
+  <a>User35 - 02:13</a>
+<a>User36 - 02:16</a>
+  <a>User37 - 02:18</a>
+  <a>User38 - 02:21</a>
+  <a>User39 - 02:23</a>
+  <a>User40 - 02:26</a>
+<a>User41 - 02:28</a>
+  <a>User42 - 02:31</a>
+  <a>User43 - 02:33</a>
+  <a>User44 - 02:36</a>
+  <a>User45 - 02:38</a>
+<a>User46 - 02:41</a>
+  <a>User47 - 02:43</a>
+  <a>User48 - 02:46</a>
+  <a>User49 - 02:48</a>
+  <a>User50 - 02:51</a>
+</div></section>
+
+  <section id="track10"><h2>Track 10</h2><div class="leaderboard">
+<a class="top1">ToonyTime - 00:51.065</a>
+  <a class="top2">User2 - 00:48</a>
+  <a class="top3">User3 - 00:51</a>
+  <a class="top4">User4 - 00:53</a>
+  <a class="top5">User5 - 00:56</a>
+<a>User6 - 01:01</a>
+  <a>User7 - 01:03</a>
+  <a>User8 - 01:06</a>
+  <a>User9 - 01:08</a>
+  <a>User10 - 01:11</a>
+<a>User11 - 01:13</a>
+  <a>User12 - 01:16</a>
+  <a>User13 - 01:18</a>
+  <a>User14 - 01:21</a>
+  <a>User15 - 01:23</a>
+<a>User16 - 01:26</a>
+  <a>User17 - 01:28</a>
+  <a>User18 - 01:31</a>
+  <a>User19 - 01:33</a>
+  <a>User20 - 01:36</a>
+<a>User21 - 01:38</a>
+  <a>User22 - 01:41</a>
+  <a>User23 - 01:43</a>
+  <a>User24 - 01:46</a>
+  <a>User25 - 01:48</a>
+<a>User26 - 01:51</a>
+  <a>User27 - 01:53</a>
+  <a>User28 - 01:56</a>
+  <a>User29 - 01:58</a>
+  <a>User30 - 02:01</a>
+<a>User31 - 02:03</a>
+  <a>User32 - 02:06</a>
+  <a>User33 - 02:08</a>
+  <a>User34 - 02:11</a>
+  <a>User35 - 02:13</a>
+<a>User36 - 02:16</a>
+  <a>User37 - 02:18</a>
+  <a>User38 - 02:21</a>
+  <a>User39 - 02:23</a>
+  <a>User40 - 02:26</a>
+<a>User41 - 02:28</a>
+  <a>User42 - 02:31</a>
+  <a>User43 - 02:33</a>
+  <a>User44 - 02:36</a>
+  <a>User45 - 02:38</a>
+<a>User46 - 02:41</a>
+  <a>User47 - 02:43</a>
+  <a>User48 - 02:46</a>
+  <a>User49 - 02:48</a>
+  <a>User50 - 02:51</a>
+</div></section>
+
+  <section id="track11"><h2>Track 11</h2><div class="leaderboard">
+<a class="top1">ToonyTime - 00:38.539</a>
+  <a class="top2">User2 - 00:48</a>
+  <a class="top3">User3 - 00:51</a>
+  <a class="top4">User4 - 00:53</a>
+  <a class="top5">User5 - 00:56</a>
+<a>User6 - 01:01</a>
+  <a>User7 - 01:03</a>
+  <a>User8 - 01:06</a>
+  <a>User9 - 01:08</a>
+  <a>User10 - 01:11</a>
+<a>User11 - 01:13</a>
+  <a>User12 - 01:16</a>
+  <a>User13 - 01:18</a>
+  <a>User14 - 01:21</a>
+  <a>User15 - 01:23</a>
+<a>User16 - 01:26</a>
+  <a>User17 - 01:28</a>
+  <a>User18 - 01:31</a>
+  <a>User19 - 01:33</a>
+  <a>User20 - 01:36</a>
+<a>User21 - 01:38</a>
+  <a>User22 - 01:41</a>
+  <a>User23 - 01:43</a>
+  <a>User24 - 01:46</a>
+  <a>User25 - 01:48</a>
+<a>User26 - 01:51</a>
+  <a>User27 - 01:53</a>
+  <a>User28 - 01:56</a>
+  <a>User29 - 01:58</a>
+  <a>User30 - 02:01</a>
+<a>User31 - 02:03</a>
+  <a>User32 - 02:06</a>
+  <a>User33 - 02:08</a>
+  <a>User34 - 02:11</a>
+  <a>User35 - 02:13</a>
+<a>User36 - 02:16</a>
+  <a>User37 - 02:18</a>
+  <a>User38 - 02:21</a>
+  <a>User39 - 02:23</a>
+  <a>User40 - 02:26</a>
+<a>User41 - 02:28</a>
+  <a>User42 - 02:31</a>
+  <a>User43 - 02:33</a>
+  <a>User44 - 02:36</a>
+  <a>User45 - 02:38</a>
+<a>User46 - 02:41</a>
+  <a>User47 - 02:43</a>
+  <a>User48 - 02:46</a>
+  <a>User49 - 02:48</a>
+  <a>User50 - 02:51</a>
+</div></section>
+
+  <section id="track12"><h2>Track 12</h2><div class="leaderboard">
+<a class="top1">ToonyTime - 00:22.859</a>
+  <a class="top2">User2 - 00:48</a>
+  <a class="top3">User3 - 00:51</a>
+  <a class="top4">User4 - 00:53</a>
+  <a class="top5">User5 - 00:56</a>
+<a>User6 - 01:01</a>
+  <a>User7 - 01:03</a>
+  <a>User8 - 01:06</a>
+  <a>User9 - 01:08</a>
+  <a>User10 - 01:11</a>
+<a>User11 - 01:13</a>
+  <a>User12 - 01:16</a>
+  <a>User13 - 01:18</a>
+  <a>User14 - 01:21</a>
+  <a>User15 - 01:23</a>
+<a>User16 - 01:26</a>
+  <a>User17 - 01:28</a>
+  <a>User18 - 01:31</a>
+  <a>User19 - 01:33</a>
+  <a>User20 - 01:36</a>
+<a>User21 - 01:38</a>
+  <a>User22 - 01:41</a>
+  <a>User23 - 01:43</a>
+  <a>User24 - 01:46</a>
+  <a>User25 - 01:48</a>
+<a>User26 - 01:51</a>
+  <a>User27 - 01:53</a>
+  <a>User28 - 01:56</a>
+  <a>User29 - 01:58</a>
+  <a>User30 - 02:01</a>
+<a>User31 - 02:03</a>
+  <a>User32 - 02:06</a>
+  <a>User33 - 02:08</a>
+  <a>User34 - 02:11</a>
+  <a>User35 - 02:13</a>
+<a>User36 - 02:16</a>
+  <a>User37 - 02:18</a>
+  <a>User38 - 02:21</a>
+  <a>User39 - 02:23</a>
+  <a>User40 - 02:26</a>
+<a>User41 - 02:28</a>
+  <a>User42 - 02:31</a>
+  <a>User43 - 02:33</a>
+  <a>User44 - 02:36</a>
+  <a>User45 - 02:38</a>
+<a>User46 - 02:41</a>
+  <a>User47 - 02:43</a>
+  <a>User48 - 02:46</a>
+  <a>User49 - 02:48</a>
+  <a>User50 - 02:51</a>
+</div></section>
+
+  <section id="track13"><h2>Track 13</h2><div class="leaderboard">
+<a class="top1">ToonyTime - 00:39.336</a>
+  <a class="top2">User2 - 00:48</a>
+  <a class="top3">User3 - 00:51</a>
+  <a class="top4">User4 - 00:53</a>
+  <a class="top5">User5 - 00:56</a>
+<a>User6 - 01:01</a>
+  <a>User7 - 01:03</a>
+  <a>User8 - 01:06</a>
+  <a>User9 - 01:08</a>
+  <a>User10 - 01:11</a>
+<a>User11 - 01:13</a>
+  <a>User12 - 01:16</a>
+  <a>User13 - 01:18</a>
+  <a>User14 - 01:21</a>
+  <a>User15 - 01:23</a>
+<a>User16 - 01:26</a>
+  <a>User17 - 01:28</a>
+  <a>User18 - 01:31</a>
+  <a>User19 - 01:33</a>
+  <a>User20 - 01:36</a>
+<a>User21 - 01:38</a>
+  <a>User22 - 01:41</a>
+  <a>User23 - 01:43</a>
+  <a>User24 - 01:46</a>
+  <a>User25 - 01:48</a>
+<a>User26 - 01:51</a>
+  <a>User27 - 01:53</a>
+  <a>User28 - 01:56</a>
+  <a>User29 - 01:58</a>
+  <a>User30 - 02:01</a>
+<a>User31 - 02:03</a>
+  <a>User32 - 02:06</a>
+  <a>User33 - 02:08</a>
+  <a>User34 - 02:11</a>
+  <a>User35 - 02:13</a>
+<a>User36 - 02:16</a>
+  <a>User37 - 02:18</a>
+  <a>User38 - 02:21</a>
+  <a>User39 - 02:23</a>
+  <a>User40 - 02:26</a>
+<a>User41 - 02:28</a>
+  <a>User42 - 02:31</a>
+  <a>User43 - 02:33</a>
+  <a>User44 - 02:36</a>
+  <a>User45 - 02:38</a>
+<a>User46 - 02:41</a>
+  <a>User47 - 02:43</a>
+  <a>User48 - 02:46</a>
+  <a>User49 - 02:48</a>
+  <a>User50 - 02:51</a>
+</div></section>
+
+<!-- You would continue similarly for Tracks 3–13 -->
+<!-- To keep the message readable, I can generate all 13 full tracks in a separate file if needed -->
+
+<a href="index.html" class="back-button">Back to Home</a>
 </body>
 </html>
