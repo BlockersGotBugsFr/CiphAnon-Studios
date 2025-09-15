@@ -5,212 +5,115 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Comparison Page</title>
     <style>
-        /* Basic Resets and Global Styles */
-body {
-    margin: 0;
-    font-family: Arial, sans-serif; /* You can replace this with a more specific font */
-    background-color: #1a1a1a; /* Dark background */
-    color: #e0e0e0; /* Light text color */
-}
+        /* Basic styles for the page */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: black;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background-color: #black;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
+        /* Navigation styles */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #e9e9e9;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
 
-/* Navbar Styling */
-.navbar {
-    background-color: #222222;
-    padding: 15px 0;
-    border-bottom: 1px solid #333;
-}
+        /* Dropdown button */
+        .dropbtn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 180px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 5px;
+            top: 100%;
+        }
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+        .dropdown-content a.active {
+            font-weight: bold;
+            background-color: #ddd;
+        }
+        .dropdown-content.show {
+            display: block; /* Show the dropdown content when the 'show' class is present */
+        }
 
-.navbar .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+        /* Go back button */
+        .back-btn {
+            background-color: #555;
+            color: white;
+            padding: 12px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        .back-btn:hover {
+            background-color: #333;
+        }
 
-.navbar .logo {
-    font-size: 1.5em;
-    font-weight: bold;
-    color: #e0e0e0;
-}
-
-.navbar nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    align-items: center;
-}
-
-.navbar nav ul li {
-    margin-left: 20px;
-}
-
-.navbar nav ul li a {
-    color: #e0e0e0;
-    text-decoration: none;
-    font-weight: bold;
-    transition: color 0.3s ease;
-}
-
-.navbar nav ul li a:hover {
-    color: #ff9800; /* Orange accent on hover */
-}
-
-/* Hero Section */
-.hero-section {
-    padding: 80px 0;
-    text-align: center;
-}
-
-.hero-section .content-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 40px;
-    flex-wrap: wrap; /* For responsiveness */
-}
-
-.hero-text {
-    max-width: 600px;
-    text-align: left;
-}
-
-.hero-text h1 {
-    font-size: 3em;
-    color: #ff9800; /* Orange accent for main heading */
-    margin-bottom: 10px;
-}
-
-.hero-text p {
-    font-size: 1.1em;
-    line-height: 1.6;
-}
-
-.hero-image img {
-    max-width: 300px; /* Adjust size as needed */
-    height: auto;
-}
-
-/* Buttons */
-.btn-orange {
-    background-color: #ff9800;
-    color: #1a1a1a;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.btn-orange:hover {
-    background-color: #e68a00;
-}
-
-.btn-secondary {
-    background-color: transparent;
-    color: #ff9800;
-    border: 2px solid #ff9800;
-    padding: 8px 18px;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: bold;
-    margin-left: 15px;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.btn-secondary:hover {
-    background-color: #ff9800;
-    color: #1a1a1a;
-}
-
-.cta-buttons {
-    margin-top: 30px;
-}
-
-/* Stats Section */
-.stats {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 40px;
-    background-color: #2d2d2d;
-    padding: 20px;
-    border-radius: 8px;
-}
-
-.stats span {
-    display: block;
-    font-size: 1.1em;
-    text-align: center;
-}
-
-.stats strong {
-    font-size: 1.8em;
-    color: #ff9800;
-    display: block;
-}
-
-/* Footer Styling */
-.footer {
-    background-color: #222222;
-    padding: 20px 0;
-    text-align: center;
-    font-size: 0.9em;
-    color: #777;
-    margin-top: 50px;
-}
-
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-    .navbar .container {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .navbar nav ul {
-        margin-top: 15px;
-        flex-direction: column;
-    }
-
-    .navbar nav ul li {
-        margin: 5px 0;
-    }
-
-    .hero-section .content-wrapper {
-        flex-direction: column;
-    }
-
-    .hero-text {
-        text-align: center;
-    }
-
-    .hero-text h1 {
-        font-size: 2.5em;
-    }
-
-    .cta-buttons {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-    }
-
-    .btn-secondary {
-        margin-left: 0;
-    }
-
-    .stats {
-        flex-direction: column;
-        gap: 20px;
-    }
-}
-
+        /* Content sections */
+        .content-section {
+            display: none; /* Hide all sections by default */
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+            margin-top: 10px;
+        }
+        .content-section.active {
+            display: block; /* Show the active section */
+        }
+        h2 {
+            margin-top: 0;
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 10px;
+        }
+        h4 {
+            color: #333;
+            margin-top: 20px;
+        }
+        ul {
+            list-style-type: disc;
+            margin-left: 20px;
+        }
+        li {
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
