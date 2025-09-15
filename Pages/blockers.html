@@ -68,6 +68,9 @@
             font-weight: bold;
             background-color: #ddd;
         }
+        .dropdown-content.show {
+            display: block; /* Show the dropdown content when the 'show' class is present */
+        }
 
         /* Go back button */
         .back-btn {
@@ -122,15 +125,15 @@
             <div class="dropdown">
                 <button onclick="toggleDropdown()" class="dropbtn">Section Topic</button>
                 <div id="myDropdown" class="dropdown-content">
-                    <a href="#deledao-section" class="nav-link" onclick="showSection('deledao-section')">Deledao</a>
-                    <a href="#iboss-section" class="nav-link" onclick="showSection('iboss-section')">iBoss</a>
-                    <a href="#other-section" class="nav-link" onclick="showSection('other-section')">Other Things</a>
+                    <a href="#" class="nav-link" onclick="showSection('deledao-section', this)">Deledao</a>
+                    <a href="#" class="nav-link" onclick="showSection('iboss-section', this)">iBoss</a>
+                    <a href="#" class="nav-link" onclick="showSection('other-section', this)">Other Things</a>
                 </div>
             </div>
             <a href="../index.html" class="back-btn">Back to home</a>
         </div>
 
-        <div id="deledao-section" class="content-section active">
+        <div id="deledao-section" class="content-section">
             <h2>Deledao</h2>
             <p>Deledao is an artificial intelligence (AI) powered web filtering and student wellness platform designed for K-12 educational settings. The technology is installed on school-issued devices, such as Chromebooks, Windows, Macs, and iOS devices, to monitor and regulate students' online activity both on and off campus.</p>
             
@@ -158,7 +161,7 @@
                 <li><strong>Encrypted traffic inspection:</strong> iBoss can perform deep inspection of encrypted SSL/TLS traffic, which is essential for detecting threats hidden in secure web connections.</li>
                 <li><strong>Zero Trust Browser Isolation:</strong> For added security, especially for third-party contractors and unmanaged devices, iBoss uses browser isolation. It streams content to the user's browser as pixels, isolating web data from the device and preventing unauthorized downloads or malware infections.</li>
                 <li><strong>Consolidated platform:</strong> iBoss integrates various security functions into a single Software-as-a-Service (SaaS) platform, eliminating the complexity and cost of managing multiple security tools.</li>
-                <li><strong>K-12 solutions:</strong> For the education sector, iBoss provides a unified platform with features such as student safety monitoring, classroom management, a parent portal, and AI-powered threat detection.</li>
+                <li><strong>K-12 solutions:</strong> For the education sector, iBoss provides a unified platform with features suchs as student safety monitoring, classroom management, a parent portal, and AI-powered threat detection.</li>
             </ul>
         </div>
 
@@ -176,7 +179,7 @@
         }
 
         // Show the selected content section and handle active class
-        function showSection(sectionId) {
+        function showSection(sectionId, element) {
             // Hide all content sections
             const sections = document.querySelectorAll('.content-section');
             sections.forEach(section => {
@@ -194,18 +197,18 @@
             navLinks.forEach(link => {
                 link.classList.remove('active');
             });
-            const activeLink = document.querySelector(`.nav-link[href="#${sectionId}"]`);
-            if (activeLink) {
-                activeLink.classList.add('active');
-            }
+            element.classList.add('active');
 
-            // Close the dropdown after selection (optional)
+            // Close the dropdown after selection
             document.getElementById("myDropdown").classList.remove("show");
         }
 
-        // Initially show the first section and hide others.
+        // Initially show the first section and set active class.
         document.addEventListener('DOMContentLoaded', (event) => {
-            showSection('deledao-section');
+            const firstLink = document.querySelector('.nav-link');
+            if (firstLink) {
+                showSection('deledao-section', firstLink);
+            }
         });
 
         // Close the dropdown if the user clicks outside of it
