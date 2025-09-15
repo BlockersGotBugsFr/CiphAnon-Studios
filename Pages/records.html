@@ -5,119 +5,219 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PolyTrack Leaderboard</title>
 <style>
-  body { margin:0; font-family: Inter, Arial, sans-serif; background:#0e0e0e; color:#fff; text-align:center; overflow-x:hidden;}
-  header { padding:20px; background: rgba(0,0,0,0.8); font-size:1.8em; font-weight:bold; text-shadow:0 2px 6px rgba(0,0,0,0.5);}
-  section { padding:50px 15px; max-width:900px; margin:auto; border-bottom:1px solid #333; position:relative; overflow:hidden;}
-  h2 { color:#ff9f1c; text-shadow:0 2px 8px rgba(0,0,0,0.6); position:relative; z-index:2; }
-  table { width:100%; border-collapse:collapse; margin-top:10px; position:relative; z-index:2;}
-  th, td { padding:8px; border:1px solid #fff; text-align:center; }
-  th { background:#222; }
-  td img { max-width:60px; border-radius:6px; }
-  input, button, select { padding:8px; margin:5px; border-radius:6px; border:none; font-size:0.95em; }
-  button { cursor:pointer; background:#ff9f1c; color:black; font-weight:bold; }
-  button:hover { background:#ff7700; }
-  #submission { margin-top:30px; text-align:left; max-width:500px; margin-left:auto; margin-right:auto; }
-  /* Background images & videos for each section */
-  .bg-image, .bg-video {
-    position:absolute; top:0; left:-10%; width:120%; height:120%; object-fit:cover; opacity:0.15; transform:rotate(-5deg); z-index:1;
+  /* --- General Page Styles --- */
+  body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: #0e0e0e;
+    color: #fff;
+    overflow-x: hidden;
   }
-  .bg-video { opacity:0.1; }
+
+  header {
+    position: sticky;
+    top: 0;
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(8px);
+    padding: 20px;
+    text-align: center;
+    font-size: 2em;
+    font-weight: bold;
+    z-index: 1000;
+  }
+
+  /* --- Navigation for sections --- */
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px;
+    background: #111;
+    position: sticky;
+    top: 80px;
+    z-index: 999;
+  }
+  nav button {
+    padding: 6px 12px;
+    background: #222;
+    border: none;
+    border-radius: 6px;
+    color: #ff9f1c;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.2s;
+  }
+  nav button:hover { background: #333; transform: translateY(-2px); }
+
+  /* --- Track Sections --- */
+  section {
+    padding: 50px 20px;
+    max-width: 1200px;
+    margin: auto;
+    position: relative;
+  }
+  section h2 {
+    font-size: 2em;
+    color: #ff9f1c;
+    margin-bottom: 20px;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+    position: relative;
+  }
+
+  /* Typing effect */
+  .typing {
+    display: inline-block;
+    border-right: 2px solid #ff9f1c;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  /* --- Leaderboard table --- */
+  .leaderboard {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .leaderboard tr {
+    transition: transform 0.2s;
+  }
+  .leaderboard tr:hover { transform: translateX(5px); }
+  .leaderboard td, .leaderboard th {
+    padding: 8px 12px;
+    text-align: left;
+  }
+  .leaderboard th { border-bottom: 2px solid #ff9f1c; }
+
+  /* Top positions */
+  .first { background: rgba(255, 159, 28, 0.3); font-weight: bold; }
+  .second { background: rgba(192, 192, 192, 0.3); font-weight: bold; }
+  .third { background: rgba(205, 127, 50, 0.3); font-weight: bold; }
+  .top5 { background: rgba(255,255,255,0.1); }
+
+  /* Slanted/faded backgrounds */
+  .bg-img {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    opacity: 0.05;
+    transform: rotate(-3deg);
+    z-index: -1;
+  }
+
+  /* Back button */
+  .back-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    padding: 10px 18px;
+    background: black;
+    border: none;
+    border-radius: 8px;
+    color: #ff9f1c;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 1001;
+    transition: 0.2s;
+  }
+  .back-btn:hover { background: #222; transform: translateY(-2px); }
+
+  /* Smooth scroll for section jumping */
+  html { scroll-behavior: smooth; }
 </style>
 </head>
 <body>
 
 <header>PolyTrack Leaderboard</header>
+<button class="back-btn" onclick="window.location.href='index.html'">Back</button>
 
-<div id="tracks-container">
-  <!-- JS will generate Track sections with slanted background images/videos -->
-</div>
+<nav id="sectionNav"></nav>
 
-<section id="submission">
-  <h2>Submit Your Score</h2>
-  <p>To submit a score: </p>
-  <ul>
-    <li>Enter your <strong>Username</strong>.</li>
-    <li>Choose which <strong>Track</strong> you played.</li>
-    <li>Upload a <strong>picture of your score</strong>.</li>
-    <li>If you are the fastest, you may earn a Discord rank.</li>
-  </ul>
-  <input type="text" id="submit-username" placeholder="Username"><br>
-  <select id="submit-track"></select><br>
-  <input type="file" id="submit-proof" accept="image/*"><br>
-  <button onclick="submitScore()">Submit Score</button>
-</section>
+<!-- Track Sections -->
+<div id="tracksContainer"></div>
 
 <script>
-  const tracksContainer = document.getElementById('tracks-container');
-  const trackData = {};
-  const trackBackgrounds = [
-    'bg1.jpg','bg2.jpg','bg3.jpg','bg4.jpg','bg5.jpg','bg6.jpg','bg7.jpg','bg8.jpg','bg9.jpg','bg10.jpg','bg11.jpg','bg12.jpg','bg13.jpg'
-  ]; // Add your background image/video filenames here
+  const totalTracks = 13;
+  const totalEntries = 50;
 
-  for(let i=1;i<=13;i++){
-    trackData['Track '+i] = [];
+  const sectionNav = document.getElementById('sectionNav');
+  const tracksContainer = document.getElementById('tracksContainer');
+
+  // Generate navigation buttons
+  for(let i=1;i<=totalTracks;i++){
+    const btn = document.createElement('button');
+    btn.textContent = `Track ${i}`;
+    btn.onclick = ()=>document.getElementById(`track${i}`).scrollIntoView({behavior:'smooth'});
+    sectionNav.appendChild(btn);
+  }
+
+  // Generate tracks and leaderboards
+  for(let t=1;t<=totalTracks;t++){
     const sec = document.createElement('section');
-    sec.id = 'track-'+i;
+    sec.id = `track${t}`;
 
-    // Use image or video background randomly
-    let bgTag;
-    if(i%3===0){ // every 3rd track a video
-      bgTag = `<video class="bg-video" autoplay loop muted playsinline src="${trackBackgrounds[i-1]}"></video>`;
-    } else {
-      bgTag = `<img class="bg-image" src="${trackBackgrounds[i-1]}" alt="bg">`;
+    // Optional background image/video
+    const bg = document.createElement('img');
+    bg.src = 'placeholder-bg.jpg'; // Replace with your own image
+    bg.className = 'bg-img';
+    sec.appendChild(bg);
+
+    const h2 = document.createElement('h2');
+    h2.innerHTML = `<span class="typing">Track ${t} Leaderboard</span>`;
+    sec.appendChild(h2);
+
+    const table = document.createElement('table');
+    table.className = 'leaderboard';
+
+    // table header
+    const thead = document.createElement('thead');
+    thead.innerHTML = `<tr><th>Position</th><th>Username</th><th>Time</th><th>Image</th></tr>`;
+    table.appendChild(thead);
+
+    const tbody = document.createElement('tbody');
+    for(let p=1;p<=totalEntries;p++){
+      const tr = document.createElement('tr');
+      if(p===1) tr.className='first top5';
+      else if(p===2) tr.className='second top5';
+      else if(p===3) tr.className='third top5';
+      else if(p<=5) tr.className='top5';
+
+      tr.innerHTML = `
+        <td>${p}</td>
+        <td>Player${p}</td>
+        <td>${(Math.random()*60).toFixed(2)}s</td>
+        <td><img src="placeholder-user.jpg" width="30" height="30" style="border-radius:50%"></td>
+      `;
+      tbody.appendChild(tr);
     }
+    table.appendChild(tbody);
+    sec.appendChild(table);
 
-    sec.innerHTML = bgTag + `
-      <h2>Track ${i}</h2>
-      <table>
-        <thead><tr><th>Username</th><th>Proof</th></tr></thead>
-        <tbody id="track-body-${i}"></tbody>
-      </table>`;
+    // Instructions at bottom
+    const instr = document.createElement('p');
+    instr.style.marginTop = '15px';
+    instr.style.fontStyle = 'italic';
+    instr.textContent = "To submit your score: send a screenshot of your username + score. Winners get a Discord rank!";
+    sec.appendChild(instr);
+
     tracksContainer.appendChild(sec);
-
-    // populate dropdown
-    const option = document.createElement('option');
-    option.value = 'Track '+i;
-    option.textContent = 'Track '+i;
-    document.getElementById('submit-track').appendChild(option);
   }
 
-  // Load from localStorage
-  const savedScores = JSON.parse(localStorage.getItem('polytrackScores')||'{}');
-  Object.assign(trackData,savedScores);
-  updateTables();
-
-  function updateTables(){
-    for(let i=1;i<=13;i++){
-      const tbody = document.getElementById('track-body-'+i);
-      tbody.innerHTML = '';
-      trackData['Track '+i].forEach(entry=>{
-        const tr = document.createElement('tr');
-        const imgTag = entry.proof ? `<img src="${entry.proof}" alt="proof">` : '';
-        tr.innerHTML = `<td>${entry.username}</td><td>${imgTag}</td>`;
-        tbody.appendChild(tr);
-      });
+  // Typing animation effect
+  const typingEls = document.querySelectorAll('.typing');
+  typingEls.forEach(el=>{
+    const text = el.textContent;
+    el.textContent = '';
+    let i=0;
+    function typeChar(){
+      if(i<text.length){
+        el.textContent += text.charAt(i);
+        i++;
+        setTimeout(typeChar,50);
+      }
     }
-  }
-
-  function submitScore(){
-    const username = document.getElementById('submit-username').value.trim();
-    const track = document.getElementById('submit-track').value;
-    const file = document.getElementById('submit-proof').files[0];
-    if(!username || !file) return alert('Please enter username and choose a proof image.');
-
-    const reader = new FileReader();
-    reader.onload = function(e){
-      const proofData = e.target.result;
-      trackData[track].push({username:username, proof:proofData});
-      localStorage.setItem('polytrackScores', JSON.stringify(trackData));
-      updateTables();
-      document.getElementById('submit-username').value = '';
-      document.getElementById('submit-proof').value = '';
-      alert('Score submitted! Admin will verify if you are the winner.');
-    };
-    reader.readAsDataURL(file);
-  }
+    typeChar();
+  });
 </script>
 
 </body>
