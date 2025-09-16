@@ -5,74 +5,134 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>CiphAnon Studios</title>
 <style>
+  /* Basic resets and styles */
   body {
-    margin:0; padding:0; font-family: Inter, Arial, sans-serif;
+    margin: 0; padding: 0; font-family: Inter, Arial, sans-serif;
     background: #0e0e0e;
-    color:#fff; text-align:center;
-    min-height:100vh;
+    color: #fff; text-align: center;
+    min-height: 100vh;
   }
   header {
     padding: 20px; background: rgba(0,0,0,0.8); backdrop-filter: blur(8px);
     font-size: 1.8em; font-weight: bold; letter-spacing: 1px;
     text-shadow: 0 2px 6px rgba(0,0,0,0.5);
-    position: sticky; top:0; z-index:1000;
+    position: sticky; top: 0; z-index: 1000;
   }
+  .go-home-btn {
+    background: #ff9f1c; border: none; padding: 10px 18px; border-radius: 8px;
+    color: black; font-weight: 700; cursor: pointer; font-size: 0.95em;
+    margin-top: 10px;
+    transition: background 0.2s;
+  }
+  .go-home-btn:hover { background: #ffb74d; }
+
   nav {
-    background:#111; display:flex; justify-content:center; gap:20px; padding:10px 0;
-    position: sticky; top:60px; z-index:999;
+    background: #111; display: flex; justify-content: center; gap: 20px; padding: 10px 0;
+    position: sticky; top: 60px; z-index: 999;
   }
   nav a {
-    color:#ff9f1c; text-decoration:none; font-weight:bold; padding:6px 12px;
-    border-radius:6px; transition: background 0.2s;
+    color: #ff9f1c; text-decoration: none; font-weight: bold; padding: 6px 12px;
+    border-radius: 6px; transition: background 0.2s;
   }
-  nav a:hover { background:#222; }
+  nav a:hover { background: #222; }
 
   section {
-    padding:50px 20px;
-    max-width:1200px; margin:auto;
+    padding: 50px 20px;
+    max-width: 1200px; margin: auto;
   }
   section h2 {
-    font-size:2em; margin-bottom:25px; color:#ff9f1c;
-    text-shadow:0 2px 8px rgba(0,0,0,0.6);
+    font-size: 2em; margin-bottom: 25px; color: #ff9f1c;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.6);
   }
 
+  /* Improved card layout */
   .items-container {
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:25px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
   }
   .item-card {
-    background: rgba(255,255,255,0.05);
-    padding:25px;
-    border-radius:16px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 16px;
     box-shadow: 0 8px 24px rgba(0,0,0,0.6);
-    transition: transform 0.25s, box-shadow 0.25s, background 0.25s;
-    cursor:pointer;
-    display:flex; flex-direction:column; align-items:center;
+    transition: transform 0.25s, box-shadow 0.25s;
+    cursor: pointer;
+    min-height: 250px;
   }
   .item-card:hover {
     transform: translateY(-8px);
     box-shadow: 0 16px 40px rgba(0,0,0,0.7);
-    background: rgba(255,255,255,0.08);
   }
-  .item-card h3 { margin:0 0 12px; font-size:1.4em; color:#ff9f1c; }
-  .item-card p { font-size:0.95em; color:#ccc; margin-bottom:20px; }
-  .item-card button {
-    background: black;
-    border:none; padding:10px 18px; border-radius:8px;
-    color:#ff9f1c; font-weight:700; cursor:pointer; font-size:0.95em;
-    transition: transform 0.2s, box-shadow 0.2s;
+  .item-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
   }
-  .item-card button:hover {
+  .item-card:hover img {
+    transform: scale(1.05);
+  }
+  .card-content {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    padding: 20px;
+    color: #fff;
+    text-align: left;
+    background: rgba(0, 0, 0, 0.6);
+    transition: background 0.3s ease;
+  }
+  .item-card:hover .card-content {
+    background: rgba(0, 0, 0, 0.8);
+  }
+  .card-content h3 {
+    margin-top: 0;
+    font-size: 1.5em;
+    color: #ff9f1c;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+  }
+  .card-content p {
+    font-size: 1em;
+    color: #ccc;
+    line-height: 1.4;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.5s ease-in-out, opacity 0.5s ease;
+  }
+  .item-card:hover .card-content p {
+    max-height: 100px; /* Adjust based on content */
+    opacity: 1;
+  }
+  .card-button {
+    background: #ff9f1c;
+    border: none; padding: 10px 18px; border-radius: 8px;
+    color: black; font-weight: 700; cursor: pointer; font-size: 0.95em;
+    transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+    position: absolute; bottom: 20px; right: 20px;
+  }
+  .card-button:hover {
     transform: translateY(-3px);
-    box-shadow:0 10px 25px rgba(0,0,0,0.4);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    background: #ffb74d;
+  }
+  /* Optional: Add a subtle overlay for better text readability */
+  .item-card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.7) 100%);
+  }
+  .item-card:hover::after {
+    background: linear-gradient(to bottom, transparent 20%, rgba(0,0,0,0.85) 100%);
   }
 </style>
 </head>
 <body>
 
 <header>CiphAnon Studios | G-S-M-D-P</header>
-<button onclick="window.location.href='../index.html'">Go To Home</button>
+<button class="go-home-btn" onclick="window.location.href='../index.html'">Go To Home</button>
 
 <nav>
   <a href="#g">G</a>
@@ -86,16 +146,22 @@
 <section id="g">
   <h2>G</h2>
   <div class="items-container">
-    <div class="item-card">
-      <h3>Nothing</h3>
-      <p>Blank</p>
-      <button onclick="playIntroThenOpen('https://example.com/game1')">P</button>
-    </div>
-    <div class="item-card">
-      <h3>Nothing</h3>
-      <p>Blank</p>
-      <button onclick="playIntroThenOpen('https://example.com/game2')">P</button>
-    </div>
+    <article class="item-card" onclick="playIntroThenOpen('https://example.com/game1')">
+      <img src="https://via.placeholder.com/600/600?text=Game+1" alt="Game Placeholder Image" />
+      <div class="card-content">
+        <h3>Nothing</h3>
+        <p>A more detailed description of the game can go here, explaining what it is about and why users should click. This text is initially hidden and appears on hover.</p>
+        <button class="card-button">P</button>
+      </div>
+    </article>
+    <article class="item-card" onclick="playIntroThenOpen('https://example.com/game2')">
+      <img src="https://via.placeholder.com/600/600?text=Game+2" alt="Game Placeholder Image" />
+      <div class="card-content">
+        <h3>Nothing</h3>
+        <p>A description for the second game. This content gives the user more information to decide if they want to interact with the link.</p>
+        <button class="card-button">P</button>
+      </div>
+    </article>
   </div>
 </section>
 
@@ -103,28 +169,38 @@
 <section id="s">
   <h2>S</h2>
   <div class="items-container">
-    <div class="item-card">
-      <h3>Petezah</h3>
-      <p>Blank</p>
-      <button onclick="playIntroThenOpen('https://supergisfire.com.cdn.cloudflare.net/')">Open</button>
-    </div>
-    <div class="item-card">
-      <h3>E-mag ig</h3>
-      <p>Blank</p>
-      <button onclick="playIntroThenOpen('https://www.algebra.casa/')">Open</button>
-    </div>
-  </div>
-  </div>
-  <div class="item-card">
-      <h3>petezah2</h3>
-      <p>Blank</p>
-      <button onclick="playIntroThenOpen('https://dashboard.adidasnmdcitysock.com.cdn.cloudflare.net/')">Open</button>
-    </div>
-   <div class="item-card">
-      <h3>petezah3</h3>
-      <p>Blank</p>
-      <button onclick="playIntroThenOpen('https://petezahbare.adidasnmdcitysock.com.cdn.cloudflare.net/')">Open</button>
-    </div>
+    <article class="item-card" onclick="playIntroThenOpen('https://supergisfire.com.cdn.cloudflare.net/')">
+      <img src="https://via.placeholder.com/600/600?text=Petezah" alt="Petezah Service Image" />
+      <div class="card-content">
+        <h3>Petezah</h3>
+        <p>This is a service from the Petezah network. Use this link to access the main site. More details about the service can be added here.</p>
+        <button class="card-button">Open</button>
+      </div>
+    </article>
+    <article class="item-card" onclick="playIntroThenOpen('https://www.algebra.casa/')">
+      <img src="https://via.placeholder.com/600/600?text=E-mag+ig" alt="E-mag ig Service Image" />
+      <div class="card-content">
+        <h3>E-mag ig</h3>
+        <p>Access the E-mag ig service via this secure link. A detailed explanation of its purpose can be written here for the user.</p>
+        <button class="card-button">Open</button>
+      </div>
+    </article>
+    <article class="item-card" onclick="playIntroThenOpen('https://dashboard.adidasnmdcitysock.com.cdn.cloudflare.net/')">
+      <img src="https://via.placeholder.com/600/600?text=Petezah2" alt="Petezah2 Service Image" />
+      <div class="card-content">
+        <h3>petezah2</h3>
+        <p>This is the second item related to the Petezah network. A full description of its function or purpose can be included here.</p>
+        <button class="card-button">Open</button>
+      </div>
+    </article>
+    <article class="item-card" onclick="playIntroThenOpen('https://petezahbare.adidasnmdcitysock.com.cdn.cloudflare.net/')">
+      <img src="https://via.placeholder.com/600/600?text=Petezah3" alt="Petezah3 Service Image" />
+      <div class="card-content">
+        <h3>petezah3</h3>
+        <p>A third service, also part of the Petezah network. Provide more information about what this service offers.</p>
+        <button class="card-button">Open</button>
+      </div>
+    </article>
   </div>
 </section>
 
@@ -132,11 +208,14 @@
 <section id="m">
   <h2>M</h2>
   <div class="items-container">
-    <div class="item-card">
-      <h3>tv</h3>
-      <p>Blank</p>
-      <button onclick="playIntroThenOpen('https://serialgo.tv/home/')">W</button>
-    </div>
+    <article class="item-card" onclick="playIntroThenOpen('https://serialgo.tv/home/')">
+      <img src="https://via.placeholder.com/600/600?text=TV" alt="TV Service Image" />
+      <div class="card-content">
+        <h3>tv</h3>
+        <p>Watch content on this television service. Add a longer description here about what content is available or how the service works.</p>
+        <button class="card-button">W</button>
+      </div>
+    </article>
   </div>
 </section>
 
@@ -144,28 +223,37 @@
 <section id="d">
   <h2>D</h2>
   <div class="items-container">
-    <div class="item-card">
-      <h3>Nothing</h3>
-      <p>Blank</p>
-      <button onclick="playIntroThenOpen('https://example.com/file1')">D</button>
-    </div>
+    <article class="item-card" onclick="playIntroThenOpen('https://example.com/file1')">
+      <img src="https://via.placeholder.com/600/600?text=Download" alt="Download Item Image" />
+      <div class="card-content">
+        <h3>Nothing</h3>
+        <p>Description of a downloadable file or item. This information is important for the user to understand what they are downloading.</p>
+        <button class="card-button">D</button>
+      </div>
+    </article>
   </div>
 </section>
 
-  <!-- P Section -->
+<!-- P Section -->
 <section id="p">
   <h2>P</h2>
   <div class="items-container">
-    <div class="item-card">
-      <h3>Doge</h3>
-      <p>Blank</p>
-      <button onclick="playIntroThenOpen('https://dogeubyvcsa.e-m-a-i-l.org/')">Open</button>
-    </div>
-    <div class="item-card">
-      <h3>RmrHd</h3>
-      <p>Blank</p>
-      <button onclick="playIntroThenOpen('https://rh.doge.land/')">Open</button>
-    </div>
+    <article class="item-card" onclick="playIntroThenOpen('https://dogeubyvcsa.e-m-a-i-l.org/')">
+      <img src="https://via.placeholder.com/600/600?text=Doge" alt="Doge Service Image" />
+      <div class="card-content">
+        <h3>Doge</h3>
+        <p>This item is related to the Doge service. Provide more context and a better description for the user here.</p>
+        <button class="card-button">Open</button>
+      </div>
+    </article>
+    <article class="item-card" onclick="playIntroThenOpen('https://rh.doge.land/')">
+      <img src="https://via.placeholder.com/600/600?text=RmrHd" alt="RmrHd Service Image" />
+      <div class="card-content">
+        <h3>RmrHd</h3>
+        <p>An explanation of what the RmrHd service is. A good description will entice users to click the link.</p>
+        <button class="card-button">Open</button>
+      </div>
+    </article>
   </div>
 </section>
 
