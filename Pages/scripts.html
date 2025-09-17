@@ -1,1 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scripts Page</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- Basic Styling & Layout --- */
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            line-height: 1.6;
+            background-color: #f4f7f9;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* --- Header --- */
+        .site-header {
+            background-color: #ffffff;
+            padding: 20px 0;
+            border-bottom: 2px solid #ddd;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .site-header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #007bff;
+        }
+
+        /* --- Navigation & Search --- */
+        .main-nav {
+            display: flex;
+            align-items: center;
+        }
+        
+        .home-button {
+            background-color: #007bff;
+            color: #ffffff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            margin-right: 20px;
+        }
+
+        .home-button:hover {
+            background-color: #0056b3;
+        }
+
+        .search-bar {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+            width: 250px;
+        }
+        
+        /* --- Main Content --- */
+        .content-wrapper {
+            padding: 40px 0;
+        }
+
+        .scripts-section h2 {
+            text-align: center;
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        /* --- Script Cards (Grid Layout) --- */
+        .script-card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .script-card {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .script-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+
+        .script-card h3 {
+            margin-top: 0;
+            color: #007bff;
+        }
+        
+        .script-content {
+            position: relative;
+            background-color: #2b2b2b;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9em;
+            margin-top: 15px;
+            overflow-x: auto;
+            white-space: pre;
+            border-bottom: 30px solid #2b2b2b;
+        }
+
+        .copy-button {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: #218838;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 3px;
+            font-size: 0.8em;
+            transition: background-color 0.3s ease;
+        }
+
+        .copy-button:hover {
+            background-color: #1a6b29;
+        }
+
+        .copy-button:active {
+            background-color: #155822;
+        }
+
+        /* --- Footer --- */
+        .site-footer {
+            background-color: #333;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+
+        /* --- Responsive adjustments --- */
+        @media (max-width: 768px) {
+            .site-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            .main-nav {
+                margin-top: 10px;
+                flex-direction: column;
+            }
+            .home-button {
+                margin: 0 0 10px 0;
+            }
+            .site-header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="container">
+            <h1>Scripts</h1>
+            <nav class="main-nav">
+                <a href="../index.html" class="home-button"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#F19E39"><path d="M240-200h120v-240h240v240h120v-360L480-740 240-560v360Zm-80 80v-480l320-240 320 240v480H520v-240h-80v240H160Zm320-350Z"/></svg></a>
+                <input type="text" id="script-search" class="search-bar" placeholder="Search scripts...">
+            </nav>
+        </div>
+    </header>
+
+    <main class="content-wrapper">
+        <div class="container">
+            <section class="scripts-section">
+                <h2>Script Library</h2>
+                <p>Welcome to the scripts page. Use the search bar to filter scripts or click the "Copy Code" button on any card to copy the code snippet to your clipboard.</p>
+                
+                <div class="script-card-grid" id="script-cards-container">
+                    <!-- Example Script Card 1 -->
+                    <div class="script-card">
+                        <h3>Automated Task Runner</h3>
+                        <p>A simple Python script to automate repetitive file management tasks.</p>
+                        <div class="script-content">
+                            <button class="copy-button" onclick="copyCode(this)">Copy Code</button>
+                            <code>
+# Python Automated Task Runner
+import os
+import shutil
+
+source_dir = "C:/Users/user/Desktop/reports"
+target_dir = "C:/Users/user/Desktop/archives"
+
+def move_files():
+    for filename in os.listdir(source_dir):
+        if filename.endswith(".txt"):
+            shutil.move(os.path.join(source_dir, filename), target_dir)
+
+if __name__ == "__main__":
+    move_files()
+                            </code>
+                        </div>
+                    </div>
+                    
+                    <!-- Example Script Card 2 -->
+                    <div class="script-card">
+                        <h3>Web Scraper</h3>
+                        <p>A versatile script for scraping data from websites with configurable settings.</p>
+                        <div class="script-content">
+                            <button class="copy-button" onclick="copyCode(this)">Copy Code</button>
+                            <code>
+# Python Web Scraper
+import requests
+from bs4 import BeautifulSoup
+
+url = "http://example.com"
+response = requests.get(url)
+soup = BeautifulSoup(response.content, 'html.parser')
+
+for link in soup.find_all('a'):
+    print(link.get('href'))
+                            </code>
+                        </div>
+                    </div>
+                    
+                    <!-- Example Script Card 3 -->
+                    <div class="script-card">
+                        <h3>Server Log Analyzer</h3>
+                        <p>An application to analyze server logs and generate easy-to-read reports.</p>
+                        <div class="script-content">
+                            <button class="copy-button" onclick="copyCode(this)">Copy Code</button>
+                            <code>
+# Server Log Analyzer (pseudo-code)
+def analyze_logs(log_file):
+    with open(log_file, 'r') as f:
+        log_data = f.readlines()
+    
+    errors = [line for line in log_data if "ERROR" in line]
+    warnings = [line for line in log_data if "WARNING" in line]
+    
+    print(f"Found {len(errors)} errors and {len(warnings)} warnings.")
+                            </code>
+                        </div>
+                    </div>
+                    
+                    <!-- Add more script cards here -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2025 Your Website. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Function to copy code to clipboard
+        async function copyCode(button) {
+            const codeBlock = button.nextElementSibling;
+            try {
+                await navigator.clipboard.writeText(codeBlock.textContent.trim());
+                button.textContent = 'Copied!';
+                setTimeout(() => {
+                    button.textContent = 'Copy Code';
+                }, 2000);
+            } catch (err) {
+                console.error('Failed to copy text: ', err);
+                alert('Failed to copy code. Please try again.');
+            }
+        }
+
+        // Function for the search bar
+        document.getElementById('script-search').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const scriptCards = document.querySelectorAll('.script-card');
+
+            scriptCards.forEach(card => {
+                const cardText = card.textContent.toLowerCase();
+                if (cardText.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
 
