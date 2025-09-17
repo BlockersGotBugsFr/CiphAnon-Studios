@@ -1,50 +1,50 @@
-# [CiphAnon Studios]
+# CiphAnon Studios
 
-welcome to CiphAnon Studios, here you will be able to bypass school restrictions and game cuz likee who really wants to do fucking school work.
+Welcome to CiphAnon Studios! This website provides browser-based games and resources for entertainment and to bypass school restrictions. It's built for students who want a bit of fun during downtime.
 
 ## Live Demo
-
-If your website is live and publicly accessible via GitHub Pages, Netlify, or another service, include a link here.
 
 **[Live Website Link](https://blockersgotbugsfr.github.io/CiphAnon-Studios/)**
 
 ## About
 
-*Example:*
-> 
+This website was created as a side project to explore front-end development using HTML, CSS, and JavaScript. It focuses on providing a clean, accessible platform for games that can be enjoyed in a browser without installation or special permissions.
 
 ## Features
 
-
-
-- **Responsive Design:** 
-- **Clean Interface:** 
-- **[Other Feature]:** 
+- **Responsive Design:** Enjoy the site on any device, from desktops to mobile phones.
+- **Clean Interface:** A straightforward and easy-to-navigate design.
+- **In-Browser Games:** Play games directly in your browser without downloads.
 
 ## Technologies Used
 
-List the core technologies you used to build the front-end of the website. This is a great section for showing off the skills you used.
-
-- **HTML5:** For the page structure.
-- **CSS3:** For styling and layout.
-- **JavaScript (ES6+):** For interactive features (if any).
+- **HTML5:** For structuring the website's content.
+- **CSS3:** For styling the look and feel of the site.
+- **JavaScript (ES6+):** For the interactive game logic and other features.
 
 ## Screenshots
 
-Visuals are a great way to show what your website looks like without requiring a user to visit the link. Include one or more screenshots or a GIF.
+Visuals are a great way to show what your website looks like. You can replace the placeholder below with a screenshot of your site.
 
-![Screenshot of the landing page](path/to/your/screenshot.png)
+![Screenshot of the CiphAnon Studios landing page](path/to/your/screenshot.png)
+
+## Featured People
+
+A big thank you to the people who helped test and improve this project!
+
+- **[Crayon]** - (Tester)
+- **[SecretShadows]** - (helped traffic people to my site).
 
 ## Contact
 
-Provide ways for people to reach out to you if they have questions or want to connect.
+You can get in touch with me here:
 
-- **Your Name** - (e.g., Jane Doe)
-- **GitHub** - (e.g., [https://github.com/your-username](https://github.com/your-username))
-- **Email** - (e.g., janedoe@example.com)
+- **Your Name** - [blank]
+- **YouTube** - [https://www.youtube.com/@CiphAnonStudios] - [https://www.youtube.com/@ItsToonyTime]
+- **Email** - [blank]
+- **Discord** - [blank]
+- **Roblox** - [blank]
 
 ## License
-
-If you're making your code available for others to use, it's good practice to specify a license. The MIT license is a common choice for personal projects.
 
 This project is licensed under the **MIT License**.
