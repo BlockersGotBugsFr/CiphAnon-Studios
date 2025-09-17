@@ -660,28 +660,104 @@ function playIntroThenOpen(url){
       const popupTitle = "CiphAnon Studios";
       const popupHTML = `
         <!DOCTYPE html>
-        <html lang="en">
-        <head>
-          <meta charset="UTF-8"/>
-          <meta name="viewport" content="width=device-width,initial-scale=1"/>
-          <title>${popupTitle}</title>
-          <style>
-            body{margin:0;display:flex;flex-direction:column;height:100vh;background:orange;color:white;font-family:Inter,Arial,sans-serif;}
-            iframe{flex:1;border:none;width:100%;}
-            .topbar{padding:12px 20px;background:black;display:flex;justify-content:space-between;align-items:center;font-weight:bold;color:orange;}
-            .topbar button{padding:6px 14px;border:none;border-radius:6px;background:#071018;color:#ff9f1c;cursor:pointer;font-weight:bold;transition:transform 0.15s;}
-            .topbar button:hover{transform:translateY(-2px);background:#333;}
-          </style>
-        </head>
-        <body>
-          <div class="topbar">
-            <button></button>
-            <span>CiphAnon Studios</span>
-            <button onclick="window.close()"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#F19E39"><path d="M240-200h120v-240h240v240h120v-360L480-740 240-560v360Zm-80 80v-480l320-240 320 240v480H520v-240h-80v240H160Zm320-350Z"/></svg></button>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Main Page</title>
+  <style>
+    body { font-family: Inter, Arial, sans-serif; text-align: center; margin-top: 50px; }
+    button { padding: 10px 20px; font-size: 16px; cursor: pointer; }
+
+    /* The modal container, hidden by default */
+    .modal {
+      display: none; /* Hide the modal */
+      position: fixed; /* Position it relative to the viewport */
+      z-index: 1000; /* Sit on top of other elements */
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      overflow: auto; /* Enable scroll if needed */
+      background-color: rgba(0,0,0,0.6); /* Dark background with transparency */
+      box-sizing: border-box;
+      padding: 50px; /* Add some padding around the popup */
+      justify-content: center; /* Center horizontally */
+      align-items: center; /* Center vertically */
+    }
+
+    /* Modal content styling */
+    .modal-content {
+      background: orange;
+      width: 1000px;
+      max-width: 90%; /* Make it responsive */
+      height: 700px;
+      max-height: 90%; /* Make it responsive */
+      display: flex;
+      flex-direction: column;
+      border: 2px solid black;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    /* Your existing topbar and iframe styles */
+    iframe { flex: 1; border: none; width: 100%; }
+    .topbar { padding: 12px 20px; background: black; display: flex; justify-content: space-between; align-items: center; font-weight: bold; color: orange; }
+    .topbar button { padding: 6px 14px; border: none; border-radius: 6px; background: #071018; color: #ff9f1c; cursor: pointer; font-weight: bold; transition: transform 0.15s; }
+    .topbar button:hover { transform: translateY(-2px); background: #333; }
+  </style>
+</head>
+<body>
+
+  <h1>Click the button to open a smaller Google window</h1>
+
+  <!-- The button to trigger the modal popup -->
+  <button onclick="openInModal('https://www.google.com')">Open Google Window</button>
+
+  <script>
+    function openInModal(url) {
+      const modalId = 'dynamic-modal';
+      let modal = document.getElementById(modalId);
+
+      if (!modal) {
+        // Create the modal container if it doesn't exist
+        modal = document.createElement('div');
+        modal.id = modalId;
+        modal.className = 'modal';
+
+        const popupTitle = "CiphAnon Studios";
+        const modalHTML = `
+          <div class="modal-content">
+            <div class="topbar">
+              <button></button>
+              <span>${popupTitle}</span>
+              <button onclick="closeModal()">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#F19E39"><path d="M240-200h120v-240h240v240h120v-360L480-740 240-560v360Zm-80 80v-480l320-240 320 240v480H520v-240h-80v240H160Zm320-350Z"/></svg>
+              </button>
+            </div>
+            <iframe id="popup-iframe" src=""></iframe>
           </div>
-          <iframe src="${url}"></iframe>
-        </body>
-        </html>
+        `;
+
+        modal.innerHTML = modalHTML;
+        document.body.appendChild(modal);
+      }
+
+      const iframe = document.getElementById('popup-iframe');
+      iframe.src = url; // Set the iframe's source URL
+      modal.style.display = "flex"; // Show the modal
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('dynamic-modal');
+      if (modal) {
+        modal.style.display = "none"; // Hide the modal
+        const iframe = document.getElementById('popup-iframe');
+        iframe.src = ""; // Clear the iframe source to stop any audio/video
+      }
+    }
+  </script>
+  
+</body>
+</html>
+
       `;
       win.document.open();
       win.document.write(popupHTML);
