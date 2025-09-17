@@ -652,29 +652,117 @@ function playIntroThenOpen(url){
   const win = window.open('about:blank','_blank','width=1000,height=700');
   const popupTitle = "CiphAnon Studios";
   const popupHTML = `
-    <!DOCTYPE html>
+   <!DOCTYPE html>
     <html lang="en">
     <head>
       <meta charset="UTF-8"/>
       <meta name="viewport" content="width=device-width,initial-scale=1"/>
       <title>${popupTitle}</title>
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
       <style>
-        body{margin:0;display:flex;flex-direction:column;height:100vh;background:orange;color:white;font-family:Inter,Arial,sans-serif;}
-        iframe{flex:1;border:none;width:100%;}
-        .topbar{padding:12px 20px;background:black;display:flex;justify-content:space-between;align-items:center;font-weight:bold;color:orange;}
-        .topbar button{padding:6px 14px;border:none;border-radius:6px;background:#071018;color:#ff9f1c;cursor:pointer;font-weight:bold;transition:transform 0.15s;}
-        .topbar button:hover{transform:translateY(-2px);background:#333;}
+        /* Modernized colors and typography */
+        :root {
+          --primary-color: #ff9f1c;
+          --secondary-color: #071018;
+          --background-orange: #ff8c00; /* A slightly richer orange */
+          --font-family: 'Poppins', Inter, Arial, sans-serif;
+        }
+
+        body {
+          margin: 0;
+          display: flex;
+          flex-direction: column;
+          height: 100vh;
+          background-color: var(--background-orange);
+          color: white;
+          font-family: var(--font-family);
+          transition: background-color 0.5s ease-in-out; /* Smooth transition for background changes */
+        }
+
+        iframe {
+          flex: 1;
+          border: none;
+          width: 100%;
+          border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .topbar {
+          padding: 12px 20px;
+          background: rgba(0, 0, 0, 0.4); /* Glassmorphism background */
+          backdrop-filter: blur(10px); /* Blur effect for modern feel */
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          font-weight: 600;
+          color: var(--primary-color);
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+          position: sticky;
+          top: 0;
+          z-index: 10;
+        }
+
+        .topbar button {
+          padding: 6px 14px;
+          border: none;
+          border-radius: 8px; /* Slightly larger radius */
+          background-color: var(--secondary-color);
+          color: var(--primary-color);
+          cursor: pointer;
+          font-weight: bold;
+          transition: transform 0.15s ease, box-shadow 0.15s ease;
+          display: flex;
+          align-items: center;
+        }
+
+        .topbar button:hover {
+          transform: translateY(-2px);
+          background: #333;
+          box-shadow: 0 4px 12px rgba(255, 159, 28, 0.4); /* Add glow effect on hover */
+        }
+
+        .topbar button svg {
+          height: 24px;
+          width: 24px;
+          fill: var(--primary-color);
+        }
+
+        .topbar-title {
+          flex-grow: 1;
+          text-align: center;
+          font-size: 1.25rem;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        /* Responsive adjustments for smaller screens */
+        @media (max-width: 600px) {
+          .topbar {
+            padding: 10px 15px;
+          }
+          .topbar-title {
+            font-size: 1rem;
+          }
+        }
       </style>
     </head>
     <body>
       <div class="topbar">
-        <button></button>
-        <span>CiphAnon Studios</span>
-        <button onclick="window.close()"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#F19E39"><path d="M240-200h120v-240h240v240h120v-360L480-740 240-560v360Zm-80 80v-480l320-240 320 240v480H520v-240h-80v240H160Zm320-350Z"/></svg></button>
+        <button class="topbar-button back-button">
+          <!-- Back button with a new icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#ff9f1c"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M11.67 3.87L9.9 2.1 0 12l9.9 9.9 1.77-1.77L3.54 12z"/></svg>
+        </button>
+        <span class="topbar-title">${popupTitle}</span>
+        <button class="topbar-button close-button" onclick="window.close()">
+          <!-- Close button with a modern 'X' icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#ff9f1c"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
       </div>
       <iframe src="${url}"></iframe>
     </body>
-    </html>
+</html>
   `;
   win.document.open();
   win.document.write(popupHTML);
