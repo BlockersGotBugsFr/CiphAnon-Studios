@@ -648,39 +648,46 @@ function playIntroThenOpen(url){
   }, 3000);
 }
 
-function openPopup(url){
-  const win = window.open('about:blank','_blank','width=1000,height=700');
-  const popupTitle = "CiphAnon Studios";
-  const popupHTML = `
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-      <meta charset="UTF-8"/>
-      <meta name="viewport" content="width=device-width,initial-scale=1"/>
-      <title>${popupTitle}</title>
-      <style>
-        body{margin:0;display:flex;flex-direction:column;height:100vh;background:orange;color:white;font-family:Inter,Arial,sans-serif;}
-        iframe{flex:1;border:none;width:100%;}
-        .topbar{padding:12px 20px;background:black;display:flex;justify-content:space-between;align-items:center;font-weight:bold;color:orange;}
-        .topbar button{padding:6px 14px;border:none;border-radius:6px;background:#071018;color:#ff9f1c;cursor:pointer;font-weight:bold;transition:transform 0.15s;}
-        .topbar button:hover{transform:translateY(-2px);background:#333;}
-      </style>
-    </head>
-    <body>
-      <div class="topbar">
-        <button></button>
-        <span>CiphAnon Studios</span>
-        <button onclick="window.close()"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#F19E39"><path d="M240-200h120v-240h240v240h120v-360L480-740 240-560v360Zm-80 80v-480l320-240 320 240v480H520v-240h-80v240H160Zm320-350Z"/></svg></button>
-      </div>
-      <iframe src="${url}"></iframe>
-    </body>
-    </html>
-  `;
-  win.document.open();
-  win.document.write(popupHTML);
-  win.document.close();
-}
-</script>
+  <h1>Click the button to open a smaller Google window</h1>
+
+  <!-- The button to trigger the popup -->
+  <button onclick="openPopup('https://www.google.com')">Open Google Window</button>
+
+  <!-- Your existing JavaScript function -->
+  <script>
+    function openPopup(url){
+      const win = window.open('about:blank','_blank','width=1000,height=700');
+      const popupTitle = "CiphAnon Studios";
+      const popupHTML = `
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+          <meta charset="UTF-8"/>
+          <meta name="viewport" content="width=device-width,initial-scale=1"/>
+          <title>${popupTitle}</title>
+          <style>
+            body{margin:0;display:flex;flex-direction:column;height:100vh;background:orange;color:white;font-family:Inter,Arial,sans-serif;}
+            iframe{flex:1;border:none;width:100%;}
+            .topbar{padding:12px 20px;background:black;display:flex;justify-content:space-between;align-items:center;font-weight:bold;color:orange;}
+            .topbar button{padding:6px 14px;border:none;border-radius:6px;background:#071018;color:#ff9f1c;cursor:pointer;font-weight:bold;transition:transform 0.15s;}
+            .topbar button:hover{transform:translateY(-2px);background:#333;}
+          </style>
+        </head>
+        <body>
+          <div class="topbar">
+            <button></button>
+            <span>CiphAnon Studios</span>
+            <button onclick="window.close()"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#F19E39"><path d="M240-200h120v-240h240v240h120v-360L480-740 240-560v360Zm-80 80v-480l320-240 320 240v480H520v-240h-80v240H160Zm320-350Z"/></svg></button>
+          </div>
+          <iframe src="${url}"></iframe>
+        </body>
+        </html>
+      `;
+      win.document.open();
+      win.document.write(popupHTML);
+      win.document.close();
+    }
+  </script>
 
 </body>
 </html>
