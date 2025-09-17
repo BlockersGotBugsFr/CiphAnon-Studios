@@ -652,168 +652,29 @@ function playIntroThenOpen(url){
   const win = window.open('about:blank','_blank','width=1000,height=700');
   const popupTitle = "CiphAnon Studios";
   const popupHTML = `
-   <!DOCTYPE html>
+  <!DOCTYPE html>
     <html lang="en">
     <head>
       <meta charset="UTF-8"/>
       <meta name="viewport" content="width=device-width,initial-scale=1"/>
       <title>${popupTitle}</title>
-      <link rel="preconnect" href="https://fonts.googleapis.com">
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-      <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
       <style>
-        /* Custom properties for colors and fonts */
-        :root {
-            --primary-color: #ff9f1c;
-            --secondary-color: #071018;
-            --background-color: #212121;
-            --topbar-bg: rgba(0, 0, 0, 0.4);
-            --font-family: 'Poppins', Inter, Arial, sans-serif;
-        }
-
-        body {
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
-            background-color: var(--background-color);
-            color: white;
-            font-family: var(--font-family);
-        }
-
-        .topbar {
-            padding: 12px 20px;
-            background: var(--topbar-bg);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px); /* For Safari */
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: 600;
-            color: var(--primary-color);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            position: sticky;
-            top: 0;
-            z-index: 10;
-        }
-
-        .topbar-button {
-            padding: 6px 14px;
-            border: none;
-            border-radius: 8px;
-            background-color: var(--secondary-color);
-            color: var(--primary-color);
-            cursor: pointer;
-            font-weight: bold;
-            transition: transform 0.15s ease, box-shadow 0.15s ease;
-            display: flex;
-            align-items: center;
-        }
-
-        .topbar-button:hover {
-            transform: translateY(-2px);
-            background: #333;
-            box-shadow: 0 4px 12px rgba(255, 159, 28, 0.4);
-        }
-
-        .topbar-title {
-            flex-grow: 1;
-            text-align: center;
-            font-size: 1.25rem;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        
-        .topbar-button svg {
-            fill: var(--primary-color);
-        }
-
-        /* Iframe styling */
-        iframe {
-            flex: 1;
-            border: none;
-            width: 100%;
-            opacity: 0; /* Initially hidden */
-            transition: opacity 0.5s ease-in-out;
-        }
-
-        /* Loading Spinner */
-        .loader-container {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            height: 100%;
-            z-index: 5;
-        }
-
-        .spinner {
-            width: 50px;
-            height: 50px;
-            border: 4px solid rgba(255, 255, 255, 0.3);
-            border-top: 4px solid var(--primary-color);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 600px) {
-            .topbar {
-                padding: 10px 15px;
-            }
-            .topbar-title {
-                font-size: 1rem;
-            }
-        }
+        body{margin:0;display:flex;flex-direction:column;height:100vh;background:orange;color:white;font-family:Inter,Arial,sans-serif;}
+        iframe{flex:1;border:none;width:100%;}
+        .topbar{padding:12px 20px;background:black;display:flex;justify-content:space-between;align-items:center;font-weight:bold;color:orange;}
+        .topbar button{padding:6px 14px;border: 2px solid orange;border-radius:100px;background:#071018;color:#ff9f1c;cursor:pointer;font-weight:bold;transition:transform 0.15s;}
+        .topbar button:hover{transform:translateY(-2px);background:#333;}
       </style>
     </head>
     <body>
       <div class="topbar">
-        <button class="topbar-button back-button">
-          <!-- Your original SVG -->
-          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#F19E39"><path d="M240-200h120v-240h240v240h120v-360L480-740 240-560v360Zm-80 80v-480l320-240 320 240v480H520v-240h-80v240H160Zm320-350Z"/></svg>
-        </button>
-        <span class="topbar-title">${popupTitle}</span>
-        <button class="topbar-button close-button" onclick="window.close()">
-          <!-- Your existing close SVG from previous versions -->
-          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#F19E39"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>
-        </button>
+        <button></button>
+        <span>CiphAnon Studios</span>
+        <button onclick="window.close()"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#F19E39"><path d="M240-200h120v-240h240v240h120v-360L480-740 240-560v360Zm-80 80v-480l320-240 320 240v480H520v-240h-80v240H160Zm320-350Z"/></svg></button>
       </div>
-
-      <!-- Loading spinner container -->
-      <div class="loader-container">
-        <div class="spinner"></div>
-      </div>
-
-      <!-- Iframe for content -->
-      <iframe id="contentFrame" src="${url}" title="${popupTitle}"></iframe>
-
-      <script>
-        // Get the iframe and the loader elements
-        const iframe = document.getElementById('contentFrame');
-        const loaderContainer = document.querySelector('.loader-container');
-
-        // Listen for the iframe's content to load
-        iframe.addEventListener('load', () => {
-          // Hide the loader container
-          loaderContainer.style.display = 'none';
-          // Fade in the iframe content
-          iframe.style.opacity = 1;
-        });
-      </script>
+      <iframe src="${url}"></iframe>
     </body>
-</html>
-
+    </html>
   `;
   win.document.open();
   win.document.write(popupHTML);
