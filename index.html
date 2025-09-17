@@ -270,7 +270,41 @@ li::before {
         font-size: 1em;
     }
 }
-  
+
+.image-swap {
+  position: relative;
+  display: inline-block;
+  width: 600px; /* Adjust to your image size */
+  height: 400px; /* Adjust to your image size */
+  margin: 0 auto;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.image-swap img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: opacity 0.4s ease-in-out; /* Smooth fade effect */
+}
+
+/* Initially, the hover image is fully transparent */
+.image-swap .img-hover {
+  opacity: 0;
+}
+
+/* On hover, the hover image becomes visible */
+.image-swap:hover .img-hover {
+  opacity: 1;
+}
+
+/* On hover, the default image fades out */
+.image-swap:hover .img-default {
+  opacity: 0;
+}
+
 </style>
 </head>
 <body>
@@ -345,6 +379,13 @@ li::before {
       <img src="assets/1000007475.png" alt="Character" class="portrait" loading="lazy">
     </div>
   </section>
+
+  <div class="image-swap">
+   
+    <img class="img-default" src="../assets/1000007475.png" alt="Default image">
+  
+    <img class="img-hover" src="../assets/1000007475.png" alt="Hover image">
+  </div>
   
         <div class="about-header">
             <h1 class="heading-large">Sch𝟶𝟶l Sucks Wh𝟶 Else Agrees</h1>
