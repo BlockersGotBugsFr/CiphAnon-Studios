@@ -206,7 +206,7 @@
     <div class="container">
       <h1>Scripts</h1>
       <nav class="main-nav">
-        <a href="../index.html" class="home-button">Home</a>
+        <a href="../index.html" class="home-button"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#F19E39"><path d="M240-200h120v-240h240v240h120v-360L480-740 240-560v360Zm-80 80v-480l320-240 320 240v480H520v-240h-80v240H160Zm320-350Z"/></svg></a>
         <input type="text" id="script-search" class="search-bar" placeholder="Search scripts...">
       </nav>
     </div>
@@ -216,13 +216,13 @@
     <div class="container">
       <section class="scripts-section">
         <h2>Script Library</h2>
-        <p>Search and copy underground code snippets straight to your clipboard.</p>
+        <p>Search and copy underground code straight to your clipboard/download to play<br>https://sites.google.com/view/great-minds-education-1/home<br>https://sites.google.com/view/great-minds-education-2/home.</p>
 
         <div class="script-card-grid" id="script-cards-container">
           <!-- Example Script Card -->
           <div class="script-card">
             <h3>Duck Clicker</h3>
-            <p>Embed the duck clicker game.</p>
+            <p>script.</p>
             <div class="script-content">
               <button class="copy-button" onclick="copyCode(this)">Copy</button>
               <code>&lt;html&gt;&lt;body&gt;
@@ -233,19 +233,120 @@ style="border:none;width:100%;height:100%;"&gt;&lt;/iframe&gt;
           </div>
 
           <div class="script-card">
-            <h3>Web Scraper</h3>
-            <p>A simple Python web scraper.</p>
+            <h3>Tube Jumpers</h3>
+            <p>script</p>
             <div class="script-content">
               <button class="copy-button" onclick="copyCode(this)">Copy</button>
-              <code>import requests
-from bs4 import BeautifulSoup
-
-url = "http://example.com"
-response = requests.get(url)
-soup = BeautifulSoup(response.content, 'html.parser')
-
-for link in soup.find_all('a'):
-    print(link.get('href'))</code>
+              <code>&lt;html&gt;
+  &lt;head&gt;
+    &lt;script src="//www.google.com/jsapi"&gt;&lt;/script&gt;
+    &lt;script&gt;
+      window.parent.maeExportApis_();
+    &lt;/script&gt;
+    &lt;style&gt;
+      body {
+        overflow: hidden;
+      }
+    &lt;/style&gt;
+    &lt;link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/greggman/webgl-helpers@06e3d45373af0f3ce8f58b472b61835d9678d23a/examples/unity/TemplateData/style.css"
+    &gt;
+    &lt;script
+      src="https://cdn.jsdelivr.net/gh/greggman/webgl-helpers@06e3d45373af0f3ce8f58b472b61835d9678d23a/examples/unity/TemplateData/UnityProgress.js"
+    &gt;&lt;/script&gt;
+    &lt;script
+      src="https://cdn.jsdelivr.net/gh/Ven0mYT/tube-jumpers-ven0m@d7e473d1bbb19c421a23516ef2202bda21e8c3f0/js/UnityLoader.js"
+    &gt;&lt;/script&gt;
+    &lt;script&gt;
+      var gameInstance = UnityLoader.instantiate(
+        "gameContainer",
+        "https://cdn.jsdelivr.net/gh/Ven0mYT/tube-jumpers-ven0m@d7e473d1bbb19c421a23516ef2202bda21e8c3f0/tube-jumpers.json",
+        {
+          onProgress: UnityProgress,
+          Module: {
+            onRuntimeInitialized: function () {
+              UnityProgress(gameInstance, "complete");
+            },
+          },
+        }
+      );
+    &lt;/script&gt;
+    &lt;script src="https://cdn.jsdelivr.net/gh/st39/sdk@main/api.js"&gt;&lt;/script&gt;
+    &lt;style type="text/css"&gt;
+      #button {
+        display: none;
+      }
+      .imgb_vis {
+        animation: imgb-animation 7s linear;
+      }
+      @keyframes imgb-animation {
+        10% {
+          transform: translateX(0);
+        }
+        20% {
+          transform: translateX(100px);
+        }
+        90% {
+          transform: translateX(100px);
+        }
+        100% {
+          transform: translateX(0);
+        }
+      }
+    &lt;/style&gt;
+  &lt;/head&gt;
+  &lt;body data-new-gr-c-s-check-loaded="14.1249.0" data-gr-ext-installed=""&gt;
+    &lt;div class="webgl-content"&gt;
+      &lt;div
+        id="gameContainer"
+        style="
+          width: 100vw;
+          height: 100vh;
+          padding: 0px;
+          margin: 0px;
+          border: 0px;
+          position: relative;
+          background: black;
+        "
+      &gt;
+        &lt;canvas id="#canvas" width="902" height="564" style=""&gt;&lt;/canvas&gt;
+        &lt;div class="logo Dark" style="display: none"&gt;&lt;/div&gt;
+        &lt;div class="progress Dark" style="display: none"&gt;
+          &lt;div class="empty" style="width: 0%"&gt;&lt;/div&gt;
+          &lt;div class="full" style="width: 100%"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div
+      id="button"
+      class="imgb imgb_vis"
+      style="position: fixed; top: 10%; left: -100px; z-index: 10; display: none"
+    &gt;
+      &lt;a
+        target="_blank"
+        href="https://sites.google.com/view/classroom6x/"
+        title="More Unblocked Games 6x"
+        &gt;&lt;img
+          src="https://lh4.googleusercontent.com/lUEWrXMVEr4AdjKISyJahDRJ61bwfvHdpeYm86Djn5U8oCm9dI60NGXSBqad9HUvzTXgqlkosA_hWV-VuXPjzrkGvh3_kNSgYk8ySWzXnDpbBCBiooyBbU8oBy3YBZMDkW8RcRVmDuC0raoeqZBm8kBlqs6c5mdfkJeN2aE68lXS_lcOZ5_F7lIuM6qLVg"
+          width="100"
+          height="30"
+          style="cursor: pointer"
+          alt="More of best Classroom 6x Unblocked Games"
+        &gt;&lt;/a
+      &gt;
+    &lt;/div&gt;
+    &lt;script
+      src="blob:https://n-ovufrclbft6pcpbtig6gwx5bzfs7jm3s64l5wja-0lu-script.googleusercontent.com/e396c208-2ff3-4219-bcfb-e45a33e958fa"
+      id="35dfc395013eaa740252ee543cdd3bc1"
+    &gt;&lt;/script&gt;
+    &lt;script
+      src="blob:https://n-ovufrclbft6pcpbtig6gwx5bzfs7jm3s64l5wja-0lu-script.googleusercontent.com/716b22d2-edc5-4d9b-9e44-b874d04e55f0"
+      id="f7f21c1089e1616038f942870a631dc5"
+    &gt;&lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code>
             </div>
           </div>
 
@@ -256,7 +357,7 @@ for link in soup.find_all('a'):
 
   <footer class="site-footer">
     <div class="container">
-      <p>&copy; 2025 DarkNet Scripts. All Rights Reserved.</p>
+      <p>&copy; 2025 CiphAnon Studios. All Rights Reserved.</p>
     </div>
   </footer>
 
