@@ -653,48 +653,28 @@ function playIntroThenOpen(url){
   const popupTitle = "CiphAnon Studios";
   const popupHTML = `
   <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>${popupTitle}</title>
-  <style>
-    body{margin:0;display:flex;flex-direction:column;height:100vh;background:orange;color:white;font-family:Inter,Arial,sans-serif;}
-    iframe{flex:1;border:none;width:100%;}
-    .topbar{padding:12px 20px;background:black;display:flex;justify-content:space-between;align-items:center;font-weight:bold;color:orange;}
-    .topbar button{padding:6px 14px;border: 2px solid orange;border-radius:100px;background:#071018;color:#ff9f1c;cursor:pointer;font-weight:bold;transition:transform 0.15s;}
-    .topbar button:hover{transform:translateY(-2px);background:#333;}
-    /* Style for the reload button icon */
-    .reload-icon{fill: orange;}
-  </style>
-</head>
-<body>
-  <div class="topbar">
-    <!-- Reload button that calls the new function -->
-    <button onclick="forceReloadIframe()"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" class="reload-icon"><path d="M480-160q-134 0-227-93t-93-227q0-134 93-227t227-93q69 0 132 28.5t104 75.5v-128q0-13 9.5-22.5t22.5-9.5q13 0 22.5 9.5t9.5 22.5v170q0 13-9.5 22.5t-22.5 9.5H620q-13 0-22.5-9.5t-9.5-22.5q0-13 9.5-22.5t22.5-9.5h97q-29-57-81-89.5T480-720q-100 0-170 70t-70 170q0 100 70 170t170 70q77 0 139-44t88-116q5-12 18-12h115q15 0 24.5 10t9.5 24q-21 129-130 207.5T480-160Z"/></svg></button>
-    <span>CiphAnon Studios</span>
-    <button onclick="window.close()"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#F19E39"><path d="M240-200h120v-240h240v240h120v-360L480-740 240-560v360Zm-80 80v-480l320-240 320 240v480H520v-240h-80v240H160Zm320-350Z"/></svg></button>
-  </div>
-  <iframe id="mainIframe" src="${url}"></iframe>
-
-  <script>
-    function forceReloadIframe() {
-      const iframe = document.getElementById('mainIframe');
-      if (iframe) {
-        // Get the current URL
-        let src = iframe.src;
-
-        // Strip any previous cache-busting parameter
-        src = src.split('?')[0];
-
-        // Append a new, unique timestamp to the URL to force a non-cached reload
-        const newSrc = src + '?t=' + new Date().getTime();
-        iframe.src = newSrc;
-      }
-    }
-  </script>
-</body>
-</html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8"/>
+      <meta name="viewport" content="width=device-width,initial-scale=1"/>
+      <title>${popupTitle}</title>
+      <style>
+        body{margin:0;display:flex;flex-direction:column;height:100vh;background:orange;color:white;font-family:Inter,Arial,sans-serif;}
+        iframe{flex:1;border:none;width:100%;}
+        .topbar{padding:12px 20px;background:black;display:flex;justify-content:space-between;align-items:center;font-weight:bold;color:orange;}
+        .topbar button{padding:6px 14px;border: 2px solid orange;border-radius:100px;background:#071018;color:#ff9f1c;cursor:pointer;font-weight:bold;transition:transform 0.15s;}
+        .topbar button:hover{transform:translateY(-2px);background:#333;}
+      </style>
+    </head>
+    <body>
+      <div class="topbar">
+        <button></button>
+        <span>CiphAnon Studios</span>
+        <button onclick="window.close()"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#F19E39"><path d="M240-200h120v-240h240v240h120v-360L480-740 240-560v360Zm-80 80v-480l320-240 320 240v480H520v-240h-80v240H160Zm320-350Z"/></svg></button>
+      </div>
+      <iframe src="${url}"></iframe>
+    </body>
+    </html>
   `;
   win.document.open();
   win.document.write(popupHTML);
