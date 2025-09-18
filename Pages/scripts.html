@@ -1,228 +1,243 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scripts Page</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        /* --- Basic Styling & Layout --- */
-        body {
-            font-family: 'Roboto', sans-serif;
-            margin: 0;
-            line-height: 1.6;
-            background-color: #f4f7f9;
-            color: #333;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scripts Page</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* --- General Styling --- */
+    body {
+      font-family: 'Roboto Mono', monospace;
+      margin: 0;
+      line-height: 1.6;
+      background-color: #0a0a0a;
+      color: #f19e39;
+      overflow-x: hidden;
+    }
 
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+    canvas#particles {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: -1;
+    }
 
-        /* --- Header --- */
-        .site-header {
-            background-color: #ffffff;
-            padding: 20px 0;
-            border-bottom: 2px solid #ddd;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
 
-        .site-header h1 {
-            margin: 0;
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #007bff;
-        }
+    /* --- Header --- */
+    .site-header {
+      background-color: #111;
+      padding: 20px 0;
+      border-bottom: 2px solid #f19e39;
+      box-shadow: 0 0 20px rgba(241,158,57,0.4);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-        /* --- Navigation & Search --- */
-        .main-nav {
-            display: flex;
-            align-items: center;
-        }
-        
-        .home-button {
-            background-color: #007bff;
-            color: #ffffff;
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-            transition: background-color 0.3s ease;
-            margin-right: 20px;
-        }
+    .site-header h1 {
+      margin: 0;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #f19e39;
+      text-shadow: 0 0 10px #f19e39;
+    }
 
-        .home-button:hover {
-            background-color: #0056b3;
-        }
+    /* --- Navigation --- */
+    .main-nav {
+      display: flex;
+      align-items: center;
+    }
 
-        .search-bar {
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 1rem;
-            width: 250px;
-        }
-        
-        /* --- Main Content --- */
-        .content-wrapper {
-            padding: 40px 0;
-        }
+    .home-button {
+      background: none;
+      border: 2px solid #f19e39;
+      color: #f19e39;
+      padding: 8px 16px;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: 0.3s ease;
+      margin-right: 20px;
+      text-transform: uppercase;
+    }
 
-        .scripts-section h2 {
-            text-align: center;
-            color: #555;
-            margin-bottom: 30px;
-        }
+    .home-button:hover {
+      background-color: #f19e39;
+      color: #000;
+      box-shadow: 0 0 15px #f19e39;
+    }
 
-        /* --- Script Cards (Grid Layout) --- */
-        .script-card-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
+    .search-bar {
+      padding: 8px;
+      border: 2px solid #f19e39;
+      background: #111;
+      color: #f19e39;
+      border-radius: 5px;
+      font-size: 1rem;
+      width: 220px;
+    }
 
-        .script-card {
-            background-color: #ffffff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
+    /* --- Content --- */
+    .content-wrapper {
+      padding: 40px 0;
+    }
 
-        .script-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-        }
+    .scripts-section h2 {
+      text-align: center;
+      color: #f19e39;
+      margin-bottom: 30px;
+      text-shadow: 0 0 12px #f19e39;
+    }
 
-        .script-card h3 {
-            margin-top: 0;
-            color: #007bff;
-        }
-        
-        .script-content {
-            position: relative;
-            background-color: #2b2b2b;
-            color: #f8f8f2;
-            padding: 15px;
-            border-radius: 5px;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 0.9em;
-            margin-top: 15px;
-            overflow-x: auto;
-            white-space: pre;
-            border-bottom: 30px solid #2b2b2b;
-        }
+    .scripts-section p {
+      text-align: center;
+      color: #bbb;
+      margin-bottom: 40px;
+    }
 
-        .copy-button {
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            background-color: #218838;
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            cursor: pointer;
-            border-radius: 3px;
-            font-size: 0.8em;
-            transition: background-color 0.3s ease;
-        }
+    /* --- Script Cards --- */
+    .script-card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
 
-        .copy-button:hover {
-            background-color: #1a6b29;
-        }
+    .script-card {
+      background-color: #111;
+      padding: 25px;
+      border-radius: 10px;
+      border: 1px solid #222;
+      box-shadow: 0 0 15px rgba(241,158,57,0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
 
-        .copy-button:active {
-            background-color: #155822;
-        }
+    .script-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 20px rgba(241,158,57,0.5);
+    }
 
-        /* --- Footer --- */
-        .site-footer {
-            background-color: #333;
-            color: #ffffff;
-            text-align: center;
-            padding: 20px 0;
-            margin-top: 40px;
-        }
+    .script-card h3 {
+      margin-top: 0;
+      color: #f19e39;
+    }
 
-        /* --- Responsive adjustments --- */
-        @media (max-width: 768px) {
-            .site-header {
-                flex-direction: column;
-                text-align: center;
-            }
-            .main-nav {
-                margin-top: 10px;
-                flex-direction: column;
-            }
-            .home-button {
-                margin: 0 0 10px 0;
-            }
-            .site-header h1 {
-                font-size: 2rem;
-            }
-        }
-    </style>
+    .script-card p {
+      color: #aaa;
+    }
+
+    .script-content {
+      position: relative;
+      background-color: #0d0d0d;
+      color: #f19e39;
+      padding: 15px;
+      border-radius: 5px;
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.9em;
+      margin-top: 15px;
+      overflow-x: auto;
+      white-space: pre;
+      border: 1px solid #222;
+    }
+
+    .copy-button {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      background-color: #f19e39;
+      color: black;
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 3px;
+      font-size: 0.8em;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    .copy-button:hover {
+      background-color: #ffb85c;
+      box-shadow: 0 0 10px #f19e39;
+    }
+
+    .copy-button:active {
+      background-color: #d57c1f;
+    }
+
+    /* --- Footer --- */
+    .site-footer {
+      background-color: #111;
+      color: #666;
+      text-align: center;
+      padding: 20px 0;
+      margin-top: 40px;
+      border-top: 2px solid #f19e39;
+    }
+
+    /* --- Responsive --- */
+    @media (max-width: 768px) {
+      .site-header {
+        flex-direction: column;
+        text-align: center;
+      }
+      .main-nav {
+        margin-top: 10px;
+        flex-direction: column;
+      }
+      .home-button {
+        margin: 0 0 10px 0;
+      }
+      .site-header h1 {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
 </head>
 <body>
 
-    <header class="site-header">
-        <div class="container">
-            <h1>Scripts</h1>
-            <nav class="main-nav">
-                <a href="../index.html" class="home-button"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#F19E39"><path d="M240-200h120v-240h240v240h120v-360L480-740 240-560v360Zm-80 80v-480l320-240 320 240v480H520v-240h-80v240H160Zm320-350Z"/></svg></a>
-                <input type="text" id="script-search" class="search-bar" placeholder="Search scripts...">
-            </nav>
-        </div>
-    </header>
+  <canvas id="particles"></canvas>
 
-    <main class="content-wrapper">
-        <div class="container">
-            <section class="scripts-section">
-                <h2>Script Library</h2>
-                <p>Welcome to the scripts page. Use the search bar to filter scripts or click the "Copy Code" button on any card to copy the code snippet to your clipboard.</p>
-                
-                <div class="script-card-grid" id="script-cards-container">
-                    <!-- Example Script Card 1 -->
-                    <div class="script-card">
-                        <h3>Automated Task Runner</h3>
-                        <p>A simple Python script to automate repetitive file management tasks.</p>
-                        <div class="script-content">
-                            <button class="copy-button" onclick="copyCode(this)">Copy Code</button>
-                            <code>
-# Python Automated Task Runner
-import os
-import shutil
+  <header class="site-header">
+    <div class="container">
+      <h1>Scripts</h1>
+      <nav class="main-nav">
+        <a href="../index.html" class="home-button">Home</a>
+        <input type="text" id="script-search" class="search-bar" placeholder="Search scripts...">
+      </nav>
+    </div>
+  </header>
 
-source_dir = "C:/Users/user/Desktop/reports"
-target_dir = "C:/Users/user/Desktop/archives"
+  <main class="content-wrapper">
+    <div class="container">
+      <section class="scripts-section">
+        <h2>Script Library</h2>
+        <p>Search and copy underground code snippets straight to your clipboard.</p>
 
-def move_files():
-    for filename in os.listdir(source_dir):
-        if filename.endswith(".txt"):
-            shutil.move(os.path.join(source_dir, filename), target_dir)
+        <div class="script-card-grid" id="script-cards-container">
+          <!-- Example Script Card -->
+          <div class="script-card">
+            <h3>Duck Clicker</h3>
+            <p>Embed the duck clicker game.</p>
+            <div class="script-content">
+              <button class="copy-button" onclick="copyCode(this)">Copy</button>
+              <code>&lt;html&gt;&lt;body&gt;
+&lt;iframe src="https://script.google.com/macros/s/AKfycbysJKtWMnsbhg8q1RmnOEAr2U89XMzTL2Ca0w9lqKdoi7dx9QZbwsqzQdCcCBmLUtiI6A/exec"
+style="border:none;width:100%;height:100%;"&gt;&lt;/iframe&gt;
+&lt;/body&gt;&lt;/html&gt;</code>
+            </div>
+          </div>
 
-if __name__ == "__main__":
-    move_files()
-                            </code>
-                        </div>
-                    </div>
-                    
-                    <!-- Example Script Card 2 -->
-                    <div class="script-card">
-                        <h3>Web Scraper</h3>
-                        <p>A versatile script for scraping data from websites with configurable settings.</p>
-                        <div class="script-content">
-                            <button class="copy-button" onclick="copyCode(this)">Copy Code</button>
-                            <code>
-# Python Web Scraper
-import requests
+          <div class="script-card">
+            <h3>Web Scraper</h3>
+            <p>A simple Python web scraper.</p>
+            <div class="script-content">
+              <button class="copy-button" onclick="copyCode(this)">Copy</button>
+              <code>import requests
 from bs4 import BeautifulSoup
 
 url = "http://example.com"
@@ -230,74 +245,82 @@ response = requests.get(url)
 soup = BeautifulSoup(response.content, 'html.parser')
 
 for link in soup.find_all('a'):
-    print(link.get('href'))
-                            </code>
-                        </div>
-                    </div>
-                    
-                    <!-- Example Script Card 3 -->
-                    <div class="script-card">
-                        <h3>Server Log Analyzer</h3>
-                        <p>An application to analyze server logs and generate easy-to-read reports.</p>
-                        <div class="script-content">
-                            <button class="copy-button" onclick="copyCode(this)">Copy Code</button>
-                            <code>
-# Server Log Analyzer (pseudo-code)
-def analyze_logs(log_file):
-    with open(log_file, 'r') as f:
-        log_data = f.readlines()
-    
-    errors = [line for line in log_data if "ERROR" in line]
-    warnings = [line for line in log_data if "WARNING" in line]
-    
-    print(f"Found {len(errors)} errors and {len(warnings)} warnings.")
-                            </code>
-                        </div>
-                    </div>
-                    
-                    <!-- Add more script cards here -->
-                </div>
-            </section>
+    print(link.get('href'))</code>
+            </div>
+          </div>
+
         </div>
-    </main>
+      </section>
+    </div>
+  </main>
 
-    <footer class="site-footer">
-        <div class="container">
-            <p>&copy; 2025 Your Website. All Rights Reserved.</p>
-        </div>
-    </footer>
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2025 DarkNet Scripts. All Rights Reserved.</p>
+    </div>
+  </footer>
 
-    <script>
-        // Function to copy code to clipboard
-        async function copyCode(button) {
-            const codeBlock = button.nextElementSibling;
-            try {
-                await navigator.clipboard.writeText(codeBlock.textContent.trim());
-                button.textContent = 'Copied!';
-                setTimeout(() => {
-                    button.textContent = 'Copy Code';
-                }, 2000);
-            } catch (err) {
-                console.error('Failed to copy text: ', err);
-                alert('Failed to copy code. Please try again.');
-            }
-        }
+  <script>
+    // Copy Code
+    async function copyCode(button) {
+      const codeBlock = button.nextElementSibling;
+      try {
+        await navigator.clipboard.writeText(codeBlock.textContent.trim());
+        button.textContent = 'Copied!';
+        setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+      } catch (err) {
+        console.error('Failed to copy: ', err);
+        alert('Copy failed');
+      }
+    }
 
-        // Function for the search bar
-        document.getElementById('script-search').addEventListener('input', function(e) {
-            const searchTerm = e.target.value.toLowerCase();
-            const scriptCards = document.querySelectorAll('.script-card');
+    // Search Filter
+    document.getElementById('script-search').addEventListener('input', function(e) {
+      const searchTerm = e.target.value.toLowerCase();
+      const scriptCards = document.querySelectorAll('.script-card');
+      scriptCards.forEach(card => {
+        const cardText = card.textContent.toLowerCase();
+        card.style.display = cardText.includes(searchTerm) ? 'block' : 'none';
+      });
+    });
 
-            scriptCards.forEach(card => {
-                const cardText = card.textContent.toLowerCase();
-                if (cardText.includes(searchTerm)) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        });
-    </script>
+    // Particle Background
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const particles = [];
+    for (let i = 0; i < 100; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        dx: (Math.random() - 0.5) * 1,
+        dy: (Math.random() - 0.5) * 1,
+        radius: Math.random() * 2
+      });
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = '#f19e39';
+        ctx.fill();
+        p.x += p.dx;
+        p.y += p.dy;
+        if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+      });
+      requestAnimationFrame(animateParticles);
+    }
+    animateParticles();
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  </script>
 </body>
 </html>
-
