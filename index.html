@@ -4,548 +4,157 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>CiphAnon Studios</title>
-<meta name="description" content="CiphAnon — prototypes, developer tooling, and polished front-end experiences.">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&amp;display=swap" rel="stylesheet">
+<meta name="description" content="CiphAnon Studios — developer projects, tools, and unrestricted experiences.">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
 <style>
 :root{
-  --bg-1:#06121a; 
-  --bg-2:#071824;
-  --card:#0f1720;
-  --muted:#98a9bd;
-  --text:#eaf3fb;
-  --accent-1:#ff9f1c;
-  --accent-2:#ff5e7a;
+  --bg-1:#06121a; --bg-2:#071824;
+  --card:#0f1720; --muted:#98a9bd; --text:#eaf3fb;
+  --accent-1:#ff9f1c; --accent-2:#ff5e7a;
   --glass: rgba(255,255,255,0.03);
-  --maxw:1200px; 
-  --radius:12px; 
-  --ease:cubic-bezier(.2,.9,.3,1);
+  --maxw:1200px; --radius:12px;
   --shadow: 0 12px 30px rgba(2,6,12,0.5);
   --btn-shadow: 0 8px 22px rgba(2,6,12,0.35);
-  --fab-fill: #e3e3e3;
-  --fast: 120ms;
+  --fast: 120ms; --ease:cubic-bezier(.2,.9,.3,1);
 }
 [data-theme="light"]{
-  --bg-1:#f6f8fa; 
-  --bg-2:#eef2f6;
-  --card:#ffffff; 
-  --muted:#475569;
-  --text:#071018;
-  --glass: rgba(11,17,22,0.04);
+  --bg-1:#f6f8fa; --bg-2:#eef2f6; --card:#fff;
+  --muted:#475569; --text:#071018;
   --shadow: 0 10px 30px rgba(11,17,22,0.06);
   --btn-shadow: 0 8px 22px rgba(11,17,22,0.06);
-  --fab-fill: #071018;
 }
-*{box-sizing:border-box}
-html,body{height:100%}
+*{box-sizing:border-box;margin:0;padding:0}
 body{
-  margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;
-  background: linear-gradient(180deg,var(--bg-1),var(--bg-2));
-  color:var(--text); -webkit-font-smoothing:antialiased; line-height:1.45;
-  scroll-behavior:smooth;
+  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;
+  background:linear-gradient(180deg,var(--bg-1),var(--bg-2));
+  color:var(--text); -webkit-font-smoothing:antialiased; line-height:1.5;
 }
 .container{max-width:var(--maxw);margin:0 auto;padding:20px}
-header{position:sticky;top:0;z-index:220}
+header{position:sticky;top:0;z-index:100}
 .header-row{
-  width:100%; background:var(--card); border-bottom:1px solid rgba(0,0,0,0.06);
+  background:var(--card);border-bottom:1px solid rgba(0,0,0,0.08);
   box-shadow:var(--shadow);
 }
 .nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 0}
-.brand{display:flex;gap:12px;align-items:center}
-.logo{width:48px;height:48px;border-radius:10px;object-fit:cover}
-.brand h1{font-size:16px;margin:0}
-.nav .primary{display:flex;gap:14px;align-items:center}
-.nav .primary a{color:var(--muted);text-decoration:none;padding:6px;border-radius:8px;font-weight:600}
-.actions{display:flex;gap:10px;align-items:center}
+.brand{display:flex;align-items:center;gap:12px}
+.logo{width:46px;height:46px;border-radius:10px;object-fit:cover}
+.brand h1{font-size:18px;font-weight:800}
+.primary a{
+  text-decoration:none;color:var(--muted);font-weight:600;
+  padding:6px 10px;border-radius:8px;transition:all var(--fast) var(--ease)
+}
+.primary a:hover{color:var(--text);background:var(--glass)}
 .btn{
-  display:inline-flex;align-items:center;gap:8px;padding:9px 12px;border-radius:10px;border:0;
-  background:linear-gradient(90deg,var(--accent-1),var(--accent-2));color:#071018;font-weight:800;
-  cursor:pointer;box-shadow:var(--btn-shadow);transition:transform var(--fast) var(--ease),box-shadow var(--fast) var(--ease);
+  display:inline-flex;align-items:center;gap:6px;padding:9px 14px;
+  border-radius:10px;border:0;cursor:pointer;font-weight:700;
+  background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
+  color:#071018;box-shadow:var(--btn-shadow);
+  transition:transform var(--fast) var(--ease);
 }
-.btn.ghost{background:transparent;border:1px solid rgba(0,0,0,0.06);color:var(--muted);font-weight:700;box-shadow:none;padding:8px 12px}
-.icon-btn{background:transparent;border:0;padding:8px;border-radius:8px;cursor:pointer;color:var(--muted)}
-.hire-dropdown{position:relative;display:inline-block}
-.hire-btn{
-  display:inline-flex;align-items:center;gap:8px;padding:8px 10px;border-radius:10px;border:0;background:transparent;cursor:pointer;
-  transition:background var(--fast) var(--ease), transform var(--fast) var(--ease);
-  color:var(--muted);font-weight:700;
-}
-.hire-btn:hover{background:var(--glass)}
-.hire-btn svg{width:18px;height:18px;display:block;fill:currentColor;transition:transform var(--fast) var(--ease)}
-.hire-chevron{transition:transform calc(var(--fast) * 1.2) var(--ease)}
-.sr-only{position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap;border:0;padding:0;margin:-1px}
-.hire-menu{
-  position:absolute;right:0;top:calc(100% + 8px);min-width:240px;background:var(--card);border-radius:10px;padding:6px;
-  box-shadow:0 12px 30px rgba(2,6,12,0.25);border:1px solid rgba(0,0,0,0.06);transform-origin:top right;
-  opacity:0;transform:translateY(-6px) scale(.995);pointer-events:none;transition:opacity calc(var(--fast) * 1.8) var(--ease), transform calc(var(--fast) * 1.8) var(--ease);
-  z-index:240;
-}
-.hire-dropdown.open .hire-menu{opacity:1;transform:none;pointer-events:auto}
-.hire-menu a{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;text-decoration:none;color:var(--muted);font-weight:700;margin:6px 0}
-.hire-menu a:hover,.hire-menu a:focus{background:linear-gradient(90deg,var(--accent-1),var(--accent-2));color:#071018;outline:none}
-.hire-divider{height:1px;background:rgba(255,255,255,0.03);margin:8px 4px;border-radius:2px}
-.hero{display:grid;grid-template-columns:1fr 460px;gap:36px;align-items:center;padding:48px 0}
-.kicker{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
-.title{font-size:42px;line-height:1.03;margin:8px 0 0}
-.title .accent{background:linear-gradient(90deg,var(--accent-1),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
-.subtitle{color:var(--muted);margin-top:14px;max-width:60ch}
-.hero-visual{height:420px;border-radius:12px;padding:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));position:relative;overflow:hidden}
-.bg-svg{position:absolute;inset:-15% -10% auto auto;width:560px;height:560px;filter:blur(48px);opacity:0.12;pointer-events:none}
-.portrait{width:100%;border-radius:12px;display:block;filter:drop-shadow(0 24px 36px rgba(2,6,12,0.45))}
-.typed{font-weight:700;color:var(--accent-2);margin-top:10px}
-.typed::after{content:"|";margin-left:6px;color:var(--accent-2);animation:blink 0.8s infinite}
-@keyframes blink{0%,50%{opacity:1}51%,100%{opacity:0}}
-.floating{position:fixed;right:18px;bottom:18px;z-index:260;display:flex;flex-direction:column;gap:10px}
-.fab{width:46px;height:46px;border-radius:12px;background:var(--card);display:inline-grid;place-items:center;cursor:pointer;border:0;box-shadow:var(--shadow);transition:transform var(--fast) var(--ease), box-shadow var(--fast) var(--ease)}
-.fab:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(0,0,0,0.18)}
-.fab:focus{outline:2px solid rgba(0,0,0,0.06);outline-offset:4px}
-.fab-icons{width:24px;height:24px;position:relative;display:inline-block}
-.fab-icons svg{position:absolute;left:0;top:0;width:24px;height:24px;opacity:0;transform:translateY(6px) scale(.98);transition:opacity calc(var(--fast) * 2) var(--ease), transform calc(var(--fast) * 2) var(--ease), fill calc(var(--fast) * 1.2) var(--ease)}
-.fab-icons svg.active{opacity:1;transform:none;fill:var(--fab-fill)}
-.fab--pop{animation:pop .36s var(--ease) both}
-@keyframes pop{0%{transform:translateY(0) scale(1)}30%{transform:translateY(-6px) scale(1.06)}100%{transform:translateY(0) scale(1)}}
-@media (max-width:1000px){.hero{grid-template-columns:1fr}.hero-visual{height:320px}}
-@media (max-width:560px){.cap-grid{grid-template-columns:1fr}.logo{width:40px;height:40px}}
-@media (prefers-reduced-motion: reduce){.fab-icons svg, .hire-menu, .btn{transition:none!important}}
-
-.about-me {
-    max-width: 1000px; /* Slightly increased max-width for more content room */
-    margin: 60px auto; /* More vertical margin for better separation */
-    padding: 30px; /* Increased padding */
-    background: black;
-    border-radius: 8px; /* Soft rounded corners */
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Slightly more prominent shadow */
-}
-
-.about-header {
-    text-align: center;
-    margin-bottom: 50px; /* Increased margin for better visual separation */
-  color:white;
-}
-
-.heading-large {
-    font-family: 'Playfair Display', serif;
-    font-size: 3rem; /* Slightly larger heading for impact */
-    color: #2c3e50; /* A deep, elegant blue-grey for main headings */
-    font-weight: 700; /* Bolder for prominence */
-}
-
-.personal-touch {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center; /* Center items when they wrap on smaller screens */
-    gap: 40px; /* Increased gap for better spacing */
-    margin-bottom: 50px;
-}
-
-.image-container {
-    flex-shrink: 0;
-    text-align: center; /* Ensure image is centered on smaller screens when wrapping */
-}
-
-.image-container img {
-    width: 280px; /* Slightly adjusted size */
-    height: 280px; /* Slightly adjusted size */
-    object-fit: cover;
-    border-radius: 50%;
-    border: 5px solid #e0e0e0; /* Subtle border for definition */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Softer, wider shadow */
-}
-
-.text-container {
-    flex-grow: 1;
-    max-width: 600px; /* Constrain text container width for readability on larger screens */
-}
-
-.heading-medium {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.2rem; /* Adjusted size */
-    margin-top: 0;
-    color: #34495e; /* Complementary dark color */
-    border-bottom: 1px solid #eee; /* Lighter, more subtle border */
-    padding-bottom: 15px; /* More padding below border */
-    margin-bottom: 25px; /* Added margin below heading */
-}
-
-.heading-small {
-    font-size: 1.1rem; /* Slightly smaller for sub-points */
-    color: #555; /* Refined color */
-    margin-top: 15px; /* Adjusted margin */
-    font-weight: 600; /* Add some weight */
-}
-
-ul {
-    list-style-type: none; /* Remove default bullet */
-    padding-left: 0; /* Remove default padding */
-}
-
-li {
-    position: relative; /* For custom bullet positioning */
-    margin-bottom: 12px;
-    padding-left: 25px; /* Space for custom bullet */
-}
-
-li::before {
-    content: '→'; /* Custom bullet icon */
-    position: absolute;
-    left: 0;
-    color: #3498db; /* Accent color for bullets */
-    font-weight: bold;
-    font-size: 1.1em;
-    top: 0;
-}
-
-.call-to-action {
-    text-align: center;
-    margin-top: 60px; /* Increased margin */
-}
-
-.cta-button {
-    display: inline-block;
-    padding: 16px 32px; /* Slightly larger padding for better click area */
-    background-color: #3498db; /* Vibrant accent color for CTA */
-    color: #fff;
-    text-decoration: none;
-    border-radius: 30px; /* Pill-shaped button for modern look */
-    font-weight: bold;
-    font-size: 1.1em;
-    transition: background-color 0.3s ease, transform 0.2s ease; /* Added transform for subtle animation */
-}
-
-.cta-button:hover {
-    background-color: #2980b9; /* Darker shade on hover */
-    transform: translateY(-2px); /* Subtle lift effect */
-}
-
-/* Media Queries for improved responsiveness */
-@media (max-width: 992px) { /* Adjust breakpoint for a more flexible transition */
-    .about-me {
-        margin: 40px 20px; /* Add horizontal margin on smaller screens */
-        padding: 25px;
-    }
-    .heading-large {
-        font-size: 2.5rem;
-    }
-    .heading-medium {
-        font-size: 1.8rem;
-    }
-    .text-container {
-        max-width: 100%; /* Allow text to take full width */
-    }
-}
-
-@media (max-width: 768px) {
-    .personal-touch {
-        flex-direction: column;
-        text-align: center;
-        gap: 30px; /* Adjusted gap */
-    }
-    .image-container img {
-        width: 200px; /* Smaller image on mobile */
-        height: 200px;
-    }
-    .heading-large {
-        font-size: 2rem;
-    }
-    .heading-medium {
-        font-size: 1.5rem;
-    }
-    li {
-        padding-left: 20px; /* Adjusted padding for smaller screens */
-    }
-    li::before {
-        font-size: 1em;
-    }
-}
-
-@media (max-width: 480px) {
-    .about-me {
-        padding: 15px;
-    }
-    .heading-large {
-        font-size: 1.8rem;
-    }
-    .cta-button {
-        padding: 12px 25px;
-        font-size: 1em;
-    }
-}
+.btn:hover{transform:translateY(-2px)}
+.btn.ghost{background:transparent;color:var(--muted);border:1px solid rgba(255,255,255,0.08)}
+.hero{display:grid;grid-template-columns:1fr 400px;gap:40px;align-items:center;padding:60px 0}
+.kicker{font-size:12px;color:var(--muted);letter-spacing:1px;text-transform:uppercase}
+.title{font-size:40px;line-height:1.1;margin:12px 0}
+.title .accent{background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
+  -webkit-background-clip:text;color:transparent}
+.subtitle{color:var(--muted);max-width:55ch;margin-top:12px}
+.hero-visual{height:380px;background:var(--glass);border-radius:12px;overflow:hidden;position:relative}
+.hero-visual img{width:100%;height:100%;object-fit:cover;border-radius:12px}
+.stats{display:flex;gap:16px;margin-top:20px;flex-wrap:wrap}
+.stats div{background:var(--card);padding:12px 16px;border-radius:10px;box-shadow:var(--shadow);text-align:center}
+.stats strong{font-size:20px;display:block}
+.section{margin:60px 0}
+.section h2{font-size:28px;margin-bottom:16px}
+footer{margin-top:60px;padding:32px 0;background:var(--card);color:var(--muted)}
+footer .container{display:flex;flex-wrap:wrap;gap:20px;justify-content:space-between}
 </style>
 </head>
-<body>
 
+<body>
 <header>
   <div class="header-row">
-    <div class="container nav" role="navigation" aria-label="Main">
+    <div class="container nav">
       <div class="brand">
-        <img src="assets/StudiosImageT.png" alt="CiphAnon logo" class="logo" loading="lazy">
+        <img src="assets/StudiosImageT.png" alt="CiphAnon logo" class="logo">
         <div>
           <h1>CiphAnon Studios</h1>
-          <div style="font-size:12px;color:var(--muted)">C𝟶der • Idk What Else ngl</div>
+          <div style="font-size:12px;color:var(--muted)">Code • Projects • Chaos</div>
         </div>
       </div>
-
-      <nav class="primary" aria-label="Primary navigation">
-        <a href="#about">Ab𝟶ut</a>
-        <a href="#capabilities">hmm</a>
-        <a href="#contact">C𝟶ntact</a>
+      <nav class="primary">
+        <a href="#about">About</a>
+        <a href="#updates">Updates</a>
+        <a href="#contact">Contact</a>
       </nav>
-
       <div class="actions">
-        <button id="themeToggle" class="icon-btn" aria-label="Toggle theme"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm40-83q119-15 199.5-104.5T800-480q0-123-80.5-212.5T520-797v634Z"/></svg></button>
         <a class="btn ghost" href="mailto:example@email.com">Email</a>
-
-        <!-- Restored: Hire dropdown with visible label + chevron -->
-        <div class="hire-dropdown" id="hireDropdown">
-          <button id="hireToggle" class="hire-btn" aria-haspopup="true" aria-expanded="false" aria-controls="hireMenu" title="Hire">
-            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#F19E39"><path d="M240-160q-33 0-56.5-23.5T160-240q0-33 23.5-56.5T240-320q33 0 56.5 23.5T320-240q0 33-23.5 56.5T240-160Zm240 0q-33 0-56.5-23.5T400-240q0-33 23.5-56.5T480-320q33 0 56.5 23.5T560-240q0 33-23.5 56.5T480-160Zm240 0q-33 0-56.5-23.5T640-240q0-33 23.5-56.5T720-320q33 0 56.5 23.5T800-240q0 33-23.5 56.5T720-160ZM240-400q-33 0-56.5-23.5T160-480q0-33 23.5-56.5T240-560q33 0 56.5 23.5T320-480q0 33-23.5 56.5T240-400Zm240 0q-33 0-56.5-23.5T400-480q0-33 23.5-56.5T480-560q33 0 56.5 23.5T560-480q0 33-23.5 56.5T480-400Zm240 0q-33 0-56.5-23.5T640-480q0-33 23.5-56.5T720-560q33 0 56.5 23.5T800-480q0 33-23.5 56.5T720-400ZM240-640q-33 0-56.5-23.5T160-720q0-33 23.5-56.5T240-800q33 0 56.5 23.5T320-720q0 33-23.5 56.5T240-640Zm240 0q-33 0-56.5-23.5T400-720q0-33 23.5-56.5T480-800q33 0 56.5 23.5T560-720q0 33-23.5 56.5T480-640Zm240 0q-33 0-56.5-23.5T640-720q0-33 23.5-56.5T720-800q33 0 56.5 23.5T800-720q0 33-23.5 56.5T720-640Z"/></svg>
-            <span class="sr-only">Open hire menu</span>
-          </button>
-
-          <div class="hire-menu" id="hireMenu" role="menu" aria-labelledby="hireToggle" hidden>
-
-            <div class="hire-divider" aria-hidden="true"></div>
-
-            <div class="hire-divider" aria-hidden="true"></div>
-
-            <button class="btn" onclick="window.open('Pages/E mag.html','_blank')" data-action="emag">G-S-M-D-P<span style="margin-left:auto;font-size:12px;color:black;">v7</span></button>
-            <button class="btn" onclick="window.open('Pages/records.html','_blank')" data-action="emag">PolyTrack Rec𝟶rds<span style="margin-left:auto;font-size:12px;color:black;">v3</span></button>
-            <button class="btn" onclick="window.open('Pages/blockers.html','_blank')" data-action="emag">Blockers<span style="margin-left:auto;font-size:12px;color:black;">v3</span></button>
-            <button class="btn" onclick="window.open('Pages/scripts.html','_blank')" data-action="emag">Scripts<span style="margin-left:auto;font-size:12px;color:black;">v2</span></button>
-          </div>
-        </div>
       </div>
     </div>
   </div>
 </header>
 
 <main class="container">
-  <section class="hero" aria-labelledby="hero-title">
+  <section class="hero">
     <div>
-      <div class="kicker">Hell𝟶 — T𝟶𝟶nyTime</div>
-      <h1 id="hero-title" class="title">Wë̸̢̨̩͕̪̲̪̫͐͗͜lcome To<span class="accent"><br>CiphAnon Stuḑ̴̝̼̜͈̤̰͎̞͈̆͂͆̃͒͠ios&nbsp;</span><br>The b̵͓͙̜͉̠̬̈́͗ē̵̡̫̯͖̼̗̜͚̉͝st Way To #̶̙̯̗̟̯̗̬̭̓͠#̸̡̢̲̹͈̼̮͇̺͖̇̉̿̍̂͒͊̃#̸̲̼̤̬͙̘̘̖̣̰̑̋̒̌͝#̶̡̹̤̈͊̽̐͊͘͘#̶̎̇͒̚ͅ#̸̢̨̦̥̱̬̰̈́̐́̀͌͛́̚͝ Things At S̸̞̐̄̏c̵͍̹̪̮̖̳͙̉͋̀̎͝h𝟶𝟶l</h1>
-      <div class="subtitle">3 years 𝟶f hands 𝟶ǹ̸̨̲̙̌̋̾ experience acr𝟶ss 1𝟶 different ć̸̨̩͙̻̺̯̭͐̕ò̷̢̗͙̅̄̂̌̎̀͠͝de launguages. here y𝟶u will be able to #̶̙̯̗̟̯̗̬̭̓͠#̸̡̢̲̹͈̼̮͇̺͖̇̉̿̍̂͒͊̃#̸̲̼̤̬͙̘̘̖̣̰̑̋̒̌͝#̶̡̹̤̈͊̽̐͊͘͘#̶̎̇͒̚ͅ#̸̢̨̦̥̱̬̰̈́̐́̀͌͛́̚͝ sch𝟶𝟶l restricti𝟶ns a̷͔͍̦̠̩͑̓͝ͅt̵̺̭͠ ease!</div>
-      <div class="typed" id="typedLine" aria-hidden="true">Inte</div>
-
-      <div style="margin-top:20px;display:flex;gap:10px;flex-wrap:wrap">
-        <a class="btn" href="#contact">What t𝟶 add next?</a>
-        <a class="btn ghost" href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
+      <div class="kicker">Hey — TonyTime</div>
+      <h1 class="title">Welcome to <span class="accent">CiphAnon Studios</span></h1>
+      <p class="subtitle">Breaking through restrictions, creating tools, and making projects that go past the limits.</p>
+      <div style="margin-top:20px;display:flex;gap:12px;flex-wrap:wrap">
+        <a class="btn" href="#contact">What should I add next?</a>
+        <a class="btn ghost" href="https://github.com/" target="_blank">GitHub</a>
       </div>
-
-      <div style="display:flex;gap:12px;margin-top:16px">
-        <div style="background:var(--card);padding:10px 12px;border-radius:8px;box-shadow:var(--shadow)"><strong id="statYears">3</strong><div style="color:var(--muted)">Years</div></div>
-        <div style="background:var(--card);padding:10px 12px;border-radius:8px;box-shadow:var(--shadow)"><strong id="statLangs">9</strong><div style="color:var(--muted)">Languages</div></div>
-        <div style="background:var(--card);padding:10px 12px;border-radius:8px;box-shadow:var(--shadow)"><strong id="statWorks">12</strong><div style="color:var(--muted)">Demos/tools</div></div>
+      <div class="stats">
+        <div><strong>3</strong><span>Years</span></div>
+        <div><strong>9</strong><span>Languages</span></div>
+        <div><strong>12</strong><span>Projects</span></div>
       </div>
     </div>
-
-    <div class="hero-visual" aria-hidden="true">
-      <svg class="bg-svg" viewBox="0 0 600 600" aria-hidden="true"><defs><linearGradient id="g1" x1="0" x2="1"><stop offset="0" stop-color="#ff9f1c"></stop><stop offset="1" stop-color="#ff5e7a"></stop></linearGradient></defs><circle cx="300" cy="300" r="260" fill="url(#g1)"></circle></svg>
-      <img src="assets/1000007475.png" alt="Character" class="portrait" loading="lazy">
-    </div>
-  </section>
-  
-        <div class="about-header">
-            <h1 class="heading-large">Sch𝟶𝟶l Fucking Sucks Wh𝟶 Else Agrees</h1>
-        </div>
-
-        <div class="personal-touch">
-            <div class="image-container">
-                <!-- Replace with your image and alt text -->
-                <img src="assets/StudiosImageT.png" alt="Shhhhhhh">
-            </div>
-            <div class="text-container">
-                <h2>Hell𝟶, I'm T𝟶𝟶nyTime.</h2>
-                <p>
-                    here t𝟶 help with y𝟶ur sch𝟶𝟶l pr𝟶blems ;).
-                </p>
-            </div>
-        </div>
-
-        <div class="journey">
-            <h2 class="heading-medium">My St𝟶ry</h2>
-            <p>
-                i like games, and i started t𝟶 create and add m𝟶re and m𝟶re untill i g𝟶t t𝟶 g𝟶𝟶d :p to good 
-            </p>
-        </div>
-
-        <div class="process">
-            <h2 class="heading-medium">H𝟶w I W𝟶rk</h2>
-            <p>
-                trust pr𝟶blems(wh𝟶le st𝟶ry but i g𝟶t my wh𝟶le sch𝟶𝟶l a ai bl𝟶cker cuz trusted 𝟶nce), fuck school fr 
-            </p>
-            <h3 class="heading-small">Expertise</h3>
-            <ul>
-                <li>Hacker</li>
-                <li>Developer (Roblox, Unity, Godot)</li>
-                <li>c𝟶der (1𝟶 c𝟶ding laungeuges (ill fix later)</li>
-                <li>r𝟶b𝟶tic enginer(i made a walking r𝟶b𝟶t fr𝟶m cratch)</li>
-            </ul>
-        </div>
-
-        <div class="personal-connection">
-            <h2 class="heading-medium">Fun Fact𝟶rs</h2>
-            <p>
-                When I'm n𝟶t w𝟶rking 𝟶n a pr𝟶ject, I enj𝟶y Sp𝟶rts and art. I'm als𝟶 trying t𝟶 n𝟶t fail sch𝟶𝟶l but t𝟶 biz e f𝟶r it :/
-            </p>
-        </div>
-
-        <div class="call-to-action">
-            <a class="btn" href="#contact">If Y𝟶u Want s𝟶mething t𝟶 be added send me message here!</a>
-        </div>
-
-  <section id="capabilities"><h2>Updates</h2>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:12px">
-      <div style="background:var(--card);padding:16px;border-radius:10px;box-shadow:var(--shadow)"><h3></h3><p style="color:var(--muted)">blank</p></div>
-      <div style="background:var(--card);padding:16px;border-radius:10px;box-shadow:var(--shadow)"><h3>blank</h3><p style="color:var(--muted)">blank</p></div>
-      <div style="background:var(--card);padding:16px;border-radius:10px;box-shadow:var(--shadow)"><h3>blank</h3><p style="color:var(--muted)">blank</p></div>
+    <div class="hero-visual">
+      <img src="assets/1000007475.png" alt="Hero Character">
     </div>
   </section>
 
-  <h1>The School Cure Is fucking Here, School Restrictions Plus those shity ass blockers dont work here xd</h1>
+  <section id="about" class="section">
+    <h2>About Me</h2>
+    <p>Yo, I’m TonyTime. Been coding for 3 years, learned 9+ languages, made scripts, Roblox games, AI experiments, and ways to get around school limits.  
+    School restrictions? Not stopping me, never will.</p>
+  </section>
+
+  <section id="updates" class="section">
+    <h2>Updates</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px">
+      <div style="background:var(--card);padding:16px;border-radius:10px;box-shadow:var(--shadow)">
+        <h3>Blockers v3</h3><p style="color:var(--muted)">Bypass tools and write-ups.</p>
+      </div>
+      <div style="background:var(--card);padding:16px;border-radius:10px;box-shadow:var(--shadow)">
+        <h3>Scripts v2</h3><p style="color:var(--muted)">Useful code snippets and automations.</p>
+      </div>
+      <div style="background:var(--card);padding:16px;border-radius:10px;box-shadow:var(--shadow)">
+        <h3>PolyTrack v3</h3><p style="color:var(--muted)">Recording and tracking experiments.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="section">
+    <h2>Contact</h2>
+    <p>Want something added? Hit me up at <a href="mailto:example@email.com">example@email.com</a>.</p>
+  </section>
 </main>
 
-<footer style="margin-top:32px;padding:28px 0;color:var(--muted)">
-  <div class="container" style="display:flex;gap:20px;flex-wrap:wrap;align-items:flex-start">
-    <div><strong>CiphAnon Studios</strong><div style="color:var(--muted);margin-top:8px">Devel𝟶per &amp; etc...</div></div>
-    <div><h4>Navigate</h4><a href="#about">Ab𝟶ut</a><br><a href="#capabilities">hmm</a><br><a href="#contact">C𝟶ntact</a></div>
-    <div><h4>C𝟶ntact</h4><a href="mailto:example@email.com">example@email.com</a>
-      <div style="color:var(--muted);margin-top:10px;font-size:13px">© <span id="year">2𝟶25</span> CiphAnon Studios</div>
-    </div>
+<footer>
+  <div class="container">
+    <div><strong>CiphAnon Studios</strong><div style="margin-top:8px">Developer • Creator • Breaker</div></div>
+    <div><h4>Links</h4><a href="#about">About</a><br><a href="#updates">Updates</a><br><a href="#contact">Contact</a></div>
+    <div><h4>© <span id="year"></span> CiphAnon</h4></div>
   </div>
 </footer>
 
-<div class="floating" aria-hidden="false">
-  <button id="themeFab" class="fab" aria-label="Toggle theme"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm40-83q119-15 199.5-104.5T800-480q0-123-80.5-212.5T520-797v634Z"/></svg></button>
-
-  <button id="topFab" class="fab fab--pop" aria-label="Back to top" title="Back to top">
-    <span class="fab-icons" aria-hidden="true">
-      <svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" class="active">New Scripts Section<path d="M480-528 296-344l-56-56 240-240 240 240-56 56-184-184Z">Code For Things Can Be Found Here</path></svg>
-      <svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" class=""><path d="M440-240v-368L296-464l-56-56 240-240 240 240-56 56-144-144v368h-80Z"></path></svg>
-      <svg viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg" class=""><path d="M440-727 256-544l-56-56 280-280 280 280-56 57-184-184v287h-80v-287Zm0 487v-120h80v120h-80Zm0 160v-80h80v80h-80Z"></path></svg>
-    </span>
-  </button>
-</div>
-
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
-
-/* typed */
-(function(){
-  const el = document.getElementById('typedLine'); if(!el) return;
-  const lines = ['Got A Whole School A New Ai Blocker :( Not Stopping Me ','The Web Is A 𝟶cean 𝟶f Teasure','Y𝟶uT𝟶be: @T𝟶𝟶nyTime','Learned H𝟶w T𝟶 Hack Cheat And Game N𝟶w I Think Im Addicted 13-16','Endless Fun Best Site F𝟶r It T𝟶','Coding Is S𝟶 Fun'];
-  let i=0,pos=0,forward=true;
-  function step(){
-    const text = lines[i];
-    if(forward){ pos++; el.textContent = text.slice(0,pos); if(pos===text.length){ forward=false; setTimeout(step,900); return } }
-    else{ pos--; el.textContent = text.slice(0,pos); if(pos===0){ forward=true; i=(i+1)%lines.length } }
-    setTimeout(step, forward?60:35 );
-  }
-  step();
-})();
-
-/* theme */
-function toggleTheme(){
-  const cur = document.documentElement.getAttribute('data-theme') || 'light';
-  const next = cur === 'light' ? 'dark' : 'light';
-  document.documentElement.setAttribute('data-theme', next);
-  try{ localStorage.setItem('theme', next) }catch(e){}
-}
-document.getElementById('themeFab').addEventListener('click', toggleTheme);
-document.getElementById('themeToggle').addEventListener('click', toggleTheme);
-(function(){ try{ const s = localStorage.getItem('theme'); if(s) document.documentElement.setAttribute('data-theme', s) }catch(e){} })();
-
-/* back-to-top: snappier */
-(function(){
-  const topFab = document.getElementById('topFab');
-  const svgs = Array.from(topFab.querySelectorAll('svg'));
-  let index = 0, interval = null;
-  const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const THRESH = 120;
-  const CYCLE_MS = 350;
-
-  function setActive(i){
-    svgs.forEach((s,idx)=> s.classList.toggle('active', idx===i));
-    index = i;
-  }
-  setActive(0);
-
-  function cycle(){ setActive((index+1) % svgs.length); }
-  function start(){ if(REDUCED || interval) return; interval = setInterval(cycle, CYCLE_MS); }
-  function stop(){ if(interval){ clearInterval(interval); interval = null; } setActive(0); }
-
-  function check(){
-    const atBottom = (window.innerHeight + window.scrollY) >= (document.documentElement.scrollHeight - THRESH);
-    if(atBottom) start(); else stop();
-  }
-  check();
-  window.addEventListener('scroll', check, {passive:true});
-  window.addEventListener('resize', check);
-
-  topFab.addEventListener('click', () => {
-    topFab.classList.remove('fab--pop'); void topFab.offsetWidth; topFab.classList.add('fab--pop');
-    window.scrollTo({top:0, behavior:'smooth'});
-  });
-  topFab.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' ') { e.preventDefault(); topFab.click(); } });
-
-  window.addEventListener('unload', ()=>{ if(interval) clearInterval(interval) });
-})();
-
-/* Hire dropdown: restored/robust */
-(function(){
-  const root = document.getElementById('hireDropdown'); if(!root) return;
-  const toggle = document.getElementById('hireToggle'); const menu = document.getElementById('hireMenu');
-  const chevron = toggle.querySelector('.hire-chevron');
-  const items = () => Array.from(menu.querySelectorAll('[role="menuitem"]'));
-  let open = false;
-  const ANIM_MS = 160;
-
-  function setOpenState(state){
-    open = state;
-    toggle.setAttribute('aria-expanded', state ? 'true' : 'false');
-    if(state){
-      root.classList.add('open');
-      menu.hidden = false;
-      if(chevron) chevron.style.transform = 'rotate(180deg)';
-      setTimeout(()=> items()[0]?.focus(), ANIM_MS);
-    } else {
-      root.classList.remove('open');
-      if(chevron) chevron.style.transform = '';
-      setTimeout(()=> { if(!open) menu.hidden = true; }, ANIM_MS + 20);
-    }
-  }
-  function openMenu(focus=true){ if(open) return; setOpenState(true); if(focus) items()[0]?.focus(); }
-  function closeMenu(retFocus=true){ if(!open) return; setOpenState(false); if(retFocus) toggle.focus(); }
-
-  toggle.addEventListener('click', (e)=>{ e.stopPropagation(); open ? closeMenu() : openMenu(true); });
-  toggle.addEventListener('keydown', (e)=>{
-    if(e.key==='ArrowDown' || e.key==='Enter' || e.key===' ') { e.preventDefault(); openMenu(true); }
-    else if(e.key==='Escape') closeMenu();
-  });
-
-  menu.addEventListener('keydown', (e)=>{
-    const list = items(); const idx = list.indexOf(document.activeElement);
-    if(e.key==='ArrowDown'){ e.preventDefault(); list[(idx+1)%list.length].focus(); }
-    else if(e.key==='ArrowUp'){ e.preventDefault(); list[(idx-1+list.length)%list.length].focus(); }
-    else if(e.key==='Home'){ e.preventDefault(); list[0].focus(); }
-    else if(e.key==='End'){ e.preventDefault(); list[list.length-1].focus(); }
-    else if(e.key==='Escape'){ e.preventDefault(); closeMenu(); }
-    else if(e.key==='Tab'){ closeMenu(false); }
-  });
-
-  menu.addEventListener('click', (e) => {
-    const target = e.target.closest('[role="menuitem"]');
-    if(!target) return;
-    closeMenu(false);
-  });
-
-  window.addEventListener('click', (ev)=>{ if(!root.contains(ev.target) && open) closeMenu(false); }, {capture:true, passive:true});
-  window.addEventListener('keydown', (e)=>{ if(e.key==='Escape' && open) closeMenu(); });
-})();
-
- 
 </script>
-
 </body>
 </html>
+
