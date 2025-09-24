@@ -194,23 +194,25 @@ footer a:hover{color:var(--accent-1)}
   }
 
   #miniText {
-      /* Position the element in the top-right corner, relative to the viewport */
+       /* Position the element in the top-right corner, relative to the viewport */
     position: fixed;
-    top: 50px;   /* Add a small margin from the top edge */
-    right: 20px; /* Add a small margin from the right edge */
+    right: 20px;
+
+    /* Adjust the top value to move it down */
+    top: 100px; /* Increased from 20px to 100px to move it further down */
 
     /* Ensure it's on top of everything else */
     z-index: 9999;
 
-    /* Smaller font size */
-    font-size: 0.5em; /* Change this value to adjust the size */
-
-    /* Rotate the element clockwise (positive value) */
-    transform: rotate(10deg); /* Use a positive value for clockwise rotation */
+    /* New, smaller font size */
+    font-size: 0.8em;
 
     /* Give it an orange background and black text */
     background-color: orange;
     color: black;
+
+    /* Keep the clockwise rotation */
+    transform: rotate(10deg);
 
     /* --- Additional Styling (optional) --- */
     border: 2px solid #333;
