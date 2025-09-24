@@ -519,144 +519,29 @@ function playIntroThenOpen(url){
   const popupTitle = "CiphAnon Studios";
   const popupHTML = `
   <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>${popupTitle}</title>
-  <style>
-    body {
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      height: 100vh;
-      background: black; /* Changed to black for better contrast with particles */
-      color: white;
-      font-family: Inter, Arial, sans-serif;
-      position: relative; /* Positioned for the particle canvas */
-      overflow: hidden; /* Prevents scrollbars from appearing */
-    }
-    /* Styles for the particle canvas */
-    #particles-js {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 0; /* Ensures the particles are behind the content */
-    }
-    .topbar {
-      padding: 12px 20px;
-      background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-weight: bold;
-      color: orange;
-      position: relative; /* Brings topbar to the front */
-      z-index: 1; /* Ensures the topbar is above the particles */
-    }
-    .topbar button {
-      padding: 6px 14px;
-      border: 2px solid orange;
-      border-radius: 100px;
-      background: #071018;
-      color: #ff9f1c;
-      cursor: pointer;
-      font-weight: bold;
-      transition: transform 0.15s;
-    }
-    .topbar button:hover {
-      transform: translateY(-2px);
-      background: #333;
-    }
-    iframe {
-      flex: 1;
-      border: none;
-      width: 100%;
-      position: relative; /* Brings iframe to the front */
-      z-index: 1;
-      background: transparent; /* Ensures particles are visible through iframe */
-    }
-  </style>
-</head>
-<body>
-  <!-- Container for the particle effect -->
-  <div id="particles-js"></div>
-  
-  <div class="topbar">
-    <button></button>
-    <span>CiphAnon Studios</span>
-    <button onclick="window.close()"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#F19E39"><path d="M240-200h120v-240h240v240h120v-360L480-740 240-560v360Zm-80 80v-480l320-240 320 240v480H520v-240h-80v240H160Zm320-350Z"/></svg></button>
-  </div>
-  <iframe src="${url}"></iframe>
-  
-  <!-- particles.js library -->
-  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-  
-  <!-- particles.js initialization script -->
-  <script>
-    /*
-    This script initializes the particles.js library and sets the configuration for the particle effect.
-    The configuration creates a snow-like, orange particle effect.
-    */
-    particlesJS('particles-js', {
-      "particles": {
-        "number": {
-          "value": 80, // Number of particles
-          "density": {
-            "enable": true,
-            "value_area": 800
-          }
-        },
-        "color": {
-          "value": "#ff9f1c" // Orange color to match the theme
-        },
-        "shape": {
-          "type": "circle"
-        },
-        "opacity": {
-          "value": 0.5,
-          "random": false
-        },
-        "size": {
-          "value": 3,
-          "random": true
-        },
-        "line_linked": {
-          "enable": false
-        },
-        "move": {
-          "enable": true,
-          "speed": 2, // Controls the speed of the particles
-          "direction": "bottom", // Particles fall downwards
-          "random": true,
-          "straight": false,
-          "out_mode": "out", // Particles disappear when they go off-screen
-          "bounce": false
-        }
-      },
-      "interactivity": {
-        "detect_on": "canvas",
-        "events": {
-          "onhover": {
-            "enable": false // Hover effects are disabled
-          },
-          "onclick": {
-            "enable": false // Click effects are disabled
-          },
-          "onresize": {
-            "enable": true,
-            "density_auto": true,
-            "area": 400
-          }
-        }
-      },
-      "retina_detect": true
-    });
-  </script>
-</body>
-</html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8"/>
+      <meta name="viewport" content="width=device-width,initial-scale=1"/>
+      <title>${popupTitle}</title>
+      <style>
+        body{margin:0;display:flex;flex-direction:column;height:100vh;background:orange;color:white;font-family:Inter,Arial,sans-serif;}
+        iframe{flex:1;border:none;width:100%;}
+        .topbar{padding:12px 20px;background:black;display:flex;justify-content:space-between;align-items:center;font-weight:bold;color:orange;}
+        .topbar button{padding:6px 14px;border: 2px solid orange;border-radius:100px;background:#071018;color:#ff9f1c;cursor:pointer;font-weight:bold;transition:transform 0.15s;}
+        .topbar button:hover{transform:translateY(-2px);background:#333;}
+      </style>
+    </head>
+    <body>
+      <div class="topbar">
+        <button></button>
+        <span>CiphAnon Studios</span>
+        <button onclick="window.close()"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#F19E39"><path d="M240-200h120v-240h240v240h120v-360L480-740 240-560v360Zm-80 80v-480l320-240 320 240v480H520v-240h-80v240H160Zm320-350Z"/></svg></button>
+      </div>
+      <iframe src="${url}"></iframe>
+    </body>
+    </html>
+
 
   `;
   win.document.open();
