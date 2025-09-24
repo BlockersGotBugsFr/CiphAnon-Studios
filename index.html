@@ -194,10 +194,29 @@ footer a:hover{color:var(--accent-1)}
   }
 
   #miniText {
-    position: fixed; 
+      /* Position the element in the top-right corner, relative to the viewport */
+    position: fixed;
+    top: 20px;   /* Add a small margin from the top edge */
+    right: 20px; /* Add a small margin from the right edge */
+
+    /* Ensure it's on top of everything else */
     z-index: 9999;
-    transform: rotate(20deg) translate(200px, 100px);
-    top-left: 50px;
+
+    /* Give it an orange background and black text */
+    background-color: orange;
+    color: black;
+
+    /* Rotate the element. You can remove or adjust this value. */
+    transform: rotate(-10deg);
+
+    /* --- Additional Styling (optional) --- */
+    border: 2px solid #333;
+    padding: 15px;
+    font-size: 1.5em;
+  }
+
+  #miniText b {
+    font-weight: 700;
   }
 </style>
 </head>
@@ -275,7 +294,7 @@ footer a:hover{color:var(--accent-1)}
         <div style="background:linear-gradient(180deg, rgba(255,106,0,0.02), rgba(0,0,0,0.6));padding:10px 12px;border-radius:8px;box-shadow:var(--shadow)"><strong id="statWorks">12</strong><div style="color:var(--muted)">Demos/tools</div></div>
       </div>
     </div>
-<p id="miniText">Dont Be A <span>Dumb Ass&nbsp;</span>Give Me Link And Use CiphAnon Studios! </p>
+<p id="miniText">Dont Be A <b>Dumb Ass&nbsp;</b>Give Me Link And Use <b>CiphAnon Studios!</b> </p>
     <div class="hero-visual" aria-hidden="true">
       <svg class="bg-svg" viewBox="0 0 600 600" aria-hidden="true"><defs><linearGradient id="g1" x1="0" x2="1"><stop offset="0" stop-color="#ff6a00"></stop><stop offset="1" stop-color="#ffb46a"></stop></linearGradient></defs><circle cx="300" cy="300" r="260" fill="url(#g1)"></circle></svg>
       <img src="assets/1000007937.png" alt="Character" class="portrait" loading="lazy">
