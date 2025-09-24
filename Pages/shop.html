@@ -1,1 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop</title>
+    <style>
+        /* Basic page setup */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .shop-header {
+            background: #333;
+            color: #fff;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        .shop-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            background: #555;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 1.5rem;
+            font-weight: bold;
+        }
+
+        /* Product Sliders */
+        .product-slider-container {
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-slider {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .product-slide {
+            min-width: 100%;
+            box-sizing: border-box;
+            display: none; /* Hide all slides by default */
+        }
+        
+        .product-slide.active-slide {
+            display: block; /* Show only the active slide */
+        }
+
+        .product-slide img {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        .slider-controls {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            padding: 0 1rem;
+        }
+
+        .slider-controls button {
+            background: rgba(0,0,0,0.5);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            border-radius: 50%;
+            font-size: 1.5rem;
+        }
+
+        /* Product Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: #fff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .product-card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+
+        .product-card h3 {
+            margin: 0 0 0.5rem;
+        }
+
+        .product-card .price {
+            color: #b12704;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin: 0.5rem 0;
+        }
+
+        .product-card .description {
+            font-size: 0.9rem;
+            color: #666;
+            height: 60px; /* Enforce consistent card size */
+            overflow: hidden;
+        }
+
+        .buy-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .buy-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* "How to Buy" Section */
+        .how-to-buy {
+            margin-top: 3rem;
+            padding: 2rem;
+            background: #e9ecef;
+            border-radius: 8px;
+        }
+
+        .how-to-buy-steps {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .step {
+            flex: 1 1 250px;
+            background: #fff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        /* Button back to home page */
+        .home-button-large {
+            display: block;
+            width: fit-content;
+            margin: 3rem auto 0;
+            padding: 1rem 2rem;
+            background-color: #28a745;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .home-button-large:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-links">
+            <a href="index.html" class="home-button">Back to Home</a>
+            <a href="#how-to-buy-section">How to Buy</a>
+        </div>
+    </nav>
+
+    <header class="shop-header">
+        <h1>Our Products</h1>
+    </header>
+
+    <!-- Main Shop Content -->
+    <main class="shop-container">
+
+        <!-- Product Sliders Section -->
+        <section class="product-slider-container">
+            <h2>Featured Products</h2>
+            <div class="product-slider">
+                <div class="product-slide active-slide">
+                    <img src="https://via.placeholder.com/600x400/FF5733/FFFFFF?text=Featured+Product+1" alt="Featured Product 1">
+                </div>
+                <div class="product-slide">
+                    <img src="https://via.placeholder.com/600x400/33C1FF/FFFFFF?text=Featured+Product+2" alt="Featured Product 2">
+                </div>
+                <div class="product-slide">
+                    <img src="https://via.placeholder.com/600x400/A833FF/FFFFFF?text=Featured+Product+3" alt="Featured Product 3">
+                </div>
+            </div>
+            <div class="slider-controls">
+                <button class="prev-btn">&lt;</button>
+                <button class="next-btn">&gt;</button>
+            </div>
+        </section>
+
+        <!-- Product Grid Section -->
+        <section class="product-grid">
+            <!-- Example Product Card 1 -->
+            <div class="product-card">
+                <img src="https://via.placeholder.com/300x200/5C8271/FFFFFF?text=Product+A" alt="Product A">
+                <h3>Product A</h3>
+                <p class="price">$19.99</p>
+                <p class="description">A detailed description of Product A. It's a great product that you will love!</p>
+                <button class="buy-button">Buy Now</button>
+            </div>
+            <!-- Example Product Card 2 -->
+            <div class="product-card">
+                <img src="https://via.placeholder.com/300x200/5C7682/FFFFFF?text=Product+B" alt="Product B">
+                <h3>Product B</h3>
+                <p class="price">$29.99</p>
+                <p class="description">This is Product B, another fantastic item. Perfect for everyday use.</p>
+                <button class="buy-button">Buy Now</button>
+            </div>
+            <!-- Example Product Card 3 -->
+            <div class="product-card">
+                <img src="https://via.placeholder.com/300x200/5D5D5D/FFFFFF?text=Product+C" alt="Product C">
+                <h3>Product C</h3>
+                <p class="price">$9.99</p>
+                <p class="description">Product C is a budget-friendly option without sacrificing quality.</p>
+                <button class="buy-button">Buy Now</button>
+            </div>
+            <!-- Add more product cards as needed -->
+        </section>
+
+        <!-- "How to Buy" Section -->
+        <section id="how-to-buy-section" class="how-to-buy">
+            <h2>How to Buy</h2>
+            <div class="how-to-buy-steps">
+                <div class="step">
+                    <h3>Step 1: Browse Products</h3>
+                    <p>Scroll through our featured items or browse the product grid below to find what you're looking for.</p>
+                </div>
+                <div class="step">
+                    <h3>Step 2: Add to Cart</h3>
+                    <p>Click the "Buy Now" button on any product you wish to purchase. *Note: This is a placeholder and would require a more complex e-commerce system to function.</p>
+                </div>
+                <div class="step">
+                    <h3>Step 3: Checkout</h3>
+                    <p>Proceed to our secure checkout page to finalize your purchase and enter your payment details.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Button to go back to home page -->
+        <a href="index.html" class="home-button-large">Return to Home Page</a>
+
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const slides = document.querySelectorAll('.product-slide');
+            const prevBtn = document.querySelector('.prev-btn');
+            const nextBtn = document.querySelector('.next-btn');
+            let currentSlide = 0;
+
+            function showSlide(index) {
+                // Hide all slides
+                slides.forEach(slide => {
+                    slide.classList.remove('active-slide');
+                });
+
+                // Show the current slide
+                slides[index].classList.add('active-slide');
+            }
+
+            // Next slide button
+            nextBtn.addEventListener('click', () => {
+                currentSlide = (currentSlide + 1) % slides.length;
+                showSlide(currentSlide);
+            });
+
+            // Previous slide button
+            prevBtn.addEventListener('click', () => {
+                currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+                showSlide(currentSlide);
+            });
+
+            // Initial load
+            showSlide(currentSlide);
+        });
+    </script>
+</body>
+</html>
 
