@@ -250,16 +250,16 @@ footer a:hover{color:var(--accent-1)}
 #cactus-container {
   /* Positioning and size */
   position: fixed;
-  top: -50;
-  left: -50;
-  width: 100vw;
-  height: 100vh;
+  bottom: 0; /* Positions the container at the bottom of the viewport */
+  left: 0;   /* Positions the container at the left of the viewport */
+  max-width: 100vw;
+  max-height: 100vh;
   
   /* Set the default GIF as the background */
   background-image: url('assets/Cactus Game Idle.gif');
-  background-size: contain; /* Ensures it fits within the container */
+  background-size: contain;
   background-repeat: no-repeat;
-  background-position: center; /* Centers the image */
+  background-position: center;
 
   /* Optional: Smooth transition */
   transition: background-image 0.3s ease-in-out;
@@ -267,8 +267,9 @@ footer a:hover{color:var(--accent-1)}
 
 /* Change the background image on hover */
 #cactus-container:hover {
-  background-image: url('assets/Cactus Game Idle.gif'); /* Replace with your second GIF */
+  background-image: url('assets/Cactus Game Hover.gif');
 }
+
 
 
 </style>
