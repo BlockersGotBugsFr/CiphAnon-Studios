@@ -52,3 +52,5 @@ This project is licensed under the **MIT License**.
 
 
 nahh deledao is crazy i was watching a youtube short about a guy with cancer and deledao blocked it???? 
+
+3089 lines of script 
