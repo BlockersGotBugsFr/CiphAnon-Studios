@@ -223,6 +223,34 @@ footer a:hover{color:var(--accent-1)}
   #miniText b {
     font-weight: 700;
   }
+
+  /* Styling for the button container */
+.gif-button {
+  display: block; /* Makes the button take up its own line */
+  width: 200px; /* Adjust size as needed */
+  height: 200px; /* Adjust size as needed */
+  border: none;
+  background: none;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+/* Base state for the image (static frame) */
+.gif-image {
+  width: 100%;
+  height: 100%;
+  background-image: url('assets/icons8-discord-50.png'); /* The URL for your static image */
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.3s ease-in-out; /* Add transition for a smooth growing effect */
+}
+
+/* Hover effect: Swap the background image to the GIF and grow */
+.gif-button:hover .gif-image {
+  background-image: url('assets/icons8-discord.gif'); /* The URL for your animated GIF */
+  transform: scale(1.2); /* Grow the image by 20% on hover */
+}
+
 </style>
 </head>
 <body>
@@ -309,6 +337,11 @@ footer a:hover{color:var(--accent-1)}
         <div class="about-header">
             <h1 class="heading-large">School Fucking Sucks Who Else Agrees</h1>
         </div>
+
+  <a href="#" class="gif-button">
+  <div class="gif-image"></div>
+</a>
+
 
         <div class="personal-touch about-me" id="about">
             <div class="image-container">
