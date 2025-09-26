@@ -247,12 +247,29 @@ footer a:hover{color:var(--accent-1)}
     font-weight: 700;
   }
 
-  #cactus {
-    position: fixed;
-    top: 0px;
-    left: 0px;
-    z-index: 999999999;
+#cactus-container {
+  /* Positioning and size */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  
+  /* Set the default GIF as the background */
+  background-image: url('assets/Cactus Game Idle.gif');
+  background-size: contain; /* Ensures it fits within the container */
+  background-repeat: no-repeat;
+  background-position: center; /* Centers the image */
+
+  /* Optional: Smooth transition */
+  transition: background-image 0.3s ease-in-out;
 }
+
+/* Change the background image on hover */
+#cactus-container:hover {
+  background-image: url('assets/Cactus Game Hover.gif'); /* Replace with your second GIF */
+}
+
 
 </style>
 </head>
@@ -406,7 +423,7 @@ footer a:hover{color:var(--accent-1)}
      Crayon - Tester
   </p>
   <br>
-  <img id="cactus" src="assets/Cactus Game Idle.gif">
+<div id="cactus-container"></div>
   <h1>E-mags Ive Made</h1>
   <p>Green Field Infinite</p>
   <section id="capabilities" class="container"><h2>Updates</h2>
