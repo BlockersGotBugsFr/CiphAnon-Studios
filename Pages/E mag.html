@@ -424,7 +424,49 @@
 </section>
 
 <script>
-function openPopup(url){
+
+function playIntroThenOpen(url){
+  if(document.getElementById('introOverlay')) return;
+
+  const overlay = document.createElement('div');
+  overlay.id = 'introOverlay';
+  overlay.style.position = 'fixed';
+  overlay.style.top = '0';
+  overlay.style.left = '0';
+  overlay.style.width = '100%';
+  overlay.style.height = '100%';
+  overlay.style.background = 'black';
+  overlay.style.zIndex = '9999';
+  overlay.style.display = 'flex';
+  overlay.style.justifyContent = 'center';
+  overlay.style.alignItems = 'center';
+  overlay.style.transition = 'opacity 1s ease';
+
+  const video = document.createElement('video');
+  video.src = 'lv_0_20250831190250.mp4';
+  video.autoplay = true;
+  video.muted = true;
+  video.controls = false;
+  video.playsInline = true;
+  video.style.width = '100%';
+  video.style.height = '100%';
+  video.style.objectFit = 'cover';
+
+  overlay.appendChild(video);
+  document.body.appendChild(overlay);
+
+  video.play().catch(() => console.warn("Video autoplay failed"));
+
+  setTimeout(() => {
+    overlay.style.opacity = '0';
+    setTimeout(()=>{
+      overlay.remove();
+      openPopup(url);
+    }, 150);
+  }, 3000);
+}
+
+ function openPopup(url){
   const win = window.open('about:blank','_blank','width=1000,height=700');
   const popupTitle = "CiphAnon Studios";
   const popupHTML = `
@@ -450,7 +492,7 @@ function openPopup(url){
         color: white;
         font-family: Inter, Arial, sans-serif;
     }
-   
+    
     iframe {
         flex: 1;
         border: none;
@@ -501,7 +543,6 @@ function openPopup(url){
   win.document.write(popupHTML);
   win.document.close();
 }
-
 </script>
 
 </body>
