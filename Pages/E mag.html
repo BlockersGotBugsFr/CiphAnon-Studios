@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>CiphAnon Studios</title>
 <style>
-  /* Basic resets and styles */
   body {
     margin: 0; padding: 0; font-family: 'Inter', Arial, sans-serif;
     background: #0e0e0e;
@@ -56,12 +55,11 @@
     text-shadow: 0 2px 8px rgba(0,0,0,0.6);
   }
 
-  /* Visually appealing card layout */
   .items-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 30px;
-    max-width: 1100px; /* Constrains the max width of the cards */
+    max-width: 1100px;
     margin: auto;
   }
   .item-card {
@@ -86,7 +84,7 @@
   }
   .item-card:hover img {
     transform: scale(1.05);
-    filter: blur(5px); /* Adds the blur effect on hover */
+    filter: blur(5px); 
   }
   .card-content {
     position: absolute;
@@ -151,7 +149,6 @@
     box-shadow: 0 10px 25px rgba(0,0,0,0.4);
     background: #ffb74d;
   }
-    /* Card tags styling (NEW and POPULAR) */
   .card-tags {
     position: absolute;
     top: 15px;
@@ -167,23 +164,23 @@
     border-radius: 6px;
     text-transform: uppercase;
     color: #fff;
-    backdrop-filter: blur(4px); /* Blurs the background behind the tag */
-    background: rgba(0,0,0,0.5); /* Semi-transparent background */
+    backdrop-filter: blur(4px); 
+    background: rgba(0,0,0,0.5); 
   }
   .card-tag.new {
     position: absolute;
-    background: #ff5722; /* Vivid Orange for New */
+    background: #ff5722; 
     top: 25px;
     right: 0px;
   }
   .card-tag.popular {
-    background: #4caf50; /* Green for Popular */
+    background: #4caf50; 
   }
   .card-tag.coming-soon {
-  background: #8e44ad; /* A purple color */
+  background: #8e44ad; 
 }
   .card-tag.updated {
-  background: #FFFF00; /* A yellow color */
+  background: #FFFF00;
     top: 35px;
     right: 0px;
 }
