@@ -6,7 +6,6 @@
   <title>Scripts Page</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    /* --- General Styling --- */
     body {
       font-family: 'Roboto Mono', monospace;
       margin: 0;
@@ -29,7 +28,6 @@
       padding: 0 20px;
     }
 
-    /* --- Header --- */
     .site-header {
       background-color: #111;
       padding: 20px 0;
@@ -48,7 +46,6 @@
       text-shadow: 0 0 10px #f19e39;
     }
 
-    /* --- Navigation --- */
     .main-nav {
       display: flex;
       align-items: center;
@@ -83,7 +80,6 @@
       width: 220px;
     }
 
-    /* --- Content --- */
     .content-wrapper {
       padding: 40px 0;
     }
@@ -101,7 +97,6 @@
       margin-bottom: 40px;
     }
 
-    /* --- Script Cards --- */
     .script-card-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -169,7 +164,6 @@
       background-color: #d57c1f;
     }
 
-    /* --- Footer --- */
     .site-footer {
       background-color: #111;
       color: #666;
@@ -179,7 +173,6 @@
       border-top: 2px solid #f19e39;
     }
 
-    /* --- Responsive --- */
     @media (max-width: 768px) {
       .site-header {
         flex-direction: column;
@@ -219,7 +212,6 @@
         <p>Search and copy underground code straight to your clipboard/download to play<br>https://sites.google.com/view/great-minds-education-1/home<br>https://sites.google.com/view/great-minds-education-2/home.</p>
 
         <div class="script-card-grid" id="script-cards-container">
-          <!-- Example Script Card -->
           <div class="script-card">
             <h3>Duck Clicker</h3>
             <p>script.</p>
@@ -362,7 +354,6 @@ style="border:none;width:100%;height:100%;"&gt;&lt;/iframe&gt;
   </footer>
 
   <script>
-    // Copy Code
     async function copyCode(button) {
       const codeBlock = button.nextElementSibling;
       try {
@@ -375,7 +366,6 @@ style="border:none;width:100%;height:100%;"&gt;&lt;/iframe&gt;
       }
     }
 
-    // Search Filter
     document.getElementById('script-search').addEventListener('input', function(e) {
       const searchTerm = e.target.value.toLowerCase();
       const scriptCards = document.querySelectorAll('.script-card');
@@ -385,7 +375,6 @@ style="border:none;width:100%;height:100%;"&gt;&lt;/iframe&gt;
       });
     });
 
-    // Particle Background
     const canvas = document.getElementById('particles');
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
