@@ -470,45 +470,34 @@ function playIntroThenOpen(url){
   const popupTitle = "CiphAnon Studios";
   const popupHTML = `
   <!DOCTYPE html>
-    <html lang="en">
-    <head>
-      <meta charset="UTF-8"/>
-      <meta name="viewport" content="width=device-width,initial-scale=1"/>
-      <title>${popupTitle}</title>
-      <style>
-    body {
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <title>${popupTitle}</title>
+    <style>
+      body {
         margin: 0;
+        height: 100vh;
+        background: #0d0d0d url('https://images.unsplash.com/photo-1503264116251-35a269479413?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+        font-family: Inter, Arial, sans-serif;
+        overflow: hidden;
         display: flex;
         flex-direction: column;
-        height: 100vh;
-        /* Replace background-color with your image settings */
-        background-image: url('../assets/LoadingUpd.png');
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        /* Fallback color in case the image fails to load */
-        background-color: #333;
-        color: white;
-        font-family: Inter, Arial, sans-serif;
-    }
-    
-    iframe {
-        flex: 1;
-        border: none;
-        width: 100%;
-    }
+      }
 
-    .topbar {
-        padding: 12px 20px;
-        background: black;
+      .topbar {
+        padding: 10px 15px;
+        background: rgba(0,0,0,0.8);
         display: flex;
         justify-content: space-between;
         align-items: center;
         font-weight: bold;
         color: orange;
-    }
+        box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+      }
 
-    .topbar button {
+      .topbar button {
         padding: 6px 14px;
         border: 2px solid orange;
         border-radius: 100px;
@@ -516,32 +505,240 @@ function playIntroThenOpen(url){
         color: #ff9f1c;
         cursor: pointer;
         font-weight: bold;
-        transition: transform 0.15s;
-    }
-
-    .topbar button:hover {
+        transition: transform 0.15s, background 0.3s;
+      }
+      .topbar button:hover {
         transform: translateY(-2px);
         background: #333;
-    }
-</style>
+      }
 
-    </head>
-    <body>
-      <div class="topbar">
-        <button></button>
-        <span>CiphAnon Studios</span>
-        <button onclick="window.close()"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#F19E39"><path d="M240-200h120v-240h240v240h120v-360L480-740 240-560v360Zm-80 80v-480l320-240 320 240v480H520v-240h-80v240H160Zm320-350Z"/></svg></button>
-      </div>
-      <iframe src="${url}"></iframe>
-    </body>
-    </html>
+      .workspace {
+        position: relative;
+        flex: 1;
+        width: 100%;
+        overflow: hidden;
+      }
 
+      .panel {
+        position: absolute;
+        width: 400px;
+        height: 300px;
+        border: 2px solid #ff9f1c;
+        border-radius: 10px;
+        overflow: hidden;
+        background: rgba(17,17,17,0.95) url('https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?auto=format&fit=crop&w=800&q=80') center/cover no-repeat;
+        resize: both;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+        animation: panelOpen 0.3s ease-out;
+        transition: left 0.15s ease, top 0.15s ease, width 0.2s ease, height 0.2s ease, opacity 0.3s ease;
+      }
 
+      @keyframes panelOpen {
+        from { transform: scale(0.8); opacity: 0; }
+        to { transform: scale(1); opacity: 1; }
+      }
+
+      @keyframes panelClose {
+        from { transform: scale(1); opacity: 1; }
+        to { transform: scale(0.8); opacity: 0; }
+      }
+
+      @keyframes panelRestore {
+        from { opacity: 0; transform: translateY(20px) scale(0.9); }
+        to { opacity: 1; transform: translateY(0) scale(1); }
+      }
+
+      .panel-header {
+        background: rgba(34,34,34,0.9);
+        color: #ff9f1c;
+        padding: 6px 10px;
+        cursor: move;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 14px;
+      }
+
+      .panel iframe {
+        flex: 1;
+        border: none;
+        width: 100%;
+        height: 100%;
+      }
+
+      .panel-buttons {
+        display: flex;
+        gap: 6px;
+      }
+
+      .panel-buttons button {
+        cursor: pointer;
+        background: none;
+        border: none;
+        color: #ff9f1c;
+        font-size: 16px;
+        transition: transform 0.2s, color 0.2s;
+      }
+      .panel-buttons button:hover {
+        transform: scale(1.2);
+        color: red;
+      }
+
+      .taskbar {
+        height: 40px;
+        background: rgba(0,0,0,0.8);
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        padding: 0 10px;
+        overflow-x: auto;
+      }
+      .taskbar button {
+        background: #222;
+        color: orange;
+        border: none;
+        padding: 4px 10px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      .taskbar button:hover {
+        background: #333;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="topbar">
+      <button id="addPanel">+</button>
+      <span>CiphAnon Studios</span>
+      <button onclick="window.close()">X</button>
+    </div>
+    <div class="workspace" id="workspace"></div>
+    <div class="taskbar" id="taskbar"></div>
+
+    <script>
+      let panelCount = 0;
+      let zIndexCounter = 1;
+      const workspace = document.getElementById('workspace');
+      const taskbar = document.getElementById('taskbar');
+
+      document.getElementById('addPanel').addEventListener('click', () => {
+        addPanel("${url}");
+      });
+
+      function addPanel(src){
+        panelCount++;
+        const panel = document.createElement('div');
+        panel.className = 'panel';
+        panel.dataset.panelId = panelCount;
+        panel.style.top = (20 * panelCount) + 'px';
+        panel.style.left = (20 * panelCount) + 'px';
+        panel.style.zIndex = zIndexCounter++;
+
+        panel.innerHTML = \`
+          <div class="panel-header">
+            <span>Panel \${panelCount}</span>
+            <div class="panel-buttons">
+              <button class="min-btn">&#8211;</button>
+              <button class="max-btn">&#9723;</button>
+              <button class="close-btn">&times;</button>
+            </div>
+          </div>
+          <iframe src="\${src}"></iframe>
+        \`;
+
+        // Close animation
+        panel.querySelector('.close-btn').addEventListener('click', () => {
+          panel.style.animation = "panelClose 0.2s forwards";
+          panel.addEventListener('animationend', () => {
+            panel.remove();
+            removeTaskbarButton(panel.dataset.panelId);
+          });
+        });
+
+        // Minimize button
+        panel.querySelector('.min-btn').addEventListener('click', () => {
+          panel.style.opacity = "0";
+          setTimeout(() => {
+            panel.style.display = 'none';
+            addTaskbarButton(panel.dataset.panelId, panel.querySelector('.panel-header span').innerText, panel);
+          }, 200);
+        });
+
+        // Maximize button
+        panel.querySelector('.max-btn').addEventListener('click', () => {
+          panel.style.top = "0px";
+          panel.style.left = "0px";
+          panel.style.width = "100%";
+          panel.style.height = "calc(100% - 40px)";
+        });
+
+        // Bring to front
+        panel.addEventListener('mousedown', () => {
+          panel.style.zIndex = zIndexCounter++;
+        });
+
+        // Dragging
+        const header = panel.querySelector('.panel-header');
+        let isDragging = false, offsetX = 0, offsetY = 0;
+
+        header.addEventListener('mousedown', (e) => {
+          isDragging = true;
+          offsetX = e.clientX - panel.offsetLeft;
+          offsetY = e.clientY - panel.offsetTop;
+          panel.style.zIndex = zIndexCounter++;
+        });
+
+        document.addEventListener('mousemove', (e) => {
+          if (isDragging) {
+            let newLeft = e.clientX - offsetX;
+            let newTop = e.clientY - offsetY;
+            const snapMargin = 20;
+            if (Math.abs(newLeft) < snapMargin) newLeft = 0;
+            if (Math.abs(newTop) < snapMargin) newTop = 0;
+            if (Math.abs(newLeft + panel.offsetWidth - workspace.clientWidth) < snapMargin) newLeft = workspace.clientWidth - panel.offsetWidth;
+            if (Math.abs(newTop + panel.offsetHeight - workspace.clientHeight) < snapMargin) newTop = workspace.clientHeight - panel.offsetHeight;
+            panel.style.left = newLeft + 'px';
+            panel.style.top = newTop + 'px';
+          }
+        });
+
+        document.addEventListener('mouseup', () => {
+          isDragging = false;
+        });
+
+        workspace.appendChild(panel);
+      }
+
+      function addTaskbarButton(id, name, panel) {
+        const btn = document.createElement('button');
+        btn.innerText = name;
+        btn.dataset.panelId = id;
+        btn.addEventListener('click', () => {
+          panel.style.display = 'flex';
+          panel.style.animation = "panelRestore 0.3s ease-out";
+          panel.style.opacity = "1";
+          btn.remove();
+        });
+        taskbar.appendChild(btn);
+      }
+
+      function removeTaskbarButton(id) {
+        const btn = taskbar.querySelector(\`button[data-panel-id="\${id}"]\`);
+        if (btn) btn.remove();
+      }
+
+      addPanel("${url}");
+    </script>
+  </body>
+  </html>
   `;
   win.document.open();
   win.document.write(popupHTML);
   win.document.close();
 }
+
 </script>
 
 </body>
@@ -554,3 +751,4 @@ https://www.algebra.casa/
 https://geography-basic-30.live/
 https://selenite-wheat.vercel.app/projects.html
 https://history-archive.vercel.app/games.html
+https://mercurygames-15327267.codehs.me/
