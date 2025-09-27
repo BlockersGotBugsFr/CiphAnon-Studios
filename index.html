@@ -8,15 +8,15 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <style>
-/* ---------- THEME VARIABLES (orange/black hacker) ---------- */
+
 :root{
-  --bg-1: #020202; /* deepest black */
-  --bg-2: #070707; /* slightly lighter */
+  --bg-1: #020202; 
+  --bg-2: #070707; 
   --card: rgba(6,6,6,0.85);
   --muted: #9aa6b2;
-  --text: #ffd9b3; /* pale orange text */
-  --accent-1: #ff6a00; /* vivid orange */
-  --accent-2: #ffb46a; /* soft orange */
+  --text: #ffd9b3;
+  --accent-1: #ff6a00; 
+  --accent-2: #ffb46a; 
   --glass: rgba(255,106,0,0.03);
   --maxw:1200px;
   --radius:10px;
@@ -30,7 +30,7 @@
   --mono: 'Share Tech Mono', monospace;
 }
 
-/* Light theme fallback (kept minimal) */
+
 [data-theme="light"]{
   --bg-1:#f6f8fa;
   --bg-2:#eef2f6;
@@ -40,7 +40,7 @@
   --glass: rgba(11,17,22,0.04);
 }
 
-/* ---------- Base ---------- */
+
 *{box-sizing:border-box}
 html,body{height:100%}
 body{
@@ -57,7 +57,7 @@ body{
   background-color: orange;
 }
 
-/* particle canvas sits behind content but above bg */
+
 #particle-canvas{
   position:fixed;
   inset:0;
@@ -66,7 +66,7 @@ body{
   mix-blend-mode:screen;
 }
 
-/* subtle hacker grid + scanlines for texture */
+
 .page-grid {
   position:fixed;
   inset:0;
@@ -79,10 +79,10 @@ body{
   pointer-events:none;
 }
 
-/* container sits above particle canvas */
+
 .container{max-width:var(--maxw);margin:0 auto;padding:20px;position:relative;z-index:220}
 
-/* header */
+
 header{position:sticky;top:0;z-index:240}
 .header-row{
   width:100%;
@@ -99,7 +99,6 @@ header{position:sticky;top:0;z-index:240}
 .nav .primary a{color:var(--muted);text-decoration:none;padding:6px;border-radius:8px;font-weight:700;font-family:var(--mono);font-size:13px}
 .nav .primary a:hover{color:var(--accent-1);transform:translateY(-1px)}
 
-/* actions/buttons */
 .actions{display:flex;gap:10px;align-items:center}
 .btn{
   display:inline-flex;align-items:center;gap:8px;padding:9px 12px;border-radius:10px;border:1px solid rgba(255,106,0,0.12);
@@ -110,23 +109,21 @@ header{position:sticky;top:0;z-index:240}
 .btn.ghost{background:transparent;border:1px solid rgba(255,106,0,0.08);color:var(--muted);font-weight:700;box-shadow:none;padding:8px 12px}
 .icon-btn{background:transparent;border:0;padding:8px;border-radius:8px;cursor:pointer;color:var(--muted)}
 
-/* hire dropdown */
 .hire-dropdown{position:relative;display:inline-block}
 .hire-btn{
   display:inline-flex;align-items:center;gap:8px;padding:8px 10px;border-radius:10px;border:0;background:transparent;cursor:pointer;
   transition:background var(--fast) var(--ease), transform var(--fast) var(--ease);
   color:var(--muted);font-weight:700;font-family:var(--mono);
 }
-  /* Hover effect: Subtle scale-up and glowing shadow */
+  
 .btn:hover {
   transform: scale(1.1);
   box-shadow: 0 0 15px rgba(105, 105, 105, 0.5), 0 0 30px rgba(128, 128, 128, 0.2);
 }
 
-/* Active (click) effect: Quick "squash" then release */
 .btn:active {
   transform: scale(0.9);
-  transition-duration: 0.1s; /* Faster transition for the click down */
+  transition-duration: 0.1s; 
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
 .hire-btn:hover{background:var(--glass)}
@@ -140,7 +137,6 @@ header{position:sticky;top:0;z-index:240}
 .hire-menu a,.hire-menu button{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;text-decoration:none;color:var(--muted);font-weight:800;margin:6px 0;font-family:var(--mono);background:transparent;border:1px solid rgba(255,106,0,0.02)}
 .hire-menu a:hover,.hire-menu button:hover{background:transparent;color:#071018;background:linear-gradient(90deg,var(--accent-1),var(--accent-2));}
 
-/* hero */
 .hero{display:grid;grid-template-columns:1fr 460px;gap:36px;align-items:center;padding:48px 0;position:relative;z-index:220}
 .kicker{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;font-family:var(--mono)}
 .title{font-size:42px;line-height:1.03;margin:8px 0 0;font-family:var(--mono);letter-spacing:-0.6px}
@@ -150,18 +146,15 @@ header{position:sticky;top:0;z-index:240}
 .typed::after{content:"|";margin-left:6px;color:var(--accent-2);animation:blink 0.8s infinite}
 @keyframes blink{0%,50%{opacity:1}51%,100%{opacity:0}}
 
-/* visual card */
 .hero-visual{height:420px;border-radius:12px;padding:12px;background:linear-gradient(180deg, rgba(255,106,0,0.03), rgba(0,0,0,0.6));position:relative;overflow:hidden;box-shadow:0 24px 60px rgba(255,106,0,0.04)}
 .bg-svg{position:absolute;inset:-12% -8% auto auto;width:560px;height:560px;filter:blur(34px);opacity:0.14;pointer-events:none}
 .portrait{width:100%;border-radius:12px;display:block;filter:drop-shadow(0 32px 60px rgba(255,106,0,0.04))}
 
-/* floating FABs */
 .floating{position:fixed;right:18px;bottom:18px;z-index:260;display:flex;flex-direction:column;gap:10px}
 .fab{width:46px;height:46px;border-radius:12px;background:var(--card);display:inline-grid;place-items:center;cursor:pointer;border:1px solid rgba(255,106,0,0.06);box-shadow:var(--shadow);transition:transform var(--fast) var(--ease, opacity .2s)}
 .fab:hover{transform:translateY(-4px);box-shadow:0 24px 48px rgba(255,106,0,0.06)}
 .fab-icons svg{width:24px;height:24px;fill:var(--fab-fill)}
 
-/* content sections — keep look moody */
 .about-me {
     max-width: 1000px;
     margin: 60px auto;
@@ -185,13 +178,11 @@ li::before {content:'>';position:absolute;left:0;color:var(--accent-1);font-weig
 .cta-button {display:inline-block;padding:14px 30px;background:linear-gradient(90deg,var(--accent-1),var(--accent-2));color:#071018;text-decoration:none;border-radius:999px;font-weight:900;font-family:var(--mono)}
 .cta-button:hover{transform:translateY(-3px)}
 
-/* small tweaks */
 section#capabilities h2{font-family:var(--mono);color:var(--accent-1)}
 footer{margin-top:32px;padding:28px 0;color:var(--muted);position:relative;z-index:220}
 footer a{color:var(--muted);text-decoration:none}
 footer a:hover{color:var(--accent-1)}
 
-/* responsiveness */
 @media (max-width:1000px){.hero{grid-template-columns:1fr}.hero-visual{height:320px}}
 @media (max-width:560px){.cap-grid{grid-template-columns:1fr}.logo{width:40px;height:40px}}
 @media (prefers-reduced-motion: reduce){*{transition:none!important}}
@@ -201,56 +192,39 @@ footer a:hover{color:var(--accent-1)}
   .heading-large{font-size:2rem}
 }
 
-/* Base styles for the GitHub icon */
 #github {
   height: 50px;
   width: 50px;
-  /* Define the transition for smooth scaling and glowing shadow */
   transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
   cursor: pointer;
-  /* Sets initial glow and position */
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
   transform-origin: center;
-  border-radius: 50%; /* Give it a round frame */
+  border-radius: 50%; 
 }
 
-/* Hover effect: Subtle scale-up and glowing shadow */
 #github:hover {
   transform: scale(1.1);
   box-shadow: 0 0 15px rgba(105, 105, 105, 0.5), 0 0 30px rgba(128, 128, 128, 0.2);
 }
 
-/* Active (click) effect: Quick "squash" then release */
+
 #github:active {
   transform: scale(0.9);
-  transition-duration: 0.1s; /* Faster transition for the click down */
+  transition-duration: 0.1s; 
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
 
 
 
   #miniText {
-       /* Position the element in the top-right corner, relative to the viewport */
     position: absolute;
     right: 20px;
-
-    /* Adjust the top value to move it down */
-    top: 75px; /* Increased from 20px to 100px to move it further down */
-
-    /* Ensure it's on top of everything else */
+    top: 75px; 
     z-index: 9999;
-
-    /* New, smaller font size */
     font-size: 0.8em;
-
-    /* Give it an orange background and black text */
     background-color: orange;
     color: black;
-
-    /* Keep the clockwise rotation */
     transform: rotate(10deg);
-
-    /* --- Additional Styling (optional) --- */
     border: 2px solid #333;
     padding: 15px;
   }
@@ -260,24 +234,18 @@ footer a:hover{color:var(--accent-1)}
   }
 
 #cactus-container {
-  /* Positioning and size */
   position: fixed;
-  bottom: 0; /* Positions the container at the bottom of the viewport */
-  left: 0;   /* Positions the container at the left of the viewport */
+  bottom: 0; 
+  left: 0;  
   max-width: 100vw;
   max-height: 100vh;
-  
-  /* Set the default GIF as the background */
   background-image: url('assets/Cactus Game Idle.gif');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-
-  /* Optional: Smooth transition */
   transition: background-image 0.3s ease-in-out;
 }
 
-/* Change the background image on hover */
 #cactus-container:hover {
   background-image: url('assets/Cactus Game Hover.gif');
 }
@@ -473,10 +441,10 @@ footer a:hover{color:var(--accent-1)}
 </div>
 
 <script>
-/* update year */
+
 document.getElementById('year').textContent = new Date().getFullYear();
 
-/* typed (kept original behavior) */
+
 (function(){
   const el = document.getElementById('typedLine'); if(!el) return;
   const lines = ['Got A Whole School A New Ai Blocker :( Not Stopping Me tho xd ','The Web Is A ocean of Teasure','YouTobe: @ToonyTime','Learned How To Hack Cheat And Game Now I Think Im Addicted 13-16','Endless Fun Best Site For It To','Coding Is So Fun'];
@@ -490,7 +458,7 @@ document.getElementById('year').textContent = new Date().getFullYear();
   step();
 })();
 
-/* theme toggle (kept) */
+
 function toggleTheme(){
   const cur = document.documentElement.getAttribute('data-theme') || 'dark';
   const next = cur === 'light' ? 'dark' : 'light';
@@ -501,7 +469,7 @@ document.getElementById('themeFab').addEventListener('click', toggleTheme);
 document.getElementById('themeToggle').addEventListener('click', toggleTheme);
 (function(){ try{ const s = localStorage.getItem('theme'); if(s) document.documentElement.setAttribute('data-theme', s) }catch(e){} })();
 
-/* back-to-top behavior (kept) */
+
 (function(){
   const topFab = document.getElementById('topFab');
   const svgs = Array.from(topFab.querySelectorAll('svg'));
@@ -537,7 +505,6 @@ document.getElementById('themeToggle').addEventListener('click', toggleTheme);
   window.addEventListener('unload', ()=>{ if(interval) clearInterval(interval) });
 })();
 
-/* Hire dropdown: restored/robust (kept) */
 (function(){
   const root = document.getElementById('hireDropdown'); if(!root) return;
   const toggle = document.getElementById('hireToggle'); const menu = document.getElementById('hireMenu');
@@ -589,10 +556,6 @@ document.getElementById('themeToggle').addEventListener('click', toggleTheme);
   window.addEventListener('keydown', (e)=>{ if(e.key==='Escape' && open) closeMenu(); });
 })();
 
-/* ============================
-   PARTICLE BACKGROUND SCRIPT
-   lightweight, configurable
-   ============================ */
 (function(){
   const canvas = document.getElementById('particle-canvas');
   if(!canvas) return;
