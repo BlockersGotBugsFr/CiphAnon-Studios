@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Learn About Blockers</title>
   <style>
-    /* Reset + Base */
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: 'Roboto', Arial, sans-serif;
@@ -15,7 +14,6 @@
       position: relative;
     }
 
-    /* Particle canvas */
     #particles {
       position: fixed;
       top: 0; left: 0;
@@ -42,7 +40,6 @@
       font-size: 2.5rem;
     }
 
-    /* Navbar */
     .navbar {
       display: flex;
       justify-content: space-between;
@@ -112,7 +109,6 @@
       color: #111;
     }
 
-    /* Sections */
     .content-section {
       display: none;
       padding: 20px;
@@ -196,12 +192,10 @@
 </div>
 
 <script>
-  // Dropdown toggle
   function toggleDropdown() {
     document.getElementById("myDropdown").classList.toggle("show");
   }
 
-  // Show sections
   function showSection(sectionId, element) {
     const sections = document.querySelectorAll('.content-section');
     sections.forEach(sec => sec.classList.remove('active'));
@@ -214,20 +208,18 @@
     document.getElementById("myDropdown").classList.remove("show");
   }
 
-  // Show first by default
   document.addEventListener('DOMContentLoaded', () => {
     const firstLink = document.querySelector('.nav-link');
     if (firstLink) showSection('deledao-section', firstLink);
   });
 
-  // Close dropdown outside click
+
   window.onclick = function(e) {
     if (!e.target.matches('.dropbtn')) {
       document.querySelectorAll(".dropdown-content").forEach(dd => dd.classList.remove("show"));
     }
   };
 
-  // Particles effect
   const canvas = document.getElementById("particles");
   const ctx = canvas.getContext("2d");
   let particles = [];
