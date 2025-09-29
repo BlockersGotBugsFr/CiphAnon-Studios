@@ -1,0 +1,109 @@
+<html lang="en-us"><head><script src="https://gs.eponesh.com/sdk/gamepush.js?projectId=5815&amp;publicToken=BL5y2Oqp3Wl622MDcOAWrd55hJJF08SD"></script></head><body class="dark"><module>
+<moduleprefs title="Google.com">
+<content type="html"><!--[CDATA[
+
+
+<!DOCTYPE html-->
+
+
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Schoolboy Escape</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sema-ver-sem/9999@main/TemplateData/style.css">
+<script>
+    const overlayBackgroundColor = "";
+    const progressBarFillColor = "#faae20";
+    const progressBarBackgroundColor = "#8872dc";
+    const progressBarBorderColor = "#8872dc";
+  </script>
+
+
+<div id="unity-container" class="unity-desktop">
+<canvas id="unity-canvas" width="1246" height="794" style="cursor: default;"></canvas>
+</div>
+<div id="loading-cover" style="display: none;">
+<div id="unity-loading-bar">
+<div id="unity-logo"><img src="https://cdn.jsdelivr.net/gh/sema-ver-sem/9999@main/logo.png"></div>
+<div id="unity-progress-bar-empty" style="background: rgb(136, 114, 220);">
+<div id="unity-progress-bar-full" style="background: rgb(250, 174, 32); width: 100%;"></div>
+</div>
+<div class="spinner" style="display: none;"></div>
+</div>
+</div>
+<script>
+    const buildUrl = "https://cdn.jsdelivr.net/gh/sema-ver-sem/9999@main/Build";
+    const loaderUrl = buildUrl + "/SchoolboyEscapeYandex.loader.js";
+    const config = {
+      dataUrl: buildUrl + "/SchoolboyEscapeYandex.data.unityweb",
+      frameworkUrl: buildUrl + "/SchoolboyEscapeYandex.framework.js.unityweb",
+      codeUrl: buildUrl + "/SchoolboyEscapeYandex.wasm.unityweb",
+      streamingAssetsUrl: "https://cdn.jsdelivr.net/gh/sema-ver-sem/9999@main/StreamingAssets",
+      companyName: "GameCat",
+      productName: "Schoolboy Escape",
+      productVersion: "0.18",
+    };
+
+    const container = document.querySelector("#unity-container");
+    const canvas = document.querySelector("#unity-canvas");
+    const loadingCover = document.querySelector("#loading-cover");
+    const progressBarEmpty = document.querySelector("#unity-progress-bar-empty");
+    const progressBarFull = document.querySelector("#unity-progress-bar-full");
+    const spinner = document.querySelector('.spinner');
+
+    if (overlayBackgroundColor !== "-" && overlayBackgroundColor !== " " && overlayBackgroundColor !== "")
+      canvas.style.background = overlayBackgroundColor;
+
+    if (progressBarFillColor !== "-" && progressBarFillColor !== " " && progressBarFillColor !== "")
+      progressBarFull.style.background = progressBarFillColor;
+
+    if (progressBarBackgroundColor !== "-" && progressBarBackgroundColor !== " " && progressBarBackgroundColor !== "")
+      progressBarEmpty.style.background = progressBarBackgroundColor;
+
+    if (progressBarBorderColor !== "-" && progressBarBorderColor !== " " && progressBarBorderColor !== "")
+      progressBarEmpty.style.border.color = progressBarBorderColor;
+
+
+    if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+      container.className = "unity-mobile";
+    }
+
+    loadingCover.style.display = "";
+
+    const unityLoader = document.createElement("script");
+    unityLoader.src = loaderUrl;
+    unityLoader.onload = async () => {
+      //await _gpAwaiter.ready;
+      createUnityInstance(canvas, config, (progress) => {
+        spinner.style.display = "none";
+        progressBarEmpty.style.display = "";
+        progressBarFull.style.width = `${100 * progress}%`;
+      }).then((unityInstance) => {
+        window.unityInstance = unityInstance;
+        //_unityAwaiter.done(unityInstance);
+        loadingCover.style.display = "none";
+      }).catch((message) => {
+        //_unityAwaiter.abort(message);
+        alert(message);
+      });
+    };
+    document.body.appendChild(unityLoader);
+
+    document.addEventListener("pointerdown", () => {
+      container.focus();
+      window.focus();
+      canvas.focus();
+    });
+
+  </script>
+
+
+
+
+
+
+
+
+]]&gt;</content>
+</moduleprefs></module><script src="https://cdn.jsdelivr.net/gh/sema-ver-sem/9999@main/Build/SchoolboyEscapeYandex.loader.js"></script><script src="blob:https://704173942-atari-embeds.googleusercontent.com/d9d8e115-7016-4a5c-a99a-b3a41c3c945b"></script></body></html>
