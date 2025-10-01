@@ -1,3 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our People & Partners</title>
+    <style>
+        /* General body styling */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            background-color: #f0f2f5;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Header styling */
+        header {
+            margin-bottom: 4rem;
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        p.intro {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 10px auto;
+            color: #7f8c8d;
+        }
+
+        /* Container for all sections */
+        .page-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Section styling */
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: #34495e;
+            border-bottom: 2px solid #3498db;
+            display: inline-block;
+            padding-bottom: 10px;
+            margin-bottom: 2rem;
+        }
+
+        /* Card grid layout */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            justify-content: center;
+        }
+
+        /* Individual card styling */
+        .card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Profile image */
+        .profile-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+            border: 3px solid #3498db;
+            transition: border-color 0.3s ease;
+        }
+
+        .card:hover .profile-img {
+            border-color: #e74c3c;
+        }
+
+        /* Text inside the card */
+        .card h3 {
+            margin: 0 0 5px;
+            font-size: 1.4rem;
+            color: #34495e;
+        }
+
+        .card p {
+            margin: 0;
+            font-size: 1rem;
+            color: #7f8c8d;
+        }
+
+        .card-link {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        /* Footer styling */
+        footer {
+            margin-top: 5rem;
+            font-size: 0.8rem;
+            color: #95a5a6;
+        }
+
+        /* Animation for a more dynamic look */
+        .card {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.6s forwards;
+        }
+        @keyframes fadeIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Our People & Partners</h1>
+        <p class="intro">Meet the special people, partners, collaborators, and team members who make our work possible.</p>
+    </header>
+
+    <main class="page-container">
+        <!-- The JavaScript will inject sections and cards here -->
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Your Name. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const pageContainer = document.querySelector('.page-container');
+
+            const sectionsData = [
+                {
+                    title: 'Special People',
+                    id: 'special-people',
+                    members: [
+                        { name: 'Jane Doe', title: 'Founder', bio: 'The visionary leader who started it all.', image: 'https://via.placeholder.com/100/3498db/fff?text=J.D', link: '#' },
+                        { name: 'John Smith', title: 'Mentor', bio: 'A trusted advisor and guide for our team.', image: 'https://via.placeholder.com/100/e74c3c/fff?text=J.S', link: '#' },
+                    ]
+                },
+                {
+                    title: 'Partners',
+                    id: 'partners',
+                    members: [
+                        { name: 'Company Alpha', title: 'Strategic Partner', bio: 'Our main strategic partner for global growth.', image: 'https://via.placeholder.com/100/2ecc71/fff?text=Alpha', link: 'https://www.example.com/alpha' },
+                        { name: 'Company Beta', title: 'Technology Partner', bio: 'Providing us with cutting-edge technology.', image: 'https://via.placeholder.com/100/f39c12/fff?text=Beta', link: 'https://www.example.com/beta' },
+                        { name: 'Company Gamma', title: 'Content Partner', bio: 'Collaborating on creating valuable content.', image: 'https://via.placeholder.com/100/9b59b6/fff?text=Gamma', link: 'https://www.example.com/gamma' },
+                    ]
+                },
+                {
+                    title: 'Collaborators',
+                    id: 'collaborators',
+                    members: [
+                        { name: 'Freelancer One', title: 'Design Expert', bio: 'Assisting with creative design projects.', image: 'https://via.placeholder.com/100/1abc9c/fff?text=F.1', link: '#' },
+                        { name: 'Freelancer Two', title: 'Marketing Consultant', bio: 'Supporting our marketing efforts.', image: 'https://via.placeholder.com/100/3498db/fff?text=F.2', link: '#' },
+                    ]
+                },
+                {
+                    title: 'Team',
+                    id: 'team',
+                    members: [
+                        { name: 'Alice Johnson', title: 'Project Manager', bio: 'Leads our projects to success.', image: 'https://via.placeholder.com/100/34495e/fff?text=A.J', link: '#' },
+                        { name: 'Bob Williams', title: 'Software Developer', bio: 'Builds and maintains our software.', image: 'https://via.placeholder.com/100/7f8c8d/fff?text=B.W', link: '#' },
+                        { name: 'Clara Davis', title: 'UX/UI Designer', bio: 'Focuses on creating user-friendly experiences.', image: 'https://via.placeholder.com/100/c0392b/fff?text=C.D', link: '#' },
+                    ]
+                }
+            ];
+
+            // Function to create a card element
+            const createCard = (member, index) => {
+                const cardLink = document.createElement('a');
+                cardLink.href = member.link;
+                cardLink.className = 'card-link';
+                if (member.link.startsWith('http')) {
+                    cardLink.target = '_blank';
+                    cardLink.rel = 'noopener noreferrer';
+                }
+
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.style.animationDelay = `${index * 0.1}s`;
+
+                const image = document.createElement('img');
+                image.src = member.image;
+                image.alt = `${member.name} image`;
+                image.className = 'profile-img';
+
+                const heading = document.createElement('h3');
+                heading.textContent = member.name;
+
+                const title = document.createElement('p');
+                title.textContent = member.title;
+
+                const bio = document.createElement('p');
+                bio.textContent = member.bio;
+
+                card.appendChild(image);
+                card.appendChild(heading);
+                card.appendChild(title);
+                card.appendChild(bio);
+                cardLink.appendChild(card);
+
+                return cardLink;
+            };
+
+            // Loop through sections and create the content
+            sectionsData.forEach(sectionData => {
+                const section = document.createElement('div');
+                section.className = 'section';
+                
+                const title = document.createElement('h2');
+                title.className = 'section-title';
+                title.textContent = sectionData.title;
+                
+                const cardGrid = document.createElement('div');
+                cardGrid.className = 'card-grid';
+                
+                sectionData.members.forEach((member, index) => {
+                    const card = createCard(member, index);
+                    cardGrid.appendChild(card);
+                });
+
+                section.appendChild(title);
+                section.appendChild(cardGrid);
+                pageContainer.appendChild(section);
+            });
+        });
+    </script>
+</body>
+</html>
+
+
 <!-- 
 
 special people
