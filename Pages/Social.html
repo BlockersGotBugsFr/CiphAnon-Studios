@@ -1,1 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connect with Me</title>
+    <style>
+        /* General body styling */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            background-color: #0d1117; /* Dark background color from GitHub */
+            color: #c9d1d9; /* Light text color */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        /* Header styling */
+        header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: #ffffff;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        p.intro {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 10px auto;
+            color: #8b949e;
+        }
+
+        /* Container for social media items */
+        .socials-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            width: 100%;
+            max-width: 1000px;
+            padding: 20px;
+        }
+
+        /* Individual social media card styling */
+        .social-card {
+            background-color: #161b22; /* Card background color */
+            border: 1px solid #30363d;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .social-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            background-color: #21262d;
+        }
+
+        /* Social media icon image */
+        .social-icon-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 15px;
+            object-fit: cover;
+            border: 3px solid transparent;
+            transition: border-color 0.3s ease;
+        }
+
+        .social-card:hover .social-icon-img {
+            border-color: #58a6ff; /* Highlight color on hover */
+        }
+
+        /* Text inside the card */
+        .social-card-text h3 {
+            margin: 0 0 5px;
+            font-size: 1.5rem;
+            color: #58a6ff; /* Heading color */
+        }
+
+        .social-card-text p {
+            margin: 0;
+            font-size: 1rem;
+            color: #8b949e;
+        }
+
+        /* Footer styling */
+        footer {
+            margin-top: 5rem;
+            font-size: 0.8rem;
+            color: #8b949e;
+        }
+
+        /* Animation for a more dynamic look */
+        .social-card {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.6s forwards;
+        }
+        @keyframes fadeIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>My Social Hub</h1>
+        <p class="intro">Find me on all my platforms. Click any card to connect!</p>
+    </header>
+
+    <main class="socials-container">
+        <!-- Social media cards will be injected here by JavaScript -->
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Your Name. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const socialsContainer = document.querySelector('.socials-container');
+
+            // Define your social media profiles
+            const socials = [
+                {
+                    name: 'GitHub',
+                    description: 'Check out my latest code and open-source projects.',
+                    image: 'https://cdn-icons-png.flaticon.com/512/25/25231.png', // GitHub logo
+                    url: 'https://github.com/your-username'
+                },
+                {
+                    name: 'YouTube',
+                    description: 'Subscribe for video tutorials and content.',
+                    image: 'https://cdn-icons-png.flaticon.com/512/174/174883.png', // YouTube logo
+                    url: 'https://www.youtube.com/your-channel'
+                },
+                {
+                    name: 'Roblox',
+                    description: 'Join my games and creations on Roblox.',
+                    image: 'https://cdn-icons-png.flaticon.com/512/5969/5969018.png', // Roblox logo
+                    url: 'https://www.roblox.com/users/your-id/profile'
+                },
+                {
+                    name: 'Twitter',
+                    description: 'Follow for my latest thoughts and updates.',
+                    image: 'https://cdn-icons-png.flaticon.com/512/3256/3256013.png', // Twitter logo
+                    url: 'https://twitter.com/your-username'
+                },
+                {
+                    name: 'Instagram',
+                    description: 'Behind the scenes photos and creative visuals.',
+                    image: 'https://cdn-icons-png.flaticon.com/512/1384/1384031.png', // Instagram logo
+                    url: 'https://instagram.com/your-username'
+                },
+            ];
+
+            // Generate social media cards dynamically
+            socials.forEach((social, index) => {
+                const card = document.createElement('a');
+                card.href = social.url;
+                card.target = '_blank';
+                card.rel = 'noopener noreferrer';
+                card.className = 'social-card';
+                card.style.animationDelay = `${index * 0.1}s`; // Staggered animation
+
+                const image = document.createElement('img');
+                image.src = social.image;
+                image.alt = `${social.name} icon`;
+                image.className = 'social-icon-img';
+
+                const textContainer = document.createElement('div');
+                textContainer.className = 'social-card-text';
+
+                const heading = document.createElement('h3');
+                heading.textContent = social.name;
+
+                const paragraph = document.createElement('p');
+                paragraph.textContent = social.description;
+
+                textContainer.appendChild(heading);
+                textContainer.appendChild(paragraph);
+
+                card.appendChild(image);
+                card.appendChild(textContainer);
+
+                socialsContainer.appendChild(card);
+            });
+        });
+    </script>
+</body>
+</html>
 
