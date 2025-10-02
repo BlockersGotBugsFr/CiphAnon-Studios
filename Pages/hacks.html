@@ -1,1 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hacks Page</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #e0e0e0;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #1e1e1e;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            border-radius: 8px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #bb86fc;
+        }
+
+        .hack-section {
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: #2c2c2c;
+            border-radius: 6px;
+            border-left: 5px solid #03dac6;
+        }
+        
+        .hack-section a {
+            color: #bb86fc;
+            text-decoration: none;
+        }
+        
+        .hack-section a:hover {
+            text-decoration: underline;
+        }
+
+        .hack-section h2 {
+            margin-top: 0;
+            color: #03dac6;
+        }
+
+        .hack-section p {
+            margin-bottom: 10px;
+        }
+        
+        .hack-section ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .hack-section li {
+            margin-bottom: 8px;
+        }
+
+        .controls {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .controls button {
+            background-color: #bb86fc;
+            color: #121212;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .controls button:hover {
+            background-color: #985ee4;
+        }
+        
+        /* The CSS class controlled by the JavaScript */
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Cool Hacks Page</h1>
+
+        <div class="controls">
+            <button onclick="toggleSection('hack1')">IXl Cheat</button>
+            <button onclick="toggleSection('hack2')">Blooket</button>
+            <button onclick="toggleSection('hack3')">Blank</button>
+        </div>
+
+        <div id="hack1" class="hack-section hidden">
+            <h2>CSS Tricks</h2>
+            <ul>
+                <li><strong>Clean layouts with `:not()`:</strong> Simplify selectors and spacing issues. For example, add bottom margin to all elements inside a container *except* the last one.
+                    <br><a href="https://css-tricks.com/almanac/selectors/n/not/" target="_blank"> Learn more about the `:not()` selector</a>
+                </li>
+                <li><strong>Consistent image sizes:</strong> Use the `aspect-ratio` property to automatically size images to a uniform aspect ratio.
+                    <br><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/aspect-ratio" target="_blank"> See MDN on `aspect-ratio`</a>
+                </li>
+                <li><strong>Easy theming with CSS variables:</strong> Define custom properties for colors and fonts to make site-wide changes from a single location.
+                    <br><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties" target="_blank"> Get the MDN guide on CSS custom properties</a>
+                </li>
+            </ul>
+        </div>
+
+        <div id="hack2" class="hack-section hidden">
+            <h2>JavaScript Tricks</h2>
+            <ul>
+                <li><strong>Efficient DOM selection:</strong> While frameworks offer powerful selection methods, `document.getElementById()` remains the fastest for accessing a single element.
+                    <br><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementById" target="_blank"> MDN reference for `getElementById()`</a>
+                </li>
+                <li><strong>Arguments to array:</strong> Quickly convert array-like objects into a true array using a spread operator (`...`).
+                    <br><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax" target="_blank"> MDN on the spread syntax</a>
+                </li>
+                <li><strong>Dynamic navigation:</strong> Change the URL to another page with a single line of JavaScript.
+                    <br><a href="https://www.quora.com/How-do-you-embed-an-external-link-in-HTML-CSS-and-JavaScript-code" target="_blank"> Quora: Use `window.location.href` to redirect users</a>
+                </li>
+            </ul>
+        </div>
+
+        <div id="hack3" class="hack-section hidden">
+            <h2>HTML & Resource Tricks</h2>
+            <ul>
+                <li><strong>Embed third-party content:</strong> Use an `<iframe>` to display content from another website directly within your page. You can customize the size and other attributes.
+                    <br><a href="https://stackoverflow.com/questions/15821278/how-to-make-a-html-page-to-show-content-from-another-url" target="_blank"> Stack Overflow: How to use an `iframe`</a>
+                </li>
+                <li><strong>Semantic tags for structure:</strong> Use tags like `<main>`, `<article>`, and `<footer>` to give your web page a logical structure for better accessibility and search engine optimization.
+                    <br><a href="https://developer.mozilla.org/en-US/docs/Glossary/Semantic_HTML" target="_blank"> MDN explanation of Semantic HTML</a>
+                </li>
+                <li><strong>Preload scripts:</strong> The `defer` attribute on a `<script>` tag tells the browser to execute the script only after the main document has finished parsing, which can speed up page load.
+                    <br><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script#defer" target="_blank"> MDN reference for the `defer` attribute</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        /**
+         * Toggles the visibility of a specified section.
+         * 
+         * @param {string} sectionId The ID of the section to show/hide.
+         */
+        function toggleSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.classList.toggle('hidden');
+            } else {
+                console.error('Section not found with ID:', sectionId);
+            }
+        }
+    </script>
+
+</body>
+</html>
 
