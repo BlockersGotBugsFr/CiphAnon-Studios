@@ -1158,9 +1158,9 @@
 </section>
 
 <script>
-
-function playIntroThenOpen(url){
-  if(document.getElementById('introOverlay')) return;
+// Existing functions for intro and pop-up window
+function playIntroThenOpen(url) {
+  if (document.getElementById('introOverlay')) return;
 
   const overlay = document.createElement('div');
   overlay.id = 'introOverlay';
@@ -1193,89 +1193,66 @@ function playIntroThenOpen(url){
 
   setTimeout(() => {
     overlay.style.opacity = '0';
-    setTimeout(()=>{
+    setTimeout(() => {
       overlay.remove();
       openPopup(url);
     }, 150);
   }, 3000);
 }
 
- function openPopup(url){
-  const win = window.open('about:blank','_blank','width=1000,height=700');
+function openPopup(url) {
+  const win = window.open('about:blank', '_blank', 'width=1000,height=700');
   const popupTitle = "CiphAnon Studios";
   const popupHTML = `
-  <!DOCTYPE html>
+    <!DOCTYPE html>
     <html lang="en">
     <head>
       <meta charset="UTF-8"/>
       <meta name="viewport" content="width=device-width,initial-scale=1"/>
       <title>${popupTitle}</title>
       <style>
-    body {
-        margin: 0;
-        display: flex;
-        flex-direction: column;
-        height: 100vh;
-        /* Replace background-color with your image settings */
-        background-image: url('../assets/LoadingUpd.png');
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        /* Fallback color in case the image fails to load */
-        background-color: #333;
-        color: white;
-        font-family: Inter, Arial, sans-serif;
-    }
-    
-    iframe {
-        flex: 1;
-        border: none;
-        width: 100%;
-    }
-
-    .topbar {
-        padding: 12px 20px;
-        background: black;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        font-weight: bold;
-        color: orange;
-    }
-
-    .topbar button {
-        padding: 6px 14px;
-        border: 2px solid orange;
-        border-radius: 100px;
-        background: #071018;
-        color: #ff9f1c;
-        cursor: pointer;
-        font-weight: bold;
-        transition: transform 0.15s;
-    }
-
-    .topbar button:hover {
-        transform: translateY(-2px);
-        background: #333;
-    }
-
-    .youtube-popup-image {
-        position: fixed;
-        bottom: 20px;
-        right: -250px; /* Starts off-screen to the right */
-        width: 200px;
-        cursor: pointer;
-        z-index: 9999;
-        transition: right 1s ease-in-out;
-        border: 5px solid #ff0000;
-        box-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
-    }
-
-    .youtube-popup-image.visible {
-        right: 20px; /* Slides into view */
-    }
-</style>
-
+        body {
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            background-image: url('../assets/LoadingUpd.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: #333;
+            color: white;
+            font-family: Inter, Arial, sans-serif;
+        }
+        iframe {
+            flex: 1;
+            border: none;
+            width: 100%;
+        }
+        .topbar {
+            padding: 12px 20px;
+            background: black;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+            color: orange;
+        }
+        .topbar button {
+            padding: 6px 14px;
+            border: 2px solid orange;
+            border-radius: 100px;
+            background: #071018;
+            color: #ff9f1c;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.15s;
+        }
+        .topbar button:hover {
+            transform: translateY(-2px);
+            background: #333;
+        }
+      </style>
     </head>
     <body>
       <div class="topbar">
@@ -1284,64 +1261,61 @@ function playIntroThenOpen(url){
         <button onclick="window.close()"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#F19E39"><path d="M240-200h120v-240h240v240h120v-360L480-740 240-560v360Zm-80 80v-480l320-240 320 240v480H520v-240h-80v240H160Zm320-350Z"/></svg></button>
       </div>
       <iframe src="${url}"></iframe>
-      const youtubeChannelUrl = 'https://www.youtube.com/@ItsToonyTime';
-    const imageSource = 'assets/1000007479.png';
-
-    function createYoutubePopup() {
-        // Only create a new popup if one doesn't exist
-        if (document.querySelector('.youtube-popup-image')) {
-            return;
-        }
-
-        const popup = document.createElement('img');
-        popup.src = imageSource;
-        popup.className = 'youtube-popup-image';
-        popup.alt = 'Click to visit my YouTube channel';
-
-        popup.addEventListener('click', () => {
-            window.open(youtubeChannelUrl, '_blank');
-        });
-
-        document.body.appendChild(popup);
-
-        // Slide the image into view
-        setTimeout(() => {
-            popup.classList.add('visible');
-        }, 100);
-
-        // Hide the image after 3 minutes (180,000 milliseconds)
-        setTimeout(() => {
-            popup.classList.remove('visible');
-        }, 180000);
-
-        // Remove the element completely after it slides away
-        setTimeout(() => {
-            popup.remove();
-        }, 181500);
-    }
-
-    function startRandomYoutubePopup() {
-        setInterval(() => {
-            // Decide randomly if the pop-up should appear (e.g., a 50% chance)
-            const shouldShow = Math.random() < 0.5;
-            if (shouldShow) {
-                createYoutubePopup();
-            }
-        }, 183000); // 3 minutes for display + 3 seconds transition time
-    }
-
-    // Call this function once the page loads to start the process
-    document.addEventListener('DOMContentLoaded', startRandomYoutubePopup);
     </body>
     </html>
-
-
   `;
   win.document.open();
   win.document.write(popupHTML);
   win.document.close();
 }
+
+// === New code for the random image pop-up ===
+// This should be outside the openPopup function to run on the main page.
+
+const youtubeChannelUrl = 'https://www.youtube.com/@ItsToonyTime';
+const imageSource = 'assets/1000007479.png';
+
+function createYoutubePopup() {
+  if (document.querySelector('.youtube-popup-image')) {
+    return;
+  }
+
+  const popup = document.createElement('img');
+  popup.src = imageSource;
+  popup.className = 'youtube-popup-image';
+  popup.alt = 'Click to visit my YouTube channel';
+
+  popup.addEventListener('click', () => {
+    window.open(youtubeChannelUrl, '_blank');
+  });
+
+  document.body.appendChild(popup);
+
+  setTimeout(() => {
+    popup.classList.add('visible');
+  }, 100);
+
+  setTimeout(() => {
+    popup.classList.remove('visible');
+  }, 180000);
+
+  setTimeout(() => {
+    popup.remove();
+  }, 181500);
+}
+
+function startRandomYoutubePopup() {
+  setInterval(() => {
+    const shouldShow = Math.random() < 0.5;
+    if (shouldShow) {
+      createYoutubePopup();
+    }
+  }, 183000);
+}
+
+document.addEventListener('DOMContentLoaded', startRandomYoutubePopup);
 </script>
+
 
 </body>
 </html>
