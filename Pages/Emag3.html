@@ -1258,6 +1258,22 @@ function playIntroThenOpen(url){
         transform: translateY(-2px);
         background: #333;
     }
+
+    .youtube-popup-image {
+        position: fixed;
+        bottom: 20px;
+        right: -250px; /* Starts off-screen to the right */
+        width: 200px;
+        cursor: pointer;
+        z-index: 9999;
+        transition: right 1s ease-in-out;
+        border: 5px solid #ff0000;
+        box-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
+    }
+
+    .youtube-popup-image.visible {
+        right: 20px; /* Slides into view */
+    }
 </style>
 
     </head>
@@ -1268,6 +1284,54 @@ function playIntroThenOpen(url){
         <button onclick="window.close()"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#F19E39"><path d="M240-200h120v-240h240v240h120v-360L480-740 240-560v360Zm-80 80v-480l320-240 320 240v480H520v-240h-80v240H160Zm320-350Z"/></svg></button>
       </div>
       <iframe src="${url}"></iframe>
+      const youtubeChannelUrl = 'https://www.youtube.com/channel/YOUR_CHANNEL_ID'; // Replace with your YouTube URL
+    const imageSource = 'youtube-logo.png'; // Replace with the path to your image file
+
+    function createYoutubePopup() {
+        // Only create a new popup if one doesn't exist
+        if (document.querySelector('.youtube-popup-image')) {
+            return;
+        }
+
+        const popup = document.createElement('img');
+        popup.src = imageSource;
+        popup.className = 'youtube-popup-image';
+        popup.alt = 'Click to visit my YouTube channel';
+
+        popup.addEventListener('click', () => {
+            window.open(youtubeChannelUrl, '_blank');
+        });
+
+        document.body.appendChild(popup);
+
+        // Slide the image into view
+        setTimeout(() => {
+            popup.classList.add('visible');
+        }, 100);
+
+        // Hide the image after 3 minutes (180,000 milliseconds)
+        setTimeout(() => {
+            popup.classList.remove('visible');
+        }, 180000);
+
+        // Remove the element completely after it slides away
+        setTimeout(() => {
+            popup.remove();
+        }, 181500);
+    }
+
+    function startRandomYoutubePopup() {
+        setInterval(() => {
+            // Decide randomly if the pop-up should appear (e.g., a 50% chance)
+            const shouldShow = Math.random() < 0.5;
+            if (shouldShow) {
+                createYoutubePopup();
+            }
+        }, 183000); // 3 minutes for display + 3 seconds transition time
+    }
+
+    // Call this function once the page loads to start the process
+    document.addEventListener('DOMContentLoaded', startRandomYoutubePopup);
     </body>
     </html>
 
