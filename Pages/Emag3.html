@@ -1256,11 +1256,17 @@ function openPopup(url) {
     </head>
     <body>
       <div class="topbar">
-        <button></button>
+        <!-- The left-most button is now the reload button -->
+        <button onclick="document.getElementById('content-iframe').src = document.getElementById('content-iframe').src;">
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#F19E39"><path d="M480-160q-134 0-227-93t-93-227q0-134 93-227t227-93q69 0 128 29.5T715-690v-110h80v280H515v-80h168q-32-56-87.5-88T480-720q-100 0-170 70t-70 170q0 100 70 170t170 70q77 0 139-44t90-116h87q-29 106-114 173t-212 67Z"/></svg>
+        </button>
         <span>CiphAnon Studios</span>
-        <button onclick="window.close()"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#F19E39"><path d="M240-200h120v-240h240v240h120v-360L480-740 240-560v360Zm-80 80v-480l320-240 320 240v480H520v-240h-80v240H160Zm320-350Z"/></svg></button>
+        <!-- The right-most button remains the close button -->
+        <button onclick="window.close()">
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#F19E39"><path d="M240-200h120v-240h240v240h120v-360L480-740 240-560v360Zm-80 80v-480l320-240 320 240v480H520v-240h-80v240H160Zm320-350Z"/></svg>
+        </button>
       </div>
-      <iframe src="${url}"></iframe>
+      <iframe id="content-iframe" src="${url}"></iframe>
     </body>
     </html>
   `;
@@ -1314,6 +1320,7 @@ function startRandomYoutubePopup() {
 }
 
 document.addEventListener('DOMContentLoaded', startRandomYoutubePopup);
+
 </script>
 
 
