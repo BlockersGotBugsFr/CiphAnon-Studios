@@ -190,7 +190,7 @@
     width: 25px;
   }
 
-  nav a {
+nav a {
   /* This is necessary to position the tooltip relative to the link */
   position: relative;
 }
@@ -198,7 +198,7 @@
 nav a::after {
   content: attr(data-tooltip); /* Get the text from the data-tooltip attribute */
   position: absolute;
-  bottom: 100%; /* Position the tooltip above the element */
+  top: 100%; /* Position the tooltip below the element */
   left: 50%;
   transform: translateX(-50%); /* Center the tooltip horizontally */
   
@@ -208,6 +208,9 @@ nav a::after {
   padding: 5px 10px;
   border-radius: 5px;
   white-space: nowrap; /* Prevent the text from wrapping */
+  
+  /* Add some space between the icon and the tooltip */
+  margin-top: 5px; 
   
   /* Initially hide the tooltip */
   visibility: hidden;
