@@ -1,20 +1,20 @@
 # CiphAnon Studios
 
-Welcome to CiphAnon Studios! This website provides browser-based games and resources for entertainment and to bypass school restrictions. It's built for students who want a bit of fun during downtime.
+Welcome to CiphAnon Studios! This website provides browser-based games and resources for entertainment and to bypass school restrictions. It's built for students who want a bit of fun during downtime or whenever.
 
 ## Live Demo
 
-**[Live Website Link](https://blockersgotbugsfr.github.io/CiphAnon-Studios/)**
+**[Live Website Link](https://blockersgotbugsfr.github.io/CiphAnon-Studios.4/)**
 
 ## About
 
-This website was created as a side project to explore front-end development using HTML, CSS, and JavaScript. It focuses on providing a clean, accessible platform for games that can be enjoyed in a browser without installation or special permissions.
+This Website has been a dream of mine for a while now. I spent my school hours working on it, so what, I guess it's made out of HTML, CSS, and JS, very simple 
 
 ## Features
 
 - **Responsive Design:** Enjoy the site on any device, from desktops to mobile phones.
-- **Clean Interface:** A straightforward and easy-to-navigate design.
-- **In-Browser Games:** Play games directly in your browser without downloads.
+- **Clean Interface:** A straightforward and  sorta easy-to-navigate design.
+- **In-Browser Games:** Play games directly in your browser without them getting blocked.
 
 ## Technologies Used
 
@@ -39,7 +39,7 @@ A big thank you to the people who helped test and improve this project!
 
 You can get in touch with me here:
 
-- **Your Name** - [blank]
+- **Your Name** - [ToonyTime - CiphAnon Studios]
 - **YouTube** - [https://www.youtube.com/@CiphAnonStudios] - [https://www.youtube.com/@ItsToonyTime]
 - **Email** - [blank]
 - **Discord** - [blank]
@@ -49,8 +49,6 @@ You can get in touch with me here:
 
 This project is licensed under the **MIT License**.
 
+## Random
 
-
-nahh deledao is crazy i was watching a youtube short about a guy with cancer and deledao blocked it???? 
-
-3089 lines of script 
+3000+ lines of script 
